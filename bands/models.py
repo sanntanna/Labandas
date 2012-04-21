@@ -1,5 +1,6 @@
 from django.db import models
 from equipaments.models import Equipament
+from registration.models import RegistrationProfile
 
 class MusicalStyle(models.Model):
     name = models.CharField(max_length=50)
@@ -7,15 +8,11 @@ class MusicalStyle(models.Model):
     def __unicode__(self):
         return self.name
 
-class Musician(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
-    registration_date = models.DateTimeField('Registration date')
+class Musician(RegistrationProfile):
     equipaments = models.ManyToManyField(Equipament)
     musical_styles = models.ManyToManyField(MusicalStyle)
     def __unicode__(self):
-        return self.name
+        return self.user.first_name + " " + self.user.last_name
 
 class Band(models.Model):
     name = models.CharField(max_length=50)
