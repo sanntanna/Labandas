@@ -6,7 +6,7 @@ from django.http import HttpResponse
 def subscribe(request):
     success = "1"
     
-    if request.method == 'POST' && request.is_ajax(): 
+    if request.method == 'POST' and request.is_ajax(): 
         form = ExpressRegistrationForm(request.POST)
         if not form.is_valid():
             success = "0"
