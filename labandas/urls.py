@@ -4,12 +4,10 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'labandas.views.home', name='home'),
-    # url(r'^labandas/', include('labandas.foo.urls')),
-
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+    (r'^$', 'labandas.views.home'),
+    (r'^ajax/register-musician$', 'bands.views.subscribe'),
      url(r'^admin/', include(admin.site.urls)),
+     (r'^accounts/', include('registration.urls')),
 )
