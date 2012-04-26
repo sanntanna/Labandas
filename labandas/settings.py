@@ -106,8 +106,7 @@ ROOT_URLCONF = 'labandas.urls'
 WSGI_APPLICATION = 'labandas.wsgi.application'
 
 TEMPLATE_DIRS = (
-    "templates",
-    'templates/registration'
+    "/home/renato/Dev/python/labandas.com/Labandas/templates",
 )
 
 INSTALLED_APPS = (
@@ -154,3 +153,6 @@ LOGGING = {
         },
     }
 }
+
+
+AUTH_PROFILE_MODULE = 'labandas.Musician'

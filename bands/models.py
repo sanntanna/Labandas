@@ -1,6 +1,7 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
 from equipaments.models import Equipament
-from registration.models import RegistrationProfile
 
 class MusicalStyle(models.Model):
     name = models.CharField(max_length=50)
@@ -8,11 +9,13 @@ class MusicalStyle(models.Model):
     def __unicode__(self):
         return self.name
 
-class Musician(RegistrationProfile):
+class Musician(models.Model):
     equipaments = models.ManyToManyField(Equipament)
     musical_styles = models.ManyToManyField(MusicalStyle)
+    account = models.OneToOneField(User)
+    
     def __unicode__(self):
-        return self.user.first_name + " " + self.user.last_name
+        return self.account.first_name + " " + self.account.last_name
 
 class Band(models.Model):
     name = models.CharField(max_length=50)
@@ -21,3 +24,10 @@ class Band(models.Model):
     musical_styles = models.ManyToManyField(MusicalStyle)
     def __unicode__(self):
         return self.name
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Musician.objects.create(account=instance)
+
+post_save.connect(create_user_profile, sender=User)

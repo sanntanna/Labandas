@@ -1,5 +1,5 @@
 from bands.forms import ExpressRegistrationForm
-from django.core import serializers
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
 
 
@@ -8,9 +8,13 @@ def subscribe(request):
     
     if request.method == 'POST' and request.is_ajax(): 
         form = ExpressRegistrationForm(request.POST)
-        if not form.is_valid():
+        if form.is_valid():
+            form.save()
+            user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
+            login(request, user)
+        else:
             success = "0"
-            
+        
     #output = serializers.serialize("json", {'success', success})
     output = "{'success', " + success + "})"
     return HttpResponse(output)
