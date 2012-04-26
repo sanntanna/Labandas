@@ -12,6 +12,6 @@ class ExpressRegistrationForm(forms.Form):
         new_user.first_name = self.cleaned_data['name']
         new_user.username = self.cleaned_data['email']
         new_user.email = self.cleaned_data['email']
-        new_user.password = self.cleaned_data['password']
+        new_user.set_password(self.cleaned_data['password'])
         new_user.save()
         
