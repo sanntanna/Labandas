@@ -1,7 +1,8 @@
 {% extends "includes/wrapper.html" %}
 
-{% block main %}
+{% block content %}
 	Cadastre-se
+	
 	<form action="/ajax/register-musician" method="post" id="subscribe-form">{% csrf_token %}
 		{{ form.as_p }}
 		<input type="submit" value="Cadastrar" />

@@ -1,10 +1,31 @@
-{% extends "includes/base.html" %}
+<!doctype HTML>
+<html>
+	<head>
+		{% block head %}<title>Labandas - Forme sua banda</title>{% endblock %}
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	</head>
+<body>
 
-{% block head %}
-	<title>Labandas - Forme sua banda</title>
-{% endblock %}
+<div id="wrapper">
+	<div id="header">
+		<div id="user-menu">
+			{% if user.is_authenticated %}
+			    <span>Olá <strong>{{ user.first_name }}</strong></span> |
+			    <a href="/logout">sair</a>
+			{% else %}
+				<a href="/">entrar</a>    
+			{% endif %}
+		</div>
+	</div>
+	
+	<div id="content">
+		{% block content %}
+			conteudo
+		{% endblock %}
+	</div>
+	
+</div>
 
-{% block content %}
-	{% block main %}
-	{% endblock main %}
-{% endblock %}
+</body>
+
+</html>
