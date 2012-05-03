@@ -4,11 +4,24 @@ from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
+from bands.models import MusicianType
 
 def home(request):
-    t = loader.get_template('home-logged.html' if request.user.is_authenticated() else 'home.html')
+    if request.user.is_authenticated():
+        return homeLogged(request)
+    
+    t = loader.get_template('home.html')
     c = RequestContext(request, {
         'form': ExpressRegistrationForm(),
+    })
+    c.update(csrf(request))
+    
+    return HttpResponse(t.render(c))
+
+def homeLogged(request):
+    t = loader.get_template('home-logged.html')
+    c = RequestContext(request, {
+        'MusicianTypes': MusicianType.objects.all(),
     })
     c.update(csrf(request))
     

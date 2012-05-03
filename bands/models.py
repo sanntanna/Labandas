@@ -9,8 +9,15 @@ class MusicalStyle(models.Model):
     def __unicode__(self):
         return self.name
 
+class MusicianType(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.CharField(max_length=255, null=True,blank = True)
+    def __unicode__(self):
+        return self.name
+
 class Musician(models.Model):
     equipaments = models.ManyToManyField(Equipament)
+    musician_type = models.ManyToManyField(MusicianType)
     musical_styles = models.ManyToManyField(MusicalStyle)
     account = models.OneToOneField(User)
     
