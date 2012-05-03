@@ -6,7 +6,7 @@ from django.template import loader
 from django.template.context import RequestContext
 
 def home(request):
-    t = loader.get_template('home.html')
+    t = loader.get_template('home-logged.html' if request.user.is_authenticated() else 'home.html')
     c = RequestContext(request, {
         'form': ExpressRegistrationForm(),
     })
