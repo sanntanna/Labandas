@@ -3,6 +3,8 @@
 	<head>
 		{% block head %}<title>Labandas - Forme sua banda</title>{% endblock %}
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="/static/js/lb.form.ajax.js" defer="true" assync="true"></script>
+		<script src="/static/js/lb.common.js" defer="true" assync="true"></script>
 	</head>
 <body>
 
@@ -13,7 +15,11 @@
 			    <span>Olá <strong>{{ user.first_name }}</strong></span> |
 			    <a href="/logout">sair</a>
 			{% else %}
-				<a href="/">entrar</a>    
+				<form id="lb-form-login" action="/login" class="ajax">
+					<input type="text" placeholder="email" name="user" />
+					<input type="password" placeholder="senha" name="password" />
+					<input type="submit" value="entrar" />
+				</form>
 			{% endif %}
 		</div>
 	</div>

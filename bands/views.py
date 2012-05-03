@@ -18,8 +18,3 @@ def subscribe(request):
     #output = serializers.serialize("json", {'success', success})
     output = "{'success', " + success + "})"
     return HttpResponse(output)
-
-
-#def logout(request):
-    
-#    return HttpResponse('<script>location.href="/";</script>')
