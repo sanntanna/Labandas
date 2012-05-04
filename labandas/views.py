@@ -21,7 +21,7 @@ def home(request):
 def homeLogged(request):
     t = loader.get_template('home-logged.html')
     c = RequestContext(request, {
-        'MusicianTypes': MusicianType.objects.all(),
+        'musicianTypes': MusicianType.objects.all(),
     })
     c.update(csrf(request))
     

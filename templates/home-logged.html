@@ -2,6 +2,16 @@
 
 {% block content %}
 	{{ user.first_name }}, complete seu perfil:
+	<br /><br />
 	
-	
+	O que você é?
+	<ul>
+		{% for type in musicianTypes %}
+			<li>
+				<label> 
+					<input type="checkbox" class="musician-type" value="{{type.id}}" />{{type.name}}
+				</label> 
+			</li>
+		{% endfor %}
+	</ul>
 {% endblock %}

@@ -2,13 +2,14 @@
 <html>
 	<head>
 		{% block head %}<title>Labandas - Forme sua banda</title>{% endblock %}
+		<link rel="stylesheet" type="text/css" href="/static/css/oocss.css" />
+		<link rel="stylesheet" type="text/css" href="/static/css/lb.common.css" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="/static/js/lb.form.ajax.js" defer="true" assync="true"></script>
-		<script src="/static/js/lb.common.js" defer="true" assync="true"></script>
 	</head>
 <body>
 
 <div id="wrapper">
+
 	<div id="header">
 		<div id="user-menu">
 			{% if user.is_authenticated %}
@@ -29,6 +30,15 @@
 			conteudo
 		{% endblock %}
 	</div>
+	
+	<div id="footer">
+		
+	</div>
+	
+	<script src="/static/js/lb.form.ajax.js" defer="defer" assync="assync"></script>
+	<script src="/static/js/lb.common.js" defer="defer" assync="assync"></script>
+	{% block scripts %}
+	{% endblock %}
 	
 </div>
 
