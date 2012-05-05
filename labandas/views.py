@@ -1,10 +1,10 @@
 from bands.forms import ExpressRegistrationForm
+from bands.models import MusicianType, Band
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
-from bands.models import MusicianType
 
 def home(request):
     if request.user.is_authenticated():
@@ -22,6 +22,7 @@ def homeLogged(request):
     t = loader.get_template('home-logged.html')
     c = RequestContext(request, {
         'musicianTypes': MusicianType.objects.all(),
+        'bands': Band.objects.filter(musicians=request.user),
     })
     c.update(csrf(request))
     

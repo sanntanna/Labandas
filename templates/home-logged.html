@@ -1,17 +1,33 @@
 {% extends "includes/wrapper.html" %}
 
 {% block content %}
-	{{ user.first_name }}, complete seu perfil:
-	<br /><br />
-	
-	O que você é?
-	<ul>
-		{% for type in musicianTypes %}
-			<li>
-				<label> 
-					<input type="checkbox" class="musician-type" value="{{type.id}}" />{{type.name}}
-				</label> 
-			</li>
-		{% endfor %}
-	</ul>
+	<div class="line">
+		<div class="size1of2 unit">
+		
+			{{ user.first_name }}, complete seu perfil:
+			<br /><br />
+			
+			O que você é?
+			<ul>
+				{% for type in musicianTypes %}
+					<li>
+						<label> 
+							<input type="checkbox" class="musician-type" value="{{type.id}}" />{{type.name}}
+						</label> 
+					</li>
+				{% endfor %}
+			</ul>
+			
+		</div>
+		
+		<div class="size1of2 unit lastUnit">
+			Bandas em que você toca:
+			<ul>
+			{% for band in bands %}
+				<li>{{ band.name }}</li>
+			{% endfor %}
+			</ul>
+			
+		</div>
+	</div>
 {% endblock %}
