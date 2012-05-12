@@ -19,10 +19,10 @@ class Musician(models.Model):
     equipaments = models.ManyToManyField(Equipament)
     musician_type = models.ManyToManyField(MusicianType)
     musical_styles = models.ManyToManyField(MusicalStyle)
-    account = models.OneToOneField(User)
+    user = models.OneToOneField(User)
     
     def __unicode__(self):
-        return self.account.first_name + " " + self.account.last_name
+        return self.user.first_name
 
 class Band(models.Model):
     name = models.CharField(max_length=50)
@@ -35,6 +35,6 @@ class Band(models.Model):
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Musician.objects.create(account=instance)
+        Musician.objects.create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)

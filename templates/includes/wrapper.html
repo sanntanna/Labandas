@@ -16,9 +16,12 @@
 	
 	<link rel="shortcut icon" href="/favicon.ico">
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	
 	<link rel="stylesheet" href="/static/css/common.css">
 	<link rel="stylesheet" href="/static/css/form.css">
-
+	<link rel="stylesheet" href="/static/css/message.css">
+	{% block css %}{% endblock %}
+	
 	<script src="/static/js/libs/modernizr-1.7.min.js"></script>
 </head>
 <body>
@@ -28,7 +31,7 @@
 				
 				<div id="user-header">
 				{% if user.is_authenticated %}
-				    <span>Olá <strong>{{ user.first_name }}fulano!</strong></span> |
+				    <span>Olá <strong>{{ user.first_name }}</strong></span> |
 				    <a href="/logout">sair</a>
 				{% else %}
 					<form id="lb-form-login" action="/login" class="ajax" method="post">
@@ -41,7 +44,7 @@
 				</div>
 			<nav>
 				<ul>
-					<li><a href="/">Encontre um músico</a></li>
+					<li><a href="#">Encontre um músico</a></li>
 					<li><a href="#">Encontre uma banda</a></li>
 					<li><a href="#">Encontre um estúdio</a></li>
 				</ul>
@@ -69,8 +72,11 @@
 	<script src="/static/js/libs/dd_belatedpng.js"></script>
 	<script> DD_belatedPNG.fix('img, .png_bg');</script>
 	<![endif]-->
+	
 	<script src="/static/js/lb/formAjax.js"></script>
+	<script src="/static/js/lb/messages.js"></script>
 	<script src="/static/js/lb/common.js"></script>
+	
 	{% block scripts %}{% endblock %}
 	<script>
 		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID

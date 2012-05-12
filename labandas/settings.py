@@ -160,4 +160,4 @@ LOGGING = {
 }
 
 
-AUTH_PROFILE_MODULE = 'labandas.Musician'
+AUTH_PROFILE_MODULE = 'bands.Musician'
