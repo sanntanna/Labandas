@@ -5,6 +5,7 @@ from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
+from jsonui.response import JSONResponse
 
 def home(request):
     if request.user.is_authenticated():
@@ -30,8 +31,15 @@ def homeLogged(request):
 
 def login(request):
     user = auth.authenticate(username=request.POST['user'], password=request.POST['password'])
-    auth.login(request, user)
-    return  HttpResponse("{s:1}")
+    responseData = { "success": True }
+    
+    if user == None:
+        responseData["success"] = False
+        responseData["message"] = "Usuario e/ou senha invalidos"
+    else:
+        auth.login(request, user)
+    
+    return JSONResponse(responseData)
 
 def logout(request):
     auth.logout(request)

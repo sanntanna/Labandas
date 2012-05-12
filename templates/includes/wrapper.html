@@ -1,47 +1,82 @@
-<!doctype HTML>
-<html>
-	<head>
-		{% block head %}<title>Labandas - Forme sua banda</title>{% endblock %}
-		<link rel="stylesheet" type="text/css" href="/static/css/oocss.css" />
-		<link rel="stylesheet" type="text/css" href="/static/css/lb.common.css" />
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	</head>
-<body>
-
-<div id="wrapper">
-
-	<div id="header">
-		<div id="user-menu">
-			{% if user.is_authenticated %}
-			    <span>Olá <strong>{{ user.first_name }}</strong></span> |
-			    <a href="/logout">sair</a>
-			{% else %}
-				<form id="lb-form-login" action="/login" class="ajax">
-					<input type="text" placeholder="email" name="user" />
-					<input type="password" placeholder="senha" name="password" />
-					<input type="submit" value="entrar" />
-				</form>
-			{% endif %}
-		</div>
-	</div>
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	
-	<div id="content">
+	{% block head %}<title>Lasbandas - Forme sua banda</title>{% endblock %}
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	<link rel="stylesheet" href="/static/css/common.css">
+	<link rel="stylesheet" href="/static/css/form.css">
+
+	<script src="/static/js/libs/modernizr-1.7.min.js"></script>
+</head>
+<body>
+	<div id="header-container">
+		<header class="wrapper">
+			<h1 id="title">Lasbandas</h1>
+				
+				<div id="user-header">
+				{% if user.is_authenticated %}
+				    <span>Olá <strong>{{ user.first_name }}fulano!</strong></span> |
+				    <a href="/logout">sair</a>
+				{% else %}
+					<form id="lb-form-login" action="/login" class="ajax" method="post">
+						<label for="user">Efetuar login:</label>
+						<input type="text" placeholder="email" name="user" id="user" autocomplete="off" />
+						<input type="password" placeholder="senha" name="password" />
+						<input type="submit" value="entrar" />
+					</form>
+				{% endif %}
+				</div>
+			<nav>
+				<ul>
+					<li><a href="/">Encontre um músico</a></li>
+					<li><a href="#">Encontre uma banda</a></li>
+					<li><a href="#">Encontre um estúdio</a></li>
+				</ul>
+			</nav>
+		</header>
+	</div>
+	<div id="main" class="wrapper">
+		{% block aside %}
+		<aside>
+			<h3>Some in aside</h3>
+		</aside>
+		{% endblock %}
 		{% block content %}
 			conteudo
 		{% endblock %}
 	</div>
-	
-	<div id="footer">
-		
+	<div id="footer-container">
+		<footer class="wrapper">
+			<h3>A nice footer</h3>
+		</footer>
 	</div>
-	
-	<script src="/static/js/lb.form.ajax.js" defer="defer" assync="assync"></script>
-	<script src="/static/js/lb.common.js" defer="defer" assync="assync"></script>
-	{% block scripts %}
-	{% endblock %}
-	
-</div>
-
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
+	<!--[if lt IE 7 ]>
+	<script src="/static/js/libs/dd_belatedpng.js"></script>
+	<script> DD_belatedPNG.fix('img, .png_bg');</script>
+	<![endif]-->
+	<script src="/static/js/lb/formAjax.js"></script>
+	<script src="/static/js/lb/common.js"></script>
+	{% block scripts %}{% endblock %}
+	<script>
+		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>
 </body>
-
 </html>

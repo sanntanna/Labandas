@@ -1,10 +1,16 @@
 {% extends "includes/wrapper.html" %}
 
 {% block content %}
-	Cadastre-se
-	
-	<form action="/ajax/register-musician" method="post" id="subscribe-form" class="ajax">{% csrf_token %}
-		{{ form.as_p }}
-		<input type="submit" value="Cadastrar" />
-	</form>
+	<article>
+		<h3>Cadastre-se</h3>
+		
+		<form action="/ajax/register-musician" method="post" id="subscribe-form" class="ajax">{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Cadastrar" />
+		</form>
+	</article>
+{% endblock %}
+
+
+{% block aside %}
 {% endblock %}
