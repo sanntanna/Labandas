@@ -1,10 +1,39 @@
 {% extends "includes/wrapper.html" %}
 
+{% block css %}
+	<link rel="stylesheet" href="/static/css/home.css">
+{% endblock %}
+
+
 {% block content %}
 	<h3>Bem vindo!</h3>
 	<div class="message">
-		<p>Você ainda não está em nenhuma banda cadastrada no Lasbandas.</p>
-		<a href="/band/create">Crie uma banda</a> ou <a href="#">Encontre uma banda que precisa de você</a>.
+		{% if musicBands.count = 0 %}
+			<div class="box without-bands">
+				Você ainda não está em nenhuma banda cadastrada no Lasbandas.<br />
+				<a href="/band/create">Crie uma banda</a> ou <a href="#">Encontre uma banda que precisa de você</a>.
+			</div>
+		{% else %}
+			<div class="box with-bands">
+				Suas bandas:
+				<ul>
+					{% for musicBand in musicBands %}
+						<li> 
+							{{ musicBand.band.name }} (
+								{%for instrument in musicBand.instruments.all %}
+									{{instrument.name}}
+									{% if not forloop.last %}, {%endif%}
+								{% endfor %}
+							)
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+		
+		<p>Informe <a href="/user/edit">seu endereço</a> para encontrar músicos e bandas próximos de você!</p>
+		
+		
 	</div>
 {% endblock %}
 

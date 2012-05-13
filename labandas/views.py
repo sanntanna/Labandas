@@ -21,7 +21,7 @@ def home(request):
 def homeLogged(request):
     t = loader.get_template('home-logged.html')
     c = RequestContext(request, {
-        #'bands': Band.objects.filter(musicians=request.user),
+        'musicBands': request.user.get_profile().get_musician_bands(),
     })
     
     return HttpResponse(t.render(c))

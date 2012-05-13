@@ -15,10 +15,20 @@ class Musician(models.Model):
     type_instruments_play = models.ManyToManyField(EquipamentType)
     musical_styles = models.ManyToManyField(MusicalStyle)
     medias = models.ManyToManyField(Media)
+    
+    cep = models.CharField(max_length=9, null=True,blank = True)
+    city = models.CharField(max_length=20, null=True,blank = True)
+    state = models.CharField(max_length=2, null=True,blank = True)
+    latitute = models.FloatField(null=True,blank = True)
+    longitude = models.FloatField(null=True,blank = True)
+    
     user = models.OneToOneField(User)
     
     def __unicode__(self):
         return self.user.first_name
+    
+    def get_musician_bands(self):
+        return MusicianBand.objects.filter(musician=self)
 
 class Band(models.Model):
     name = models.CharField(max_length=50)
@@ -29,11 +39,22 @@ class Band(models.Model):
         
     def __unicode__(self):
         return self.name
-
+    
+    def save_adding_musician(self, musician, instruments):
+        self.save()
+        musicianBand = MusicianBand()
+        musicianBand.band = self
+        musicianBand.musician = musician
+        musicianBand.save()
+        musicianBand.instruments = instruments
+    
 class MusicianBand(models.Model):
     band = models.ForeignKey(Band)
     musician = models.ForeignKey(Musician)
-    instrument = models.ForeignKey(EquipamentType)
+    instruments = models.ManyToManyField(EquipamentType)
+    
+    def __unicode__(self):
+        return self.musician.user.first_name + ' na banda "' + self.band.name + '"'
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

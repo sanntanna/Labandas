@@ -1,15 +1,14 @@
 from bands.forms import ExpressRegistrationForm, BandForm
-from django.template import loader
 from django.contrib.auth import login, authenticate
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import loader
 from django.template.context import RequestContext
 from jsonui.response import JSONResponse
 
-
-def subscribe(request):
+def subscribe_musician(request):
     data = { "success": True }
     
-    if request.method == 'POST': 
+    if request.method == 'POST' and request.is_ajax():  
         form = ExpressRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
@@ -22,9 +21,17 @@ def subscribe(request):
     return JSONResponse(data)
 
 def add_band(request):
+    if request.method == 'POST': 
+        form = BandForm(request.POST)
+        if form.is_valid():
+            form.save(request.user)
+        
+        return HttpResponseRedirect("/")
+        
     t = loader.get_template('band/new.html')
     c = RequestContext(request, {
         'form': BandForm()
     })
     
     return HttpResponse(t.render(c))
+
