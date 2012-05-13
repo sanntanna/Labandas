@@ -1,5 +1,8 @@
-from bands.forms import ExpressRegistrationForm
+from bands.forms import ExpressRegistrationForm, BandForm
+from django.template import loader
 from django.contrib.auth import login, authenticate
+from django.http import HttpResponse
+from django.template.context import RequestContext
 from jsonui.response import JSONResponse
 
 
@@ -17,3 +20,11 @@ def subscribe(request):
             data["success"] = False
 
     return JSONResponse(data)
+
+def add_band(request):
+    t = loader.get_template('band/new.html')
+    c = RequestContext(request, {
+        'form': BandForm()
+    })
+    
+    return HttpResponse(t.render(c))

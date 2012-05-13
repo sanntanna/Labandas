@@ -1,15 +1,10 @@
 {% extends "includes/wrapper.html" %}
 
 {% block content %}
-	<div class="line">
-		<div class="size1of2 unit">
-		
-			{{ user.first_name }}, complete seu perfil:
-			<br /><br />
-			
-		</div>
+	<h3>Bem vindo!</h3>
+	<div class="message">
+		<p>Você ainda não está em nenhuma banda cadastrada no Lasbandas.</p>
+		<a href="/band/create">Crie uma banda</a> ou <a href="#">Encontre uma banda que precisa de você</a>.
 	</div>
 {% endblock %}
 
-{% block aside %}
-{% endblock %}

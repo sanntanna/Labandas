@@ -31,7 +31,7 @@
 				
 				<div id="user-header">
 				{% if user.is_authenticated %}
-				    <span>Olá <strong>{{ user.first_name }}</strong></span> |
+				    <span>Logado como <strong>{{ user.first_name }}</strong></span> |
 				    <a href="/logout">sair</a>
 				{% else %}
 					<form id="lb-form-login" action="/login" class="ajax" method="post">
@@ -54,12 +54,20 @@
 	<div id="main" class="wrapper">
 		{% block aside %}
 		<aside>
-			<h3>Some in aside</h3>
+			<ul>
+				<li><a href="#">Informações pessoais</a></li>
+				<li><a href="#">Suas bandas</a></li>
+				<li><a href="#">Suas mídias</a></li>
+				<li><a href="#">Seus equipamentos</a></li>
+				<li><a href="#">Solicitações de bandas</a></li>
+			</ul>
 		</aside>
 		{% endblock %}
-		{% block content %}
+		<section id="content" class="clearfix">
+			{% block content %}
 			conteudo
-		{% endblock %}
+			{% endblock %}
+		</section>
 	</div>
 	<div id="footer-container">
 		<footer class="wrapper">

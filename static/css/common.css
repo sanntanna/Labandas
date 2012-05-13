@@ -165,9 +165,9 @@ nav a{
 aside{
 	color:white;
 	padding:20px;
-	float:right;
-	height:500px;
-	width:200px;
+	float:left;
+	width:150px;
+	margin-right:20px;
 	background-color:#343434;
 	border-bottom:20px solid #222;
 	margin-bottom:50px;
@@ -176,18 +176,24 @@ aside{
 	        box-shadow:0 0px 40px -10px #AAA;	
 }
 
-#main header h2{
-	padding-bottom:30px;
+aside ul{
+	list-style-type:none;
+	margin:0;
+	padding:0;
 }
 
-article header{
-	margin-bottom:50px;
-	padding-bottom:30px;
-	width:700px;
-	-webkit-box-shadow:0 45px 60px -60px #AAA;
-	   -moz-box-shadow:0 45px 60px -60px #AAA;
-	        box-shadow:0 45px 60px -60px #AAA;
+aside li{
+	margin-bottom:10px;
+	border-bottom:1px dotted #777;
 }
+
+aside a{
+	dispĺay:block;
+	color:#fff;
+	text-decoration:none;
+}
+
+section{margin-left:200px;}
 
 #footer-container{
 	background-color:#343434;
