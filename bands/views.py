@@ -1,4 +1,4 @@
-from bands.forms import ExpressRegistrationForm, BandForm
+from bands.forms import ExpressRegistrationForm, BandForm, PersonalInfoForm
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
@@ -20,6 +20,13 @@ def subscribe_musician(request):
 
     return JSONResponse(data)
 
+def edit_personal_info(request):
+    t = loader.get_template('bands/edit-personal-info.html')
+    c = RequestContext(request, {
+        'form': PersonalInfoForm()
+    })
+    return HttpResponse(t.render(c))    
+
 def add_band(request):
     if request.method == 'POST': 
         form = BandForm(request.POST)
@@ -28,7 +35,7 @@ def add_band(request):
         
         return HttpResponseRedirect("/")
         
-    t = loader.get_template('band/new.html')
+    t = loader.get_template('bands/new-band.html')
     c = RequestContext(request, {
         'form': BandForm()
     })

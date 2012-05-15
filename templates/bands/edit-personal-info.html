@@ -1,0 +1,17 @@
+{% extends "includes/wrapper.html" %}
+
+{% block css %}
+	<link rel="stylesheet" href="/static/css/band.css">
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+	<h3>Dados pessoais</h3>
+	
+	<form method="post" id="edit-musician-form">{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Cadastrar" />
+	</form>
+{% endblock %}

@@ -33,3 +33,8 @@ class BandForm(forms.Form):
         
         band.admins.add(user.get_profile())
         band.musical_styles = self.cleaned_data['musical_styles']
+        
+class PersonalInfoForm(forms.Form):
+    name = forms.CharField(max_length=100, label="Nome")
+    email = forms.CharField(max_length=100, label="Email")
+    cep = forms.CharField(max_length=9, label="Cep")

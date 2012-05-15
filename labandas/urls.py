@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     (r'^logout$', 'labandas.views.logout'),
     (r'^ajax/register-musician$', 'bands.views.subscribe_musician'),
     (r'^band/create$', 'bands.views.add_band'),
+    (r'^personal-info$', 'bands.views.edit_personal_info'),
      url(r'^admin/', include(admin.site.urls)),
      (r'^accounts/', include('registration.urls')),
 )
