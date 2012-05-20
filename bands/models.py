@@ -62,6 +62,9 @@ class Band(models.Model):
         self.url = slugify(self.name)
         super(Band, self).save(*args, **kwargs)
     
+    def get_musicians(self):
+        return MusicianBand.objects.filter(band=self)
+    
     def save_adding_musician(self, musician, instruments):
         self.save()
         musicianBand = MusicianBand()

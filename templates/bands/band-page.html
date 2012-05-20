@@ -1,0 +1,44 @@
+{% extends "includes/wrapper.html" %}
+
+{% block css %}
+	<link rel="stylesheet" href="/s/css/profile.css">
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+
+{% block content %}
+	<h3>{{ band.name }}</h3>
+	
+	<section id="musicians" class="profile-block">
+		<header>
+			<h4>Músicos</h4>
+		</header>
+		<ul>
+			{% for musicBand in band_musicians %}
+				<li> 
+					<a href="{{ musicBand.musician.encode_profile }}">
+					{%for instrument in musicBand.instruments.all %}
+						{{instrument.name}}
+						{% if not forloop.last %}, {%endif%}
+					{% endfor %}:
+					{{ musicBand.musician.user.get_full_name }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</section>
+	
+	<section id="musical-styles" class="profile-block">
+		<header>
+			<h4>Estilos musicais</h4>
+		</header>
+		<ul>
+			{% for style in band.musical_styles.all %}
+				<li>{{ style.name }}</li>
+			{% endfor %}
+		</ul>
+	</section>
+{% endblock %}
+
+{% block aside %}{% endblock %}

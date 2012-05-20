@@ -1,5 +1,5 @@
 from bands.forms import ExpressRegistrationForm, BandForm, UserInfoForm
-from bands.models import Musician
+from bands.models import Musician, Band
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import get_object_or_404
@@ -54,9 +54,8 @@ class EditMusician(BaseView):
 class MusicianProfile(BaseView):
     @get
     def show_profile(self, request, uid, name):
-        t = loader.get_template('bands/musician-profile.html')
-        
         owner = get_object_or_404(Musician, pk=uid)
+        t = loader.get_template('bands/musician-profile.html')
         
         c = RequestContext(request, {
             'owner': owner,
@@ -80,3 +79,16 @@ class AddBand(BaseView):
             form.save(request.user)
         
         return HttpResponseRedirect("/")
+    
+class BandPage(BaseView):
+    @get
+    def show_page(self, request, bid, name):
+        band = get_object_or_404(Band, pk=bid)
+        
+        t = loader.get_template('bands/band-page.html')
+        c = RequestContext(request, {
+            'band': band,
+            'band_musicians': band.get_musicians()
+        })
+        
+        return HttpResponse(t.render(c))
