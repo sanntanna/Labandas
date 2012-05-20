@@ -193,7 +193,9 @@ aside a{
 	text-decoration:none;
 }
 
-section{margin-left:200px;}
+#content{
+	float:left;
+}
 
 #footer-container{
 	background-color:#343434;

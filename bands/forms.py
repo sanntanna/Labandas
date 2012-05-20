@@ -1,4 +1,4 @@
-from bands.models import MusicalStyle, Band, Musician
+from bands.models import MusicalStyle, Band
 from datetime import datetime
 from django import forms
 from django.contrib.auth.models import User

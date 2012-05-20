@@ -1,0 +1,43 @@
+{% extends "includes/wrapper.html" %}
+
+{% block css %}
+	<link rel="stylesheet" href="/s/css/band.css">
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+
+{% block content %}
+	<h3>{{ owner.user.get_full_name }}</h3>
+	
+	<section id="bands" class="profile-block">
+		<header>
+			<h4>Bandas que toca</h4>
+		</header>
+		<ul>
+			{% for musicBand in owner_bands %}
+				<li> 
+					{{ musicBand.band.name }} (
+						{%for instrument in musicBand.instruments.all %}
+							{{instrument.name}}
+							{% if not forloop.last %}, {%endif%}
+						{% endfor %}
+					)
+				</li>
+			{% endfor %}
+		</ul>
+	</section>
+	
+	<section id="musical-styles" class="profile-block">
+		<header>
+			<h4>Estilos musicais</h4>
+		</header>
+		<ul>
+			{% for style in owner.musical_styles.all %}
+				<li>{{ style.name }}</li>
+			{% endfor %}
+		</ul>
+	</section>
+{% endblock %}
+
+{% block aside %}{% endblock %}

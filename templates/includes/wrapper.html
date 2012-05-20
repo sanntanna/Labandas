@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="/s/css/form.css">
 	<link rel="stylesheet" href="/s/css/message.css">
 	{% block css %}{% endblock %}
-	
+
 	<script src="/s/js/libs/modernizr-1.7.min.js"></script>
 </head>
 <body>
@@ -31,7 +31,7 @@
 				
 				<div id="user-header">
 				{% if user.is_authenticated %}
-				    <span>Logado como <strong>{{ user.first_name }}</strong></span> |
+				    <span>Logado como <strong><a href="/">{{ user.first_name }}</a></strong></span> |
 				    <a href="/logout">sair</a>
 				{% else %}
 					<form id="lb-form-login" action="/login" class="ajax" method="post">
@@ -42,7 +42,7 @@
 					</form>
 				{% endif %}
 				</div>
-			<nav>
+			<nav id="header">
 				<ul>
 					<li><a href="#">Encontre um músico</a></li>
 					<li><a href="#">Encontre uma banda</a></li>
@@ -51,22 +51,23 @@
 			</nav>
 		</header>
 	</div>
-	<div id="main" class="wrapper">
+	<div id="main" class="wrapper clearfix">
 		{% block aside %}
-		<aside>
-			<ul>
-				<li><a href="/">Inicio</a></li>
-				<li><a href="/musico/editar">Informações pessoais</a></li>
-				<li><a href="#">Suas bandas</a></li>
-				<li><a href="#">Suas mídias</a></li>
-				<li><a href="#">Seus equipamentos</a></li>
-				<li><a href="#">Solicitações de bandas</a></li>
-			</ul>
-		</aside>
+			<aside>
+				<ul>
+					<li><a href="/">Inicio</a></li>
+					<li><a href="{{ user.get_profile.encode_profile }}">Perfil</a></li>
+					<li><a href="/musico/editar">Informações pessoais</a></li>
+					<li><a href="#">Suas bandas</a></li>
+					<li><a href="#">Suas mídias</a></li>
+					<li><a href="#">Seus equipamentos</a></li>
+					<li><a href="#">Solicitações de bandas</a></li>
+				</ul>
+			</aside>
 		{% endblock %}
-		<section id="content" class="clearfix">
+		<section id="content">
 			{% block content %}
-			conteudo
+				conteudo
 			{% endblock %}
 		</section>
 	</div>

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
+from django.template.defaultfilters import slugify
 from equipaments.models import Equipament, EquipamentType
 from medias.models import Media
 
@@ -15,6 +16,7 @@ class Musician(models.Model):
     type_instruments_play = models.ManyToManyField(EquipamentType)
     musical_styles = models.ManyToManyField(MusicalStyle)
     medias = models.ManyToManyField(Media)
+    url = models.SlugField(max_length=50)
     
     cep = models.CharField(max_length=9, null=True,blank = True)
     city = models.CharField(max_length=20, null=True,blank = True)
@@ -34,6 +36,13 @@ class Musician(models.Model):
         if cep == None:
             return
         self.cep = cep
+    
+    def encode_profile(self):
+        return "/musico/" + self.url + "/" + self.pk.__str__()
+    
+    def save(self, *args, **kwargs):
+        self.url = slugify(self.user.first_name)
+        super(Musician, self).save(*args, **kwargs)
 
 class Band(models.Model):
     name = models.CharField(max_length=50)
@@ -41,9 +50,17 @@ class Band(models.Model):
     musical_styles = models.ManyToManyField(MusicalStyle)
     medias = models.ManyToManyField(Media)
     admins = models.ManyToManyField(Musician)
+    url = models.SlugField(max_length=50)
         
     def __unicode__(self):
         return self.name
+    
+    def encode_page(self):
+        return "/banda/" + self.url + "/" + self.pk.__str__()
+    
+    def save(self, *args, **kwargs):
+        self.url = slugify(self.name)
+        super(Band, self).save(*args, **kwargs)
     
     def save_adding_musician(self, musician, instruments):
         self.save()
@@ -63,6 +80,6 @@ class MusicianBand(models.Model):
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Musician.objects.create(user=instance)
+        Musician(user=instance).save()
 
 post_save.connect(create_user_profile, sender=User)

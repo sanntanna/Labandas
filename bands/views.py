@@ -1,6 +1,8 @@
 from bands.forms import ExpressRegistrationForm, BandForm, UserInfoForm
+from bands.models import Musician
 from django.contrib.auth import login, authenticate
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.template.context import RequestContext
 from http_method.BaseView import BaseView, get, post, ajax, onypostallowed
@@ -48,6 +50,20 @@ class EditMusician(BaseView):
         
         form.save()
         return JSONResponse({'success': True})
+
+class MusicianProfile(BaseView):
+    @get
+    def show_profile(self, request, uid, name):
+        t = loader.get_template('bands/musician-profile.html')
+        
+        owner = get_object_or_404(Musician, pk=uid)
+        
+        c = RequestContext(request, {
+            'owner': owner,
+            'owner_bands': owner.get_musician_bands(),
+        })
+        
+        return HttpResponse(t.render(c))
     
 class AddBand(BaseView):
     @get
@@ -56,10 +72,11 @@ class AddBand(BaseView):
         c = RequestContext(request, {'form': BandForm()})
         
         return HttpResponse(t.render(c))
+    
     @post
     def add_band_post(self, request):
         form = BandForm(request.POST)
         if form.is_valid():
-            form.save()
+            form.save(request.user)
         
         return HttpResponseRedirect("/")
