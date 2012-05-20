@@ -37,8 +37,8 @@ class BandForm(forms.Form):
 
 
 class UserInfoForm(ModelForm):
-    cep = forms.CharField(max_length=8, label="Cep")
-    musical_styles = forms.ModelMultipleChoiceField(queryset=MusicalStyle.objects.all(), label="Estilos musicais", widget=forms.CheckboxSelectMultiple)
+    cep = forms.CharField(max_length=8, label="Cep", required=False)
+    musical_styles = forms.ModelMultipleChoiceField(queryset=MusicalStyle.objects.all(), label="Estilos musicais", widget=forms.CheckboxSelectMultiple, required=False)
     type_instruments_play = forms.ModelMultipleChoiceField(queryset=EquipamentType.objects.all(), label="Instrumentos que toca", widget=forms.CheckboxSelectMultiple)
     
     def __init__(self, *args, **kwargs):
