@@ -39,7 +39,8 @@ class EditMusician(BaseView):
         
         return HttpResponse(t.render(c))
     
-    @post
+    @ajax
+    @onypostallowed
     def edit_musician_post(self, request):
         form = UserInfoForm(data=request.POST, instance=request.user)
         if not form.is_valid():

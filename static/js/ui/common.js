@@ -1,6 +1,4 @@
-lb = window.lb || {};
-
-lb.common = function(){
+(function(){
 	
 	this.init = function(){
 		setupAjax();
@@ -50,14 +48,10 @@ lb.common = function(){
 		$("#lb-form-login").bind('ajaxcomplete', function(e, data){
 			if(data.success) {
 				location.reload()
-			} else {
-				new lb.message(data.message, lb.message.type.ERROR);
 			}
 		});
 	}
 	
 	this.init();
 	$(this.domLoaded);
-};
-
-new lb.common();
+}());

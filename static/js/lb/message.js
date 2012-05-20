@@ -4,6 +4,10 @@ lb.message = function(text, type, timeInSecconds){
 	var instance = this;
 	instance.box = null;
 	
+	instance.remove = function(){
+		instance.box.remove();
+	}
+	
 	function createBox(){
 		return $('<div class="message_box"><div class="message_inner"><span class="ico">&nbsp;</span><div class="text"></div></div><span class="close">X</span></div>');
 	}
@@ -43,8 +47,6 @@ lb.message = function(text, type, timeInSecconds){
 	showBox(text, type, timeInSecconds);
 };
 
-lb.message.type = {
-	WARNING: 'warning',
-	ERROR: 'error',
-	SUCCESS: 'success'
-};
+lb.message.ERROR = 'error';
+lb.message.SUCCESS = 'success';
+lb.message.WARNING = 'warning';

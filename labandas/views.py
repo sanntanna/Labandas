@@ -28,15 +28,12 @@ def homeLogged(request):
 
 def login(request):
     user = auth.authenticate(username=request.POST['user'], password=request.POST['password'])
-    responseData = { "success": True }
     
     if user == None:
-        responseData["success"] = False
-        responseData["message"] = "Usuario e/ou senha invalidos"
-    else:
-        auth.login(request, user)
+        return JSONResponse({'success': False, 'errors': {'login':["Usuario e/ou senha invalidos"]}})
     
-    return JSONResponse(responseData)
+    auth.login(request, user)
+    return JSONResponse( { 'success': True, 'user': user })
 
 def logout(request):
     auth.logout(request)

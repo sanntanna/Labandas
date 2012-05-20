@@ -12,21 +12,14 @@
 				location.reload();
 				return;
 			}
-			
-			var messageBuilder = [],
-				field;
-			
-			for(field in response.errors){
-				messageBuilder.push(field + ':' + response.errors[field][0]);
-			}
-			
-			new lb.message(messageBuilder.join('<br />'), lb.message.type.ERROR);
 		});
 	}
 	
 	function setupCepUpdate(){
 		$("#save-cep").click(function(){
-			$.get('/musico/atualizar-endereco', {'cep': $("#cep").val()});
+			$.get('/musico/atualizar-endereco', {'cep': $("#cep").val()}, function(){
+				new lb.message('Seu cep foi atualizado', lb.message.SUCCESS);
+			});
 		});
 	}
 	
