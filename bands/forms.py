@@ -46,9 +46,15 @@ class UserInfoForm(ModelForm):
         
         if any(self.initial):
             musician = self.instance.get_profile()
+            
             self.fields['first_name'].label = "Nome"
+            self.fields['first_name'].required = True
+            
             self.fields['email'].label = "Email"
+            self.fields['email'].required = True
+            
             self.fields['cep'].initial = musician.cep
+            
             self.fields['type_instruments_play'].initial = [m.pk for m in musician.type_instruments_play.filter()]
             self.fields['musical_styles'].initial = [m.pk for m in musician.musical_styles.filter()]
             
