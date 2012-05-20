@@ -1,10 +1,9 @@
-lb = window.lb || {};
-
-lb.home = function(){
+(function(){
 	this.init = function(){};
 	
 	this.domLoaded = function(){
 		setupSubscribeForm();
+		setupCepUpdate();
 	};
 	
 	function setupSubscribeForm(){
@@ -25,8 +24,12 @@ lb.home = function(){
 		});
 	}
 	
+	function setupCepUpdate(){
+		$("#save-cep").click(function(){
+			$.get('/musico/atualizar-endereco', {'cep': $("#cep").val()});
+		});
+	}
+	
 	this.init();
 	$(this.domLoaded);
-}
-
-new lb.home();
+})();

@@ -1,7 +1,11 @@
 {% extends "includes/wrapper.html" %}
 
 {% block css %}
-	<link rel="stylesheet" href="/static/css/home.css">
+	<link rel="stylesheet" href="/s/css/home.css">
+{% endblock %}
+
+{% block js %}
+	<script src="/s/js/ui/home.js"></script>
 {% endblock %}
 
 
@@ -11,7 +15,7 @@
 		{% if musicBands.count = 0 %}
 			<div class="box without-bands">
 				Você ainda não está em nenhuma banda cadastrada no Lasbandas.<br />
-				<a href="/band/create">Crie uma banda</a> ou <a href="#">Encontre uma banda que precisa de você</a>.
+				<a href="/banda/cadastrar">Crie uma banda</a> ou <a href="#">Encontre uma banda que precisa de você</a>.
 			</div>
 		{% else %}
 			<div class="box with-bands">
@@ -28,10 +32,22 @@
 						</li>
 					{% endfor %}
 				</ul>
+				
+				<a href="/banda/cadastrar">[+] Cadastrar nova banda</a>
 			</div>
 		{% endif %}
 		
-		<p>Informe <a href="/personal-info#address">seu endereço</a> para encontrar músicos e bandas próximos de você!</p>
+		{% if user.get_profile.cep == "" %}
+		<p>
+			Informe seu cep e encontre músicos e bandas próximos de você: <br>
+			<input type="text" id="cep" placeholder="cep">
+			<input type="button" value="ok" id="save-cep" />
+		</p>
+		{% else %}
+			<p>
+				Mantenha suas <a href="musico/editar">informações pessoais atualizadas.</a>
+			</p>
+		{% endif %}
 		
 		
 	</div>

@@ -1,18 +1,18 @@
 {% extends "includes/wrapper.html" %}
 
 {% block css %}
-	<link rel="stylesheet" href="/static/css/home.css">
+	<link rel="stylesheet" href="/s/css/home.css">
 {% endblock %}
 
-{% block scripts %}
-	<script src="/static/js/ui/home.js"></script>
+{% block js %}
+	<script src="/s/js/ui/home.js"></script>
 {% endblock %}
 
 {% block content %}
 	<article>
 		<h3>Cadastre-se</h3>
 		
-		<form action="/ajax/register-musician" method="post" id="subscribe-form" class="ajax">{% csrf_token %}
+		<form action="/musico/cadastrar" method="post" id="subscribe-form" class="ajax">{% csrf_token %}
 			{{ form.as_p }}
 			<input type="submit" value="Cadastrar" />
 		</form>

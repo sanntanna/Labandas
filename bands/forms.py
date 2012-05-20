@@ -1,12 +1,13 @@
-from bands.models import MusicalStyle, Band
+from bands.models import MusicalStyle, Band, Musician
 from datetime import datetime
 from django import forms
 from django.contrib.auth.models import User
+from django.forms.models import ModelForm
 from equipaments.models import EquipamentType
 
 class ExpressRegistrationForm(forms.Form): 
     name = forms.CharField(max_length=100, label="Nome")
-    email = forms.EmailField(label="Email")
+    email = forms.EmailField(label="Email") 
     password = forms.CharField(max_length=100, label="Senha",   widget=forms.PasswordInput())
     instruments = forms.ModelMultipleChoiceField(queryset=EquipamentType.objects.all(), label="", widget=forms.CheckboxSelectMultiple)
     #accept = forms.BooleanField(label="Aceito os termos de uso e quero me cadastrar")
@@ -33,8 +34,37 @@ class BandForm(forms.Form):
         
         band.admins.add(user.get_profile())
         band.musical_styles = self.cleaned_data['musical_styles']
+
+
+class UserInfoForm(ModelForm):
+    cep = forms.CharField(max_length=8, label="Cep")
+    musical_styles = forms.ModelMultipleChoiceField(queryset=MusicalStyle.objects.all(), label="Estilos musicais", widget=forms.CheckboxSelectMultiple)
+    type_instruments_play = forms.ModelMultipleChoiceField(queryset=EquipamentType.objects.all(), label="Instrumentos que toca", widget=forms.CheckboxSelectMultiple)
+    
+    def __init__(self, *args, **kwargs):
+        super(UserInfoForm, self).__init__(*args, **kwargs)
         
-class PersonalInfoForm(forms.Form):
-    name = forms.CharField(max_length=100, label="Nome")
-    email = forms.CharField(max_length=100, label="Email")
-    cep = forms.CharField(max_length=9, label="Cep")
+        if any(self.initial):
+            musician = self.instance.get_profile()
+            self.fields['first_name'].label = "Nome"
+            self.fields['email'].label = "Email"
+            self.fields['cep'].initial = musician.cep
+            self.fields['type_instruments_play'].initial = [m.pk for m in musician.type_instruments_play.filter()]
+            self.fields['musical_styles'].initial = [m.pk for m in musician.musical_styles.filter()]
+            
+    
+    def save(self, force_insert=False, force_update=False, commit=True):
+        user = super(UserInfoForm, self).save(commit=False)
+        
+        musician = user.get_profile()
+        musician.cep = self.cleaned_data['cep']
+        musician.type_instruments_play = self.cleaned_data['type_instruments_play']
+        musician.musical_styles = self.cleaned_data['musical_styles']
+        
+        if commit:
+            user.save()
+            musician.save()
+        return user
+    class Meta:
+        model = User
+        fields = ('first_name', 'email')

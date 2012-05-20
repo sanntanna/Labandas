@@ -29,6 +29,11 @@ class Musician(models.Model):
     
     def get_musician_bands(self):
         return MusicianBand.objects.filter(musician=self)
+    
+    def set_cep(self, cep=None):
+        if cep == None:
+            return
+        self.cep = cep
 
 class Band(models.Model):
     name = models.CharField(max_length=50)
