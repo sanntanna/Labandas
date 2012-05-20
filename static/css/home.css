@@ -31,7 +31,7 @@
 	width:250px;
 }
 
-.box.with-bands:hover{
+.box.with-bands:hover{	
 	background-color:#ccc;
 	color:#000;
 }

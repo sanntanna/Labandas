@@ -72,18 +72,28 @@ button {  width: auto; overflow: visible; }
 
 body, select, input, textarea {  color: #444; }
 h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+
+
+
+
+body{
+	font-family:Helvetica, Helvetica Neue, Arial, sans-serif;
+}
+
+a{
+	color:#F16529;
+}
+
+a:visited{
+	color:inherit;
+}
+
 a:hover { 
 	color: #777;
 	-webkit-transition: color .2s linear;
 	   -moz-transition: color .2s linear;
 	     -o-transition: color .2s linear;
 			transition: color .2s linear; 
-}
-
-
-
-body{
-	font-family:Helvetica, Helvetica Neue, Arial, sans-serif;
 }
 
 .wrapper{

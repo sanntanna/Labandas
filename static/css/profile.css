@@ -1,0 +1,16 @@
+.profile-block{
+	float:left;
+	border-radius:10px;
+	background:#F4F3A4;
+	width:300px;
+	margin-right:15px;
+	padding:30px;
+	-webkit-transition: all .4s linear;
+	   -moz-transition: all .4s linear;
+	     -o-transition: all .4s linear;
+			transition: all .4s linear; 
+}
+
+.profile-block:hover{
+	background-color:#EFE26F;
+}
