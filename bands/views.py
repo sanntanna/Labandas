@@ -81,16 +81,24 @@ class AddBand(BaseView):
     def post(self, request):
         form = BandForm(data=request.POST)
         band = None
+        success = True
         current_musician = request.user.get_profile()
         
         if form.is_valid():
             band = form.save(admin=current_musician)
+        else:
+            success = False
         
         form_musician = BandMusicianForm(data=request.POST)
         if form_musician.is_valid():
             form_musician.save(band, current_musician)
+        else:
+            success = False
         
-        return HttpResponseRedirect("/")
+        if success:
+            return JSONResponse({'success': success})
+        
+        return JSONResponse({'success': False, 'errors': form.errors})
     
 class EditBand(BaseView):
     @get
