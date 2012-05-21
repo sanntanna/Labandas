@@ -9,34 +9,45 @@
 
 {% block content %}
 	<h3>{{ owner.user.get_full_name }}</h3>
-	
-	<section id="bands" class="profile-block">
+	<div class="clearfix">
+		<section id="bands" class="profile-block">
+			<header>
+				<h4>Bandas que toca</h4>
+			</header>
+			<ul>
+				{% for musicBand in owner_bands %}
+					<li> 
+						<a href="{{ musicBand.band.encode_page }}">
+						{{ musicBand.band.name }} (
+							{%for instrument in musicBand.instruments.all %}
+								{{instrument.name}}
+								{% if not forloop.last %}, {%endif%}
+							{% endfor %}
+						)
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</section>
+		
+		<section id="musical-styles" class="profile-block">
+			<header>
+				<h4>Estilos musicais</h4>
+			</header>
+			<ul>
+				{% for style in owner.musical_styles.all %}
+					<li>{{ style.name }}</li>
+				{% endfor %}
+			</ul>
+		</section>
+	</div>
+	<section id="instruments-play" class="profile-block">
 		<header>
-			<h4>Bandas que toca</h4>
+			<h4>Instrumentos que toca</h4>
 		</header>
 		<ul>
-			{% for musicBand in owner_bands %}
-				<li> 
-					<a href="{{ musicBand.band.encode_page }}">
-					{{ musicBand.band.name }} (
-						{%for instrument in musicBand.instruments.all %}
-							{{instrument.name}}
-							{% if not forloop.last %}, {%endif%}
-						{% endfor %}
-					)
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
-	</section>
-	
-	<section id="musical-styles" class="profile-block">
-		<header>
-			<h4>Estilos musicais</h4>
-		</header>
-		<ul>
-			{% for style in owner.musical_styles.all %}
-				<li>{{ style.name }}</li>
+			{% for instrument in owner.type_instruments_play.all %}
+				<li>{{ instrument.name }}</li>
 			{% endfor %}
 		</ul>
 	</section>
