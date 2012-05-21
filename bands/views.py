@@ -1,7 +1,8 @@
-from bands.forms import ExpressRegistrationForm, BandForm, UserInfoForm
-from bands.models import Musician, Band
+from bands.forms import ExpressRegistrationForm, BandForm, UserInfoForm, \
+    BandMusicianForm
+from bands.models import Musician, Band, MusicianBand
 from django.contrib.auth import login, authenticate
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.template.context import RequestContext
@@ -53,8 +54,8 @@ class EditMusician(BaseView):
 
 class MusicianProfile(BaseView):
     @get
-    def show_profile(self, request, uid, name):
-        owner = get_object_or_404(Musician, pk=uid)
+    def show_profile(self, request, user_id, name):
+        owner = get_object_or_404(Musician, pk=user_id)
         t = loader.get_template('bands/musician-profile.html')
         
         c = RequestContext(request, {
@@ -66,24 +67,74 @@ class MusicianProfile(BaseView):
     
 class AddBand(BaseView):
     @get
-    def add_band(self, request):
-        t = loader.get_template('bands/new-band.html')
-        c = RequestContext(request, {'form': BandForm()})
+    def get(self, request):
+        t = loader.get_template('bands/edit-band.html')
+        c = RequestContext(request, {
+            'form': BandForm(), 
+            'musician_form':BandMusicianForm()
+        })
         
         return HttpResponse(t.render(c))
     
-    @post
-    def add_band_post(self, request):
-        form = BandForm(request.POST)
+    @ajax
+    @onypostallowed
+    def post(self, request):
+        form = BandForm(data=request.POST)
+        band = None
+        current_musician = request.user.get_profile()
+        
         if form.is_valid():
-            form.save(request.user)
+            band = form.save(admin=current_musician)
+        
+        form_musician = BandMusicianForm(data=request.POST)
+        if form_musician.is_valid():
+            form_musician.save(band, current_musician)
         
         return HttpResponseRedirect("/")
     
+class EditBand(BaseView):
+    @get
+    def get(self, request, band_id):
+        band = get_object_or_404(Band, pk=band_id)
+        musician_band = MusicianBand.objects.get(band=band, musician=request.user.get_profile())
+        t = loader.get_template('bands/edit-band.html')
+        
+        c = RequestContext(request, {
+            'form': BandForm(instance=band), 
+            'musician_form':BandMusicianForm(instance=musician_band),
+            'edit': True
+        })
+        
+        return HttpResponse(t.render(c))
+    
+    @ajax
+    @onypostallowed
+    def post(self, request, band_id):
+        band = get_object_or_404(Band, pk=band_id)
+        musician = request.user.get_profile()
+        success = True
+        form = BandForm(data=request.POST, instance=band)
+        
+        if form.is_valid():
+            form.save()
+        else:
+            success = False
+        
+        musician_form = BandMusicianForm(data=request.POST)
+        if musician_form.is_valid():
+            musician_form.save(band=band, musician=musician)
+        else:
+            success = False
+        
+        if success:
+            return JSONResponse({'success': success})
+        
+        return JSONResponse({'success': False, 'errors': form.errors})
+    
 class BandPage(BaseView):
     @get
-    def show_page(self, request, bid, name):
-        band = get_object_or_404(Band, pk=bid)
+    def show_page(self, request, band_id, name):
+        band = get_object_or_404(Band, pk=band_id)
         
         t = loader.get_template('bands/band-page.html')
         c = RequestContext(request, {

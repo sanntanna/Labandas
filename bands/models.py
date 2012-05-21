@@ -8,6 +8,7 @@ from medias.models import Media
 class MusicalStyle(models.Model):
     name = models.CharField(max_length=50)
     image = models.CharField(max_length=255, null=True,blank = True)
+    
     def __unicode__(self):
         return self.name
 
@@ -65,8 +66,7 @@ class Band(models.Model):
     def get_musicians(self):
         return MusicianBand.objects.filter(band=self)
     
-    def save_adding_musician(self, musician, instruments):
-        self.save()
+    def add_musician(self, musician, instruments):
         musicianBand = MusicianBand()
         musicianBand.band = self
         musicianBand.musician = musician

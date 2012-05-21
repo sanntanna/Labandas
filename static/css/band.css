@@ -1,18 +1,18 @@
-#add-band-form p label{
+#edit-band-form p label{
 	display:block;
 }
 
-#add-band-form p{
+#edit-band-form p{
 	margin-top:15px;
 }
 
-#add-band-form ul{
+#edit-band-form ul{
 	list-style:none none;
 	margin:0;
 	padding:0;
 }
 
-#add-band-form ul li{
+#edit-band-form ul li{
 	display:inline-block;
 	margin-right:20px;
 }

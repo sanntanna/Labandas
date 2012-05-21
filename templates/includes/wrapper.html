@@ -58,7 +58,16 @@
 					<li><a href="/">Inicio</a></li>
 					<li><a href="{{ user.get_profile.encode_profile }}">Perfil</a></li>
 					<li><a href="/musico/editar">Informações pessoais</a></li>
-					<li><a href="#">Suas bandas</a></li>
+					<li>
+						Bandas:
+						<ul>
+							{%  for musicBand in user.get_profile.get_musician_bands %}
+							<li>
+								<a href="/banda/editar/{{ musicBand.band.pk }}">{{ musicBand.band.name }}</a>
+							</li>
+							{% endfor %}
+						</ul>
+					</li>
 					<li><a href="#">Suas mídias</a></li>
 					<li><a href="#">Seus equipamentos</a></li>
 					<li><a href="#">Solicitações de bandas</a></li>

@@ -203,6 +203,11 @@ aside a{
 	text-decoration:none;
 }
 
+aside li li{
+	margin:0 0 0 20px;
+	border-bottom:none;
+}
+
 #content{
 	float:left;
 }

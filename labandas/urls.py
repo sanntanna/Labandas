@@ -1,5 +1,5 @@
 from bands.views import SubscribeMusician, EditMusician, UpdateCep, AddBand, \
-    MusicianProfile, BandPage
+    MusicianProfile, BandPage, EditBand
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
@@ -14,9 +14,10 @@ urlpatterns = patterns('',
     (r'^musico/cadastrar$', SubscribeMusician()),
     (r'^musico/atualizar-endereco$', UpdateCep()),
     (r'^musico/editar$', EditMusician()),
-    (r'^musico/(?P<name>[a-z-]+)/(?P<uid>\d+)$', MusicianProfile()),
+    (r'^musico/(?P<name>[a-z-]+)/(?P<user_id>\d+)$', MusicianProfile()),
     (r'^banda/cadastrar$', AddBand()),
-    (r'^banda-(?P<name>[a-z-]+)/(?P<bid>\d+)$', BandPage()),
+    (r'^banda/editar/(?P<band_id>\d+)$', EditBand()),
+    (r'^banda-(?P<name>[a-z-]+)/(?P<band_id>\d+)$', BandPage()),
      url(r'^admin/', include(admin.site.urls)),
      (r'^accounts/', include('registration.urls')),
 )

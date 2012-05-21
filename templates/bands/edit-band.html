@@ -1,0 +1,28 @@
+{% extends "includes/wrapper.html" %}
+
+{% block css %}
+	<link rel="stylesheet" href="/s/css/band.css">
+{% endblock %}
+
+{% block js %}
+	<script src="/s/js/ui/edit-band.js"></script>
+{% endblock %}
+
+{% block content %}
+	
+	
+	{% if edit  %}
+		<h3>Editando a banda "{{ form.instance }}"</h3>
+		<a href="{{ form.instance.encode_page }}" target="_blank">Ver página da banda</a>		
+	{% else %}
+		<h3>Adicionar uma banda</h3>
+	{% endif %}
+	
+	
+	
+	<form method="post" id="edit-band-form" class="ajax">{% csrf_token %}
+		{{ form.as_p }}
+		{{ musician_form.as_p }}
+		<input type="submit" value="Cadastrar" />
+	</form>
+{% endblock %}

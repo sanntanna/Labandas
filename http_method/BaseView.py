@@ -76,9 +76,9 @@ def connect(func):
     return httpmethod('CONNECT', func)
 
 def onypostallowed(func):
-    def new(obj, request):
+    def new(obj, request, *args, **kwargs):
         if request.method != 'POST':
             return HttpResponseNotFound()
-        return func(obj, request)
+        return func(obj, request, *args, **kwargs)
     
     return new
