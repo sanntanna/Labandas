@@ -46,6 +46,8 @@ class BandForm(forms.ModelForm):
 
 
 class BandMusicianForm(forms.ModelForm):
+    instruments = forms.ModelMultipleChoiceField(queryset=EquipamentType.objects.all(), label="Instrumentos que voce toca na banda", widget=forms.CheckboxSelectMultiple)
+    
     def save(self, band, musician):
         musician_band = MusicianBand.objects.get_or_create(band=band,musician=musician)[0]
         musician_band.instruments = self.cleaned_data['instruments']
@@ -53,9 +55,6 @@ class BandMusicianForm(forms.ModelForm):
     class Meta:
         model = MusicianBand
         fields = ('instruments',)
-        widgets = {
-            'instruments': forms.CheckboxSelectMultiple,
-        }
 
 
 class UserInfoForm(forms.ModelForm):
