@@ -57,7 +57,7 @@ class Band(models.Model):
         return self.name
     
     def encode_page(self):
-        return "/banda-" + self.url + "/" + self.pk.__str__()
+        return "/banda/" + self.url + "/" + self.pk.__str__()
     
     def save(self, *args, **kwargs):
         self.url = slugify(self.name)

@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     (r'^musico/(?P<name>[a-z-]+)/(?P<user_id>\d+)$', MusicianProfile()),
     (r'^banda/cadastrar$', AddBand()),
     (r'^banda/editar/(?P<band_id>\d+)$', EditBand()),
-    (r'^banda-(?P<name>[a-z-]+)/(?P<band_id>\d+)$', BandPage()),
+    (r'^banda/(?P<name>[a-z-]+)/(?P<band_id>\d+)$', BandPage()),
      url(r'^admin/', include(admin.site.urls)),
      (r'^accounts/', include('registration.urls')),
 )
