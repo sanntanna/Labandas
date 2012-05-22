@@ -1,6 +1,43 @@
-.box-ask-musician{
+#box-ask-musician{
+	float:right;
+	border-radius:10px;
+	background:#F4F3A4;
+	padding:15px;
+	position:relative;
+}
+
+
+#ask-musician-complete{
 	float:right;
 }
+
+#list-your-bands{
+	display:none;
+}
+
+#list-your-bands a{
+	padding:3px 10px;
+	display:block;
+}
+
+#list-your-bands a.selected{
+	background-color:#EFE26F;
+}
+
+
+#instruments{
+	display:none;
+	border-radius:5px;
+	background:#fff;
+	padding:4px 10px;
+	position:absolute;
+	top:0px;
+	left:110%;
+	width:150px;
+	border:3px solid #EFE26F;
+}
+
+#instruments label{display:block;}
 
 .profile-block{
 	float:left;

@@ -5,28 +5,23 @@
 {% endblock %}
 
 {% block js %}
+	<script src="/s/js/ui/musician-profile.js"></script>
 {% endblock %}
 
 {% block content %}
 
 	{% if owner.pk != user.pk %}
-<!-- 		<div class="box-ask-musician"> -->
-<!-- 			<a href="#convidar-musico">Convidar para uma banda</a> -->
-<!-- 			<div id="list-your-bands"> -->
-<!-- 				<ul id="bands"> -->
-<!-- 					<li>asd asd</li> -->
-<!-- 				</ul> -->
-<!-- 				<div id="instruments"> -->
-<!-- 					<label> -->
-<!-- 						<input type="checkbox" />Guitarra -->
-<!-- 					</label> -->
-<!-- 					<label> -->
-<!-- 						<input type="checkbox" />Baixo -->
-<!-- 					</label> -->
-<!-- 					<a href="#concluir">ok</a> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+		<div id="box-ask-musician">
+			<a href="#convidar-musico" id="ask-musician">Convidar para uma banda</a>
+			<div id="list-your-bands">
+				<ul id="bands"></ul>
+			</div>
+			
+			<div id="instruments">
+				<div id="list-instruments"></div>
+				<a href="#concluir" id="ask-musician-complete">ok</a>
+			</div>
+		</div>
 	{% endif %}
 	
 	<h3>{{ owner.user.get_full_name }}</h3>

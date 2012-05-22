@@ -23,7 +23,7 @@ class SolicitationManager(models.Manager):
         if not band.admins.filter(pk=sender_musician.pk):
             return False
         
-        solicitation = self.generate_new_solicitation(from_musician=sender_musician, to_musician=target_musician,band=band)
+        solicitation = self.generate_new_solicitation(from_musician=sender_musician, to_musician=target_musician,band=band,instruments=instruments)
         solicitation.solicitation_type = Type.MUSICIAN
         solicitation.save()
         
