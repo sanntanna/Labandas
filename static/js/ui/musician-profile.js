@@ -6,7 +6,8 @@
 	};
 	
 	var bandsLoaded = false,
-		equipamentsLoaded = false;
+		equipamentsLoaded = false,
+		selectedBandId = -1;
 	
 	function setupAskMusician(){
 		$("#ask-musician").click(function(e){
@@ -18,13 +19,15 @@
 			e.preventDefault();
 			
 			var link = $(this);
-			link.closest('#bands').find('.selected').removeClass('selected');
+			selectedBandId = link.attr('data-id');
+			link.closest('ul').find('.selected').removeClass('selected');
 			link.addClass('selected');
-			showInstruments(link.attr('data-id'));
+			showInstruments();
 		});
 		
-		$("#ask-musician-complete").click(function(){
-			/*var postData = {
+		$("#ask-musician-complete").click(function(e){
+			e.preventDefault();
+			var postData = {
 				band_id: $("#instruments").attr('data-id'),
 				instruments: $("#list-instruments input:checked").val(),
 				musician: 6
@@ -32,7 +35,7 @@
 			
 			$.post('/solicitacao/musico/enviar', postData, function(){
 				
-			}); */
+			}); 
 		});
 	}
 	
@@ -56,9 +59,9 @@
 		});
 	}
 	
-	function showInstruments(bandId){
+	function showInstruments(){
 		if(equipamentsLoaded){
-			$("#instruments").fadeIn().attr('data-id', bandId);
+			$("#instruments").fadeIn();
 			return;
 		}
 		
@@ -71,7 +74,7 @@
 						'</label>'].join('');
 			}).join(''));
 			
-			$("#instruments").fadeIn().attr('data-id', bandId);
+			$("#instruments").fadeIn();
 			equipamentsLoaded = true;
 		});
 	}

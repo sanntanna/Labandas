@@ -12,10 +12,10 @@ class Status(object):
 class SolicitationManager(models.Manager):
     
     def generate_musician_solicitation(self, from_musician=None, to_musician=None, band=None, instruments=None):
-        return Solicitation(date=datetime.now(), 
-                            solicitation_status=Status.PENDING, 
-                            from_musician=from_musician, 
-                            to_musician=to_musician, 
+        return Solicitation(date=datetime.now(),
+                            solicitation_status=Status.PENDING,
+                            from_musician=from_musician,
+                            to_musician=to_musician,
                             instruments=instruments)
      
     def ask_musician(self, sender_musician, target_musician, band, instruments):
@@ -23,7 +23,7 @@ class SolicitationManager(models.Manager):
         if not band.admins.filter(pk=sender_musician.pk):
             return False
         
-        solicitation = self.generate_new_solicitation(from_musician=sender_musician, to_musician=target_musician,band=band,instruments=instruments)
+        solicitation = self.generate_new_solicitation(from_musician=sender_musician, to_musician=target_musician, band=band, instruments=instruments)
         solicitation.solicitation_type = Type.MUSICIAN
         solicitation.save()
         
