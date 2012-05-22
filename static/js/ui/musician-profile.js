@@ -59,6 +59,7 @@
 	function showInstruments(bandId){
 		if(equipamentsLoaded){
 			$("#instruments").fadeIn().attr('data-id', bandId);
+			return;
 		}
 		
 		$.get('/equipamentos/instrumentos', null, function(response){
