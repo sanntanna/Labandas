@@ -8,7 +8,29 @@
 {% endblock %}
 
 {% block content %}
+
+	{% if owner.pk != user.pk %}
+<!-- 		<div class="box-ask-musician"> -->
+<!-- 			<a href="#convidar-musico">Convidar para uma banda</a> -->
+<!-- 			<div id="list-your-bands"> -->
+<!-- 				<ul id="bands"> -->
+<!-- 					<li>asd asd</li> -->
+<!-- 				</ul> -->
+<!-- 				<div id="instruments"> -->
+<!-- 					<label> -->
+<!-- 						<input type="checkbox" />Guitarra -->
+<!-- 					</label> -->
+<!-- 					<label> -->
+<!-- 						<input type="checkbox" />Baixo -->
+<!-- 					</label> -->
+<!-- 					<a href="#concluir">ok</a> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+	{% endif %}
+	
 	<h3>{{ owner.user.get_full_name }}</h3>
+	
 	<div class="clearfix">
 		<section id="bands" class="profile-block">
 			<header>

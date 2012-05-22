@@ -2,11 +2,11 @@ from bands.forms import ExpressRegistrationForm, BandForm, UserInfoForm, \
     BandMusicianForm
 from bands.models import Musician, Band, MusicianBand
 from django.contrib.auth import login, authenticate
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.template.context import RequestContext
-from http_method.BaseView import BaseView, get, post, ajax, onypostallowed
+from http_method.BaseView import BaseView, get, ajax, onypostallowed
 from jsonui.response import JSONResponse
 
 class UpdateCep(BaseView):
@@ -151,3 +151,8 @@ class BandPage(BaseView):
         })
         
         return HttpResponse(t.render(c))
+
+def get_bands(request):
+    bands = request.user.get_profile().get_bands()
+    return JSONResponse({'success': True, 'bands':bands})
+    

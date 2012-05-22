@@ -24,8 +24,6 @@ class ExpressRegistrationForm(forms.Form):
 class BandForm(forms.ModelForm):
     name = forms.CharField(max_length=100, label="Nome")
     musical_styles = forms.ModelMultipleChoiceField(queryset=MusicalStyle.objects.all(), label="Estilos musicais", widget=forms.CheckboxSelectMultiple)
-    def __init__(self, *args, **kwargs):
-        super(BandForm, self).__init__(*args, **kwargs)
     
     def save(self, force_insert=False, force_update=False, commit=True, admin=None):
         band = super(BandForm, self).save(commit=False)
