@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'equipaments',
     'medias',
     'bands',
+    'solicitations',
 )
 
 # A sample logging configuration. The only tangible logging
