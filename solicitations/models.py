@@ -32,6 +32,20 @@ class SolicitationManager(models.Manager):
     
     def band_pending(self, musician):
         return musician.solicitation_to.filter(active=True, solicitation_type=Type.ADD_TO_BAND)
+    
+    def accept(self, solicitation):
+        solicitation.status = Status.ACCEPTED
+        solicitation.active = False
+        
+        solicitation.save()
+        
+        if solicitation.solicitation_type == Type.ADD_TO_BAND:
+            solicitation.band.add_musician(solicitation.to_musician, solicitation.instruments.all())
+    
+    def reject(self, solicitation):
+        solicitation.status = Status.REJECTED
+        solicitation.active = False
+        solicitation.save()
 
 class Solicitation(models.Model):
     from_musician = models.ForeignKey(Musician, related_name='solicitation_from')

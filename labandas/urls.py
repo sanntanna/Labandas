@@ -2,7 +2,7 @@ from bands.views import SubscribeMusician, EditMusician, UpdateCep, AddBand, \
     MusicianProfile, BandPage, EditBand
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from solicitations.views import SolicitationMusician
+from solicitations.views import SolicitationMusician, RespondingSolicitation
 
 admin.autodiscover()
 
@@ -22,6 +22,8 @@ urlpatterns = patterns('',
     (r'^banda/(?P<name>[a-z-]+)/(?P<band_id>\d+)$', BandPage()),
     (r'^equipamentos/instrumentos$', 'equipaments.views.get_instruments'),
     (r'^solicitacao/musico/enviar$', SolicitationMusician()),
+    (r'^solicitacao/aceitar$', RespondingSolicitation()),
+    (r'^solicitacao/recusar$', RespondingSolicitation()),
      url(r'^admin/', include(admin.site.urls)),
      (r'^accounts/', include('registration.urls')),
 )

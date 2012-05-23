@@ -70,11 +70,11 @@ class Band(models.Model):
         return MusicianBand.objects.filter(band=self)
     
     def add_musician(self, musician, instruments):
-        musicianBand = MusicianBand()
-        musicianBand.band = self
-        musicianBand.musician = musician
-        musicianBand.save()
-        musicianBand.instruments = instruments
+        musician_band = MusicianBand()
+        musician_band.band = self
+        musician_band.musician = musician
+        musician_band.save()
+        musician_band.instruments = instruments
     
 class MusicianBand(models.Model):
     band = models.ForeignKey(Band)

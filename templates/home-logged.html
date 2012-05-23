@@ -14,7 +14,7 @@
 	<div class="message">
 		
 		{% for solicitation in band_solicitations %}
-			<div class="box without-bands">
+			<div class="box solicitation">
 				<p>
 				<strong>{{ solicitation.from_musician.user.get_full_name }}</strong> 
 				disse que você toca
@@ -23,8 +23,8 @@
 				{% endfor %}
 				na banda <strong>{{ solicitation.band.name }}</strong>
 				</p>
-				<a href="#accept">Está certo</a>
-				<a href="#accept">Ele viajou</a>
+				<a href="#accept" class="accept-solicitation" data-id="{{ solicitation.pk }}">Está certo</a>
+				<a href="#decline" class="decline-solicitation" data-id="{{ solicitation.pk }}">Ele viajou</a>
 			</div>
 		{% endfor %}
 	
@@ -39,12 +39,14 @@
 				<ul>
 					{% for music_band in music_bands %}
 						<li> 
+							<a href="{{ music_band.band.encode_page }}" target="_blank">
 							{{ music_band.band.name }} (
 								{%for instrument in music_band.instruments.all %}
 									{{instrument.name}}
 									{% if not forloop.last %}, {%endif%}
 								{% endfor %}
 							)
+							</a>
 						</li>
 					{% endfor %}
 				</ul>

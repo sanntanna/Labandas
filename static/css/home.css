@@ -26,6 +26,11 @@
 			transition: all .4s linear; 
 }
 
+.box.solicitation{
+	background:#F4F3A4;
+}
+
+
 .box.with-bands{
 	background:#eee;
 	width:250px;

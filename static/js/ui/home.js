@@ -4,6 +4,7 @@
 	this.domLoaded = function(){
 		setupSubscribeForm();
 		setupCepUpdate();
+		setupSolicitations();
 	};
 	
 	function setupSubscribeForm(){
@@ -19,6 +20,24 @@
 		$("#save-cep").click(function(){
 			$.get('/musico/atualizar-endereco', {'cep': $("#cep").val()}, function(){
 				new lb.message('Seu cep foi atualizado', lb.message.SUCCESS);
+			});
+		});
+	}
+	
+	function setupSolicitations(){
+		$(".accept-solicitation, .decline-solicitation").click(function(e){
+			var link = $(this),
+				isAccepting = link.hasClass('accept-solicitation'),
+				url = "/solicitacao/" + (isAccepting ? 'aceitar' : 'recusar');
+			
+			$.post(url, {id: link.attr('data-id')}, function(response){
+				link.closest('.solicitation').hide(700, function(){
+					$(this).remove();
+				});
+				
+				if(isAccepting){
+					new lb.message("Agora você está na banda #banda#", lb.message.SUCCESS);
+				}
 			});
 		});
 	}
