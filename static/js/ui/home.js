@@ -26,6 +26,8 @@
 	
 	function setupSolicitations(){
 		$(".accept-solicitation, .decline-solicitation").click(function(e){
+			e.preventDefault();
+			
 			var link = $(this),
 				isAccepting = link.hasClass('accept-solicitation'),
 				url = "/solicitacao/" + (isAccepting ? 'aceitar' : 'recusar');

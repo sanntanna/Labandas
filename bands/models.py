@@ -36,6 +36,9 @@ class Musician(models.Model):
     def get_bands(self):
         return self.get_musician_bands().values('band__id', 'band__name')
     
+    def is_in_band(self, band):
+        return MusicianBand.objects.filter(musician=self, band=band).exists()
+    
     def set_cep(self, cep=None):
         if cep == None:
             return

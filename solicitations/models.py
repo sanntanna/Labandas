@@ -23,6 +23,10 @@ class SolicitationManager(models.Manager):
         if not band.admins.filter(pk=sender_musician.pk):
             raise SecurityError('Esse musico nao pode enviar solicitacao para essa banda')
         
+        
+        if target_musician.is_in_band(band):
+            raise ValueError("O musico " + str(target_musician) + " ja pertence a banda " + str(band))
+        
         solicitation = self.generate_solicitation(from_musician=sender_musician, to_musician=target_musician, band=band)
         solicitation.solicitation_type = Type.ADD_TO_BAND
         solicitation.save()
@@ -34,13 +38,13 @@ class SolicitationManager(models.Manager):
         return musician.solicitation_to.filter(active=True, solicitation_type=Type.ADD_TO_BAND)
     
     def accept(self, solicitation):
+        if solicitation.solicitation_type == Type.ADD_TO_BAND:
+            solicitation.band.add_musician(solicitation.to_musician, solicitation.instruments.all())
+        
         solicitation.status = Status.ACCEPTED
         solicitation.active = False
         
         solicitation.save()
-        
-        if solicitation.solicitation_type == Type.ADD_TO_BAND:
-            solicitation.band.add_musician(solicitation.to_musician, solicitation.instruments.all())
     
     def reject(self, solicitation):
         solicitation.status = Status.REJECTED

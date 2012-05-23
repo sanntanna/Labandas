@@ -35,11 +35,11 @@
 				<h4>Bandas que toca</h4>
 			</header>
 			<ul>
-				{% for musicBand in owner_bands %}
+				{% for music_band in owner_bands %}
 					<li> 
-						<a href="{{ musicBand.band.encode_page }}">
-						{{ musicBand.band.name }} (
-							{%for instrument in musicBand.instruments.all %}
+						<a href="{{ musicBand.band.encode_page }}" data-owner-band-id="{{ music_band.band.id }}">
+						{{ music_band.band.name }} (
+							{%for instrument in music_band.instruments.all %}
 								{{instrument.name}}
 								{% if not forloop.last %}, {%endif%}
 							{% endfor %}

@@ -29,6 +29,18 @@
 		});
 	}
 	
+	function geOwnerBands(){
+		if(this.ownerBands != null)
+			return this.ownerBands; 
+		
+		var arr = [];
+		$("#bands a[data-owner-band-id]").each(function(){
+			arr.push(parseInt($(this).attr('data-owner-band-id')));
+		});
+		
+		return this.ownerBands = arr;
+	}
+	
 	function showBands(){
 		if(bandsLoaded){
 			$("#list-your-bands").slideToggle();
@@ -39,7 +51,12 @@
 		$.get('/musico/bandas', null, function(response){
 			var list = response.bands;
 			
+			var listOnwerBands = geOwnerBands();
 			$("#bands").html(list.map(function(band){
+				var cssClass = 'add-in-this-band';
+				if(listOnwerBands.indexOf(band.band__id) > -1)
+					return '<li><a class="add-in-this-band  already-in-band">' + band.band__name + '</a>';
+				
 				return '<li><a href="#adicionar-nessa" class="add-in-this-band" data-id="' + band.band__id + '">' + band.band__name + '</a>';
 			}).join(''));
 			

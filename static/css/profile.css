@@ -20,6 +20,10 @@
 	display:block;
 }
 
+#list-your-bands .already-in-band{
+	text-decoration: line-through;
+}
+
 #list-your-bands a.selected{
 	background-color:#EFE26F;
 }
