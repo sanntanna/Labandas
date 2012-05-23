@@ -12,14 +12,17 @@
 
 	{% if owner.pk != user.pk %}
 		<div id="box-ask-musician">
-			<a href="#convidar-musico" id="ask-musician">Convidar para uma banda</a>
+			<a href="#convidar-musico" id="ask-musician">Adicionar na banda...</a>
 			<div id="list-your-bands">
 				<ul id="bands"></ul>
 			</div>
 			
 			<div id="instruments">
-				<div id="list-instruments"></div>
-				<a href="#concluir" id="ask-musician-complete">ok</a>
+				<form id="add-to-band" action="/solicitacao/musico/enviar" class="ajax" method="post">
+					<input type="hidden" name="band_id" id="band_id" />
+					<div id="list-instruments"></div>
+					<input type="submit" value="ok" />
+				</form>
 			</div>
 		</div>
 	{% endif %}
