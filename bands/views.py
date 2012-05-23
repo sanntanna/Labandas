@@ -2,7 +2,8 @@ from bands.forms import ExpressRegistrationForm, BandForm, UserInfoForm, \
     BandMusicianForm
 from bands.models import Musician, Band, MusicianBand
 from django.contrib.auth import login, authenticate
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, \
+    HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.template.context import RequestContext
@@ -56,6 +57,11 @@ class MusicianProfile(BaseView):
     @get
     def show_profile(self, request, user_id, name):
         owner = get_object_or_404(Musician, pk=user_id)
+        profile_url = owner.encode_profile()
+        
+        if profile_url != request.path_info:
+            return HttpResponsePermanentRedirect(profile_url)
+        
         t = loader.get_template('bands/musician-profile.html')
         
         c = RequestContext(request, {
