@@ -57,10 +57,10 @@ class MusicianProfile(BaseView):
     @get
     def show_profile(self, request, user_id, name):
         owner = get_object_or_404(Musician, pk=user_id)
-        profile_url = owner.encode_profile()
         
-        if profile_url != request.path_info:
-            return HttpResponsePermanentRedirect(profile_url)
+        correct_url = owner.encode_profile()
+        if correct_url != request.path_info:
+            return HttpResponsePermanentRedirect(correct_url)
         
         t = loader.get_template('bands/musician-profile.html')
         
@@ -149,6 +149,10 @@ class BandPage(BaseView):
     @get
     def show_page(self, request, band_id, name):
         band = get_object_or_404(Band, pk=band_id)
+        
+        correct_url = band.encode_page()
+        if correct_url != request.path_info:
+            return HttpResponsePermanentRedirect(correct_url)
         
         t = loader.get_template('bands/band-page.html')
         c = RequestContext(request, {
