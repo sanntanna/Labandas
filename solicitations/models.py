@@ -30,8 +30,8 @@ class SolicitationManager(models.Manager):
 
         return True
     
-    def list_add_band_pending(self, user):
-        return None
+    def band_pending(self, musician):
+        return musician.solicitation_to.filter(active=True, solicitation_type=Type.ADD_TO_BAND)
 
 class Solicitation(models.Model):
     from_musician = models.ForeignKey(Musician, related_name='solicitation_from')

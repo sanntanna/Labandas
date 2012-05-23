@@ -12,7 +12,23 @@
 {% block content %}
 	<h3>Bem vindo!</h3>
 	<div class="message">
-		{% if musicBands.count = 0 %}
+		
+		{% for solicitation in band_solicitations %}
+			<div class="box without-bands">
+				<p>
+				<strong>{{ solicitation.from_musician.user.get_full_name }}</strong> 
+				disse que você toca
+				{%for instrument in solicitation.instruments.all %}
+					{{ instrument.name }}{% if not forloop.last %}, {%endif%}
+				{% endfor %}
+				na banda <strong>{{ solicitation.band.name }}</strong>
+				</p>
+				<a href="#accept">Está certo</a>
+				<a href="#accept">Ele viajou</a>
+			</div>
+		{% endfor %}
+	
+		{% if music_bands.count = 0 %}
 			<div class="box without-bands">
 				Você ainda não está em nenhuma banda cadastrada no Lasbandas.<br />
 				<a href="/banda/cadastrar">Crie uma banda</a> ou <a href="#">Encontre uma banda que precisa de você</a>.
@@ -21,10 +37,10 @@
 			<div class="box with-bands">
 				Suas bandas:
 				<ul>
-					{% for musicBand in musicBands %}
+					{% for music_band in music_bands %}
 						<li> 
-							{{ musicBand.band.name }} (
-								{%for instrument in musicBand.instruments.all %}
+							{{ music_band.band.name }} (
+								{%for instrument in music_band.instruments.all %}
 									{{instrument.name}}
 									{% if not forloop.last %}, {%endif%}
 								{% endfor %}
@@ -48,8 +64,6 @@
 				Mantenha suas <a href="musico/editar">informações pessoais atualizadas.</a>
 			</p>
 		{% endif %}
-		
-		
 	</div>
 {% endblock %}
 

@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
 from jsonui.response import JSONResponse
+from solicitations.models import Solicitation
 
 def home(request):
     if request.user.is_authenticated():
@@ -20,8 +21,10 @@ def home(request):
 
 def homeLogged(request):
     t = loader.get_template('home-logged.html')
+    musician = request.user.get_profile()
     c = RequestContext(request, {
-        'musicBands': request.user.get_profile().get_musician_bands(),
+        'music_bands': musician.get_musician_bands(),
+        'band_solicitations': Solicitation.objects.band_pending(musician)
     })
     
     return HttpResponse(t.render(c))
