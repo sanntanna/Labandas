@@ -31,13 +31,13 @@ class Musician(models.Model):
         return self.user.first_name
     
     def get_musician_bands(self):
-        return MusicianBand.objects.filter(musician=self)
+        return MusicianBand.objects.filter(musician=self, active=True)
     
     def get_bands(self):
         return self.get_musician_bands().values('band__id', 'band__name')
     
     def is_in_band(self, band):
-        return MusicianBand.objects.filter(musician=self, band=band).exists()
+        return MusicianBand.objects.filter(musician=self, band=band, active=True).exists()
     
     def set_cep(self, cep=None):
         if cep == None:
@@ -56,7 +56,6 @@ class Band(models.Model):
     registration_date = models.DateTimeField('Registration date')
     musical_styles = models.ManyToManyField(MusicalStyle)
     medias = models.ManyToManyField(Media)
-    admins = models.ManyToManyField(Musician)
     url = models.SlugField(max_length=50)
         
     def __unicode__(self):
@@ -69,8 +68,8 @@ class Band(models.Model):
         self.url = slugify(self.name)
         super(Band, self).save(*args, **kwargs)
     
-    def get_musicians(self):
-        return MusicianBand.objects.filter(band=self)
+    def musicians_active(self):
+        return self.musicians.filter(active=True)
     
     def add_musician(self, musician, instruments):
         musician_band = MusicianBand()
@@ -80,10 +79,17 @@ class Band(models.Model):
         musician_band.instruments = instruments
     
 class MusicianBand(models.Model):
-    band = models.ForeignKey(Band)
-    musician = models.ForeignKey(Musician)
+    band = models.ForeignKey(Band, related_name="musicians")
+    musician = models.ForeignKey(Musician, related_name="bands")
     instruments = models.ManyToManyField(EquipamentType)
+    active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
     
+    def deactivate(self):
+        self.active = False
+        self.save()
+        return True
+        
     def __unicode__(self):
         return self.musician.user.first_name + ' na banda "' + self.band.name + '"'
 

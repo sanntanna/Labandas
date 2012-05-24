@@ -15,14 +15,14 @@
 			<h4>Formação</h4>
 		</header>
 		<ul>
-			{% for musicBand in band_musicians %}
+			{% for music_band in band.musicians.all %}
 				<li> 
 					<a href="{{ musicBand.musician.encode_profile }}">
-					{%for instrument in musicBand.instruments.all %}
+					{%for instrument in music_band.instruments.all %}
 						{{instrument.name}}
 						{% if not forloop.last %}, {%endif%}
 					{% endfor %}:
-					{{ musicBand.musician.user.get_full_name }}
+					{{ music_band.musician.user.get_full_name }}
 					</a>
 				</li>
 			{% endfor %}

@@ -16,3 +16,10 @@
 	display:inline-block;
 	margin-right:20px;
 }
+
+section.block-information{
+	border:1px solid #ccc;
+	padding:10px 20px;
+	margin-top:30px;
+	border-radius:10px;
+}

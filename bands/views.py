@@ -2,8 +2,8 @@ from bands.forms import ExpressRegistrationForm, BandForm, UserInfoForm, \
     BandMusicianForm
 from bands.models import Musician, Band, MusicianBand
 from django.contrib.auth import login, authenticate
-from django.http import HttpResponse, HttpResponseRedirect, \
-    HttpResponsePermanentRedirect
+from django.http import HttpResponse, HttpResponsePermanentRedirect, \
+    HttpResponseNotFound
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.template.context import RequestContext
@@ -89,15 +89,11 @@ class AddBand(BaseView):
         band = None
         success = True
         current_musician = request.user.get_profile()
+        form_musician = BandMusicianForm(data=request.POST)
         
         if form.is_valid():
-            band = form.save(admin=current_musician)
-        else:
-            success = False
-        
-        form_musician = BandMusicianForm(data=request.POST)
-        if form_musician.is_valid():
-            form_musician.save(band, current_musician)
+            band = form.save()
+            form_musician.save_admin(band, current_musician)
         else:
             success = False
         
@@ -110,13 +106,22 @@ class EditBand(BaseView):
     @get
     def get(self, request, band_id):
         band = get_object_or_404(Band, pk=band_id)
-        musician_band = MusicianBand.objects.get(band=band, musician=request.user.get_profile())
+        musician_in_band = None
+        
+        try:
+            musician_in_band = MusicianBand.objects.get(band=band, musician=request.user.get_profile(), active=True)
+        except:
+            print("Musico nao incluido na banda")
+            return HttpResponseNotFound()
+        
         t = loader.get_template('bands/edit-band.html')
         
         c = RequestContext(request, {
+            'band': band,
             'form': BandForm(instance=band), 
-            'musician_form':BandMusicianForm(instance=musician_band),
-            'edit': True
+            'musician_form':BandMusicianForm(instance=musician_in_band),
+            'edit': True,
+            'logged_user_is_admin': musician_in_band.is_admin,
         })
         
         return HttpResponse(t.render(c))
@@ -124,19 +129,23 @@ class EditBand(BaseView):
     @ajax
     @onypostallowed
     def post(self, request, band_id):
+        #TODO: melhorar esse metodo, mover a verificacao de seguranca para outra camada 
         band = get_object_or_404(Band, pk=band_id)
-        musician = request.user.get_profile()
         success = True
         form = BandForm(data=request.POST, instance=band)
+        musician_in_band = None
+        
+        try:
+            musician_in_band = MusicianBand.objects.get(band=band, musician=request.user.get_profile(), active=True)
+        except:
+            print("Musico nao incluido na banda")
+            return HttpResponseNotFound()
         
         if form.is_valid():
             form.save()
-        else:
-            success = False
-        
-        musician_form = BandMusicianForm(data=request.POST)
-        if musician_form.is_valid():
-            musician_form.save(band=band, musician=musician)
+            musician_form = BandMusicianForm(data=request.POST)
+            if musician_form.is_valid():
+                musician_in_band.instruments = musician_form.cleaned_data['instruments']
         else:
             success = False
         
@@ -157,12 +166,20 @@ class BandPage(BaseView):
         t = loader.get_template('bands/band-page.html')
         c = RequestContext(request, {
             'band': band,
-            'band_musicians': band.get_musicians()
         })
         
         return HttpResponse(t.render(c))
 
+def remove_musician_from_band(request):
+    success = MusicianBand.objects.get(pk=request.POST.get('id')).deactivate()
+    return JSONResponse({'success': success}) 
+
+def add_musician_in_band(request):
+    return JSONResponse({'success': True}) 
+                                                                    
 def get_bands(request):
     bands = request.user.get_profile().get_bands()
     return JSONResponse({'success': True, 'bands':bands})
-    
+
+
+

@@ -25,16 +25,13 @@ class BandForm(forms.ModelForm):
     name = forms.CharField(max_length=100, label="Nome")
     musical_styles = forms.ModelMultipleChoiceField(queryset=MusicalStyle.objects.all(), label="Estilos musicais", widget=forms.CheckboxSelectMultiple)
     
-    def save(self, force_insert=False, force_update=False, commit=True, admin=None):
+    def save(self, force_insert=False, force_update=False, commit=True):
         band = super(BandForm, self).save(commit=False)
         band.registration_date = datetime.now()
         
         if commit:
             band.save()
-            
         band.musical_styles = self.cleaned_data['musical_styles']
-        if admin != None:
-            band.admins.add(admin)
         
         return band
         
@@ -46,9 +43,12 @@ class BandForm(forms.ModelForm):
 class BandMusicianForm(forms.ModelForm):
     instruments = forms.ModelMultipleChoiceField(queryset=EquipamentType.objects.all(), label="Instrumentos que voce toca na banda", widget=forms.CheckboxSelectMultiple)
     
-    def save(self, band, musician):
-        musician_band = MusicianBand.objects.get_or_create(band=band,musician=musician)[0]
-        musician_band.instruments = self.cleaned_data['instruments']
+    def save(self, band, musician, musician_in_band=None, is_admin=False):
+        musician_in_band.instruments = self.cleaned_data['instruments']
+    
+    def save_admin(self, musician, band):
+        musician_in_band = MusicianBand.objects.create(band=band,musician=musician, active=True, is_admin=True)[0]
+        musician_in_band.instrumetns = self.cleaned_data['instruments']
         
     class Meta:
         model = MusicianBand

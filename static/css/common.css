@@ -80,12 +80,8 @@ body{
 	font-family:Helvetica, Helvetica Neue, Arial, sans-serif;
 }
 
-a{
+a, a:visited{
 	color:#F16529;
-}
-
-a:visited{
-	color:inherit;
 }
 
 a:hover { 
@@ -120,7 +116,7 @@ a:hover {
 	color:#fff;
 }
 
-#user-header a{
+#user-header a, #user-header a:visited{
 	color:#fff;
 }
 
@@ -165,7 +161,7 @@ nav ul, nav ul li{
 	display:inline;
 }
 
-nav a{
+nav a, nav a:visited{
 	padding:20px;
 	color:white;
 	text-decoration:none;
@@ -197,7 +193,7 @@ aside li{
 	border-bottom:1px dotted #777;
 }
 
-aside a{
+aside a, aside a:visited{
 	dispĺay:block;
 	color:#fff;
 	text-decoration:none;
@@ -227,6 +223,9 @@ aside li li{
 }
 
 
+
+.fl{float:left}
+.fr{float:right;}
 
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }

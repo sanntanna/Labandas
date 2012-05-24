@@ -20,7 +20,7 @@ class SolicitationManager(models.Manager):
                             band=band)
      
     def ask_to_add(self, sender_musician, target_musician, band, instruments):
-        if not band.admins.filter(pk=sender_musician.pk):
+        if not band.musicians.get(musician=sender_musician).is_admin:
             raise SecurityError('Esse musico nao pode enviar solicitacao para essa banda')
         
         

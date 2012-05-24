@@ -35,6 +35,7 @@ class BaseView(object):
         method = _class_view_registry.get(self.__class__).get(methodname)
         
         if method == None:
+            print("Nenhum metodo mapeado para " + methodname)
             return HttpResponseNotFound()
         
         return method(request, *args, **kwargs)
@@ -78,6 +79,7 @@ def connect(func):
 def onypostallowed(func):
     def new(obj, request, *args, **kwargs):
         if request.method != 'POST':
+            print "requisicao nao foi enviada via post. Url = " + request.path_info
             return HttpResponseNotFound()
         return func(obj, request, *args, **kwargs)
     

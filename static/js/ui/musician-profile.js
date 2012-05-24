@@ -14,7 +14,7 @@
 			showBands();
 		});
 		
-		$(document).delegate('.add-in-this-band', 'click', function(e){
+		$(document).delegate('.add-in-this-band[href]', 'click', function(e){
 			e.preventDefault();
 			
 			var link = $(this);

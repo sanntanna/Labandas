@@ -13,16 +13,48 @@
 	
 	{% if edit  %}
 		<h3>Editando a banda "{{ form.instance }}"</h3>
-		<a href="{{ form.instance.encode_page }}" target="_blank">Ver página da banda</a>		
+		<a href="{{ form.instance.encode_page }}" target="_blank">Página da banda</a>		
 	{% else %}
 		<h3>Adicionar uma banda</h3>
 	{% endif %}
 	
 	
+	<section class="block-information">
+		<h4>Informações:</h4>
+		<form method="post" id="edit-band-form" class="ajax">{% csrf_token %}
+			{{ form.as_p }}
+			{{ musician_form.as_p }}
+			<input type="submit" value="Salvar" />
+		</form>
+	</section>
 	
-	<form method="post" id="edit-band-form" class="ajax">{% csrf_token %}
-		{{ form.as_p }}
-		{{ musician_form.as_p }}
-		<input type="submit" value="Cadastrar" />
-	</form>
+	{% if edit %}
+	<section class="block-information clearfix">
+		<h4>Formação:</h4>
+		<ul>
+			{% for m in band.musicians_active.all %}
+				<li class="musician-info-line"> 
+					<a href="{{ m.musician.encode_profile }}">
+						{%for instrument in m.instruments.all %}
+						{{instrument.name}}
+						{% if not forloop.last %}, {%endif%}
+					{% endfor %}:
+					  {{ m.musician.user.get_full_name }}
+					</a> 
+					{% if not m.is_admin and logged_user_is_admin or m.musician.user.pk == user.pk %}
+					| <a href="#remove" data-id="{{ m.pk }}" class="remove-musician">Remover</a>
+					{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+		
+		<a href="#add-musicians" class="fr">[+] Adicionar membros</a>
+	</section>
+	
+	<section class="block-information clearfix">
+		<h4>Vagas em aberto na banda:</h4>
+		
+		<a href="#add-annoucments" class="fr">[+] Adicionar vaga</a>
+	</section>
+	{% endif %}
 {% endblock %}
