@@ -60,7 +60,8 @@ lb.lightbox = function(param){
 				url = param;
 			}
 		} else if(typeof param == 'object'){
-			url = param.url;
+			url = param.url || url;
+			text = param.content || text;
 			width = param.width;
 			height = param.height;
 		}
@@ -110,6 +111,7 @@ lb.lightbox = function(param){
 	}
 	
 	function loadContent(callback){
+		//TODO: adicionar loader e regra para o ajax
 		//$.get(url, null, function(){
 			callback.call(null, arguments);
 		//});

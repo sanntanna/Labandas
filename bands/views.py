@@ -171,6 +171,11 @@ class BandPage(BaseView):
         
         return HttpResponse(t.render(c))
 
+def search_musician(request):
+    search = request.GET.get('q')
+    musicians = Musician.objects.filter(user__first_name__icontains=search).values('pk', 'user__first_name')
+    return JSONResponse({'success': True, 'musicians': musicians}) 
+
 def remove_musician_from_band(request):
     #TODO: adicionar validação para nao remover todos os admins, sempre deve ficar um
     success = MusicianBand.objects.get(pk=request.POST.get('id')).deactivate()
@@ -178,6 +183,7 @@ def remove_musician_from_band(request):
 
 def add_musician_in_band(request):
     return JSONResponse({'success': True}) 
+
                                                                     
 def get_bands(request):
     bands = request.user.get_profile().get_bands()
