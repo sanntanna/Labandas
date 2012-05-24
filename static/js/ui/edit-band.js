@@ -24,6 +24,10 @@
 				new lb.message('Musico removido', lb.message.SUCCESS);
 			});
 		});
+		
+		$("#add-musicians").click(function(e){
+			
+		});
 	}
 	
 	this.init();

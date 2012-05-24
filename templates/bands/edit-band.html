@@ -47,8 +47,9 @@
 				</li>
 			{% endfor %}
 		</ul>
-		
-		<a href="#add-musicians" class="fr">[+] Adicionar membros</a>
+		{% if logged_user_is_admin %}
+		<a href="#add-musicians" id="add-musicians" class="fr">[+] Adicionar membros</a>
+		{% endif %}
 	</section>
 	
 	<section class="block-information clearfix">

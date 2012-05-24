@@ -17,7 +17,7 @@
 		<ul>
 			{% for music_band in band.musicians.all %}
 				<li> 
-					<a href="{{ musicBand.musician.encode_profile }}">
+					<a href="{{ music_band.musician.encode_profile }}">
 					{%for instrument in music_band.instruments.all %}
 						{{instrument.name}}
 						{% if not forloop.last %}, {%endif%}

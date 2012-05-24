@@ -91,9 +91,9 @@ class AddBand(BaseView):
         current_musician = request.user.get_profile()
         form_musician = BandMusicianForm(data=request.POST)
         
-        if form.is_valid():
+        if form.is_valid() and form_musician.is_valid():
             band = form.save()
-            form_musician.save_admin(band, current_musician)
+            form_musician.save_admin(band=band, musician=current_musician)
         else:
             success = False
         

@@ -47,8 +47,8 @@ class BandMusicianForm(forms.ModelForm):
         musician_in_band.instruments = self.cleaned_data['instruments']
     
     def save_admin(self, musician, band):
-        musician_in_band = MusicianBand.objects.create(band=band,musician=musician, active=True, is_admin=True)[0]
-        musician_in_band.instrumetns = self.cleaned_data['instruments']
+        musician_in_band = MusicianBand.objects.create(band=band,musician=musician, active=True, is_admin=True)
+        musician_in_band.instruments = self.cleaned_data['instruments']
         
     class Meta:
         model = MusicianBand

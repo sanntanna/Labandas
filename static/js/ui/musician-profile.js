@@ -11,7 +11,7 @@
 	function setupAskMusician(){
 		$("#ask-musician").click(function(e){
 			e.preventDefault();
-			showBands();
+			toggleBands();
 		});
 		
 		$(document).delegate('.add-in-this-band[href]', 'click', function(e){
@@ -26,6 +26,7 @@
 		
 		$("#add-to-band").bind('ajaxcomplete', function(response){
 			new lb.message('Solicitação enviada. Veja <a href="/solicitacoes#enviadas">sua solicitação</a>', lb.message.SUCCESS);
+			toggleBands();
 		});
 	}
 	
@@ -41,7 +42,7 @@
 		return this.ownerBands = arr;
 	}
 	
-	function showBands(){
+	function toggleBands(){
 		if(bandsLoaded){
 			$("#list-your-bands").slideToggle();
 			$("#instruments").fadeOut()

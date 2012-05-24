@@ -37,7 +37,7 @@
 			<ul>
 				{% for music_band in owner_bands %}
 					<li> 
-						<a href="{{ musicBand.band.encode_page }}" data-owner-band-id="{{ music_band.band.id }}">
+						<a href="{{ music_band.band.encode_page }}" data-owner-band-id="{{ music_band.band.id }}">
 						{{ music_band.band.name }} (
 							{%for instrument in music_band.instruments.all %}
 								{{instrument.name}}
