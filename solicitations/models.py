@@ -1,3 +1,4 @@
+#coding=ISO-8859-1
 from bands.models import Musician, Band
 from datetime import datetime
 from django.db import models

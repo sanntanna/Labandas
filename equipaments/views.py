@@ -1,3 +1,4 @@
+#coding=ISO-8859-1
 from equipaments.models import EquipamentType
 from jsonui.response import JSONResponse
 

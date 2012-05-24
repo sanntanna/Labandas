@@ -1,3 +1,4 @@
+#coding=ISO-8859-1
 from bands.models import MusicalStyle, Band, MusicianBand
 from datetime import datetime
 from django import forms
@@ -23,7 +24,7 @@ class ExpressRegistrationForm(forms.Form):
 
 class BandForm(forms.ModelForm):
     name = forms.CharField(max_length=100, label="Nome")
-    musical_styles = forms.ModelMultipleChoiceField(queryset=MusicalStyle.objects.all(), label="Estilos musicais", widget=forms.CheckboxSelectMultiple)
+    musical_styles = forms.ModelMultipleChoiceField(queryset=MusicalStyle.objects.all(), label="A banda toca", widget=forms.CheckboxSelectMultiple)
     
     def save(self, force_insert=False, force_update=False, commit=True):
         band = super(BandForm, self).save(commit=False)

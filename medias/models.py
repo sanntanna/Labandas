@@ -1,3 +1,4 @@
+#coding=ISO-8859-1
 from django.db import models
 
 class MediaType(models.Model):

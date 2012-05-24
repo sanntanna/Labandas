@@ -1,3 +1,12 @@
 eclipse.preferences.version=1
+encoding//bands/forms.py=ISO-8859-1
+encoding//bands/models.py=ISO-8859-1
+encoding//bands/views.py=ISO-8859-1
+encoding//equipaments/models.py=ISO-8859-1
+encoding//equipaments/views.py=ISO-8859-1
 encoding//jsonui/response.py=utf-8
 encoding//jsonui/utils.py=utf-8
+encoding//labandas/views.py=ISO-8859-1
+encoding//medias/models.py=ISO-8859-1
+encoding//solicitations/models.py=ISO-8859-1
+encoding//solicitations/views.py=ISO-8859-1

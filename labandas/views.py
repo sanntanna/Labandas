@@ -1,3 +1,4 @@
+#coding=ISO-8859-1
 from bands.forms import ExpressRegistrationForm
 from django.contrib import auth
 from django.core.context_processors import csrf

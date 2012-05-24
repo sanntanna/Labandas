@@ -1,3 +1,4 @@
+#coding=ISO-8859-1
 from bands.forms import ExpressRegistrationForm, BandForm, UserInfoForm, \
     BandMusicianForm
 from bands.models import Musician, Band, MusicianBand
@@ -171,6 +172,7 @@ class BandPage(BaseView):
         return HttpResponse(t.render(c))
 
 def remove_musician_from_band(request):
+    #TODO: adicionar validação para nao remover todos os admins, sempre deve ficar um
     success = MusicianBand.objects.get(pk=request.POST.get('id')).deactivate()
     return JSONResponse({'success': success}) 
 

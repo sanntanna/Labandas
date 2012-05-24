@@ -1,3 +1,4 @@
+#coding=ISO-8859-1
 from bands.models import Musician, Band
 from django.shortcuts import get_object_or_404
 from equipaments.models import EquipamentType
