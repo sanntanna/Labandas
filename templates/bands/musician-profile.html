@@ -20,6 +20,8 @@
 			<div id="instruments">
 				<form id="add-to-band" action="/solicitacao/musico/enviar" class="ajax" method="post">
 					<input type="hidden" name="band_id" id="band_id" />
+					<input type="hidden" name="target_id" id="target_id" value="{{ user.pk }}" />
+					
 					<div id="list-instruments"></div>
 					<input type="submit" value="ok" />
 				</form>

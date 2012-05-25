@@ -25,7 +25,7 @@ def homeLogged(request):
     musician = request.user.get_profile()
     c = RequestContext(request, {
         'music_bands': musician.get_musician_bands(),
-        'band_solicitations': Solicitation.objects.band_pending(musician)
+        'band_solicitations': Solicitation.objects.bands_pending(musician)
     })
     
     return HttpResponse(t.render(c))

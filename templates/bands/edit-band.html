@@ -36,9 +36,9 @@
 				<li class="musician-info-line"> 
 					<a href="{{ m.musician.encode_profile }}">
 						{%for instrument in m.instruments.all %}
-						{{instrument.name}}
-						{% if not forloop.last %}, {%endif%}
-					{% endfor %}:
+							{{instrument.name}}
+							{% if not forloop.last %}, {%endif%}
+						{% endfor %}:
 					  {{ m.musician.user.get_full_name }}
 					</a> 
 					{% if not m.is_admin and logged_user_is_admin or m.musician.user.pk == user.pk %}
@@ -46,9 +46,27 @@
 					{% endif %}
 				</li>
 			{% endfor %}
+			{% for s in pending_solicitations %}
+				<li>
+					{{ s.to_musician.user.get_full_name }}(
+					{%for instrument in s.instruments.all %}
+						{{ instrument.name }}{% if not forloop.last %}, {%endif%}
+					{% endfor %}) - convidado por {{ s.from_musician.user.get_full_name }} - PENDENTE
+				</li>
+			{% endfor %}
 		</ul>
 		{% if logged_user_is_admin %}
 		<a href="#add-musicians" id="add-musicians" class="fr">[+] Adicionar membros</a>
+		
+		<div id="instruments">
+			<form id="add-to-band" action="/solicitacao/musico/enviar" class="ajax" method="post">
+				<input type="hidden" name="band_id" id="band_id" value="{{ band.pk }}" />
+				<input type="hidden" name="target_id" id="target_id" />
+				<div id="list-instruments"></div>
+				<input type="submit" value="ok" />
+			</form>
+		</div>
+		
 		{% endif %}
 	</section>
 	

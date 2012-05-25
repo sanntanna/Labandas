@@ -27,3 +27,17 @@ section.block-information{
 #wrapper-search{
 	padding:10px;
 }
+
+#instruments{
+	display:none;
+	border-radius:5px;
+	background:#fff;
+	padding:4px 10px;
+	position:fixed;
+	top:388px;
+	left:50%;
+	border:3px solid #EFE26F;
+	z-index:5;
+}
+
+#instruments label{display:block;}

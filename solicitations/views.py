@@ -7,15 +7,12 @@ from jsonui.response import JSONResponse
 from solicitations.models import Solicitation
 
 class SolicitationMusician(BaseView):
-    def _get_target_musician_id_(self, request):
-        return int(request.META.get('HTTP_REFERER').split('/').pop())
-    
     @ajax
     @onypostallowed
     def send(self, request):
         source_musician = request.user.get_profile()
-        band = Band.objects.get(pk=request.POST['band_id'])
-        target_musician = Musician.objects.get(pk=self._get_target_musician_id_(request))
+        band = Band.objects.get(pk=request.POST.get('band_id'))
+        target_musician = Musician.objects.get(pk=request.POST.get('target_id'))
         instruments_ids = request.POST.getlist('instruments')
         instruments = EquipamentType.objects.in_bulk(instruments_ids)
         

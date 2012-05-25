@@ -10,6 +10,7 @@ from django.template import loader
 from django.template.context import RequestContext
 from http_method.BaseView import BaseView, get, ajax, onypostallowed
 from jsonui.response import JSONResponse
+from solicitations.models import Solicitation
 
 class UpdateCep(BaseView):
     @ajax
@@ -123,6 +124,7 @@ class EditBand(BaseView):
             'musician_form':BandMusicianForm(instance=musician_in_band),
             'edit': True,
             'logged_user_is_admin': musician_in_band.is_admin,
+            'pending_solicitations': Solicitation.objects.musicians_pending(band)
         })
         
         return HttpResponse(t.render(c))

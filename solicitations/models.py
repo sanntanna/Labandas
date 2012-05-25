@@ -35,8 +35,11 @@ class SolicitationManager(models.Manager):
 
         return True
     
-    def band_pending(self, musician):
+    def bands_pending(self, musician):
         return musician.solicitation_to.filter(active=True, solicitation_type=Type.ADD_TO_BAND)
+    
+    def musicians_pending(self, band):
+        return band.solicitations.filter(active=True, solicitation_type=Type.ADD_TO_BAND)
     
     def accept(self, solicitation):
         if solicitation.solicitation_type == Type.ADD_TO_BAND:
@@ -55,7 +58,7 @@ class SolicitationManager(models.Manager):
 class Solicitation(models.Model):
     from_musician = models.ForeignKey(Musician, related_name='solicitation_from')
     to_musician = models.ForeignKey(Musician, related_name='solicitation_to')
-    band = models.ForeignKey(Band)
+    band = models.ForeignKey(Band, related_name='solicitations')
     instruments = models.ManyToManyField(EquipamentType)
     
     solicitation_type = models.IntegerField()

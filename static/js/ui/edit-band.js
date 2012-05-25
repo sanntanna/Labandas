@@ -6,7 +6,8 @@
 	};
 	
 	
-	var lightboxSearch = null;
+	var lightboxSearch = null,
+		equipamentsLoaded = false;
 	
 	function setupForm(){
 		$("#edit-band-form").bind('ajaxcomplete', function(e, response){
@@ -45,7 +46,16 @@
 		
 		$(document).delegate(".musician-finded", 'click', function(e){
 			e.preventDefault();
-			alert('enviar solicitação para o músico ' + $(this).attr('data-id'));
+			showInstruments();
+			$("#target_id").val($(this).attr('data-id'))
+		});
+		
+		$(document).delegate("#add-to-band", "ajaxcomplete", function(e, data){
+			if(data.success){
+				lightboxSearch.close();
+				$("#instruments").hide();
+				new lb.message('Solicitação enviada para o musico #musico#', lb.message.SUCCESS);
+			}
 		});
 	}
 	
@@ -70,6 +80,27 @@
 		}).join('');
 		
 		$("#results-list").html(content);
+	}
+	
+	
+	function showInstruments(){
+		if(equipamentsLoaded){
+			$("#instruments").fadeIn();
+			return;
+		}
+		
+		$.get('/equipamentos/instrumentos', null, function(response){
+			var list = response.instruments;
+			
+			$("#list-instruments").html(list.map(function(instrument){
+				return 	['<label>' ,
+							'<input type="checkbox" value="', instrument.pk, '" name="instruments" />', instrument.name,
+						'</label>'].join('');
+			}).join(''));
+			
+			$("#instruments").fadeIn();
+			equipamentsLoaded = true;
+		});
 	}
 	
 	this.init();
