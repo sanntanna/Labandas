@@ -70,7 +70,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/renato/Dev/python/labandas.com/Labandas/static/',
+    '/home/renato/Code/python/Labandas/static/',
 )
 
 # List of finder classes that know how to find static files in
@@ -111,7 +111,7 @@ ROOT_URLCONF = 'labandas.urls'
 WSGI_APPLICATION = 'labandas.wsgi.application'
 
 TEMPLATE_DIRS = (
-    "/home/renato/Dev/python/labandas.com/Labandas/templates",
+    "/home/renato/Code/python/Labandas/templates",
 )
 
 INSTALLED_APPS = (
@@ -124,7 +124,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'registration',
     'equipaments',
     'medias',
     'bands',

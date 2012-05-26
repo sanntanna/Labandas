@@ -28,5 +28,4 @@ urlpatterns = patterns('',
     (r'^solicitacao/aceitar$', RespondingSolicitation()),
     (r'^solicitacao/recusar$', RespondingSolicitation()),
      url(r'^admin/', include(admin.site.urls)),
-     (r'^accounts/', include('registration.urls')),
 )
