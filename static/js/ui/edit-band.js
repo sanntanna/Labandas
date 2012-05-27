@@ -23,11 +23,32 @@
 			var link = $(this),
 				parent = link.closest('.musician-info-line');
 			
-			$.post('/banda/formacao/remover', {id: link.attr('data-id')}, function(){
+			$.post('/banda/formacao/remover', {id: link.attr('data-id')}, function(response){
+				if(!response.success){
+					new lb.message('Erro ao remover o músico', lb.message.ERROR);
+					return;
+				}
 				parent.fadeOut(300, function(){ parent.remove() });
 				new lb.message('Musico removido', lb.message.SUCCESS);
 			});
 		});
+		
+		$(document).delegate('.remove-solicitation', 'click', function(e){
+			e.preventDefault();
+			var link = $(this),
+				parent = link.closest('.musician-info-line');
+			
+			$.post('/solicitacao/cancelar', {id: link.attr('data-id')}, function(response){
+				if(!response.success){
+					new lb.message('Erro ao remover a solicitação', lb.message.ERROR);
+					return;
+				}
+				
+				parent.fadeOut(300, function(){ parent.remove() });
+				new lb.message('Solicitação removida', lb.message.SUCCESS);
+			});
+		});
+		
 		
 		$("#add-musicians").click(function(e){
 			e.preventDefault();

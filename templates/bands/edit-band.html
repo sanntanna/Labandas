@@ -47,11 +47,12 @@
 				</li>
 			{% endfor %}
 			{% for s in pending_solicitations %}
-				<li>
+				<li title="convidado por {{ s.from_musician.user.get_full_name }}">
 					{{ s.to_musician.user.get_full_name }}(
 					{%for instrument in s.instruments.all %}
 						{{ instrument.name }}{% if not forloop.last %}, {%endif%}
-					{% endfor %}) - convidado por {{ s.from_musician.user.get_full_name }} - PENDENTE
+					{% endfor %}) - PENDENTE
+					| <a href="#remove" data-id="{{ s.pk }}" class="remove-solicitation">Remover</a>
 				</li>
 			{% endfor %}
 		</ul>

@@ -27,5 +27,6 @@ urlpatterns = patterns('',
     (r'^solicitacao/musico/enviar$', SolicitationMusician()),
     (r'^solicitacao/aceitar$', RespondingSolicitation()),
     (r'^solicitacao/recusar$', RespondingSolicitation()),
+    (r'^solicitacao/cancelar$', 'solicitations.views.cancel_solicitation'),
      url(r'^admin/', include(admin.site.urls)),
 )

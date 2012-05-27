@@ -41,20 +41,6 @@ class SolicitationManager(models.Manager):
     def musicians_pending(self, band):
         return band.solicitations.filter(active=True, solicitation_type=Type.ADD_TO_BAND)
     
-    def accept(self, solicitation):
-        if solicitation.solicitation_type == Type.ADD_TO_BAND:
-            solicitation.band.add_musician(solicitation.to_musician, solicitation.instruments.all())
-        
-        solicitation.status = Status.ACCEPTED
-        solicitation.active = False
-        
-        solicitation.save()
-    
-    def reject(self, solicitation):
-        solicitation.status = Status.REJECTED
-        solicitation.active = False
-        solicitation.save()
-
 class Solicitation(models.Model):
     from_musician = models.ForeignKey(Musician, related_name='solicitation_from')
     to_musician = models.ForeignKey(Musician, related_name='solicitation_to')
@@ -68,6 +54,38 @@ class Solicitation(models.Model):
     active = models.BooleanField(default=True)
 
     objects = SolicitationManager()
+    
+    def accept(self, to_musician):
+        if self.to_musician != to_musician:
+            return False
+        
+        if self.solicitation_type == Type.ADD_TO_BAND:
+            self.band.add_musician(self.to_musician, self.instruments.all())
+        self.status = Status.ACCEPTED
+        self.active = False
+        
+        self.save()
+        
+        return True
+    
+    def reject(self, to_musician):
+        if self.to_musician != to_musician:
+            return False
+        
+        self.status = Status.REJECTED
+        self.active = False
+        self.save()
+        
+        return True
+    
+    def cancel(self, from_musician):
+        if not self.band.is_admin(from_musician):
+            return False
+        
+        self.active = False
+        self.save()
+        
+        return True
     
     def __unicode__(self):
         return self.from_musician.user.first_name + " convidou " + self.to_musician.user.first_name + " para a banda " + self.band.name

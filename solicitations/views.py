@@ -23,7 +23,6 @@ class SolicitationMusician(BaseView):
     
 
 class RespondingSolicitation(BaseView):
-    
     def _get_reply_(self, request):
         return request.path_info.split('/').pop()
     
@@ -34,8 +33,15 @@ class RespondingSolicitation(BaseView):
         solicitation = get_object_or_404(Solicitation, pk=request.POST.get('id'))
         
         if reply == "aceitar":
-            Solicitation.objects.accept(solicitation)
+            solicitation.accept(request.user)
         else:
-            Solicitation.objects.reject(solicitation)
+            solicitation.reject(request.user)
             
         return JSONResponse({'success': True})
+    
+def cancel_solicitation(request):
+    solicitation = Solicitation.objects.get(pk=request.POST.get("id"))
+    if solicitation.cancel(request.user):
+        return JSONResponse({'success': True})
+    
+    return JSONResponse({'success': False})

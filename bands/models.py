@@ -69,6 +69,9 @@ class Band(models.Model):
         self.url = slugify(self.name)
         super(Band, self).save(*args, **kwargs)
     
+    def is_admin(self, musician):
+        return self.band.get(active=True, musician=musician).is_admin
+    
     def musicians_active(self):
         return self.musicians.filter(active=True)
     
