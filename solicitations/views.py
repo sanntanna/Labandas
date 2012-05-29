@@ -31,17 +31,14 @@ class RespondingSolicitation(BaseView):
     def responding(self, request):
         reply = self._get_reply_(request)
         solicitation = get_object_or_404(Solicitation, pk=request.POST.get('id'))
-        
+        success = False
         if reply == "aceitar":
-            solicitation.accept(request.user)
+            success = solicitation.accept(request.user)
         else:
-            solicitation.reject(request.user)
+            success = solicitation.reject(request.user)
             
-        return JSONResponse({'success': True})
+        return JSONResponse({'success': success})
     
 def cancel_solicitation(request):
     solicitation = Solicitation.objects.get(pk=request.POST.get("id"))
-    if solicitation.cancel(request.user):
-        return JSONResponse({'success': True})
-    
-    return JSONResponse({'success': False})
+    return JSONResponse({'success': solicitation.cancel(request.user)})

@@ -74,7 +74,23 @@
 	<section class="block-information clearfix">
 		<h4>Vagas em aberto na banda:</h4>
 		
-		<a href="#add-annoucments" class="fr">[+] Adicionar vaga</a>
+		{% for a in band.announcements.all %}
+			{%for instrument in a.instruments.all %}
+				{{ instrument.name }}{% if not forloop.last %}, {%endif%}
+			{% endfor %} - {{ a.text }}
+			| <a href="#remove" data-id="{{ a.pk }}" class="remove-announcement">Remover</a>
+		{% endfor %}
+		
+		<br /><br />
+		
+		Adicionar:<br />
+		
+		<form id="add-announcement" method="post" action="/annoucement/add">
+			<input type="hidden" name="bandid" value="{{ band.pk }}" />
+			{{ ammouncement_form.as_p }}
+			
+			<input type="submit" value="adicionar vaga" />
+		</form>
 	</section>
 	{% endif %}
 {% endblock %}

@@ -11,6 +11,7 @@ from django.template.context import RequestContext
 from http_method.BaseView import BaseView, get, ajax, onypostallowed
 from jsonui.response import JSONResponse
 from solicitations.models import Solicitation
+from announcements.forms import AnnouncementForm
 
 class UpdateCep(BaseView):
     @ajax
@@ -122,6 +123,7 @@ class EditBand(BaseView):
             'band': band,
             'form': BandForm(instance=band), 
             'musician_form':BandMusicianForm(instance=musician_in_band),
+            'ammouncement_form': AnnouncementForm(),
             'edit': True,
             'logged_user_is_admin': musician_in_band.is_admin,
             'pending_solicitations': Solicitation.objects.musicians_pending(band)
