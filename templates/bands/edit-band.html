@@ -9,8 +9,6 @@
 {% endblock %}
 
 {% block content %}
-	
-	
 	{% if edit  %}
 		<h3>Editando a banda "{{ form.instance }}"</h3>
 		<a href="{{ form.instance.encode_page }}" target="_blank">Página da banda</a>		
@@ -21,7 +19,11 @@
 	
 	<section class="block-information">
 		<h4>Informações:</h4>
-		<form method="post" id="edit-band-form" class="ajax">{% csrf_token %}
+		{% if edit %}
+		<form method="post" id="edit-band-form" class="ajax" action="/banda/editar/{{band.pk}}/post">{% csrf_token %}
+		{% else %}
+		<form method="post" id="edit-band-form" class="ajax" action="/banda/cadastrar/post">{% csrf_token %}
+		{% endif %}
 			{{ form.as_p }}
 			{{ musician_form.as_p }}
 			<input type="submit" value="Salvar" />
