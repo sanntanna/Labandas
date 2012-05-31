@@ -18,9 +18,9 @@
 			</div>
 			
 			<div id="instruments">
-				<form id="add-to-band" action="/solicitacao/musico/enviar" class="ajax" method="post">
+				<form id="add-to-band" action="/solicitacao/enviar-para-musico" class="ajax" method="post">
 					<input type="hidden" name="band_id" id="band_id" />
-					<input type="hidden" name="target_id" id="target_id" value="{{ user.pk }}" />
+					<input type="hidden" name="target_id" id="target_id" value="{{ owner.pk }}" />
 					
 					<div id="list-instruments"></div>
 					<input type="submit" value="ok" />
