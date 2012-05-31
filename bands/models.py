@@ -28,8 +28,8 @@ class Musician(models.Model):
     
     user = models.OneToOneField(User)
     
-    def __unicode__(self):
-        return self.user.first_name
+    def name(self):
+        return self.user.get_full_name()
     
     def get_musician_bands(self):
         return MusicianBand.objects.filter(musician=self, active=True)
@@ -46,11 +46,21 @@ class Musician(models.Model):
         self.cep = cep
     
     def encode_profile(self):
+        if self.url == "":
+            self._generate_url_()
+            
         return "/musico/" + self.url + "/" + self.pk.__str__()
-    
+   
     def save(self, *args, **kwargs):
-        self.url = slugify(self.user.first_name)
+        self._generate_url_()
         super(Musician, self).save(*args, **kwargs)
+   
+    def _generate_url_(self):
+        self.url = slugify(self.name())
+    
+    def __unicode__(self):
+        return self.name()
+    
 
 class Band(models.Model):
     name = models.CharField(max_length=50)
