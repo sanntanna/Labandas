@@ -28,8 +28,6 @@ class BandForm(forms.ModelForm):
     
     def save(self, force_insert=False, force_update=False, commit=True):
         band = super(BandForm, self).save(commit=False)
-        band.registration_date = datetime.now()
-        
         if commit:
             band.save()
         band.musical_styles = self.cleaned_data['musical_styles']

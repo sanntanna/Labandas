@@ -1,7 +1,9 @@
 #coding=ISO-8859-1
+from datetime import datetime
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
+from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
 from equipaments.models import Equipament, EquipamentType
 from medias.models import Media
@@ -31,11 +33,13 @@ class Musician(models.Model):
     def name(self):
         return self.user.get_full_name()
     
-    def get_musician_bands(self):
-        return MusicianBand.objects.filter(musician=self, active=True)
+    @property
+    def bands(self):
+        return self.all_bands.filter(musician=self, active=True).all()
     
-    def get_bands(self):
-        return self.get_musician_bands().values('band__id', 'band__name')
+    @property
+    def bands_list(self):
+        return [b.band for b in self.bands] 
     
     def is_in_band(self, band):
         return MusicianBand.objects.filter(musician=self, band=band, active=True).exists()
@@ -46,21 +50,14 @@ class Musician(models.Model):
         self.cep = cep
     
     def encode_profile(self):
-        if self.url == "":
-            self._generate_url_()
-            
         return "/musico/" + self.url + "/" + self.pk.__str__()
    
-    def save(self, *args, **kwargs):
-        self._generate_url_()
-        super(Musician, self).save(*args, **kwargs)
-   
-    def _generate_url_(self):
-        self.url = slugify(self.name())
-    
     def __unicode__(self):
         return self.name()
-    
+   
+    @classmethod
+    def pre_save(sender, instance, created, **kwargs):
+        instance._generate_url_() 
 
 class Band(models.Model):
     name = models.CharField(max_length=50)
@@ -68,22 +65,20 @@ class Band(models.Model):
     musical_styles = models.ManyToManyField(MusicalStyle)
     medias = models.ManyToManyField(Media)
     url = models.SlugField(max_length=50)
-        
-    def __unicode__(self):
-        return self.name
+    
+    @property
+    def musicians(self):
+        return self.all_musicians.filter(active=True).all()
     
     def encode_page(self):
-        return "/banda/" + self.url + "/" + self.pk.__str__()
+        return "/banda/" + self.url + "/" + str(self.pk)
     
     def save(self, *args, **kwargs):
         self.url = slugify(self.name)
         super(Band, self).save(*args, **kwargs)
     
     def is_admin(self, musician):
-        return self.musicians.get(active=True, musician=musician).is_admin
-    
-    def musicians_active(self):
-        return self.musicians.filter(active=True)
+        return self.all_musicians.get(active=True, musician=musician).is_admin
     
     def add_musician(self, musician, instruments):
         musician_band = MusicianBand()
@@ -92,9 +87,12 @@ class Band(models.Model):
         musician_band.save()
         musician_band.instruments = instruments
     
+    def __unicode__(self):
+        return self.name
+    
 class MusicianBand(models.Model):
-    band = models.ForeignKey(Band, related_name="musicians")
-    musician = models.ForeignKey(Musician, related_name="bands")
+    band = models.ForeignKey(Band, related_name="all_musicians")
+    musician = models.ForeignKey(Musician, related_name="all_bands")
     instruments = models.ManyToManyField(EquipamentType)
     active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -107,8 +105,16 @@ class MusicianBand(models.Model):
     def __unicode__(self):
         return self.musician.user.first_name + ' na banda "' + self.band.name + '"'
 
+@receiver(pre_save, sender=Musician)
+def pre_save_musician(sender, instance, **kwargs):
+    instance.url = slugify(instance.name())
+
+@receiver(pre_save, sender=Band)
+def pre_save_band(sender, instance, **kwargs):
+    if instance.pk == None:
+        instance.registration_date = datetime.now()
+
+@receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Musician(user=instance).save()
-
-post_save.connect(create_user_profile, sender=User)
