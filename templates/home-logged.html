@@ -28,7 +28,7 @@
 			</div>
 		{% endfor %}
 	
-		{% if music_bands.count = 0 %}
+		{% if user.get_profile.bands.count = 0 %}
 			<div class="box without-bands">
 				Você ainda não está em nenhuma banda cadastrada no Lasbandas.<br />
 				<a href="/banda/cadastrar">Crie uma banda</a> ou <a href="#">Encontre uma banda que precisa de você</a>.
@@ -37,7 +37,7 @@
 			<div class="box with-bands">
 				Suas bandas:
 				<ul>
-					{% for music_band in music_bands %}
+					{% for music_band in user.get_profile.bands %}
 						<li> 
 							<a href="{{ music_band.band.encode_page }}" target="_blank">
 							{{ music_band.band.name }} (

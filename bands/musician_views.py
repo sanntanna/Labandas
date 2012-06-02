@@ -58,7 +58,6 @@ def profile(request, user_id, name):
     
     c = RequestContext(request, {
         'owner': owner,
-        'owner_bands': owner.get_musician_bands(),
     })
     
     return HttpResponse(t.render(c))
@@ -71,5 +70,5 @@ def search_musician(request):
 
 @onlyajax
 def get_bands(request):
-    bands = request.user.get_profile().get_bands()
+    bands = [{'id': b.id, 'name': b.name} for b in request.user.get_profile().bands_list]
     return JSONResponse({'success': True, 'bands':bands})

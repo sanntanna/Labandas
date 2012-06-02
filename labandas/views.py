@@ -24,7 +24,6 @@ def homeLogged(request):
     t = loader.get_template('home-logged.html')
     musician = request.user.get_profile()
     c = RequestContext(request, {
-        'music_bands': musician.get_musician_bands(),
         'band_solicitations': Solicitation.objects.bands_pending(musician)
     })
     

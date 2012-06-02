@@ -15,7 +15,7 @@
 			<h4>Formação</h4>
 		</header>
 		<ul>
-			{% for music_band in band.musicians.all %}
+			{% for music_band in band.musicians %}
 				<li> 
 					<a href="{{ music_band.musician.encode_profile }}">
 					{%for instrument in music_band.instruments.all %}
