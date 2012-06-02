@@ -70,6 +70,10 @@ class Band(models.Model):
     def musicians(self):
         return self.all_musicians.filter(active=True).all()
     
+    @property
+    def musicians_list(self):
+        return [m.musician for m in  self.musicians]
+    
     def encode_page(self):
         return "/banda/" + self.url + "/" + str(self.pk)
     
@@ -80,12 +84,18 @@ class Band(models.Model):
     def is_admin(self, musician):
         return self.all_musicians.get(active=True, musician=musician).is_admin
     
-    def add_musician(self, musician, instruments):
+    def add_musician(self, musician, instruments=None):
+        
+        if musician in self.musicians_list:
+            raise ValueError("O musico %d ja esta na banda %d" %  (musician.id, self.id))
+        
         musician_band = MusicianBand()
         musician_band.band = self
         musician_band.musician = musician
         musician_band.save()
-        musician_band.instruments = instruments
+        
+        if instruments != None:
+            musician_band.instruments = instruments
     
     def __unicode__(self):
         return self.name
