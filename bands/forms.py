@@ -1,6 +1,5 @@
 #coding=ISO-8859-1
 from bands.models import MusicalStyle, Band, MusicianBand
-from datetime import datetime
 from django import forms
 from django.contrib.auth.models import User
 from equipaments.models import EquipamentType

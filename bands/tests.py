@@ -62,18 +62,13 @@ class BandsTests(TestCase):
     def test_deve_verificar_se_musico_nao_eh_admin_da_banda(self):
         self.assertFalse(self.dream_theater.is_admin(self.petrucci))
     
-    def test_nao_deve_permitir_que_nao_admin_adicione_musico(self):
-        labrie = self._musician_("James Labrie", "james")
-        with self.assertRaises(ValueError):
-            self.dream_theater.add_musician(labrie, self.petrucci)
-        
     def test_deve_adicionar_musico_na_banda(self):
         labrie = self._musician_("James Labrie", "james")
         
-        self.dream_theater.add_musician(labrie, self.portnoy)
+        self.dream_theater.add_musician(labrie)
         self.assertTrue(labrie in self.dream_theater.musicians_list)
     
     def test_nao_deve_permitir_adicionar_musico_que_ja_esta_na_banda(self):
         with self.assertRaises(ValueError):
-            self.dream_theater.add_musician(self.petrucci, self.portnoy)
+            self.dream_theater.add_musician(self.petrucci)
     
