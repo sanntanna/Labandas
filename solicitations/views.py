@@ -2,7 +2,7 @@
 from bands.models import Musician, Band
 from django.shortcuts import get_object_or_404
 from equipaments.models import EquipamentType
-from http_method.decorators import onlyajax, onlypost
+from httpmethod.decorators import onlyajax, onlypost
 from jsonui.response import JSONResponse
 from solicitations.models import Solicitation
 

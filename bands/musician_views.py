@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.template.context import RequestContext
-from http_method.decorators import onlyajax, onlypost
+from httpmethod.decorators import onlyajax, onlypost
 from jsonui.response import JSONResponse
 
 @onlypost
