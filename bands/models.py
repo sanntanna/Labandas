@@ -6,6 +6,7 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
 from equipaments.models import Equipament, EquipamentType
+from geoapi.geolocalization import GeoLocalization
 from medias.models import Media
 
 class MusicalStyle(models.Model):
@@ -23,6 +24,8 @@ class Musician(models.Model):
     url = models.SlugField(max_length=50)
     
     cep = models.CharField(max_length=9, null=True,blank = True)
+    street = models.CharField(max_length=100, null=True,blank = True)
+    district = models.CharField(max_length=50, null=True,blank = True)
     city = models.CharField(max_length=20, null=True,blank = True)
     state = models.CharField(max_length=2, null=True,blank = True)
     latitute = models.FloatField(null=True,blank = True)
@@ -44,20 +47,17 @@ class Musician(models.Model):
     def is_in_band(self, band):
         return MusicianBand.objects.filter(musician=self, band=band, active=True).exists()
     
-    def set_cep(self, cep=None):
-        if cep == None:
-            return
-        self.cep = cep
-    
     def encode_profile(self):
-        return "/musico/" + self.url + "/" + self.pk.__str__()
+        return "/musico/" + self.url + "/" + str(self.pk)
+   
+    def set_address(self, address_dict):
+        self.street = address_dict['street']
+        self.district = address_dict['district']
+        self.city = address_dict['city']
+        self.state = address_dict['state']
    
     def __unicode__(self):
         return self.name()
-   
-    @classmethod
-    def pre_save(sender, instance, created, **kwargs):
-        instance._generate_url_() 
 
 class Band(models.Model):
     name = models.CharField(max_length=50)
@@ -76,10 +76,6 @@ class Band(models.Model):
     
     def encode_page(self):
         return "/banda/" + self.url + "/" + str(self.pk)
-    
-    def save(self, *args, **kwargs):
-        self.url = slugify(self.name)
-        super(Band, self).save(*args, **kwargs)
     
     def is_admin(self, musician):
         return self.all_musicians.get(active=True, musician=musician).is_admin
@@ -117,9 +113,15 @@ class MusicianBand(models.Model):
 @receiver(pre_save, sender=Musician)
 def pre_save_musician(sender, instance, **kwargs):
     instance.url = slugify(instance.name())
+    
+    if instance.cep == None:
+        return
+    
+    instance.set_address(GeoLocalization().get(instance.cep))
 
 @receiver(pre_save, sender=Band)
 def pre_save_band(sender, instance, **kwargs):
+    instance.url = slugify(instance.name)
     if instance.pk == None:
         instance.registration_date = datetime.now()
 
