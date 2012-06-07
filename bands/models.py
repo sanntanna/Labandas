@@ -84,14 +84,17 @@ class Band(models.Model):
     def is_admin(self, musician):
         return self.all_musicians.get(active=True, musician=musician).is_admin
     
-    def add_musician(self, musician, instruments=None):
+    def add_musician(self, added_musician, sender_musician, instruments=None):
         
-        if musician in self.musicians_list:
-            raise ValueError("O musico %d ja esta na banda %d" %  (musician.id, self.id))
+        if not self.is_admin(sender_musician):
+            raise ValueError("O musico %d nao pode adicionar musicos na banda %d pois nao eh admin" %  (added_musician.id, self.id))
+        
+        if added_musician in self.musicians_list:
+            raise ValueError("O musico %d ja esta na banda %d" %  (added_musician.id, self.id))
         
         musician_band = MusicianBand()
         musician_band.band = self
-        musician_band.musician = musician
+        musician_band.musician = added_musician
         musician_band.save()
         
         if instruments != None:

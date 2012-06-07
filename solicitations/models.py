@@ -12,7 +12,6 @@ class Status(object):
     PENDING, ACCEPTED, REJECTED = range(3)
 
 class SolicitationManager(models.Manager):
-
     def generate_solicitation(self, from_musician=None, to_musician=None, band=None, instruments=None):
         return Solicitation(date=datetime.now(),
                             solicitation_status=Status.PENDING,
