@@ -6,7 +6,7 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
 from equipaments.models import Equipament, EquipamentType
-from geoapi.geolocalization import GeoLocalization
+from geoapi.localization import get_localization
 from medias.models import Media
 
 class MusicalStyle(models.Model):
@@ -55,6 +55,8 @@ class Musician(models.Model):
         self.district = address_dict['district']
         self.city = address_dict['city']
         self.state = address_dict['state']
+        self.latitute = address_dict['lat']
+        self.longitude = address_dict['long']
    
     def __unicode__(self):
         return self.name()
@@ -116,8 +118,7 @@ def pre_save_musician(sender, instance, **kwargs):
     
     if instance.cep == None:
         return
-    
-    instance.set_address(GeoLocalization().get(instance.cep))
+    #instance.set_address(get_localization(instance.cep))
 
 @receiver(pre_save, sender=Band)
 def pre_save_band(sender, instance, **kwargs):

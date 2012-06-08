@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'bands',
     'solicitations',
     'announcements',
+    'geoapi',
 )
 
 # A sample logging configuration. The only tangible logging

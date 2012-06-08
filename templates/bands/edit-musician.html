@@ -10,8 +10,10 @@
 {% block content %}
 	<h3>Dados pessoais</h3>
 	
+	Localidade: {{ user.get_profile.city }} /  {{ user.get_profile.state }}
 	<form method="post" id="edit-musician-form" class="ajax" action="/musico/editar/post">{% csrf_token %}
 		{{ form.as_p }}
 		<input type="submit" value="Cadastrar" />
 	</form>
+	
 {% endblock %}
