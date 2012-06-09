@@ -10,6 +10,10 @@ from django.template.context import RequestContext
 from httpmethod.decorators import onlypost, onlyajax
 from jsonui.response import JSONResponse
 from solicitations.models import Solicitation
+import logging
+
+
+logger = logging.getLogger('labandas')
 
 def add_band(request):
     t = loader.get_template('bands/edit-band.html')
@@ -42,12 +46,12 @@ def add_band_post(request):
     
 def edit_band(request, band_id):
     band = get_object_or_404(Band, pk=band_id)
+    musician = request.user.get_profile()
     musician_in_band = None
-    
     try:
-        musician_in_band = MusicianBand.objects.get(band=band, musician=request.user.get_profile(), active=True)
+        musician_in_band = MusicianBand.objects.get(band=band, musician=musician, active=True)
     except:
-        print("Musico nao incluido na banda")
+        logger.warn("Musico %d nao pertence a banda %d" % (musician.pk, band.pk))
         return HttpResponseNotFound()
     
     t = loader.get_template('bands/edit-band.html')
@@ -69,14 +73,15 @@ def edit_band(request, band_id):
 def edit_band_post(request, band_id):
     #TODO: melhorar esse metodo, mover a verificacao de seguranca para outra camada 
     band = get_object_or_404(Band, pk=band_id)
+    musician = request.user.get_profile()
     success = True
     form = BandForm(data=request.POST, instance=band)
     musician_in_band = None
     
     try:
-        musician_in_band = MusicianBand.objects.get(band=band, musician=request.user.get_profile(), active=True)
+        musician_in_band = MusicianBand.objects.get(band=band, musician=musician, active=True)
     except:
-        print("Musico nao incluido na banda")
+        logger.warn("Musico %d nao pertence a banda %d" % (musician.pk, band.pk))
         return HttpResponseNotFound()
     
     if form.is_valid():

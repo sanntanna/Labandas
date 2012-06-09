@@ -147,12 +147,34 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'standard': {
+            'format': '%(asctime)s[%(levelname)s]: %(message)s',
+            'datefmt': '[%d/%b/%Y %H:%M:%S]',
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'standard',
+            
+        },
     },
     'loggers': {
         'django.request': {
@@ -160,8 +182,18 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-    }
+        'labandas': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO',
+        }
+    },
 }
 
 
 AUTH_PROFILE_MODULE = 'bands.Musician'
+
+#amazon S3 settings
+BUCKET_NAME = 'bucket_name'
+AWS_ACCESS_KEY_ID = 'AKIAJJPCTLM7JMCQHPAA'
+AWS_SECRET_ACCESS_KEY = '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'
+

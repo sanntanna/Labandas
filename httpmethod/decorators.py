@@ -1,9 +1,13 @@
+#coding=ISO-8859-1
 from django.http import HttpResponseNotFound
+import logging
+
+logger = logging.getLogger('labandas')
 
 def onlyajax(func):
     def new(request, *args, **kwargs):
         if not request.is_ajax():
-            #TODO: adicionar log de erro aqui
+            logger.warn("url %s, Requisicao invalida, deveria ser ajax" % request.path)
             return HttpResponseNotFound()
         return func(request, *args, **kwargs)
     return new
@@ -11,7 +15,7 @@ def onlyajax(func):
 def onlypost(func):
     def new(request, *args, **kwargs):
         if request.method != 'POST':
-            #TODO: adicionar log de erro aqui
+            logger.warn("[url:%s] Requisicao invalida, deveria ser ajax" % request.path)
             return HttpResponseNotFound()
         return func(request, *args, **kwargs)
     return new

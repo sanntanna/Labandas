@@ -6,6 +6,7 @@ encoding//equipaments/models.py=ISO-8859-1
 encoding//equipaments/views.py=ISO-8859-1
 encoding//geoapi/localization.py=ISO-8859-1
 encoding//geoapi/tests.py=ISO-8859-1
+encoding//httpmethod/decorators.py=ISO-8859-1
 encoding//jsonui/response.py=utf-8
 encoding//jsonui/utils.py=utf-8
 encoding//labandas/views.py=ISO-8859-1
