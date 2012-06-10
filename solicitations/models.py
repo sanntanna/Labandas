@@ -12,7 +12,7 @@ class Status(object):
     PENDING, ACCEPTED, REJECTED = range(3)
 
 class SolicitationManager(models.Manager):
-    def generate_solicitation(self, from_musician=None, to_musician=None, band=None, instruments=None):
+    def __generate_solicitation(self, from_musician=None, to_musician=None, band=None, instruments=None):
         return Solicitation(date=datetime.now(),
                             solicitation_status=Status.PENDING,
                             from_musician=from_musician,
@@ -27,7 +27,7 @@ class SolicitationManager(models.Manager):
         if target_musician.is_in_band(band):
             raise ValueError("O musico " + str(target_musician) + " ja pertence a banda " + str(band))
         
-        solicitation = self.generate_solicitation(from_musician=sender_musician, to_musician=target_musician, band=band)
+        solicitation = self.__generate_solicitation(from_musician=sender_musician, to_musician=target_musician, band=band)
         solicitation.solicitation_type = Type.ADD_TO_BAND
         solicitation.save()
         solicitation.instruments = instruments

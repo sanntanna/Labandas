@@ -6,7 +6,6 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
 from equipaments.models import Equipament, EquipamentType
-from geoapi.localization import get_localization
 from medias.models import Media
 
 class MusicalStyle(models.Model):

@@ -3,89 +3,84 @@ from django.utils.encoding import smart_str
 from django.utils.http import urlquote
 from pyquery import PyQuery as pq
 
-class Status():
-    FOUND = 1
-    NOT_FOUND = 2
-    NOT_GEOPOSITION = 3
-
-class Address(object):
-    cep = ""
-    street = ""
-    district = ""
-    city = ""
-    state = ""
-    country = "Brasil"
-    latitude = 0.0
-    longitude = 0.0
+class AddressFinder(object):
+    #CORREIOS_URL = "http://m.correios.com.br/movel/buscaCepConfirma.do?metodo=buscarCep&cepEntrada=%s"
+    CORREIOS_URL = "http://www.buscacep.correios.com.br/servicos/dnec/consultaLogradouroAction.do"
+    MAPS_URL = "http://maps.googleapis.com/maps/api/geocode/xml?address=%s&sensor=false"
     
-    def _with_comma_(self, key):
-        return key + u"," if key != "" else ""
-    
-    def __str__(self):
-        complete_address = "%s %s %s %s" % (self._with_comma_(self.street), self._with_comma_(self.city), self._with_comma_(self.state), self._with_comma_(self.country))
-        return smart_str(complete_address).rstrip(",")
-    
-class SearchAddrResult(object):
-    address = None
-    status = None
-
-def get_localization(cep):
-    result = get_address(cep)
-    if result.status == Status.NOT_FOUND: 
+    def find(self, cep):
+        result = self.get_address(cep)
+        
+        if result.status == Status.NOT_FOUND: 
+            return result
+        
+        self.fill_lat_long(result.address)
+        
         return result
     
-    lat_lng = get_lat_long(result.address)
-    result.address.latitude = lat_lng['lat']
-    result.address.longitude = lat_lng['lng']
-    
-    return result
-    
-
-def get_address(cep):
-    CORREIOS_URL = "http://m.correios.com.br/movel/buscaCepConfirma.do?metodo=buscarCep&cepEntrada=%s"
-    def _run_(cep):
-        page = pq(CORREIOS_URL % cep)
-        content = page.find(".caixacampobranco:first")
-        
-        error = page.find(".erro:first").html()
+    def get_address(self, cep):
+        page = pq(url=self.CORREIOS_URL, method="POST", data={'relaxation': cep, 'Metodo':'listaLogradouro', 'TipoConsulta': 'relaxation'})
+        content = page.find(".ctrlcontent > div table:first tr")
+        error = page.find("title:contains('Erro')").html()
         
         result = SearchAddrResult()
         
         if not error is None:
+            result.message = error
             result.status = Status.NOT_FOUND
             return result
         
         address = Address()
-        address.status = Status.FOUND
-        address.street = _addr_field_("Logradouro", content)
-        address.district = _addr_field_("Bairro", content)
-        
-        city, state = _addr_field_("Localidade / UF", content).split("/")
-        address.city = city.strip()
-        address.state =  state.strip() 
-    
+        address.street = self.__addr_field(0, content)
+        address.district = self.__addr_field(1, content)
+        address.city = self.__addr_field(2, content)
+        address.state =  self.__addr_field(3, content)
         
         result.address = address
         result.status = Status.FOUND
         return result
     
-    def _addr_field_(name, parent):
-        content = parent.find('.resposta:contains("%s") ~ .respostadestaque' % name).html()
-        return "" if content is None else content.strip()
+    def __addr_field(self, index, parent):
+        content = parent.find('td')[index].text
+        return None if content is None else content.strip()
     
-    return _run_(cep)
+    def fill_lat_long(self, address):
+        addr_xml = pq(self.MAPS_URL % urlquote(str(address)))
+        status = addr_xml.find("geocoderesponse status").html()
+        
+        if status == "ZERO_RESULTS":
+            address.latitude= 0.0
+            address.longitude = 0.0
+            address.status = Status.NO_GEOPOSITION
+            
+        lat_long_node =  addr_xml.find('geometry location')
+    
+        address.latitude = float(lat_long_node.find('lat').html())
+        address.longitude = float(lat_long_node.find('lng').html())
 
-def get_lat_long(address):
-    MAPS_URL = "http://maps.googleapis.com/maps/api/geocode/xml?address=%s&sensor=false"
-    addr_xml = pq(MAPS_URL % urlquote(str(address)))
-    status = addr_xml.find("geocoderesponse status").html()
-    
-    if status == "ZERO_RESULTS":
-        return {'lat':0.0, 'lng': 0.0}
-    
-    lat_long_node =  addr_xml.find('geometry location')
+class Status():
+    FOUND = 1
+    NOT_FOUND = 2
+    NO_GEOPOSITION = 3
 
-    return {
-        'lat': float(lat_long_node.find('lat').html()),
-        'lng': float(lat_long_node.find('lng').html())
-    }
+class Address(object):
+    cep = None
+    street = None
+    district = None
+    city = None
+    state = None
+    country = "Brasil"
+    latitude = 0.0
+    longitude = 0.0
+    
+    def __with_comma(self, key):
+        return "" if key is None else "%s," % key
+    
+    def __str__(self):
+        complete_address = "%s %s %s %s" % (self.__with_comma(self.street), self.__with_comma(self.city), self.__with_comma(self.state), self.__with_comma(self.country))
+        return smart_str(complete_address).rstrip(",")
+    
+class SearchAddrResult(object):
+    address = None
+    status = None
+    message = None

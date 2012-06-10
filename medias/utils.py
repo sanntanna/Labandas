@@ -6,16 +6,16 @@ import logging
 class AmazonS3(object):
     logging.getLogger('boto').setLevel(logging.CRITICAL)
     
-    def _connect_s3_(self):
+    def __connect_s3(self):
         return boto.connect_s3(settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)
     
-    def _get_bucket_(self, conn):
+    def __get_bucket(self, conn):
         return conn.get_bucket(settings.BUCKET_NAME)
     
     def upload_file(self, localfile, remotepath):
-        conn = self._connect_s3_()
+        conn = self.__connect_s3()
         
-        bucket_key = Key(self._get_bucket_(conn))
+        bucket_key = Key(self.__get_bucket(conn))
         bucket_key.key = remotepath
         bucket_key.set_contents_from_filename(localfile)
 
