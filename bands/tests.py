@@ -5,35 +5,42 @@ from django.test import TestCase
 class BandsTests(TestCase):
     
     @classmethod
-    def _musician_(cls, name, username):
-        return User.objects.create(first_name=name, username=username).get_profile()
+    def __musician(cls, name, username):
+        return User.objects.create(first_name=name, username=username, email=username).get_profile()
     
     @classmethod
-    def _add_into_band_(cls, musician, band, is_admin=False, active=True):
+    def __add_into_band(cls, musician, band, is_admin=False, active=True):
         return MusicianBand.objects.create(band=band, musician=musician, active=active, is_admin=is_admin)
     
     @classmethod
     def setUpClass(cls):
-        cls.petrucci = cls._musician_("John Petrucci","petrucci")
-        cls.portnoy = cls._musician_("Mike Portnoy", "portnoy")
-        cls.rudess = cls._musician_("Jordan Rudess", "jordan")
+        cls.petrucci = cls.__musician("John Petrucci","petrucci")
+        cls.portnoy = cls.__musician("Mike Portnoy", "portnoy")
+        cls.rudess = cls.__musician("Jordan Rudess", "jordan")
         
         cls.dream_theater = Band.objects.create(name="Dream theater")
         
-        cls._add_into_band_(cls.petrucci, cls.dream_theater)
-        cls._add_into_band_(cls.portnoy, cls.dream_theater, is_admin=True)
-        cls._add_into_band_(cls.rudess, cls.dream_theater, active=False)
+        cls.__add_into_band(cls.petrucci, cls.dream_theater)
+        cls.__add_into_band(cls.portnoy, cls.dream_theater, is_admin=True)
+        cls.__add_into_band(cls.rudess, cls.dream_theater, active=False)
     
     def test_deve_salvar_slugificar_e_salvar_url_musico(self):
         self.assertEqual(self.portnoy.url, "mike-portnoy")
     
+    def test_deve_recuperar_geolocalizacao_musico(self):
+        musician = self.__musician("Renato", "rhmenegasso@gmail.com")
+        musician.cep = "03264-040"
+        musician.save()
+        self.assertEqual(musician.street, u"Rua Roque Barbosa Lima")
+        #TODO: verificar outras propriedades
+    
     def test_deve_encodar_urls_perfis_musicos(self):
-        self.assertEqual(self.petrucci.encode_profile(), u"/musico/john-petrucci/1")
-        self.assertEqual(self.portnoy.encode_profile(), u"/musico/mike-portnoy/2")
+        self.assertEqual(u"/musico/john-petrucci/1", self.petrucci.encode_profile())
+        self.assertEqual(u"/musico/mike-portnoy/2", self.portnoy.encode_profile())
     
     def test_deve_listar_bandas_ativas_do_musico(self):
         lte = Band.objects.create(name="Liquid Tension Experiment")
-        self._add_into_band_(self.petrucci, lte, active=False)
+        self.__add_into_band(self.petrucci, lte, active=False)
         
         bands = self.petrucci.bands_list
         
@@ -46,7 +53,7 @@ class BandsTests(TestCase):
         self.assertTrue(self.petrucci.is_in_band(self.dream_theater))
     
     def test_deve_verificar_se_musico_nao_esta_na_banda(self):
-        clapton = self._musician_("Eric Clapton", "clapton")
+        clapton = self.__musician("Eric Clapton", "clapton")
         self.assertFalse(clapton.is_in_band(self.dream_theater))
     
     def test_deve_listar_apenas_musicos_ativos(self):
@@ -63,7 +70,7 @@ class BandsTests(TestCase):
         self.assertFalse(self.dream_theater.is_admin(self.petrucci))
     
     def test_deve_adicionar_musico_na_banda(self):
-        labrie = self._musician_("James Labrie", "james")
+        labrie = self.__musician("James Labrie", "james")
         
         self.dream_theater.add_musician(labrie)
         self.assertTrue(labrie in self.dream_theater.musicians_list)

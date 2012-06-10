@@ -2,10 +2,11 @@
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
 from equipaments.models import Equipament, EquipamentType
+from geoapi.localization import AddressFinder, Status
 from medias.models import Media
 
 class MusicalStyle(models.Model):
@@ -27,7 +28,7 @@ class Musician(models.Model):
     district = models.CharField(max_length=50, null=True,blank = True)
     city = models.CharField(max_length=20, null=True,blank = True)
     state = models.CharField(max_length=2, null=True,blank = True)
-    latitute = models.FloatField(null=True,blank = True)
+    latitude = models.FloatField(null=True,blank = True)
     longitude = models.FloatField(null=True,blank = True)
     
     user = models.OneToOneField(User)
@@ -49,13 +50,27 @@ class Musician(models.Model):
     def encode_profile(self):
         return "/musico/" + self.url + "/" + str(self.pk)
    
-    def set_address(self, address_dict):
-        self.street = address_dict['street']
-        self.district = address_dict['district']
-        self.city = address_dict['city']
-        self.state = address_dict['state']
-        self.latitute = address_dict['lat']
-        self.longitude = address_dict['long']
+    def set_address(self, addr_result):
+        if addr_result.status == Status.NOT_FOUND:
+            return
+        
+        addr = addr_result.address
+        self.street = addr.street
+        self.district = addr.district
+        self.city = addr.city
+        self.state = addr.state
+        
+        if addr_result.status != Status.NO_GEOPOSITION:
+            self.latitude = addr.latitude
+            self.longitude = addr.longitude
+    
+    def save(self, *args, **kwargs):
+        self.url = slugify(self.name())
+        if not self.cep is None:
+            finder = AddressFinder()
+            self.set_address(finder.find(self.cep))
+    
+        super(Musician, self).save(*args, **kwargs)
    
     def __unicode__(self):
         return self.name()
@@ -93,6 +108,13 @@ class Band(models.Model):
         if instruments != None:
             musician_band.instruments = instruments
     
+    def save(self, *args, **kwargs):
+        self.url = slugify(self.name)
+        if self.pk == None:
+            self.registration_date = datetime.now()
+        
+        super(Band, self).save(*args, **kwargs)
+        
     def __unicode__(self):
         return self.name
     
@@ -110,20 +132,6 @@ class MusicianBand(models.Model):
         
     def __unicode__(self):
         return self.musician.user.first_name + ' na banda "' + self.band.name + '"'
-
-@receiver(pre_save, sender=Musician)
-def pre_save_musician(sender, instance, **kwargs):
-    instance.url = slugify(instance.name())
-    
-    if instance.cep == None:
-        return
-    #instance.set_address(get_localization(instance.cep))
-
-@receiver(pre_save, sender=Band)
-def pre_save_band(sender, instance, **kwargs):
-    instance.url = slugify(instance.name)
-    if instance.pk == None:
-        instance.registration_date = datetime.now()
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
