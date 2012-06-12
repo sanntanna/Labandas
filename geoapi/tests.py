@@ -1,6 +1,6 @@
 #coding=ISO-8859-1
 from django.test import TestCase
-from geoapi.localization import Status, AddressFinder, Address
+from geoapi.models import Status, AddressFinder, Address
 
 
 class GeoLocalizationTest(TestCase):

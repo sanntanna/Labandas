@@ -29,9 +29,9 @@ class BandsTests(TestCase):
     
     def test_deve_recuperar_geolocalizacao_musico(self):
         musician = self.__musician("Renato", "rhmenegasso@gmail.com")
-        musician.cep = "03264-040"
+        musician.address.cep = "03264-040"
         musician.save()
-        self.assertEqual(musician.street, u"Rua Roque Barbosa Lima")
+        self.assertEqual(musician.address.street, u"Rua Roque Barbosa Lima")
         #TODO: verificar outras propriedades
     
     def test_deve_encodar_urls_perfis_musicos(self):

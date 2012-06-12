@@ -27,7 +27,7 @@ def update_cep(request):
         return JSONResponse({ "success": False })
     
     musician = request.user.get_profile() 
-    musician.set_cep(request.GET["cep"])
+    musician.address.cep = request.GET["cep"]
     musician.save()
     return JSONResponse({ "success": True })
 

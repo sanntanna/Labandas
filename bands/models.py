@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
 from equipaments.models import Equipament, EquipamentType
-from geoapi.localization import AddressFinder, Status
+from geoapi.models import Address
 from medias.models import Media
 
 class MusicalStyle(models.Model):
@@ -17,21 +17,13 @@ class MusicalStyle(models.Model):
         return self.name
 
 class Musician(models.Model):
-    equipaments = models.ManyToManyField(Equipament)
-    type_instruments_play = models.ManyToManyField(EquipamentType)
-    musical_styles = models.ManyToManyField(MusicalStyle)
-    medias = models.ManyToManyField(Media)
     url = models.SlugField(max_length=50)
-    
-    cep = models.CharField(max_length=9, null=True,blank = True)
-    street = models.CharField(max_length=100, null=True,blank = True)
-    district = models.CharField(max_length=50, null=True,blank = True)
-    city = models.CharField(max_length=20, null=True,blank = True)
-    state = models.CharField(max_length=2, null=True,blank = True)
-    latitude = models.FloatField(null=True,blank = True)
-    longitude = models.FloatField(null=True,blank = True)
-    
+    equipaments = models.ManyToManyField(Equipament)
+    type_instruments_play = models.ManyToManyField(EquipamentType, null=True, blank=True)
+    musical_styles = models.ManyToManyField(MusicalStyle, null=True, blank=True)
+    medias = models.ManyToManyField(Media, null=True, blank=True)
     user = models.OneToOneField(User)
+    _address = models.OneToOneField(Address, related_name="musician", null=True, blank=True)
     
     def name(self):
         return self.user.get_full_name()
@@ -44,32 +36,26 @@ class Musician(models.Model):
     def bands_list(self):
         return [b.band for b in self.bands] 
     
+    @property
+    def address(self):
+        if self._address is None:
+            self._address = Address.objects.create()
+        return self._address
+    
     def is_in_band(self, band):
         return MusicianBand.objects.filter(musician=self, band=band, active=True).exists()
     
     def encode_profile(self):
         return "/musico/" + self.url + "/" + str(self.pk)
    
-    def set_address(self, addr_result):
-        if addr_result.status == Status.NOT_FOUND:
-            return
-        
-        addr = addr_result.address
-        self.street = addr.street
-        self.district = addr.district
-        self.city = addr.city
-        self.state = addr.state
-        
-        if addr_result.status != Status.NO_GEOPOSITION:
-            self.latitude = addr.latitude
-            self.longitude = addr.longitude
-    
+
     def save(self, *args, **kwargs):
         self.url = slugify(self.name())
-        if not self.cep is None:
-            finder = AddressFinder()
-            self.set_address(finder.find(self.cep))
-    
+
+        if not self._address is None:
+            self._address.fill_by_cep()
+            self._address.save()
+
         super(Musician, self).save(*args, **kwargs)
    
     def __unicode__(self):
