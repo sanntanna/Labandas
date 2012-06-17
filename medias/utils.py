@@ -1,5 +1,7 @@
 from boto.s3.key import Key
 from labandas import settings
+import Image
+import StringIO
 import boto
 import logging
 
@@ -17,8 +19,31 @@ class AmazonS3(object):
         
         bucket_key = Key(self.__get_bucket(conn))
         bucket_key.key = remotepath
-        bucket_key.set_contents_from_filename(localfile)
-
+        
+        if hasattr(localfile, 'read'):
+            bucket_key.set_contents_from_file(localfile)
+        else:
+            bucket_key.set_contents_from_filename(localfile)
+            
         bucket_key.make_public()
         
         return bucket_key.generate_url(1 * 60 * 60 * 24)
+
+class ImageHandler():
+    
+    def __resize_image(self, image, size):
+        clone = image.copy()
+        clone.thumbnail(size, Image.ANTIALIAS)
+        
+        file_pointer = StringIO.StringIO()
+        clone.save(file_pointer, "png")
+        file_pointer.seek(0)
+        
+        return file_pointer
+    
+    def handle_profile_images(self, new_file):
+        image = Image.open(new_file)
+        return {
+            'default': self.__resize_image(image, (250,250)),
+            'small': self.__resize_image(image, (70,70))
+        }

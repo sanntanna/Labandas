@@ -8,6 +8,7 @@ from django.template.defaultfilters import slugify
 from equipaments.models import Equipament, EquipamentType
 from geoapi.models import Address
 from medias.models import Media
+from medias.utils import ImageHandler, AmazonS3
 
 class MusicalStyle(models.Model):
     name = models.CharField(max_length=50)
@@ -42,13 +43,29 @@ class Musician(models.Model):
             self._address = Address.objects.create()
         return self._address
     
+    @property
+    def profile_image(self):
+        return "https://lasbandas.s3.amazonaws.com/u/%d/profile.png" % self.pk
+    
+    @property
+    def profile_image_small(self):
+        return "https://lasbandas.s3.amazonaws.com/u/%d/profile_small.png" % self.pk
+    
     def is_in_band(self, band):
         return MusicianBand.objects.filter(musician=self, band=band, active=True).exists()
     
     def encode_profile(self):
         return "/musico/" + self.url + "/" + str(self.pk)
    
-
+    
+    def update_image(self, uploaded_image):
+        handler = ImageHandler()
+        images = handler.handle_profile_images(uploaded_image)
+        
+        s3 = AmazonS3()
+        s3.upload_file(images['default'], '/u/%d/profile.png' % self.pk)
+        s3.upload_file(images['small'], '/u/%d/profile_small.png' % self.pk)
+    
     def save(self, *args, **kwargs):
         self.url = slugify(self.name())
 

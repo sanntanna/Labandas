@@ -1,12 +1,17 @@
 from bands.forms import ExpressRegistrationForm, UserInfoForm
 from bands.models import Musician
 from django.contrib.auth import authenticate, login
+from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.template.context import RequestContext
 from httpmethod.decorators import onlyajax, onlypost
 from jsonui.response import JSONResponse
+from medias.utils import AmazonS3
+import Image
+import StringIO
+
 
 @onlypost
 @onlyajax
@@ -72,3 +77,15 @@ def search_musician(request):
 def get_bands(request):
     bands = [{'id': b.id, 'name': b.name} for b in request.user.get_profile().bands_list]
     return JSONResponse({'success': True, 'bands':bands})
+
+
+def update_profile(request):
+    
+    if request.method == "POST":
+        request.user.get_profile().update_image(request.FILES.get('img'))
+    
+    c = RequestContext(request)
+    c.update(csrf(request))
+    
+    t = loader.get_template('bands/update-profile-image.html')
+    return HttpResponse(t.render(c))
