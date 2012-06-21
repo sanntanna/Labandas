@@ -1,10 +1,10 @@
 #coding=ISO-8859-1
-from datetime import datetime
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
+from django.utils import timezone
 from equipaments.models import Equipament, EquipamentType
 from geoapi.models import Address
 from medias.models import Media
@@ -55,7 +55,7 @@ class Musician(models.Model):
         return MusicianBand.objects.filter(musician=self, band=band, active=True).exists()
     
     def encode_profile(self):
-        return "/musico/" + self.url + "/" + str(self.pk)
+        return "/musico/%s/%d" % (self.url, self.pk)
    
     
     def update_image(self, uploaded_image):
@@ -94,14 +94,14 @@ class Band(models.Model):
         return [m.musician for m in  self.musicians]
     
     def encode_page(self):
-        return "/banda/" + self.url + "/" + str(self.pk)
+        return "/banda/%s/%d" % (self.url, self.pk)
     
     def is_admin(self, musician):
         return self.all_musicians.get(active=True, musician=musician).is_admin
     
     def add_musician(self, musician, instruments=None):
         if musician in self.musicians_list:
-            raise ValueError("O musico %d ja esta na banda %d" %  (musician.id, self.id))
+            raise ValueError("O musico %d ja esta na banda '%d'" %  (musician.id, self.id))
         
         musician_band = MusicianBand()
         musician_band.band = self
@@ -114,7 +114,7 @@ class Band(models.Model):
     def save(self, *args, **kwargs):
         self.url = slugify(self.name)
         if self.pk == None:
-            self.registration_date = datetime.now()
+            self.registration_date = timezone.now()
         
         super(Band, self).save(*args, **kwargs)
         
@@ -134,7 +134,7 @@ class MusicianBand(models.Model):
         return True
         
     def __unicode__(self):
-        return self.musician.user.first_name + ' na banda "' + self.band.name + '"'
+        return  "%s na banda '%s'" % (self.musician.user.first_name, self.band.name)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
