@@ -8,9 +8,6 @@ from django.template import loader
 from django.template.context import RequestContext
 from httpmethod.decorators import onlyajax, onlypost
 from jsonui.response import JSONResponse
-from medias.utils import AmazonS3
-import Image
-import StringIO
 
 
 @onlypost

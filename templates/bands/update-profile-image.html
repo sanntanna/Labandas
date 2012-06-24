@@ -1,0 +1,13 @@
+{% extends "includes/wrapper.html" %}
+
+
+{% block content %}
+<form enctype="multipart/form-data" method="post">
+	{% csrf_token %}
+	Imagem do perfil:
+	<input type="file" name="img" />
+	<input type="submit" />
+</form>
+
+
+{% endblock %}
