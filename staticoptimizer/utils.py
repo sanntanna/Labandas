@@ -3,12 +3,12 @@ from django.utils.encoding import smart_str
 from django.utils.hashcompat import md5_constructor
 import logging
 import os
-import shlex
+import re
 import subprocess
 
 logger = logging.getLogger("labandas")
 
-class PackageManager(object):
+class FileOptimizer(object):
     root_path = settings.STATICFILES_DIRS[0] 
     
     input_file_path = None
@@ -24,30 +24,46 @@ class PackageManager(object):
         return self
      
     def build(self):
-        self.__build_package()
+        if os.path.exists(self.output_file_path) and not settings.DEBUG:
+            return self.__get_file_name()
+        
+        self.__create_dirs()
+            
+        self.__build_file()
         
         if self.apply_less and self.file_type == "css":
             self.__build_less()
         
-        return self.output_file_path[len(self.root_path):].replace(os.sep, '/').lstrip("/")
+        self.__delete_old_files()
+        
+        return self.__get_file_name() 
     
     def with_less(self):
         self.apply_less = True
         return self
     
-    def __build_package(self):
-        if os.path.exists(self.output_file_path) and not settings.DEBUG:
-            return self
-        
+    def __create_dirs(self):
         output_directory = os.path.dirname(self.output_file_path)
-        
         if not os.path.exists(output_directory):
             os.makedirs(output_directory)
-        
+    
+    def __delete_old_files(self):
+        output_directory = os.path.dirname(self.output_file_path)
+        compiled_filename = os.path.split(self.output_file_path)[-1]
+        for filename in os.listdir(output_directory):
+            if filename.startswith(compiled_filename) and filename != compiled_filename:
+                os.remove(os.path.join(output_directory, filename))
+    
+    def __is_package(self, source_file):
+        line = source_file.readline()
+        source_file.seek(0)
+        return not re.match("(.*)(\.css|\.js)", line) is None
+    
+    def __build_file(self):
         input_file = open(self.input_file_path, "r")
         output_file = open(self.output_file_path, "w+")
         base_directory = os.path.dirname(self.input_file_path)
-        file_names = input_file.readlines()
+        file_names = (os.path.basename(self.input_file_path),) if not self.__is_package(input_file) else input_file.readlines() 
         
         for file_name in file_names:
             file_name = file_name.rstrip("\n")
@@ -56,11 +72,6 @@ class PackageManager(object):
             output_file.write(current_file.read())
         
         output_file.close()
-        
-        compiled_filename = os.path.split(self.output_file_path)[-1]
-        for filename in os.listdir(output_directory):
-            if filename.startswith(compiled_filename) and filename != compiled_filename:
-                os.remove(os.path.join(output_directory, filename))
     
     
     def __build_less(self):
@@ -88,3 +99,8 @@ class PackageManager(object):
         except OSError:
             return None
         return md5_constructor(smart_str(mtime)).hexdigest()[:length]
+    
+    def __get_file_name(self):
+        return "%s%s" % ( settings.STATIC_URL, self.output_file_path[len(self.root_path):].replace(os.sep, '/').lstrip("/"))
+    
+    

@@ -124,7 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'filespackage',
+    'staticoptimizer',
     'geoapi',
     'equipaments',
     'medias',
