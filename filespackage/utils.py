@@ -64,8 +64,8 @@ class PackageManager(object):
     
     
     def __build_less(self):
-        command = "%s %s" % (settings.LESS_EXECUTABLE, self.output_file_path)
-        p = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        command = u"%s %s" % (settings.LESS_EXECUTABLE, self.output_file_path)
+        p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         out, errors = p.communicate()
         
         if out:

@@ -1,4 +1,4 @@
-/*  HTML5 ✰ Boilerplate  */
+/*  HTML5 Boilerplate  */
 
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -137,10 +137,6 @@ a:hover {
 	margin:auto;
 	width:960px;
 }
-
-.sprite-bg-content{ background-position: 0 0; width: 18px; height: 370px; } 
-.sprite-bg-footer{ background-position: 0 -371px; width: 18px; height: 248px; } 
-.sprite-bg-header{ background-position: 0 -620px; width: 18px; height: 54px; } 
 
 #header-container{
 	background:url(https://lasbandas.s3.amazonaws.com/site/sprite-bgs.png) #323232 0 -620px repeat-x;
