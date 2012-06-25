@@ -1,4 +1,10 @@
 /*-- home não logada -- */
+
+#content article{
+	float:left;
+	width:49%
+}
+
 #subscribe-form ul{
 	list-style:none none;
 }

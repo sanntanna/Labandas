@@ -22,7 +22,7 @@ class PackageManager(object):
         self.input_file_path = os.path.join(self.root_path, input_path)
         self.output_file_path = self.__get_output_file(input_path)
         return self
-     
+    
     def build(self):
         self.__build_package()
         
@@ -37,7 +37,7 @@ class PackageManager(object):
     
     def __build_package(self):
         if os.path.exists(self.output_file_path) and not settings.DEBUG:
-            return self
+            return
         
         output_directory = os.path.dirname(self.output_file_path)
         

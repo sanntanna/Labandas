@@ -63,9 +63,6 @@ input:valid, textarea:valid   {  }
 input:invalid, textarea:invalid { border-radius: 1px; -moz-box-shadow: 0px 0px 5px red; -webkit-box-shadow: 0px 0px 5px red; box-shadow: 0px 0px 5px red; }
 .no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: #f0dddd; }
 
-::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-::selection { background:#FF5E99; color:#fff; text-shadow: none; }
-
 button {  width: auto; overflow: visible; }
 .ie7 img { -ms-interpolation-mode: bicubic; }
 
@@ -120,6 +117,9 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 }
 
 
+::-moz-selection{ background:@defaultgreen; color:#fff; text-shadow: none; }
+::selection { background:@defaultgreen; color:#fff; text-shadow: none; }
+
 body{font-family:Helvetica, Helvetica Neue, Arial, sans-serif;}
 
 nav ul li{float:left;}
@@ -138,13 +138,12 @@ a:hover {
 	width:960px;
 }
 
-.sprite-bg-content{ background-position: 0 0; width: 18px; height: 370px; } 
-.sprite-bg-footer{ background-position: 0 -371px; width: 18px; height: 248px; } 
-.sprite-bg-header{ background-position: 0 -620px; width: 18px; height: 54px; } 
 
 #header-container{
 	background:url(https://lasbandas.s3.amazonaws.com/site/sprite-bgs.png) #323232 0 -620px repeat-x;
 	height:54px;
+	-webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 1);
+			box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 1);
 }
 
 #header-logo{width:200px;}
@@ -180,15 +179,14 @@ a:hover {
 	a:hover{color:@defaultgreen;}
 }
 
+#content{
+	padding-top:10px;
+	min-height:300px;
+}
 
 #footer-container{
-	background-color:#343434;
-	height:240px;
-	border-top:20px solid #222;
-	margin-top:50px;
-	-webkit-box-shadow:0 -40px 40px -40px #AAA;
-	   -moz-box-shadow:0 -40px 40px -40px #AAA;
-	        box-shadow:0 -40px 40px -40px #AAA;
+	background:url(https://lasbandas.s3.amazonaws.com/site/sprite-bgs.png) #323232 0 -371px repeat-x;
+	height:248px;
 }
 
 #footer-container footer{
