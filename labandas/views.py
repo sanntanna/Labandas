@@ -41,3 +41,8 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect("/")
+
+def lightbox(request, lightbox_file):
+    t = loader.get_template('lightbox/%s.html' % lightbox_file)
+    c = RequestContext(request)
+    return HttpResponse(t.render(c))

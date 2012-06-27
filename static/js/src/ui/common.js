@@ -3,6 +3,7 @@
 	this.init = function(){
 		setupAjax();
 		setupLogin();
+		setupLightboxes();
 	};
 	
 	this.domLoaded = function(){
@@ -45,10 +46,17 @@
 	}
 	
 	function setupLogin(){
-		$("#lb-form-login").bind('ajaxcomplete', function(e, data){
+		$(document).delegate('#lb-form-login', 'ajaxcomplete', function(e, data){
 			if(data.success) {
 				location.reload()
 			}
+		});
+	}
+	
+	function setupLightboxes(){
+		$(document).delegate("a.lightbox", "click", function(e){
+			e.preventDefault();
+			new lb.lightbox(this.href);
 		});
 	}
 	

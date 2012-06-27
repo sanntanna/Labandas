@@ -77,6 +77,7 @@ lb.lightbox = function(param){
 		instance.container = render().appendTo('body');
 		instance.box = instance.container.find('.lightbox-wrapper');
 		instance.content = instance.box.find('.lightbox-content');
+		instance.loading = instance.box.find('.lightbox-loading');
 		loadContent(show);
 	}
 	
@@ -111,10 +112,16 @@ lb.lightbox = function(param){
 	}
 	
 	function loadContent(callback){
-		//TODO: adicionar loader e regra para o ajax
-		//$.get(url, null, function(){
-			callback.call(null, arguments);
-		//});
+		if(url == null){
+			callback.call(null, null);
+			return;
+		}
+		
+		instance.loading.show();
+		$.get(url, null, function(response){
+			instance.loading.hide();
+			callback.apply(null, arguments);
+		});
 	}
 	
 	function show(response){
@@ -125,9 +132,8 @@ lb.lightbox = function(param){
 		instance.box.centralize(height);
 		instance.box.animate({'height': _height});
 		instance.box.animate({'width': _width}, 500, function(){
-			if(text)
-				instance.content.html(text);
-			instance.content.fadeIn();
+			var _content = response || text;
+			if(_content) instance.content.hide().html(_content).fadeIn();
 		});
 	}
 	

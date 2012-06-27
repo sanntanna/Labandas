@@ -1,11 +1,12 @@
 {% extends "includes/wrapper.html" %}
+{% load staticoptimizer %}
 
 {% block css %}
-	<link rel="stylesheet" href="/s/css/src/home.css">
+	{% css "css/src/home.css" %}
 {% endblock %}
 
 {% block js %}
-	<script src="/s/js/ui/home.js"></script>
+	{% js "js/src/ui/home.js" %}
 {% endblock %}
 
 {% block content %}
