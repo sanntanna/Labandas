@@ -1,4 +1,4 @@
-{% load filespackage %}
+{% load staticoptimizer %}
 <!doctype html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -17,8 +17,8 @@
 	
 	<link rel="shortcut icon" href="/favicon.ico">
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	{% css "css/lb.common.css" %}
 	
-	<link rel="stylesheet" href="/s/{% package "css/lb.common.css" %}">
 	{% block css %}{% endblock %}
 	
 	<script src="/s/js/libs/modernizr-1.7.min.js"></script>
@@ -99,7 +99,7 @@
 	<script> DD_belatedPNG.fix('img, .png_bg');</script>
 	<![endif]-->
 	
-	<script src="/s/{% package "js/lb.common.js" %}"></script>
+	{% js "js/lb.common.js" %}"
 	
 	{% block js %}{% endblock %}
 	<script>
