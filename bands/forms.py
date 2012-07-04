@@ -5,11 +5,10 @@ from django.contrib.auth.models import User
 from equipaments.models import EquipamentType
 
 class ExpressRegistrationForm(forms.Form): 
-    name = forms.CharField(max_length=100, label="Nome")
-    email = forms.EmailField(label="Email") 
-    password = forms.CharField(max_length=100, label="Senha",   widget=forms.PasswordInput())
+    name = forms.CharField(max_length=100, label="", widget=forms.TextInput(attrs={'placeholder':'Nome', 'autocomplete':'off'}))
+    email = forms.EmailField(label="", widget=forms.TextInput(attrs={'placeholder':'Email', 'autocomplete':'off'})) 
+    password = forms.CharField(max_length=100, label="", widget=forms.PasswordInput(attrs={'placeholder':'Senha', 'autocomplete':'off'}))
     instruments = forms.ModelMultipleChoiceField(queryset=EquipamentType.objects.all(), label="", widget=forms.CheckboxSelectMultiple)
-    #accept = forms.BooleanField(label="Aceito os termos de uso e quero me cadastrar")
     
     def save(self):
         user = User()

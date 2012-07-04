@@ -19,7 +19,11 @@
 		<h3>Cadastre-se</h3>
 		
 		<form action="/musico/cadastrar" method="post" id="subscribe-form" class="ajax">{% csrf_token %}
-			{{ form.as_p }}
+			{% for field in form %}
+		        <div>
+		            {{ field }}
+		        </div>
+		    {% endfor %}
 			<input type="submit" value="Cadastrar" />
 		</form>
 	</article>
