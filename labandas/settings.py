@@ -1,5 +1,8 @@
 # Django settings for labandas project.
+import os
 import sys
+
+PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -52,7 +55,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/home/renato/Code/python/Labandas/static/'
+MEDIA_ROOT = ''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -71,8 +74,9 @@ STATIC_URL = '/s/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    '/home/renato/Code/python/Labandas/static/',
+    os.path.join(PROJECT_DIR, 'static'),
 )
+
 
 
 # List of finder classes that know how to find static files in
@@ -113,7 +117,7 @@ ROOT_URLCONF = 'labandas.urls'
 WSGI_APPLICATION = 'labandas.wsgi.application'
 
 TEMPLATE_DIRS = (
-    "/home/renato/Code/python/Labandas/templates",
+    os.path.join(PROJECT_DIR, 'templates'),
 )
 
 INSTALLED_APPS = (
