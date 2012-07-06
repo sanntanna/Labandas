@@ -4,20 +4,19 @@ from django import forms
 from django.contrib.auth.models import User
 from equipaments.models import EquipamentType
 
-class ExpressRegistrationForm(forms.Form): 
-    name = forms.CharField(max_length=100, label="", widget=forms.TextInput(attrs={'placeholder':'Nome', 'autocomplete':'off'}))
+class ExpressRegistrationForm(forms.ModelForm): 
+    first_name = forms.CharField(max_length=100, label="", widget=forms.TextInput(attrs={'placeholder':'Nome', 'autocomplete':'off'}))
     email = forms.EmailField(label="", widget=forms.TextInput(attrs={'placeholder':'Email', 'autocomplete':'off'})) 
     password = forms.CharField(max_length=100, label="", widget=forms.PasswordInput(attrs={'placeholder':'Senha', 'autocomplete':'off'}))
-    instruments = forms.ModelMultipleChoiceField(queryset=EquipamentType.objects.all(), label="", widget=forms.CheckboxSelectMultiple)
     
-    def save(self):
-        user = User()
-        user.first_name = self.cleaned_data['name']
-        user.username = self.cleaned_data['email']
-        user.email = self.cleaned_data['email']
-        user.set_password(self.cleaned_data['password'])
-        user.save()
-        user.get_profile().type_instruments_play = self.cleaned_data['instruments']
+    def save(self, *args, **kwargs):
+        self.instance.username = self.instance.email
+        self.instance.set_password(self.instance.password)
+        super(ExpressRegistrationForm, self).save(*args, **kwargs)
+    
+    class Meta:
+        model = User
+        fields = ('first_name', 'email', 'password')
 
 
 class BandForm(forms.ModelForm):
