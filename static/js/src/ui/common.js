@@ -3,6 +3,7 @@
 	this.init = function(){
 		setupAjax();
 		setupLogin();
+		setupHideParent();
 		setupLightboxes();
 	};
 	
@@ -50,6 +51,14 @@
 			if(data.success) {
 				location.reload()
 			}
+		});
+	}
+	
+	function setupHideParent(){
+		$(document).delegate('.hide-parent', 'click', function(){
+			var elm = $(this);
+			
+			elm.parent()[elm.attr('data-effect') || 'hide']();
 		});
 	}
 	

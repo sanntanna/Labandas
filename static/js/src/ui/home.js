@@ -3,7 +3,7 @@
 	
 	this.domLoaded = function(){
 		setupSubscribeForm();
-		setupCepUpdate();
+		setupInlineEdition();
 		setupSolicitations();
 	};
 	
@@ -16,11 +16,9 @@
 		});
 	}
 	
-	function setupCepUpdate(){
-		$("#save-cep").click(function(){
-			$.get('/musico/atualizar-endereco', {'cep': $("#cep").val()}, function(){
-				new lb.message('Seu cep foi atualizado', lb.message.SUCCESS);
-			});
+	function setupInlineEdition(){
+		$("form.inline-form input").change(function(){
+			$(this).closest('form').trigger('submit');
 		});
 	}
 	

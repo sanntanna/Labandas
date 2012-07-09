@@ -18,7 +18,6 @@ class ExpressRegistrationForm(forms.ModelForm):
         model = User
         fields = ('first_name', 'email', 'password')
 
-
 class BandForm(forms.ModelForm):
     name = forms.CharField(max_length=100, label="Nome")
     musical_styles = forms.ModelMultipleChoiceField(queryset=MusicalStyle.objects.all(), label="A banda toca", widget=forms.CheckboxSelectMultiple)

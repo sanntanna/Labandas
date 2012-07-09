@@ -1,16 +1,65 @@
 {% extends "includes/wrapper.html" %}
+{% load staticoptimizer %}
 
 {% block css %}
-	<link rel="stylesheet" href="/s/css/home.css">
+	{% css "css/src/home.css" %}
 {% endblock %}
 
 {% block js %}
-	<script src="/s/js/ui/home.js"></script>
+	{% js "js/src/ui/home.js" %}
 {% endblock %}
 
 
 {% block content %}
-	<h3>Bem vindo!</h3>
+	
+	<div class="manager-pannel">
+		<h3>Fale mais sobre você:</h3>
+		<p>Quanto mais informações você preencher, mais chances você tem de achar sua banda:</p>
+		
+		<section id="styles">
+			Estilos que você gosta:
+			<form action="/musico/atualizar/musical_styles" method="post" class="ajax inline-form">
+				{% for style in musical_styles %}
+					<label>
+						<input type="checkbox" value="{{ style.id }}" name="musical_styles" /> {{ style.name }}
+					</label>
+				{% endfor %}
+			</form>
+		</section>
+		
+		<section id="instruments">
+			Instrumentos que você toca:
+			<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">
+				{% for instrument in equipament_types %}
+					<label>
+						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" /> {{ instrument.name }}
+					</label>
+				{% endfor %}
+			</form>
+		</section>
+		
+		<section id="address" class="clearfix">
+			Sua localidade:
+			<form action="/musico/atualizar/address" method="post" class="ajax inline-form">
+				<div class="fl">
+					<label>Cep:</label>
+					<input type="text" name="cep" id="cep" />
+				</div>
+				<div class="fl">
+					<label>Rua:</label>
+					<input type="text" name="street" id="street" />
+					
+					<label>Cidade:</label>
+					<input type="text" name="street" id="street" />
+					
+					<label>Estado:</label>
+					<input type="text" name="street" id="street" />
+				</div>
+			</form>
+		</section>
+		
+		<div class="hide-parent" data-effect="slideUp">fechar</div>
+	</div>
 	<div class="message">
 		
 		{% for solicitation in band_solicitations %}
@@ -53,18 +102,6 @@
 				
 				<a href="/banda/cadastrar">[+] Cadastrar nova banda</a>
 			</div>
-		{% endif %}
-		
-		{% if user.get_profile.cep == None %}
-		<p>
-			Informe seu cep e encontre músicos e bandas próximos de você: <br>
-			<input type="text" id="cep" placeholder="cep">
-			<input type="button" value="ok" id="save-cep" />
-		</p>
-		{% else %}
-			<p>
-				Mantenha suas <a href="musico/editar">informações pessoais atualizadas.</a>
-			</p>
 		{% endif %}
 	</div>
 {% endblock %}

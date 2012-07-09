@@ -17,14 +17,23 @@ class MusicalStyle(models.Model):
     def __unicode__(self):
         return self.name
 
+class MediaField(models.ManyToManyField):
+    
+    def profile(self):
+        return ""
+
 class Musician(models.Model):
+    about = models.CharField(max_length=1000)
     url = models.SlugField(max_length=50)
+    
     equipaments = models.ManyToManyField(Equipament)
     type_instruments_play = models.ManyToManyField(EquipamentType, null=True, blank=True)
     musical_styles = models.ManyToManyField(MusicalStyle, null=True, blank=True)
-    medias = models.ManyToManyField(Media, null=True, blank=True)
-    user = models.OneToOneField(User)
+    
+    medias = MediaField(Media, null=True, blank=True)
     _address = models.OneToOneField(Address, related_name="musician", null=True, blank=True)
+    
+    user = models.OneToOneField(User)
     
     def name(self):
         return self.user.get_full_name()
@@ -79,6 +88,7 @@ class Musician(models.Model):
         return self.name()
 
 class Band(models.Model):
+    about = models.CharField(max_length=1000)
     name = models.CharField(max_length=50)
     registration_date = models.DateTimeField('Registration date')
     musical_styles = models.ManyToManyField(MusicalStyle)
@@ -120,7 +130,7 @@ class Band(models.Model):
         
     def __unicode__(self):
         return self.name
-    
+
 class MusicianBand(models.Model):
     band = models.ForeignKey(Band, related_name="all_musicians")
     musician = models.ForeignKey(Musician, related_name="all_bands")

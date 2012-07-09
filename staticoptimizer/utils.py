@@ -11,11 +11,11 @@ logger = logging.getLogger("labandas")
 class FileOptimizer(object):
     root_path = settings.STATICFILES_DIRS[0] 
     
-    input_file_path = None
-    output_file_path = None
-    file_type = None
-    
-    apply_less = False
+    def __init__(self):
+        self.input_file_path = None
+        self.output_file_path = None
+        self.file_type = None
+        self.apply_less = False
         
     def load(self, input_path):
         self.file_type = os.path.splitext(input_path)[1].lstrip(".")
@@ -30,9 +30,6 @@ class FileOptimizer(object):
         self.__create_dirs()
             
         self.__build_file()
-        
-        if self.apply_less and self.file_type == "css":
-            self.__build_less()
         
         self.__delete_old_files()
         
@@ -68,25 +65,27 @@ class FileOptimizer(object):
         
         for file_name in file_names:
             file_name = file_name.rstrip("\n")
-            current_file = open(os.path.join(base_directory, file_name), "r")
+            file_fullpath = os.path.join(base_directory, file_name)
+            
+            current_file = open(file_fullpath, "r")
             output_file.write("\n\n/* -- %s -- */\n" % file_name)
-            output_file.write(current_file.read())
+            
+            content = self.__lessify(file_fullpath) if self.apply_less else current_file.read() 
+            output_file.write(content)
         
         output_file.close()
     
     
-    def __build_less(self):
-        command = u"%s %s" % (settings.LESS_EXECUTABLE, self.output_file_path)
+    def __lessify(self, file_path):
+        command = u"%s %s" % (settings.LESS_EXECUTABLE, file_path)
         p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         out, errors = p.communicate()
         
         if out:
-            compiled_file = open(self.output_file_path, "w+")
-            compiled_file.write(out)
-            compiled_file.close()
-            
+            return out
         elif errors:
             logger.error(errors)
+            return None
     
     def __get_output_file(self, input_file):
         filename = os.path.split(input_file)[-1]

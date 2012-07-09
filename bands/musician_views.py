@@ -23,13 +23,12 @@ def subscribe_musician(request):
     login(request, user)
     return JSONResponse({'success': True, 'user': user})
 
+@onlypost
 @onlyajax
-def update_cep(request):
-    if request.GET["cep"] == "":
-        return JSONResponse({ "success": False })
-    
-    musician = request.user.get_profile() 
-    musician.address.cep = request.GET["cep"]
+def update_field(request, field):
+    updated_field = request.POST.getlist(field)
+    musician = request.user.get_profile()
+    setattr(musician, field, updated_field)
     musician.save()
     return JSONResponse({ "success": True })
 

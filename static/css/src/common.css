@@ -1,3 +1,6 @@
+@import "_colors.less";
+@import "_utils.less";
+
 /*  HTML5 Boilerplate  */
 
 html, body, div, span, object, iframe,
@@ -101,31 +104,15 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
   h2, h3{ page-break-after: avoid; }
 }
 
-
-/* ### global variables #### */
-
-@defaultgreen:#8bbd0c;
-
-
-/* ### /global variables #### */
-
-.transition(@prop){
-	-webkit-transition:@prop;
-	   -moz-transition:@prop;
-	     -o-transition:@prop;
-			transition:@prop; 
-}
-
-
-::-moz-selection{ background:@defaultgreen; color:#fff; text-shadow: none; }
-::selection { background:@defaultgreen; color:#fff; text-shadow: none; }
+::-moz-selection{ background:@green; color:#fff; text-shadow: none; }
+::selection { background:@green; color:#fff; text-shadow: none; }
 
 body{font-family:Helvetica, Helvetica Neue, Arial, sans-serif;}
 
 nav ul li{float:left;}
 
 a{
-	color:@defaultgreen;
+	color:@green;
 	text-decoration:none;
 }
 a:hover { 
@@ -140,7 +127,7 @@ a:hover {
 
 
 #header-container{
-	background:url(https://lasbandas.s3.amazonaws.com/site/sprite-bgs.png) #323232 0 -620px repeat-x;
+	background:url(https://lasbandas.s3.amazonaws.com/site/sprite-bgs.png) @darkgray 0 -620px repeat-x;
 	height:54px;
 	-webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 1);
 			box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 1);
@@ -166,7 +153,7 @@ a:hover {
 
 #main-search-submit{
 	height:@searchHeight;
-	background:@defaultgreen;
+	background:@green;
 	color:#fff;
 	border:none;
 	border-radius: 0 3px 3px 0;
@@ -176,7 +163,7 @@ a:hover {
 #user-menu{
 	li{margin:0px 15px 0 0;line-height:54px;}
 	a{color:#fff;font-weight:bold;}
-	a:hover{color:@defaultgreen;}
+	a:hover{color:@green;}
 }
 
 #content{
