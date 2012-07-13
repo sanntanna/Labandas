@@ -107,7 +107,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 ::-moz-selection{ background:@green; color:#fff; text-shadow: none; }
 ::selection { background:@green; color:#fff; text-shadow: none; }
 
-body, input, textarea{font:14px 'Dosis',Helvetica,Arial,sans-serif;}
+body{font:12px Helvetica,Arial,sans-serif;}
 
 nav ul li{float:left;}
 
@@ -117,12 +117,16 @@ a{
 }
 a:hover { 
 	color: #777;
-	.transition(color .2s linear)
+	.transition(color .2s linear);
 }
 
 .wrapper{
 	margin:auto;
 	width:960px;
+}
+
+h1,h2{
+	font-family: 'Dosis';
 }
 
 h1{

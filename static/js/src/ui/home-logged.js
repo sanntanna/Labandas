@@ -7,9 +7,34 @@
 	};
 	
 	function setupInlineEdition(){
+		$("#main.can-edit .editable").click(function(){
+			var $t = $(this);
+
+			if($t.find('input').length){return;}
+
+			this.originalContent = $.trim($t.html());
+			var ipt = input($t);
+			$t.html("").append(ipt);
+			ipt[0].focus();
+		})
+		.keyup(function(e){
+			if(e.keyCode == 13){ $(e.target).trigger('enterpress'); }
+		});
+
 		$("form.inline-form input").change(function(){
 			$(this).closest('form').trigger('submit');
 		});
+
+		function input($elm, type){
+			return $('<input type="text" />')
+					.attr('name', $elm.attr('data-field'))
+					.css('width', $elm.width())
+					.val($elm[0].originalContent)
+					.bind('blur enterpress', function(){
+						var $parent = $(this).parent();
+						$parent.html(this.value != "" ? this.value : $parent[0].originalContent );
+					});
+		}
 	}
 	
 	function setupSolicitations(){

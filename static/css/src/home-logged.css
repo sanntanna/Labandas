@@ -48,6 +48,7 @@
 
 .can-edit .editable{
 	border:1px solid #fff;
+	cursor:pointer;
 	.transition(.5s border);
 	&:hover{
 		border:1px solid lighten(@darkgray, 20%);
