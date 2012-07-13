@@ -2,17 +2,28 @@
 {% load staticoptimizer %}
 
 {% block css %}
-	{% css "css/src/home.css" %}
+	{% css "css/src/home-logged.css" %}
 {% endblock %}
 
 {% block js %}
-	{% js "js/src/ui/home.js" %}
+	{% js "js/src/ui/home-logged.js" %}
 {% endblock %}
 
+{% block mainclass %}can-edit{% endblock %}
 
 {% block content %}
+	<div id="cover-photo"></div>
+	<div id="page-header" class="clearfix">
+		<div id="profile-photo" class="fl"></div>
+		<h1 class="fl editable" data-field="user.first_name">
+			{{ user.get_full_name }}
+		</h1>
+	</div>
+	
 	
 	<div class="manager-pannel">
+		{% if not user.get_profile.musical_styles.all.count and not user.get_profile.equipament_types.all.count %}
+		
 		<h3>Fale mais sobre você:</h3>
 		<p>Quanto mais informações você preencher, mais chances você tem de achar sua banda:</p>
 		
@@ -57,11 +68,11 @@
 				</div>
 			</form>
 		</section>
-		
+		{% endif %}
 		<div class="hide-parent" data-effect="slideUp">fechar</div>
 	</div>
+	
 	<div class="message">
-		
 		{% for solicitation in band_solicitations %}
 			<div class="box solicitation">
 				<p>
