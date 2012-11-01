@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'bands',
     'solicitations',
     'announcements',
+    'precadastro',
 )
 
 # A sample logging configuration. The only tangible logging

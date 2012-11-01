@@ -15,7 +15,7 @@ def onlyajax(func):
 def onlypost(func):
     def new(request, *args, **kwargs):
         if request.method != 'POST':
-            logger.warn("[url:%s] Requisicao invalida, deveria ser ajax" % request.path)
+            logger.warn("[url:%s] Requisicao invalida, deveria ser post" % request.path)
             return HttpResponseNotFound()
         return func(request, *args, **kwargs)
     return new
