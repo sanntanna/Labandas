@@ -125,7 +125,7 @@ a:hover {
 	width:960px;
 }
 
-h1,h2{
+h1,h2,h3{
 	font-family: 'Dosis';
 }
 
@@ -139,7 +139,13 @@ h1{
 	height:54px;
 }
 
-#header-logo{width:150px;}
+#header-logo{
+	width:144px;
+	height:42px;
+	text-indent: -9999px;
+	margin:5px 0 0 0 ;
+	background:url(https://lasbandas.s3.amazonaws.com/site/logo.png) no-repeat;
+}
 
 #main-search{
 	width:600px;

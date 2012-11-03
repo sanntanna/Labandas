@@ -27,23 +27,38 @@
 
 <div id="header-container">
 	<header class="wrapper">
-		<h1 id="header-logo" class="fl">&nbsp;</h1>
+		<h1 id="header-logo" class="fl">LasBandas</h1>
 	</header>
 </div>
 
-<div id="main" class="wrapper clearfix {% block mainclass %}{% endblock %}">
-	<section id="content">
+<div id="main" class="wrapper clearfix">
+	<section id="content" class="lp-content">
+		<div class="fl what-is">
+			<ul class="what-is-lb">
+				<li>Cadastre-se e seja o primeiro a conheçer a primeira rede social de musicos do Brasil</li>
+				<li>Encontre musicos próximos de você</li>
+				<li>Crie seu perfil e de sua banda</li>
+			</ul>
+		</div>
 
-		{% if success %}
-			sucesso!
-		{% else %}
-		<form method="post" action="/precadastro/salvar">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<input type="submit" value="salvar" />
-		</form>
-		{% endif %}
+		<div class="fl subscribe">
+			<div id="main-message">
+				<h2>Procura ou quer formar uma banda?</h2>
+				<h3>Cadastre-se no maior site de bandas do Brasil</h3>
+			</div>
 
+			{% if success %}
+				sucesso!
+			{% else %}
+				<div id="subscription-box">
+					<form method="post" action="/precadastro/salvar">
+						{% csrf_token %}
+						{{ form.as_p }}
+						<input type="submit" value="CADASTRAR" />
+					</form>
+				</div>
+			{% endif %}
+		</div>
 	</section>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
