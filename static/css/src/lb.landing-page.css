@@ -18,9 +18,14 @@ body{
 
 	.fl.what-is{
 		width:550px;
+		height:650px;
 
 		.what-is-lb{
-			margin-top:400px;
+			margin-top:430px;
+			li{
+				font:18px 'Dosis';
+				list-style-image: url(https://lasbandas.s3.amazonaws.com/site/lp/marker.png);
+			}
 		}
 	}
 
@@ -49,9 +54,16 @@ body{
 	background: #f0f0f0;
 	border:1px solid #9d9f94;
 	border-radius:10px;
-	padding:20px;
+	padding:35px 20px 20px 20px;
 	font-size:17px;
 	text-transform: uppercase;
+	position:relative;
+
+	.stash-suscribe{
+		top:-17px;
+		left:-56px;
+		position: absolute;
+	}
 
 	form{
 		label{

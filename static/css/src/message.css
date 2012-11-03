@@ -35,6 +35,8 @@
 	float:left;
 }
 
+.message_box .message_inner .text{float:left;}
+
 .message_box.success .message_inner .ico {
 	background-position: 0 0;
 }

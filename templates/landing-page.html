@@ -51,11 +51,15 @@
 				sucesso!
 			{% else %}
 				<div id="subscription-box">
-					<form method="post" action="/precadastro/salvar">
+					<img src="https://lasbandas.s3.amazonaws.com/site/lp/cadastre-se.png" alt="Cadastre-se" class="stash-suscribe" />
+					<form method="post" action="/precadastro/salvar" class="ajax" id="lp-form">
 						{% csrf_token %}
 						{{ form.as_p }}
 						<input type="submit" value="CADASTRAR" />
 					</form>
+					<h3 id="success-message" class="hidden">
+						Obrigado, suas informações foram salvas<br/> Em breve entraremos em contato
+					</h3>
 				</div>
 			{% endif %}
 		</div>
@@ -68,7 +72,8 @@
 <script> DD_belatedPNG.fix('img, .png_bg');</script>
 <![endif]-->
 
-{% js "js/lb.common.js" %}"
+{% js "js/lb.common.js" %}
+{% js "js/src/ui/landingpage.js" %}
 
 {% block js %}{% endblock %}
 <script>

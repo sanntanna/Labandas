@@ -8,6 +8,8 @@ from httpmethod.decorators import onlyajax, onlypost
 from forms import RecordForm
 from models import Record
 
+from jsonui.response import JSONResponse
+
 def landing_page(request):
     t = loader.get_template('landing-page.html')
     c = RequestContext(request, {
@@ -23,7 +25,7 @@ def landing_page_submit(request):
     form = RecordForm(request.POST)
 
     if not form.is_valid():
-        return landing_page(request)
+        return JSONResponse({'success': False, 'errors': form.errors})
 
     form.instance.save()
 
@@ -31,4 +33,5 @@ def landing_page_submit(request):
     c = RequestContext(request, {
         'success': True,
     })
-    return HttpResponse(t.render(c)) 
+
+    return JSONResponse({'success': True})

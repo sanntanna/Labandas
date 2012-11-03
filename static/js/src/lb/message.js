@@ -9,7 +9,7 @@ lb.message = function(text, type, timeInSecconds){
 	}
 	
 	function createBox(){
-		return $('<div class="message_box"><div class="message_inner"><span class="ico">&nbsp;</span><div class="text"></div></div><span class="close">X</span></div>');
+		return $('<div class="message_box"><div class="message_inner clearfix"><span class="ico">&nbsp;</span><div class="text"></div></div><span class="close">X</span></div>');
 	}
 	
 	function showBox(message, type, timeInSecconds){
