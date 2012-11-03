@@ -1,36 +1,54 @@
+
 @import "_utils.less";
 
 body{
 	background:#c8cccb;
 }
 
+#header-container {
+	background: none;
+	height: 0;
+}
+
+#logo-big{
+	background: url("https://lasbandas.s3.amazonaws.com/site/lp/logo-lb-big.png") no-repeat scroll 0 0 transparent;
+    height: 76px;
+    left: 225px;
+    position: absolute;
+    text-indent: -9999px;
+    top: 20px;
+    width: 223px;
+}
+
 #main{
-	background:#84a904;
+	background:url(https://lasbandas.s3.amazonaws.com/site/lp/header-landing-page.jpg) no-repeat center transparent;
 	width:100%;
-	height:400px;
+	height:445px;
 }
 
 #content.lp-content{
 	height:400px;
 	width:960px;
-	margin:auto;
-	background: url(https://lasbandas.s3.amazonaws.com/site/lp/silhueta-banda.png) no-repeat bottom left;
+	margin:45px auto auto;
+	background: url(https://lasbandas.s3.amazonaws.com/site/lp/silhueta.png) no-repeat bottom left;
 
 	.fl.what-is{
-		width:550px;
+		width:470px;
 		height:650px;
 
 		.what-is-lb{
 			margin-top:430px;
+			width:360px;
 			li{
-				font:18px 'Dosis';
+				font:24px 'Dosis';
 				list-style-image: url(https://lasbandas.s3.amazonaws.com/site/lp/marker.png);
+				margin-bottom: 20px;
 			}
 		}
 	}
 
 	.fl.subscribe{
-		width:400px;
+		width:490px;
 	}
 }
 
@@ -38,26 +56,33 @@ body{
 	padding:40px 0;
 
 	h2{
-		color:#fff;
-		font-size:45px;
-		line-height:45px;
-		text-shadow: 2px 5px 2px rgba(0, 0, 0, 0.5);
+		color: #FFFFFF;
+	    font-size: 58px;
+	    letter-spacing: -2px;
+	    line-height: 51px;
+	    text-shadow: 2px 5px 2px rgba(0, 0, 0, 0.5);
 	}
 
 	h3{
-		color:#000;
-		font-size:30px;
+		color: #ffb000;
+	    font-size: 43px;
+	    font-weight: normal;
+	    letter-spacing: -3px;
+	    line-height: 41px;
+	    padding-top: 10px;
+	    width: 70%;
 	}
 }
 
 #subscription-box{
-	background: #f0f0f0;
-	border:1px solid #9d9f94;
-	border-radius:10px;
-	padding:35px 20px 20px 20px;
-	font-size:17px;
-	text-transform: uppercase;
-	position:relative;
+	background: none repeat scroll 0 0 #F0F0F0;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 17px;
+    padding: 50px 40px 40px;
+    position: relative;
+    text-transform: uppercase;
+    width: 360px;
 
 	.stash-suscribe{
 		top:-17px;
@@ -69,12 +94,14 @@ body{
 		label{
 			display:block;
 			color:#858585;
+			font-size: 13px;
+			padding: 5px 0 5px 5px;
 		}
 
 		input[type=text], select{ 
 			margin-bottom:15px; 
 			width:97%;
-			border:1px solid #9d9f94;
+			border:1px solid #e0e0e0;
 			border-radius:3px;
 			height:30px;
 		}

@@ -6,8 +6,8 @@ class RecordForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RecordForm, self).__init__(*args, **kwargs)
-        self.fields['name'].label = "Nome"
-        self.fields['instrument'].label = "Instrumentos que toca"
+        self.fields['name'].label = "Nome Completo"
+        self.fields['instrument'].label = "Qual instrumento você toca ?"
         self.fields['uf'].label = "Estado"
 
     class Meta:
