@@ -2,7 +2,7 @@
 @import "_utils.less";
 
 body{
-	background:#c8cccb;
+	background:url(https://lasbandas.s3.amazonaws.com/site/lp/noisepattern.png) repeat 0 0 #c8cccb;
 }
 
 #logo-big{
