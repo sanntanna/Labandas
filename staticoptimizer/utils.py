@@ -9,7 +9,7 @@ import subprocess
 logger = logging.getLogger("labandas")
 
 class FileOptimizer(object):
-    root_path = settings.STATICFILES_DIRS[0] 
+    root_path = settings.STATICFILES_DIRS[0] if settings.DEBUG else settings.STATIC_ROOT
     
     def __init__(self):
         self.input_file_path = None
