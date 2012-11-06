@@ -159,11 +159,13 @@ h2{
 }
 
 #header-logo{
-	width:144px;
-	height:42px;
-	text-indent: -9999px;
-	margin:5px 0 0 0 ;
-	background:url(https://lasbandas.s3.amazonaws.com/site/logo.png) no-repeat;
+
+	#logo{
+		width:144px;
+		height:42px;
+		margin:5px 0 0 0;
+		background:url(https://lasbandas.s3.amazonaws.com/site/logo.png) no-repeat;
+	}
 }
 
 #main-search{
