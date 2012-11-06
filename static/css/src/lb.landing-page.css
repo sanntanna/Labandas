@@ -23,7 +23,7 @@ body{
 
 #content.lp-content{
 	height:400px;
-	width:960px;
+	width:960px; 
 	margin:0 auto ;
 	background: url(https://lasbandas.s3.amazonaws.com/site/lp/silhueta.png) no-repeat bottom left;
 	padding-top: 45px;
