@@ -28,7 +28,8 @@ def homeLogged(request):
     c = RequestContext(request, {
         'band_solicitations': Solicitation.objects.bands_pending(musician),
         'musical_styles': MusicalStyle.objects.all(),
-        'equipament_types': EquipamentType.objects.all()
+        'equipament_types': EquipamentType.objects.all(),
+        'musician':musician
     })
     
     return HttpResponse(t.render(c))
