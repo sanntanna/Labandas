@@ -5,7 +5,6 @@ input[type=text],input[type=password], textarea, select{
 	border:1px solid #A0A0A0;
 	border-radius:5px;
 	padding:3px;
-	height:40px;
 	font-size:15px;
 	.transition;
 }

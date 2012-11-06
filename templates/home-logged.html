@@ -12,15 +12,43 @@
 {% block mainclass %}can-edit{% endblock %}
 
 {% block content %}
-	<div id="cover-photo"></div>
-	<div id="page-header" class="clearfix">
-		<div id="profile-photo" class="fl"></div>
-		<h1 class="fl editable" data-field="user.first_name">
-			{{ user.get_full_name }}
-		</h1>
+	<div id="cover-photo">
+
+		<div id="user-header" class="clearfix">
+			<div id="profile-photo" class="fl"></div>
+			<h1 class="fl editable" data-field="user.first_name">
+				{{ user.get_full_name }}
+			</h1>
+		</div>
 	</div>
 	
+	{% if not user.get_profile.equipament_types.all.count and not user.get_profile.address.city %}
+		<div id="complete-subscription" class="clearfix">
+			<h3 class="attention">*É PRECISO COMPLETAR SEU CADASTRO</h3>
+			<div class="instruments fl">
+				<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">
+				{% for instrument in equipament_types %}
+					<label>
+						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" /> {{ instrument.name }}
+					</label>
+				{% endfor %}
+				</form>
+			</div>
+
+			<div class="personal-info fl">
+				<form action="/musico/atualizar" method="post" class="ajax inline-form">
+					<label>Data de nascimento:</label>
+					<input type="text" />
+				</form>
+				<form action="/musico/atualizar/address" method="post" class="ajax inline-form">
+					<label>Digite seu cep:</label>
+					<input type="text" name="cep" id="cep" />
+				</form>
+			</div>
+		</div>
+	{% endif %}
 	
+	<!--
 	<div class="manager-pannel">
 		{% if not user.get_profile.musical_styles.all.count and not user.get_profile.equipament_types.all.count %}
 		
@@ -71,6 +99,7 @@
 		{% endif %}
 		<div class="hide-parent" data-effect="slideUp">fechar</div>
 	</div>
+	-->
 	
 	<div class="message">
 		{% for solicitation in band_solicitations %}

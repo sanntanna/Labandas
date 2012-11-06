@@ -109,7 +109,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 
 body{
 	font:13px Helvetica,Arial,sans-serif;
-	background:url(https://lasbandas.s3.amazonaws.com/site/bg-gray.jpg) no-repeat center 54px;
+	background:@defaultgray url(https://lasbandas.s3.amazonaws.com/site/bg-gray.jpg) no-repeat center 54px;
 }
 
 nav ul li{float:left;}
