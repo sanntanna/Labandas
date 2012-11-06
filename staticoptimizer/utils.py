@@ -71,8 +71,8 @@ class FileOptimizer(object):
             output_file.write("\n\n/* -- %s -- */\n" % file_name)
             
             content = self.__lessify(file_fullpath) if self.apply_less else current_file.read() 
-            #logger.log(3, file_fullpath + "#")
-            output_file.write(content)
+            if not content is None:
+                output_file.write(content)
         
         output_file.close()
     

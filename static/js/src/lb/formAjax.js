@@ -41,13 +41,14 @@ lb.formAjax = function(){
 	
 	function handleErrors(form, errors){
 		function label(k){
-			return ($(form[k]).prev('label').html() || k + ':');
+			var $field = $(form[k]);
+			return ($field.prev('label').html() || $field.attr('placeholder') || k) + ': ';
 		}
 		
 		var k, messages = [];
 		for(k in errors){
-			$(form[k]).addClass(FORM_ERROR_CLASS);
 			var message = form[k] ? label(k) + errors[k].join('<br>') : errors[k].join('<br>'); 
+			$(form[k]).addClass(FORM_ERROR_CLASS).attr('title', message);
 			messages.push(message);
 		}
 		
