@@ -8,13 +8,13 @@
 	
 	function setupInlineEdition(){
 		$("#main.can-edit .editable").click(function(){
-			var $t = $(this);
+			var $div = $(this);
 
-			if($t.find('input').length){return;}
+			if($div.find('input').length){return;}
 
-			this.originalContent = $.trim($t.html());
-			var ipt = input($t);
-			$t.html("").append(ipt);
+			this.originalContent = $.trim($div.html());
+			var ipt = input($div);
+			$div.html("").append(ipt);
 			ipt[0].focus();
 		})
 		.keyup(function(e){
@@ -28,12 +28,26 @@
 		function input($elm, type){
 			return $('<input type="text" />')
 					.attr('name', $elm.attr('data-field'))
-					.css('width', $elm.width())
+					.width($elm.width())
 					.val($elm[0].originalContent)
-					.bind('blur enterpress', function(){
-						var $parent = $(this).parent();
-						$parent.html(this.value != "" ? this.value : $parent[0].originalContent );
-					});
+					.bind('blur enterpress', inputBlur);
+		}
+
+		function inputBlur(e){
+			var $input = $(this),
+				$parent = $input.parent(),
+				dataField = this.name.split('.'),
+				val = this.value;
+
+			$parent.html(val != "" ? val : $parent[0].originalContent );
+
+			if(val == "" || val == $parent[0].originalContent){return;}
+			
+			var postData = {};
+			postData[dataField[1]] = val;
+			$.post('/musico/atualizar/' + dataField[0] + '/' + dataField[1], postData, function(){
+				console.log(arguments);
+			});
 		}
 	}
 	

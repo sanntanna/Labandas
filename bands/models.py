@@ -49,7 +49,7 @@ class Musician(models.Model):
     @property
     def address(self):
         if self._address is None:
-            self._address = Address.objects.create()
+            self._address = Address()
         return self._address
     
     @property

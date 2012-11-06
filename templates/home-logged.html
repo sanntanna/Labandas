@@ -42,8 +42,8 @@
 
 			<div class="personal-info fl">
 				<form action="/musico/atualizar" method="post" class="ajax inline-form">
-					<label>Data de nascimento:</label>
-					<input type="text" />
+					<label>Nome completo:</label>
+					<span class="editable" data-field="user.first_name">{{ user.get_full_name }}</span>
 				</form>
 				<form action="/musico/atualizar/address" method="post" class="ajax inline-form">
 					<label>Digite seu cep:</label>
@@ -52,60 +52,7 @@
 			</div>
 		</div>
 	{% endif %}
-	
-	<!--
-	<div class="manager-pannel">
-		{% if not user.get_profile.musical_styles.all.count and not user.get_profile.equipament_types.all.count %}
-		
-		<h3>Fale mais sobre você:</h3>
-		<p>Quanto mais informações você preencher, mais chances você tem de achar sua banda:</p>
-		
-		<section id="styles">
-			Estilos que você gosta:
-			<form action="/musico/atualizar/musical_styles" method="post" class="ajax inline-form">
-				{% for style in musical_styles %}
-					<label>
-						<input type="checkbox" value="{{ style.id }}" name="musical_styles" /> {{ style.name }}
-					</label>
-				{% endfor %}
-			</form>
-		</section>
-		
-		<section id="instruments">
-			Instrumentos que você toca:
-			<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">
-				{% for instrument in equipament_types %}
-					<label>
-						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" /> {{ instrument.name }}
-					</label>
-				{% endfor %}
-			</form>
-		</section>
-		
-		<section id="address" class="clearfix">
-			Sua localidade:
-			<form action="/musico/atualizar/address" method="post" class="ajax inline-form">
-				<div class="fl">
-					<label>Cep:</label>
-					<input type="text" name="cep" id="cep" />
-				</div>
-				<div class="fl">
-					<label>Rua:</label>
-					<input type="text" name="street" id="street" />
-					
-					<label>Cidade:</label>
-					<input type="text" name="street" id="street" />
-					
-					<label>Estado:</label>
-					<input type="text" name="street" id="street" />
-				</div>
-			</form>
-		</section>
-		{% endif %}
-		<div class="hide-parent" data-effect="slideUp">fechar</div>
-	</div>
-	-->
-	
+
 	<div class="message">
 		{% for solicitation in band_solicitations %}
 			<div class="box solicitation">

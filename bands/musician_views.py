@@ -28,8 +28,24 @@ def subscribe_musician(request):
 def update_field(request, field):
     updated_field = request.POST.getlist(field)
     musician = request.user.get_profile()
+
     setattr(musician, field, updated_field)
+
     musician.save()
+    return JSONResponse({ "success": True })
+
+@onlypost
+@onlyajax
+def update_obj_field(request, obj, attr):
+    updated_attr = request.POST.get(attr)
+
+    musician = request.user.get_profile()
+
+    musician_obj = getattr(musician, obj)
+    
+    setattr(musician_obj, attr, updated_attr)
+    musician_obj.save()
+    
     return JSONResponse({ "success": True })
 
 def edit_musician(request):
