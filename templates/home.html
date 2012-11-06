@@ -11,12 +11,13 @@
 
 {% block content %}
 	<article>
-		<strong>Você é musico?</strong>
+		&nbsp;
+		<!--<strong>Você é musico?</strong>
 		<span class="color-higlight">Procura ou quer formar uma banda </span>
-		<p>então conheça o melhor site de bandas e músicos do brasil!</p>
+		<p>então conheça o melhor site de bandas e músicos do brasil!</p> -->
 	</article>
-	<article>
-		<h3>Cadastre-se</h3>
+	<article id="subscription">
+		<h2 class="white">Cadastre-se</h2>
 		
 		<form action="/musico/cadastrar" method="post" id="subscribe-form" class="ajax">{% csrf_token %}
 			{% for field in form %}
@@ -24,7 +25,7 @@
 		            {{ field }}
 		        </div>
 		    {% endfor %}
-			<input type="submit" value="Cadastrar" />
+			<input type="submit" value="Cadastrar" class="btn fr" />
 		</form>
 	</article>
 {% endblock %}
