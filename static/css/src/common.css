@@ -107,7 +107,10 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 ::-moz-selection{ background:@green; color:#fff; text-shadow: none; }
 ::selection { background:@green; color:#fff; text-shadow: none; }
 
-body{font:12px Helvetica,Arial,sans-serif;}
+body{
+	font:12px Helvetica,Arial,sans-serif;
+	background:url(https://lasbandas.s3.amazonaws.com/site/bg-gray.jpg) no-repeat center 54px;
+}
 
 nav ul li{float:left;}
 
