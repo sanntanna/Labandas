@@ -1,4 +1,5 @@
 #coding=ISO-8859-1
+from copy import copy
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
@@ -49,7 +50,7 @@ class Musician(models.Model):
     @property
     def address(self):
         if self._address is None:
-            self._address = Address.objects.create()
+            self._address = Address()
         return self._address
     
     @property
@@ -80,6 +81,13 @@ class Musician(models.Model):
 
         if not self._address is None:
             self._address.fill_by_cep()
+            
+            if self._address.id is None:
+                addr_temp = copy(self._address)
+                self._address = Address.objects.create()
+                addr_temp.id = self._address.id
+                self._address = addr_temp
+
             self._address.save()
 
         super(Musician, self).save(*args, **kwargs)

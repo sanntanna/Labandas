@@ -8,16 +8,15 @@
 	
 	function setupInlineEdition(){
 		$("#main.can-edit .editable").click(function(){
-			var $t = $(this);
+			var $div = $(this);
 
-			if($t.find('input').length){return;}
+			if($div.find('input').length){return;}
 
-			this.originalContent = $.trim($t.html());
-			var ipt = input($t);
-			$t.html("").append(ipt);
+			this.originalContent = $.trim($div.html());
+			var ipt = input($div);
+			$div.html("").append(ipt);
 			ipt[0].focus();
-		})
-		.keyup(function(e){
+		}).keyup(function(e){
 			if(e.keyCode == 13){ $(e.target).trigger('enterpress'); }
 		});
 
@@ -25,15 +24,28 @@
 			$(this).closest('form').trigger('submit');
 		});
 
+		$(document).delegate('input.post-on-edit', 'change', function(e){
+			var dataField = this.name.split('.'),
+				val = this.value;
+
+			var postData = {};
+			postData[dataField[1]] = val;
+			$.post('/musico/atualizar/' + dataField[0] + '/' + dataField[1], postData);
+		});
+
 		function input($elm, type){
-			return $('<input type="text" />')
+			return $('<input type="text" class="post-on-edit" />')
 					.attr('name', $elm.attr('data-field'))
-					.css('width', $elm.width())
+					.width($elm.width())
 					.val($elm[0].originalContent)
-					.bind('blur enterpress', function(){
-						var $parent = $(this).parent();
-						$parent.html(this.value != "" ? this.value : $parent[0].originalContent );
-					});
+					.bind('blur enterpress', inlineInputBlur);
+		}
+
+		function inlineInputBlur(e){
+			var $parent = $(this).parent(),
+				val = this.value;
+
+			$parent.html(val != "" ? val : $parent[0].originalContent );
 		}
 	}
 	

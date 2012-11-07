@@ -12,66 +12,46 @@
 {% block mainclass %}can-edit{% endblock %}
 
 {% block content %}
-	<div id="cover-photo"></div>
-	<div id="page-header" class="clearfix">
-		<div id="profile-photo" class="fl"></div>
-		<h1 class="fl editable" data-field="user.first_name">
-			{{ user.get_full_name }}
-		</h1>
+	<div id="cover-photo">
+		<div id="user-header" class="clearfix">
+			<div id="profile-photo" class="fl"></div>
+			<h1 class="fl editable" data-field="user.first_name">
+				{{ user.get_full_name }}
+			</h1>
+		</div>
 	</div>
 	
-	
-	<div class="manager-pannel">
-		{% if not user.get_profile.musical_styles.all.count and not user.get_profile.equipament_types.all.count %}
-		
-		<h3>Fale mais sobre você:</h3>
-		<p>Quanto mais informações você preencher, mais chances você tem de achar sua banda:</p>
-		
-		<section id="styles">
-			Estilos que você gosta:
-			<form action="/musico/atualizar/musical_styles" method="post" class="ajax inline-form">
-				{% for style in musical_styles %}
-					<label>
-						<input type="checkbox" value="{{ style.id }}" name="musical_styles" /> {{ style.name }}
-					</label>
-				{% endfor %}
-			</form>
-		</section>
-		
-		<section id="instruments">
-			Instrumentos que você toca:
-			<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">
+	{% if musician.type_instruments_play.all.count = 0 or not musician.address.city %}
+		<div id="complete-subscription" class="clearfix">
+			<h3 class="attention">*É PRECISO COMPLETAR SEU CADASTRO</h3>
+			<div class="instruments fl">
+				<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">
 				{% for instrument in equipament_types %}
 					<label>
-						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" /> {{ instrument.name }}
+
+						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
+							{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
+								checked="checked"
+							{% endif %}
+						/> 
+						{{ instrument.name }}
 					</label>
 				{% endfor %}
-			</form>
-		</section>
-		
-		<section id="address" class="clearfix">
-			Sua localidade:
-			<form action="/musico/atualizar/address" method="post" class="ajax inline-form">
-				<div class="fl">
-					<label>Cep:</label>
-					<input type="text" name="cep" id="cep" />
-				</div>
-				<div class="fl">
-					<label>Rua:</label>
-					<input type="text" name="street" id="street" />
-					
-					<label>Cidade:</label>
-					<input type="text" name="street" id="street" />
-					
-					<label>Estado:</label>
-					<input type="text" name="street" id="street" />
-				</div>
-			</form>
-		</section>
-		{% endif %}
-		<div class="hide-parent" data-effect="slideUp">fechar</div>
-	</div>
-	
+				</form>
+			</div>
+
+			<div class="personal-info fl">
+			
+				<label>Nome completo:</label>
+				<input type="text" name="user.first_name" class="post-on-edit" value="{{ user.get_full_name }}" />
+				<br /><br />
+
+				<label>Digite seu cep:</label>
+				<input type="text" name="address.cep" class="post-on-edit" value="{{ musician.address.cep }}" />
+			</div>
+		</div>
+	{% endif %}
+
 	<div class="message">
 		{% for solicitation in band_solicitations %}
 			<div class="box solicitation">

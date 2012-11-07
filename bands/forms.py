@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 from equipaments.models import EquipamentType
 
 class ExpressRegistrationForm(forms.ModelForm): 
-    first_name = forms.CharField(max_length=100, label="", widget=forms.TextInput(attrs={'placeholder':'Nome', 'autocomplete':'off'}))
+    first_name = forms.CharField(max_length=100, label="", widget=forms.TextInput(attrs={'placeholder':'Nome completo', 'autocomplete':'off'}))
     email = forms.EmailField(label="", widget=forms.TextInput(attrs={'placeholder':'Email', 'autocomplete':'off'})) 
-    password = forms.CharField(max_length=100, label="", widget=forms.PasswordInput(attrs={'placeholder':'Senha', 'autocomplete':'off'}))
+    password = forms.CharField(max_length=100, label="", widget=forms.PasswordInput(attrs={'placeholder':'Crie uma senha', 'autocomplete':'off'}))
     
     def save(self, *args, **kwargs):
         self.instance.username = self.instance.email

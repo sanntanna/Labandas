@@ -1,19 +1,22 @@
+@import "_colors.less";
+@import "_utils.less";
+
 input[type=text],input[type=password], textarea, select{
 	border:1px solid #A0A0A0;
-	border-radius:3px;
+	border-radius:5px;
 	padding:3px;
+	font-size:15px;
+	.transition;
 }
 
 input:focus, textarea:focus{
 	outline:none;
-	/*border-color:#777;
-	box-shadow: 0 0 0 #000, inset 0 3px 3px #ccc;
-	-webkit-transition: all .2s linear;
-	   -moz-transition: all .2s linear;
-	     -o-transition: all .2s linear;
-			transition: all .2s linear; */ 
+	border-color:@green; 
+	.box-shadow(0px 0px 15px @green;
 }
 
 form *.error{
-	/*border-color:#f00;*/
+	border-color:#f00;
+	background: #ffeded;
+	.box-shadow(0px 0px 15px rgba(255, 83, 83, 0.72));
 }

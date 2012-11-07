@@ -1,8 +1,8 @@
-.transition(@prop){
-	-webkit-transition:@prop;
-	   -moz-transition:@prop;
-	     -o-transition:@prop;
-			transition:@prop; 
+.transition(@time: .3s, @prop:all){
+	-webkit-transition:@prop @time;
+	   -moz-transition:@prop @time;
+	     -o-transition:@prop @time;
+			transition:@prop @time; 
 }
 
 .gradient(@start, @end){
@@ -14,4 +14,10 @@
 	background: -ms-linear-gradient(top, @start 0%,@end 100%); /* IE10+ */
 	background: linear-gradient(to bottom, @start 0%,@end 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@start', endColorstr='@end',GradientType=0); /* IE6-9 */
+}
+
+.box-shadow(@props){
+	-webkit-box-shadow: @props;
+	-moz-box-shadow:    @props;
+	box-shadow:         @props;
 }
