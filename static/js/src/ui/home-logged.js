@@ -16,8 +16,7 @@
 			var ipt = input($div);
 			$div.html("").append(ipt);
 			ipt[0].focus();
-		})
-		.keyup(function(e){
+		}).keyup(function(e){
 			if(e.keyCode == 13){ $(e.target).trigger('enterpress'); }
 		});
 
@@ -25,29 +24,28 @@
 			$(this).closest('form').trigger('submit');
 		});
 
+		$(document).delegate('input.post-on-edit', 'change', function(e){
+			var dataField = this.name.split('.'),
+				val = this.value;
+
+			var postData = {};
+			postData[dataField[1]] = val;
+			$.post('/musico/atualizar/' + dataField[0] + '/' + dataField[1], postData);
+		});
+
 		function input($elm, type){
-			return $('<input type="text" />')
+			return $('<input type="text" class="post-on-edit" />')
 					.attr('name', $elm.attr('data-field'))
 					.width($elm.width())
 					.val($elm[0].originalContent)
-					.bind('blur enterpress', inputBlur);
+					.bind('blur enterpress', inlineInputBlur);
 		}
 
-		function inputBlur(e){
-			var $input = $(this),
-				$parent = $input.parent(),
-				dataField = this.name.split('.'),
+		function inlineInputBlur(e){
+			var $parent = $(this).parent(),
 				val = this.value;
 
 			$parent.html(val != "" ? val : $parent[0].originalContent );
-
-			if(val == "" || val == $parent[0].originalContent){return;}
-			
-			var postData = {};
-			postData[dataField[1]] = val;
-			$.post('/musico/atualizar/' + dataField[0] + '/' + dataField[1], postData, function(){
-				console.log(arguments);
-			});
 		}
 	}
 	

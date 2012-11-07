@@ -37,14 +37,19 @@ def update_field(request, field):
 @onlypost
 @onlyajax
 def update_obj_field(request, obj, attr):
+
     updated_attr = request.POST.get(attr)
 
     musician = request.user.get_profile()
 
     musician_obj = getattr(musician, obj)
-    
+
     setattr(musician_obj, attr, updated_attr)
-    musician_obj.save()
+
+    if musician_obj.id is None:
+        musician.save()
+    else:
+        musician_obj.save()
     
     return JSONResponse({ "success": True })
 

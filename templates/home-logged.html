@@ -41,14 +41,13 @@
 			</div>
 
 			<div class="personal-info fl">
-				<form action="/musico/atualizar" method="post" class="ajax inline-form">
-					<label>Nome completo:</label>
-					<span class="editable" data-field="user.first_name">{{ user.get_full_name }}</span>
-				</form>
-				<form action="/musico/atualizar/address" method="post" class="ajax inline-form">
-					<label>Digite seu cep:</label>
-					<input type="text" name="cep" id="cep" />
-				</form>
+			
+				<label>Nome completo:</label>
+				<input type="text" name="user.first_name" class="post-on-edit" value="{{ user.get_full_name }}" />
+				<br /><br />
+
+				<label>Digite seu cep:</label>
+				<input type="text" name="address.cep" class="post-on-edit" value="{{ musician.address.cep }}" />
 			</div>
 		</div>
 	{% endif %}

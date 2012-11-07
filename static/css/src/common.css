@@ -169,14 +169,14 @@ h2{
 }
 
 #main-search{
-	width:600px;
+	width:550px;
 	padding-top:9px;
 	
 	@search-height:36px;
 	
 	#main-search-field{
 		height:@search-height;
-		width:400px;
+		width:370px;
 		border-radius: 3px 0 0 3px;
 		font-size:15px;
 		padding:0;
