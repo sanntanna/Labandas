@@ -3,7 +3,7 @@
 
 #content article{
 	float:left;
-	width:49%;
+	padding-top:65px;
 	&#subscription{
 		width:325px;
 	}
@@ -11,15 +11,41 @@
 
 #subscription {
 	h2{
-		margin:30px 0 10px 0;
+		font-size: 30px;
+		.semibold;
 	}
+
 	input[type=text], input[type=password]{
 		width:100%;
 		margin-bottom:5px;
 		height:40px;
+		color: #969494
 	}
 
 	input[type=submit]{
 		margin-top:10px;
+	}
+}
+
+#call-to-action {
+	width: 355px;
+	padding-right: 170px;
+	color: white;
+
+	h2{
+		font-size: 40px;
+		color: #FFFFFF;
+		.semibold;
+	}
+	.higlight{
+		font-size: 38px;
+		color: #aae32e;
+		line-height: 40px;
+		.light;
+	}
+	p{
+		font-size: 20px;
+		width: 67%;
+		.light;
 	}
 }

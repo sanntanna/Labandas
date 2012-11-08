@@ -17,7 +17,7 @@
 	
 	<link rel="shortcut icon" href="/favicon.ico">
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-	<link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Dosis:200,400,500,600,700' rel='stylesheet' type='text/css'>
 
 	{% css "css/lb.common.css" %}
 	
@@ -53,11 +53,11 @@
 			</form>
 		</div>
 		
-		<nav id="user-menu" class="fl">
+		<nav id="user-menu" class="fr">
 			<ul>
 			{% if user.is_authenticated %}
 			    <li>
-			    	<strong><a href="/">Bem vindo, {{ user.first_name }}</a></strong>
+			    	<strong><a href="/" class="name-logged">{{ user.first_name }}</a></strong>
 			    </li>
 			    <li><a href="/logout">sair</a></li>
 			{% else %}
@@ -69,8 +69,8 @@
 	</header>
 </div>
 
-<div id="main" class="wrapper clearfix {% block mainclass %}{% endblock %}">
-	<section id="content">
+<div id="main" class="clearfix {% block mainclass %}{% endblock %} banner">
+	<section id="content" class="wrapper">
 		{% block content %}
 			conteudo
 		{% endblock %}
