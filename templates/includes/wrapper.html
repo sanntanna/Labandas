@@ -69,8 +69,8 @@
 	</header>
 </div>
 
-<div id="main" class="clearfix {% block mainclass %}{% endblock %} banner">
-	<section id="content" class="wrapper">
+<div id="main" class="{% block mainclass %}{% endblock %} banner">
+	<section id="content" class="wrapper clearfix">
 		{% block content %}
 			conteudo
 		{% endblock %}

@@ -24,7 +24,8 @@
 	{% if musician.type_instruments_play.all.count = 0 or not musician.address.city %}
 		<div id="complete-subscription" class="clearfix">
 			<h3 class="attention">*É PRECISO COMPLETAR SEU CADASTRO</h3>
-			<div class="instruments fl">
+			<div class="musician-info fl">
+				Instrumentos:<br />
 				<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">
 				{% for instrument in equipament_types %}
 					<label>
@@ -35,6 +36,21 @@
 							{% endif %}
 						/> 
 						{{ instrument.name }}
+					</label>
+				{% endfor %}
+				</form>
+
+				Estilos musicais:<br />
+				<form action="/musico/atualizar/musical_styles" method="post" class="ajax inline-form">
+				{% for style in musical_styles %}
+					<label>
+
+						<input type="checkbox" value="{{ style.id }}" name="musical_styles" 
+							{% if style in musician.musical_styles.all|dictsort:"id" %}
+								checked="checked"
+							{% endif %}
+						/> 
+						{{ style.name }}
 					</label>
 				{% endfor %}
 				</form>

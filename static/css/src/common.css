@@ -123,8 +123,8 @@ a:hover {
 }
 
 .banner{
-	background:@defaultgray url(https://lasbandas.s3.amazonaws.com/site/bg-gray-texture.jpg) no-repeat center ;
-	height: 370px;
+	background:@defaultgray url(https://lasbandas.s3.amazonaws.com/site/bg-gray-texture.jpg) no-repeat center top;
+	min-height: 370px;
 }
 
 .wrapper{
