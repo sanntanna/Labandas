@@ -49,3 +49,28 @@
 		.light;
 	}
 }
+
+#search-musicians {
+	background: url(https://lasbandas.s3.amazonaws.com/site/bg-search-musicians.jpg) no-repeat 0 0;
+	height: 234px;
+	margin-top: 3px;
+
+		.filters{
+			li{
+				background: url(https://lasbandas.s3.amazonaws.com/site/lb-sprite-search.png) no-repeat 0 0;
+				color: #000000;
+			    float: left;
+			    font-size: 22px;
+			    .semibold;
+			    height: 234px;
+			    line-height: 420px;
+			    list-style: none outside none;
+			    text-align: center;
+			    width: 300px;
+
+				&.musicians	{background-position: 30px 25px}
+				&.bands 	{background-position: 5px -160px}
+				&.studios	{background-position: 30px -389px}
+			}
+		}
+}

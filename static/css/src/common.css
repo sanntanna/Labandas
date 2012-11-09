@@ -108,6 +108,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 ::selection { background:@green; color:#fff; text-shadow: none; }
 
 body{
+	background: url("https://lasbandas.s3.amazonaws.com/site/lp/noisepattern.png") repeat scroll 0 0 #C8CCCB;
 	font:13px Helvetica,Arial,sans-serif;
 }
 
@@ -123,7 +124,7 @@ a:hover {
 }
 
 .banner{
-	background:@defaultgray url(https://lasbandas.s3.amazonaws.com/site/bg-gray-texture.jpg) no-repeat center top;
+	background: url(https://lasbandas.s3.amazonaws.com/site/bg-gray-texture.jpg) no-repeat center top transparent;
 	min-height: 370px;
 }
 
