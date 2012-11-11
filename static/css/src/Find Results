@@ -1,0 +1,62 @@
+Searching 246 files for "box-shadow"
+
+/Users/andersonsantana/Documents/code/python/LasBandas/static/css/src/_utils.less:
+   17  }
+   18  
+   19: .box-shadow(@props){
+   20: 	-webkit-box-shadow:@props;
+   21: 	   -moz-box-shadow:@props;
+   22: 		    box-shadow:@props;
+   23  }
+   24  
+
+/Users/andersonsantana/Documents/code/python/LasBandas/static/css/src/common.css:
+   64  button, input, select, textarea { margin: 0; }
+   65  input:valid, textarea:valid   {  }
+   66: input:invalid, textarea:invalid { border-radius: 1px; -moz-box-shadow: 0px 0px 5px red; -webkit-box-shadow: 0px 0px 5px red; box-shadow: 0px 0px 5px red; }
+   67  .no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: #f0dddd; }
+   68  
+
+/Users/andersonsantana/Documents/code/python/LasBandas/static/css/src/form.css:
+   13  	outline:none;
+   14  	border-color:@green; 
+   15: 	.box-shadow(0px 0px 15px @green);
+   16  }
+   17  
+   ..
+   19  	border-color:#f00;
+   20  	background: #ffeded;
+   21: 	.box-shadow(0px 0px 15px rgba(255, 83, 83, 0.72);
+   22  }
+
+/Users/andersonsantana/Documents/code/python/LasBandas/static/css/src/home-logged.css:
+  137  #advertising{
+  138  	width: 139px
+  139: 	.box-shadow(3px white)
+  140  }
+
+/Users/andersonsantana/Documents/code/python/LasBandas/static/pkg/css/lb.common.css-6622468e1f78.css:
+  257  textarea:invalid {
+  258    border-radius: 1px;
+  259:   -moz-box-shadow: 0px 0px 5px red;
+  260:   -webkit-box-shadow: 0px 0px 5px red;
+  261:   box-shadow: 0px 0px 5px red;
+  262  }
+  263  .no-boxshadow input:invalid,
+  ...
+  552    outline: none;
+  553    border-color: #8bbd0c;
+  554:   -webkit-box-shadow: 0px 0px 15px #8bbd0c;
+  555:   -moz-box-shadow: 0px 0px 15px #8bbd0c;
+  556:   box-shadow: 0px 0px 15px #8bbd0c;
+  557  }
+  558  form *.error {
+  559    border-color: #f00;
+  560    background: #ffeded;
+  561:   -webkit-box-shadow: 0px 0px 15px rgba(255, 83, 83, 0.72);
+  562:   -moz-box-shadow: 0px 0px 15px rgba(255, 83, 83, 0.72);
+  563:   box-shadow: 0px 0px 15px rgba(255, 83, 83, 0.72);
+  564  }
+  565  
+
+19 matches across 5 files

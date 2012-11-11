@@ -25,13 +25,16 @@
 	#profile-photo{
 		width:@fotosize;
 		height:@fotosize;
-		background:#fff url(https://lasbandas.s3.amazonaws.com/site/default-avatar.gif) no-repeat center center; 
+		background:url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 15px -205px #FFFFFF;
 		border-radius: 5px;
 	}
 	
 	h1{
-		margin:@fotosize - 30px 0 0 20px;
+		background: url("https://lasbandas.s3.amazonaws.com/site/sprite-icons.png") no-repeat scroll 0 -1px transparent;
+		margin:@fotosize - 30px 0 0 10px;
+		padding-left: 35px;
 		width:400px;
+
 	}
 } 
 
@@ -39,28 +42,113 @@
 	border-radius:4px;
 	background: @darkgray;
 	margin:20px;
-	padding:15px 30px;
+	padding:15px 0 15px 30px;
 	color:#fff;
+	width: 750px;
 
 	.attention{
-		color:#e83b59;
-		font-weight: bold;
-		font-size:20px;
+		color:#e93b58;
+		.semibold;
+		font-size:18px;
 		margin-bottom:10px;
 	}
 
 	.musician-info{
-		width:450px;
-		margin-right: 15px;
+		width:365px;
+		margin-right: 40px;
+
+			label{
+				background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-icons-instruments.png") no-repeat scroll 0 0 transparent;
+			    display: block;
+			    float: left;
+			    font-size: 11px;
+			    height: 53px;
+			    line-height: 140px;
+			    margin: 0 0 30px 7px;
+			    text-align: center;
+			    width: 53px;
+			    	&.Guitarra	 {background-position: 0 0}
+			    	&.Bateria 	 {background-position: 0 -62px;}
+			    	&.Teclado	 {background-position: 0 -123px;}
+			    	&.Saxofone	 {background-position: 0 -184px;}
+			    	&.Sanfona	 {background-position: 0 -244px;}
+			    	&.Canto 	 {background-position: 0 -306px;}
+			    	&.Cavaquinho {background-position: 0 -367px;}
+			    	&.Violoncelo {background-position: 0 -428px;}
+			    	&.Piano		 {background-position: 0 -489px;}
+			    	&.Pickup	 {background-position: 0 -550px;}
+			    	&.plus		 {background-position: 0 -611px;}
+			    	input{display: none;}
+			}
 	}
 
 	.personal-info{
-		width:400px;
+		width:300px;
+		font-size: 14px;
 
 		label{
 			color:@green;
+			line-height: 30px;
 		}
 
-		input{margin-bottom:20px;}
+		input{
+			background: none repeat scroll 0 0 #2E2E2E;
+		    border: 0 none;
+		    color: white;
+		 }
 	}
+}
+.about {
+		width: 375px;
+		margin-left: 20px;
+
+
+			textarea{
+				background: none repeat scroll 0 0 transparent;
+			    border: 0 none;
+			    min-height: 125px;
+			    overflow: hidden;
+			    width: 375px;
+			}
+}
+
+#all-media {
+	margin-right: 13px;
+		a{
+			background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 0 0 transparent;
+			width: 120px; 
+			height: 85px;
+			color: #000;
+
+				&.pictures 	{background-position: 0 -417px;}
+				&.movies	{background-position: 0 -315px;}
+				&.bands     {background-position: 0 -417px;}
+
+				.title{
+					 background: none repeat scroll 0 0 #97B62F;
+				    display: block;
+				    margin: 82px 0 0 2px;
+				    padding: 5px;
+				    width: 100px;
+				}
+		}
+		
+}
+
+.advertising{
+	background: none repeat scroll 0 0 white;
+	border-radius: 3px;
+	color: @darkgray;
+    margin-top: 20px;
+    min-height: 640px;
+    padding: 10px;
+    width: 120px;
+    .light;
+
+    	h2{
+    		background: url("https://lasbandas.s3.amazonaws.com/site/sprite-icons.png") no-repeat scroll 0 -34px transparent;
+		    font-size: 14px;
+		    padding-left: 35px;
+		    text-transform: uppercase;
+    	}
 }
