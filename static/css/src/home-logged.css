@@ -20,7 +20,13 @@
 	}
 
 	&.with_photo{
-		.change-cover-photo{opacity: 0;}
+		.change-cover-photo{
+			opacity: 0;
+			bottom: 15px;
+			right: 15px;
+			top:auto;
+			left:auto;
+		}
 
 		&:hover{
 			.change-cover-photo{opacity: 1;}

@@ -31,14 +31,39 @@ class AmazonS3(object):
 
 class ImageHandler():
     
-    def __resize_image(self, image, size):
+
+    def __resize_image(self, image, size, crop=True):
+        factor = 1
+
         clone = image.copy()
+
+        while clone.size[0]/factor > 2*size[0] and clone.size[1]*2/factor > 2*size[1]:
+            factor *=2
+
+        if factor > 1:
+            clone.thumbnail((clone.size[0]/factor, clone.size[1]/factor), Image.NEAREST)
+
+        if crop:
+            x1 = y1 = 0
+            x2, y2 = clone.size
+            wRatio = 1.0 * x2/size[0]
+            hRatio = 1.0 * y2/size[1]
+
+            if hRatio > wRatio:
+                y1 = int(y2/2-size[1]*wRatio/2)
+                y2 = int(y2/2+size[1]*wRatio/2)
+            else:
+                x1 = int(x2/2-size[0]*hRatio/2)
+                x2 = int(x2/2+size[0]*hRatio/2)
+
+            clone = clone.crop((x1,y1,x2,y2))
+
         clone.thumbnail(size, Image.ANTIALIAS)
-        
+
         file_pointer = StringIO.StringIO()
         clone.save(file_pointer, "png")
         file_pointer.seek(0)
-        
+
         return file_pointer
     
     def handle_profile_images(self, new_file):
@@ -51,5 +76,5 @@ class ImageHandler():
     def handle_cover_image(self, new_file):
         image = Image.open(new_file)
         return {
-            'default': self.__resize_image(image, (935,400)),
+            'default': self.__resize_image(image, (960,400)),
         }
