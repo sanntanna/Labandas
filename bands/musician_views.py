@@ -8,6 +8,7 @@ from django.template import loader
 from django.template.context import RequestContext
 from httpmethod.decorators import onlyajax, onlypost
 from jsonui.response import JSONResponse
+from medias.models import MusicianMedia
 
 
 @onlypost
@@ -99,8 +100,15 @@ def get_bands(request):
 def update_profile(request):
     
     if request.method == "POST":
-        request.user.get_profile().update_image(request.FILES.get('img'))
-    
+        musician = request.user.get_profile()
+
+        if musician.media is None:
+            musician.media = MusicianMedia.objects.create()
+            musician.media.musician = musician
+
+        musician.media.avatar = request.FILES.get('img')
+        musician.save()
+
     c = RequestContext(request)
     c.update(csrf(request))
     

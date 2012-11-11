@@ -8,8 +8,7 @@ from django.template.defaultfilters import slugify
 from django.utils import timezone
 from equipaments.models import Equipament, EquipamentType
 from geoapi.models import Address
-from medias.models import Media
-from medias.utils import ImageHandler, AmazonS3
+from medias.models import MusicianMedia
 
 class MusicalStyle(models.Model):
     name = models.CharField(max_length=50)
@@ -17,11 +16,6 @@ class MusicalStyle(models.Model):
     
     def __unicode__(self):
         return self.name
-
-class MediaField(models.ManyToManyField):
-    
-    def profile(self):
-        return ""
 
 class Musician(models.Model):
     about = models.CharField(max_length=1000)
@@ -31,7 +25,7 @@ class Musician(models.Model):
     type_instruments_play = models.ManyToManyField(EquipamentType, null=True, blank=True)
     musical_styles = models.ManyToManyField(MusicalStyle, null=True, blank=True)
     
-    medias = MediaField(Media, null=True, blank=True)
+    media = models.OneToOneField(MusicianMedia, related_name="musician", null=True, blank=True)
     _address = models.OneToOneField(Address, related_name="musician", null=True, blank=True)
     
     user = models.OneToOneField(User)
@@ -67,15 +61,6 @@ class Musician(models.Model):
     def encode_profile(self):
         return "/musico/%s/%d" % (self.url, self.pk)
    
-    
-    def update_image(self, uploaded_image):
-        handler = ImageHandler()
-        images = handler.handle_profile_images(uploaded_image)
-        
-        s3 = AmazonS3()
-        s3.upload_file(images['default'], '/u/%d/profile.png' % self.pk)
-        s3.upload_file(images['small'], '/u/%d/profile_small.png' % self.pk)
-    
     def save(self, *args, **kwargs):
         self.url = slugify(self.name())
 
@@ -100,7 +85,6 @@ class Band(models.Model):
     name = models.CharField(max_length=50)
     registration_date = models.DateTimeField('Registration date')
     musical_styles = models.ManyToManyField(MusicalStyle)
-    medias = models.ManyToManyField(Media)
     url = models.SlugField(max_length=50)
     
     @property

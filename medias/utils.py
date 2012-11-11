@@ -44,6 +44,6 @@ class ImageHandler():
     def handle_profile_images(self, new_file):
         image = Image.open(new_file)
         return {
-            'default': self.__resize_image(image, (250,250)),
-            'small': self.__resize_image(image, (70,70))
+            'default': self.__resize_image(image, (100,100)),
+            'small': self.__resize_image(image, (45,45))
         }

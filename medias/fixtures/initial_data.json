@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "medias.mediatype", "fields": {"name": "avatar"}}, {"pk": 2, "model": "medias.mediatype", "fields": {"name": "cover_photo"}}]
