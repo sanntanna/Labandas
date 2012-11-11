@@ -9,5 +9,6 @@ urlpatterns = patterns('bands.musician_views',
     (r'^(?P<name>[a-z-]+)/(?P<user_id>\d+)$', 'profile'),
     (r'^buscar$', 'search_musician'),
     (r'^bandas$', 'get_bands'),
-    (r'^atualizar-imagem-perfil$', 'update_profile'),
+    (r'^atualizar-imagem-perfil$', 'update_avatar'),
+    (r'^atualizar-imagem-capa$', 'update_cover_photo'),
 )

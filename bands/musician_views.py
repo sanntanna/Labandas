@@ -3,7 +3,7 @@ from bands.models import Musician
 from django.contrib.auth import authenticate, login
 from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponsePermanentRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.template import loader
 from django.template.context import RequestContext
 from httpmethod.decorators import onlyajax, onlypost
@@ -97,20 +97,28 @@ def get_bands(request):
     return JSONResponse({'success': True, 'bands':bands})
 
 
-def update_profile(request):
-    
-    if request.method == "POST":
-        musician = request.user.get_profile()
+@onlypost
+def update_avatar(request):
+    musician = request.user.get_profile()
 
-        if musician.media is None:
-            musician.media = MusicianMedia.objects.create()
-            musician.media.musician = musician
+    if musician.media is None:
+        musician.media = MusicianMedia.objects.create()
+        musician.media.musician = musician
 
-        musician.media.avatar = request.FILES.get('img')
-        musician.save()
+    musician.media.avatar = request.FILES.get('img')
+    musician.save()
 
-    c = RequestContext(request)
-    c.update(csrf(request))
-    
-    t = loader.get_template('bands/update-profile-image.html')
-    return HttpResponse(t.render(c))
+    return redirect('/')
+
+@onlypost
+def update_cover_photo(request):
+    musician = request.user.get_profile()
+
+    if musician.media is None:
+        musician.media = MusicianMedia.objects.create()
+        musician.media.musician = musician
+
+    musician.media.cover = request.FILES.get('img')
+    musician.save()
+
+    return redirect('/')

@@ -18,6 +18,7 @@ class MusicianMedia(models.Model):
     BASE_URL_USER_IMAGES = "https://lasbandas.s3.amazonaws.com/u/"
     AVATAR_IMG_NAME = "avatar.png"
     AVATAR_SMALL_IMG_NAME = "avatar-small.png"
+    COVER_IMG_NAME = "cover.png"
 
     AVATAR_TYPE = MediaType.objects.get(name="avatar")
     COVER_PHOTO_TYPE = MediaType.objects.get(name="cover_photo")
@@ -48,6 +49,25 @@ class MusicianMedia(models.Model):
         if not self.media_list.filter(media_type = AVATAR):
             return None
         return "%s%d/%S" % (self.BASE_URL_USER_IMAGES, self.musician.id, self.AVATAR_SMALL_IMG_NAME)
+
+
+    def cover():
+        def fget(self):
+            if not self.media_list.filter(media_type = self.COVER_PHOTO_TYPE):
+                return None
+            return "%s%d/%s" % (self.BASE_URL_USER_IMAGES, self.musician.id, self.COVER_IMG_NAME)
+
+        def fset(self, uploaded_image):
+            handler = ImageHandler()
+            images = handler.handle_cover_image(uploaded_image)
+            
+            s3 = AmazonS3()
+            s3.upload_file(images['default'], '/u/%d/%s' % (self.musician.id, self.COVER_IMG_NAME))
+
+            if not self.media_list.filter(media_type = self.COVER_PHOTO_TYPE):
+                self.media_list.add(Media.objects.create(media = "cover", media_type = self.COVER_PHOTO_TYPE))
+        return locals()
+    cover = property(**cover())
 
 
     def __unicode__(self):

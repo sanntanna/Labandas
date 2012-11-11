@@ -1,0 +1,5 @@
+<form enctype="multipart/form-data" action="/musico/atualizar-imagem-perfil" method="post">
+	{% csrf_token %}
+	<input type="file" name="img" />
+	<input type="submit" />
+</form>

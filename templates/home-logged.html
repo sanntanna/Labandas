@@ -12,9 +12,29 @@
 {% block mainclass %}can-edit{% endblock %}
 
 {% block content %}
-	<div id="cover-photo">
+	<div id="cover-photo"
+		{% if musician.media.cover %} class="with_photo" {% endif %} >
+
+		{% if musician.media.cover %}
+			<img src="{{musician.media.cover}}" alt="{{ musician.name }}" />
+		{% endif %}
+		<a href="/lightbox/foto-capa" class="lightbox change-cover-photo">
+			<span class="highlight">+</span> 
+
+			{% if musician.media.cover %}
+				Alterar foto da capa
+			{% else %}
+				Adicionar foto da capa
+			{% endif %}
+		</a>
+
 		<div id="user-header" class="clearfix">
-			<div id="profile-photo" class="fl"></div>
+			<div id="profile-photo" class="fl">
+				{% if musician.media.avatar %}
+				<img src="{{musician.media.avatar}}" alt="{{ musician.name }}" />
+				{% endif %}
+				<a href="/lightbox/foto-perfil" class="lightbox">Alterar foto</a>
+			</div>
 			<h1 class="fl editable" data-field="user.first_name">
 				{{ user.get_full_name }}
 			</h1>
