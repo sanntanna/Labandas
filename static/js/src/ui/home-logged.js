@@ -24,13 +24,22 @@
 			$(this).closest('form').trigger('submit');
 		});
 
-		$(document).delegate('input.post-on-edit', 'change', function(e){
+		$(document).delegate('.post-on-edit', 'change', function(e){
 			var dataField = this.name.split('.'),
 				val = this.value;
 
-			var postData = {};
-			postData[dataField[1]] = val;
-			$.post('/musico/atualizar/' + dataField[0] + '/' + dataField[1], postData);
+			var postData = {},
+				url = "";
+
+			if(dataField.length == 1){
+				postData[dataField[0]] = val;
+				url = dataField[0];
+			} else {
+				postData[dataField[1]] = val;
+				url = dataField[0] + '/' + dataField[1];
+			}
+
+			$.post('/musico/atualizar/' + url, postData);
 		});
 
 		function input($elm, type){

@@ -48,7 +48,7 @@
 			<div class="musician-info fl">
 				<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">
 				{% for instrument in equipament_types %}
-					<label class="{{ instrument.name }}">
+					<label class="{{ instrument.normalized_name }}">
 
 						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
 							{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
@@ -99,7 +99,7 @@
 
 			
 		 <div class="about fl">
-			<textarea type="text" class="post-on-edit">Fale sobre você</textarea>
+			<textarea type="text" class="post-on-edit" name="about">{% if musician.about %}{{musician.about}}{% else %}Fale sobre você{% endif %}</textarea>
 		</div>
 
 		<div id="all-media" class="fr">

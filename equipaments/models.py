@@ -1,5 +1,6 @@
 #coding=ISO-8859-1
 from django.db import models
+from django.template.defaultfilters import slugify
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -10,6 +11,11 @@ class Category(models.Model):
 class EquipamentType(models.Model):
     name = models.CharField(max_length=50)
     category = models.ForeignKey(Category)
+
+    @property
+    def normalized_name(self):
+        return slugify(self.name)
+
     def __unicode__(self):
         return self.name
 
