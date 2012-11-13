@@ -216,10 +216,19 @@
 }
 .mysound{
 	width: 370px;
-	.soundcloud{
-		background: #f78910;
-		.border-radius(7px);
-		height:170px;
-		margin-top: 10px;
-}
+		.soundcloud{
+			background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 125px -567px #F78910;
+		    .border-radius(7px);
+		    height: 170px;
+		    line-height: 235px;
+		    margin-top: 10px;
+		    padding-left: 10px;
+
+			a{
+				color: white;
+			    font-size: 20px;
+			    text-decoration: underline;
+			    width: 60px;
+			}
+		}
 }
