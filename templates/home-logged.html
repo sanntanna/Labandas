@@ -16,7 +16,7 @@
 		{% if musician.media.cover %} class="with_photo" {% endif %} >
 
 		{% if musician.media.cover %}
-			<img src="{{musician.media.cover}}" alt="{{ musician.name }}" />
+			<img src="{{musician.media.cover}}" alt="{{ musician.name }}"/>
 		{% endif %}
 		<a href="/lightbox/foto-capa" class="lightbox change-cover-photo">
 			<span class="highlight">+</span> 
@@ -31,7 +31,7 @@
 		<div id="user-header" class="clearfix">
 			<div id="profile-photo" class="fl">
 				{% if musician.media.avatar %}
-				<img src="{{musician.media.avatar}}" alt="{{ musician.name }}" />
+				<img src="{{musician.media.avatar}}" alt="{{ musician.name }}"/>
 				{% endif %}
 				<a href="/lightbox/foto-perfil" class="lightbox">Alterar foto</a>
 			</div>
@@ -42,7 +42,7 @@
 	</div>
 	
 	{% if musician.type_instruments_play.all.count = 0 or not musician.address.city %}
-	<div class="fl">
+	<div id="container" class="fl">
 		<div id="complete-subscription" class="clearfix">
 			<h3 class="attention">*É PRECISO COMPLETAR SEU CADASTRO</h3>
 			<div class="musician-info fl">
@@ -102,7 +102,7 @@
 			<textarea type="text" class="post-on-edit" name="about">{% if musician.about %}{{musician.about}}{% else %}Fale sobre você{% endif %}</textarea>
 		</div>
 
-		<div id="all-media" class="fr">
+		<div id="all-media" class="fl">
 			
 			<a href="#" class="pictures fl">
 				<span class="title">Fotos <span class="count">(68)</span></span>
@@ -115,11 +115,23 @@
 			</a>
 		</div>
 
+		<div class="fl status">
+			<h2 class="marker small">Status</h2>
+			<div class="self-assessment"></div>
+		</div>
+		<div class="fl mysound">
+			<h2 class="marker small">Meu Som</h2>
+			<div class="soundcloud"></div>
+		</div>
+
 	</div>
 
-	<div class="fr advertising">
-		<h2>Ofertas</h2>
-	</div>
+<div class="fl advertising">
+			<h2>Ofertas</h2>
+		</div>
+
+
+	
 
 
 <!-- 	<div class="message">

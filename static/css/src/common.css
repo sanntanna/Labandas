@@ -159,6 +159,7 @@ h2{
 .highlight{
 	color:@green;
 	font-weight: bold;
+	font-size: 30px;
 }
 
 #header-container{
@@ -212,6 +213,17 @@ h2{
 
 #content{
 	min-height:360px;
+}
+
+.marker {
+	background: url("https://lasbandas.s3.amazonaws.com/site/sprite-icons.png") no-repeat scroll 0 0 transparent;
+	line-height: 15px;
+    padding-left: 40px;
+    .light;
+    font-size: 22px;
+
+		&.small {background-position: 0 -34px}
+		&.big {background-position: 0 -1px}
 }
 
 #footer-container{

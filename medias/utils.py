@@ -76,5 +76,5 @@ class ImageHandler():
     def handle_cover_image(self, new_file):
         image = Image.open(new_file)
         return {
-            'default': self.__resize_image(image, (960,400)),
+            'default': self.__resize_image(image, (948,315)),
         }

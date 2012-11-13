@@ -1,19 +1,21 @@
 @import "_colors.less";
 @import "_utils.less";
 
+#container{width: 800px; padding-left: 20px;}
 #cover-photo{
 	width:100%;
 	height:370px;
-	background: #e5e5e5 url(https://lasbandas.s3.amazonaws.com/site/default-coverphoto.gif) no-repeat center 30px;
+	background: #e5e5e5 url(https://lasbandas.s3.amazonaws.com/site/default-coverphoto.gif) no-repeat center 70px;
 	position: relative;
 	text-align: center;
 	overflow: hidden;
+	padding-top: 5px;
 
 	.change-cover-photo{
 		color: @textcolor;
-		font-size: 15px;
+		font-size: 16px;
 		font-family: Dosis;
-		top:200px;
+		top:225px;
 		left:405px;
 		position: absolute;
 		.transition;
@@ -48,6 +50,7 @@
 		height:@fotosize;
 		background:url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 15px -205px #FFFFFF;
 		border-radius: 5px;
+		border: 3px solid #FFFFFF;
 		text-align: center;
 		img{
 			max-width: 90px;
@@ -79,7 +82,7 @@
 	
 	h1{
 		background: url("https://lasbandas.s3.amazonaws.com/site/sprite-icons.png") no-repeat scroll 0 -1px transparent;
-		margin:@fotosize - 30px 0 0 10px;
+		margin:@fotosize - 35px 0 0 10px;
 		padding-left: 35px;
 		width:400px;
 
@@ -89,7 +92,7 @@
 #complete-subscription{
 	border-radius:4px;
 	background: @darkgray;
-	margin:20px;
+	margin:20px 20px 20px 0;
 	padding:15px 0 15px 30px;
 	color:#fff;
 	width: 750px;
@@ -115,16 +118,16 @@
 			    margin: 0 0 30px 7px;
 			    text-align: center;
 			    width: 53px;
-			    	&.Guitarra	 {background-position: 0 0}
-			    	&.Bateria 	 {background-position: 0 -62px;}
-			    	&.Teclado	 {background-position: 0 -123px;}
-			    	&.Saxofone	 {background-position: 0 -184px;}
-			    	&.Sanfona	 {background-position: 0 -244px;}
-			    	&.Canto 	 {background-position: 0 -306px;}
-			    	&.Cavaquinho {background-position: 0 -367px;}
-			    	&.Violoncelo {background-position: 0 -428px;}
-			    	&.Piano		 {background-position: 0 -489px;}
-			    	&.Pickup	 {background-position: 0 -550px;}
+			    	&.guitarra	 {background-position: 0 0}
+			    	&.bateria 	 {background-position: 0 -62px;}
+			    	&.teclado	 {background-position: 0 -123px;}
+			    	&.saxofone	 {background-position: 0 -184px;}
+			    	&.sanfona	 {background-position: 0 -244px;}
+			    	&.voz 	 {background-position: 0 -306px;}
+			    	&.cavaquinho {background-position: 0 -367px;}
+			    	&.violoncelo {background-position: 0 -428px;}
+			    	&.piano		 {background-position: 0 -489px;}
+			    	&.pickup	 {background-position: 0 -550px;}
 			    	&.plus		 {background-position: 0 -611px;}
 			    	input{display: none;}
 			}
@@ -148,8 +151,6 @@
 }
 .about {
 		width: 375px;
-		margin-left: 20px;
-
 
 			textarea{
 				background: none repeat scroll 0 0 transparent;
@@ -161,7 +162,8 @@
 }
 
 #all-media {
-	margin-right: 13px;
+	margin-left: 52px;
+	height: 135px;
 		a{
 			background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 0 0 transparent;
 			width: 120px; 
@@ -199,4 +201,25 @@
 		    padding-left: 35px;
 		    text-transform: uppercase;
     	}
+}
+
+.status {
+	width: 370px;
+	margin-right: 45px;
+
+		.self-assessment{
+			background: #383b3b;
+			.border-radius(7px);
+			height: 170px;
+			margin-top: 10px;
+		}
+}
+.mysound{
+	width: 370px;
+	.soundcloud{
+		background: #f78910;
+		.border-radius(7px);
+		height:170px;
+		margin-top: 10px;
+}
 }
