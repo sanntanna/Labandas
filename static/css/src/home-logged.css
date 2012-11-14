@@ -123,11 +123,12 @@
 			    	&.teclado	 {background-position: 0 -123px;}
 			    	&.saxofone	 {background-position: 0 -184px;}
 			    	&.sanfona	 {background-position: 0 -244px;}
-			    	&.voz 	 {background-position: 0 -306px;}
+			    	&.voz 	 	 {background-position: 0 -306px;}
 			    	&.cavaquinho {background-position: 0 -367px;}
 			    	&.violoncelo {background-position: 0 -428px;}
 			    	&.piano		 {background-position: 0 -489px;}
-			    	&.pickup	 {background-position: 0 -550px;}
+			    	&.violao	 {background-position: 0 -550px;}
+			    	&.pickup	 {background-position: 0 -611px;}
 			    	&.plus		 {background-position: 0 -611px;}
 			    	input{display: none;}
 			}
@@ -204,14 +205,23 @@
 }
 
 .status {
-	width: 370px;
-	margin-right: 45px;
+	margin-bottom: 30px;
+    margin-right: 45px;
+    width: 370px;
 
 		.self-assessment{
 			background: #383b3b;
 			.border-radius(7px);
-			height: 170px;
+			color: white;
+			height: 131px;
 			margin-top: 10px;
+			padding: 20px 20px 20px 0;
+			font-size: 14px;
+
+			ul{
+				line-height: 27px;
+    			list-style: none outside none;
+			}
 		}
 }
 .mysound{
@@ -231,4 +241,21 @@
 			    width: 60px;
 			}
 		}
+}
+
+.myequipaments{
+	width: 370px;
+	margin-right: 45px;
+}
+
+.influences{
+	textarea{
+		background: none repeat scroll 0 0 #504F50;
+	    color: white;
+	    font-size: 20px;
+	    height: 140px;
+	    margin-top: 20px;
+	    padding: 20px;
+	    width: 330px;
+	}
 }
