@@ -130,6 +130,10 @@
 			    	&.violao	 {background-position: 0 -550px;}
 			    	&.pickup	 {background-position: 0 -611px;}
 			    	&.plus		 {background-position: 0 -611px;}
+			    	&.active{
+			    		background-position-x:-71px;
+			    		.box-shadow(0px 0px 15px @green);
+			    	}
 			    	input{display: none;}
 			}
 	}

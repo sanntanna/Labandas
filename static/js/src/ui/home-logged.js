@@ -3,6 +3,7 @@
 	
 	this.domLoaded = function(){
 		setupInlineEdition();
+		setupCheckUncheckIcons();
 		setupSolicitations();
 	};
 	
@@ -50,6 +51,18 @@
 		});
 	}
 	
+	function setupCheckUncheckIcons(){
+		$('.check-icon').each(function(){
+			$(this).bind('mouseup', function(){
+				var $icon = $(this);
+				setTimeout(function(){
+					var fn = $icon.find('input:checked').length ? 'addClass' : 'removeClass';
+					$icon[fn]('active');
+				}, 10)
+			}).trigger('mouseup');
+		});
+	}
+
 	function setupSolicitations(){
 		$(".accept-solicitation, .decline-solicitation").click(function(e){
 			e.preventDefault();

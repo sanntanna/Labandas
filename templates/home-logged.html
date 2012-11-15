@@ -47,9 +47,9 @@
 			<h3 class="attention">*É PRECISO COMPLETAR SEU CADASTRO</h3>
 			<div class="musician-info fl">
 				<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">
+				
 				{% for instrument in equipament_types %}
-					<label class="{{ instrument.normalized_name }}">
-
+					<label class="{{ instrument.normalized_name }} check-icon">
 						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
 							{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
 								checked="checked"
@@ -58,6 +58,7 @@
 						{{ instrument.name }}
 					</label>
 				{% endfor %}
+
 				</form>
 			</div>
 
