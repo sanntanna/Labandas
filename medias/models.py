@@ -20,8 +20,20 @@ class MusicianMedia(models.Model):
     AVATAR_SMALL_IMG_NAME = "avatar-small.png"
     COVER_IMG_NAME = "cover.png"
 
-    AVATAR_TYPE = MediaType.objects.get(name="avatar")
-    COVER_PHOTO_TYPE = MediaType.objects.get(name="cover_photo")
+    __avatar_type = None
+    __cover_photo_type = None
+
+    @property
+    def AVATAR_TYPE(self):
+        if self.__avatar_type is None:
+            self.__avatar_type = MediaType.objects.get(name="avatar")
+        return self.__avatar_type
+
+    @property
+    def COVER_PHOTO_TYPE(self):
+        if self.__cover_photo_type is None:
+            self.__cover_photo_type = MediaType.objects.get(name="cover_photo")
+        return self.__cover_photo_type
 
     media_list = models.ManyToManyField(Media, null=True, blank=True)
 

@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "bands.musicalstyle", "fields": {"image": "", "name": "Rock"}}, {"pk": 2, "model": "bands.musicalstyle", "fields": {"image": "", "name": "Jazz"}}, {"pk": 3, "model": "bands.musicalstyle", "fields": {"image": "", "name": "Samba"}}, {"pk": 4, "model": "bands.musicalstyle", "fields": {"image": "", "name": "Alternativo"}}]
