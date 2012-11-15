@@ -1,7 +1,15 @@
 @import "_colors.less";
 @import "_utils.less";
 
-#container{width: 800px; padding-left: 20px;}
+#container{
+	width: 800px; 
+	padding-left: 20px;
+
+	h2{
+		.light;
+		strong{.normal;}
+	}
+}
 #cover-photo{
 	width:100%;
 	height:370px;
@@ -215,24 +223,54 @@
     width: 370px;
 
 		.self-assessment{
-			background: #383b3b;
+			background: url("https://lasbandas.s3.amazonaws.com/site/textura-inner.jpg") repeat scroll 0 0 #383b3b;
 			.border-radius(7px);
 			color: white;
 			height: 131px;
 			margin-top: 10px;
-			padding: 20px 20px 20px 0;
+			padding: 20px 0;
 			font-size: 14px;
 
-			ul{
+			.skills{
 				line-height: 27px;
     			list-style: none outside none;
+    			margin-left: 15px;
+
+    				strong{
+    					display: inline-block;
+					    font-size: 12px;
+					    font-weight: bold;
+					    text-align: left;
+					    width: 95px;
+    				}
+    				span{ 
+    					background: #142010;
+						display: inline-block;
+						height: 19px;
+						overflow: hidden;
+						vertical-align: middle;
+						.border-radius(5px);
+    				}
+    				.bar{
+    					background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-status.png") repeat scroll 2px 0 #142010;
+					    margin-left: 15px;
+					    text-align: left;
+					    width: 182px;
+					}
+    				.rate{
+    					font-size: 10px;
+						line-height: 20px;
+						margin-left: 0;
+						padding: 2px 5px 0;
+						text-align: left;
+    				}
 			}
 		}
 }
 .mysound{
 	width: 370px;
 		.soundcloud{
-			background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 125px -567px #F78910;
+			background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 125px -615px #F78910;
 		    .border-radius(7px);
 		    height: 170px;
 		    line-height: 235px;
@@ -251,6 +289,15 @@
 .myequipaments{
 	width: 370px;
 	margin-right: 45px;
+
+		a{
+			&.add{
+				background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll -90px -540px transparent;
+			    display: block;
+			    margin-top: 20px;
+			    padding: 20px 20px 20px 55px;
+			}
+		}
 }
 
 .influences{
