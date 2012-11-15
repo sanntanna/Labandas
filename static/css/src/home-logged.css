@@ -163,7 +163,12 @@
 		}
 	}
 }
-.about {
+
+.modules{
+	display: inline-block;
+    padding-bottom: 20px;
+
+	.about {
 		width: 375px;
 
 			.about-you{
@@ -173,54 +178,36 @@
 			    width: 375px;
 			    margin:10px 0 0 10px;
 			}
-}
+	}
 
-#all-media {
-	margin-left: 52px;
-	height: 135px;
-		a{
-			background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 0 0 transparent;
-			width: 120px; 
-			height: 85px;
-			color: #000;
+	#all-media {
+		margin-left: 52px;
+		height: 135px;
+			a{
+				background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 0 0 transparent;
+				width: 120px; 
+				height: 85px;
+				color: #000;
 
-				&.pictures 	{background-position: 0 -417px;}
-				&.movies	{background-position: 0 -315px;}
-				&.bands     {background-position: 0 -417px;}
+					&.pictures 	{background-position: 0 -417px;}
+					&.movies	{background-position: 0 -315px;}
+					&.bands     {background-position: 0 -417px;}
 
-				.title{
-					 background: none repeat scroll 0 0 #97B62F;
-				    display: block;
-				    margin: 82px 0 0 2px;
-				    padding: 5px;
-				    width: 100px;
-				}
-		}
-		
-}
+					.title{
+						 background: none repeat scroll 0 0 #97B62F;
+					    display: block;
+					    margin: 82px 0 0 2px;
+					    padding: 5px;
+					    width: 100px;
+					}
+			}
+			
+	}
 
-.advertising{
-	background: none repeat scroll 0 0 white;
-	border-radius: 3px;
-	color: @darkgray;
-    margin-top: 20px;
-    min-height: 640px;
-    padding: 10px;
-    width: 120px;
-    .light;
-
-    	h2{
-    		background: url("https://lasbandas.s3.amazonaws.com/site/sprite-icons.png") no-repeat scroll 0 -34px transparent;
-		    font-size: 14px;
-		    padding-left: 35px;
-		    text-transform: uppercase;
-    	}
-}
-
-.status {
-	margin-bottom: 30px;
-    margin-right: 45px;
-    width: 370px;
+	.status {
+		margin-bottom: 30px;
+	    margin-right: 45px;
+	    width: 370px;
 
 		.self-assessment{
 			background: url("https://lasbandas.s3.amazonaws.com/site/textura-inner.jpg") repeat scroll 0 0 #383b3b;
@@ -266,48 +253,66 @@
     				}
 			}
 		}
-}
-.mysound{
-	width: 370px;
-		.soundcloud{
-			background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 125px -625px #F78910;
-		    .border-radius(7px);
-		    height: 170px;
-		    line-height: 235px;
-		    margin-top: 10px;
-		    padding-left: 10px;
+	}
+	.mysound{
+		width: 370px;
+			.soundcloud{
+				background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 125px -615px #F78910;
+			    .border-radius(7px);
+			    height: 170px;
+			    line-height: 235px;
+			    margin-top: 10px;
+			    padding-left: 10px;
+
+				a{
+					color: white;
+				    font-size: 20px;
+				    text-decoration: underline;
+				    width: 60px;
+				}
+			}
+	}
+
+	.myequipaments{
+		width: 370px;
+		margin-right: 45px;
 
 			a{
-				color: white;
-			    font-size: 20px;
-			    text-decoration: underline;
-			    width: 60px;
+				&.add{
+					background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll -90px -540px transparent;
+				    display: block;
+				    margin-top: 20px;
+				    padding: 20px 20px 20px 55px;
+				}
 			}
-		}
-}
-
-.myequipaments{
-	width: 370px;
-	margin-right: 45px;
-
-		a{
-			&.add{
-				background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll -90px -540px transparent;
-			    display: block;
-			    margin-top: 20px;
-			    padding: 20px 20px 20px 55px;
-			}
-		}
-}
-
-.influences{
-	textarea{
-		background: none repeat scroll 0 0 #504F50;
-	    color: white;
-	    font-size: 20px;
-	    height: 140px;
-	    margin-top: 20px;
-	    padding: 20px;
-	    width: 330px;
 	}
+
+	.influences{
+		textarea{
+			background: none repeat scroll 0 0 #504F50;
+		    color: white;
+		    font-size: 20px;
+		    height: 140px;
+		    margin-top: 20px;
+		    padding: 20px;
+		    width: 330px;
+		}
+	}
+}
+.advertising{
+	background: none repeat scroll 0 0 white;
+	border-radius: 3px;
+	color: @darkgray;
+    margin-top: 20px;
+    min-height: 640px;
+    padding: 10px;
+    width: 120px;
+    .light;
+
+    	h2{
+    		background: url("https://lasbandas.s3.amazonaws.com/site/sprite-icons.png") no-repeat scroll 0 -34px transparent;
+		    font-size: 14px;
+		    padding-left: 35px;
+		    text-transform: uppercase;
+    	}
 }

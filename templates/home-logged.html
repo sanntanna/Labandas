@@ -99,76 +99,81 @@
 		</div>
 	{% endif %}
 
-			
-		<div class="about fl">
-			<div class="about-you editable" data-field="about" data-single="true">
-				{% if musician.about %}
-					{{musician.about}}
-				{% else %}
-					Fale sobre você
-				{% endif %}
+		<div class="modules">	
+			<div class="about fl">
+				<div class="about-you editable" data-field="about" data-single="true">
+					{% if musician.about %}
+						{{musician.about}}
+					{% else %}
+						Fale sobre você
+					{% endif %}
+				</div>
+			</div>
+
+			<div id="all-media" class="fl">
+				
+				<a href="#" class="pictures fl">
+					<span class="title">Fotos <span class="count">(68)</span></span>
+				</a>
+				<a href="#" class="movies fl">
+					<span class="title">Vídeos <span class="count">(68)</span></span>
+				</a>
+				<a href="#" class="bands fl">
+					<span class="title">Bandas</span>
+				</a>
 			</div>
 		</div>
 
-		<div id="all-media" class="fl">
-			
-			<a href="#" class="pictures fl">
-				<span class="title">Fotos <span class="count">(68)</span></span>
-			</a>
-			<a href="#" class="movies fl">
-				<span class="title">Vídeos <span class="count">(68)</span></span>
-			</a>
-			<a href="#" class="bands fl">
-				<span class="title">Bandas</span>
-			</a>
-		</div>
-
-		<div class="fl status">
-			<h2 class="marker small">Status</h2>
-			<div class="self-assessment">
-				<ul class="skills">
-					<li>
-						<strong>Feeling</strong>
-						<span class="bar"></span>
-						<span class="rate">selecione</span>
-					</li>
-					<li>
-						<strong>Experiência</strong>
-						<span class="bar"></span>
-						<span class="rate">selecione</span>
-					</li>
-					<li>
-						<strong>Versatilidade</strong>
-						<span class="bar"></span>
-						<span class="rate">selecione</span>
-					</li>
-					<li>
-						<strong>Originalidade</strong>
-						<span class="bar"></span>
-						<span class="rate">selecione</span>
-					</li>
-					<li>
-						<strong>Comprometimento</strong>
-						<span class="bar"></span>
-						<span class="rate">selecione</span>
-					</li>
-				</ul>
+		<div class="modules">	
+			<div class="fl status">
+				<h2 class="marker small">Status</h2>
+				<div class="self-assessment">
+					<ul class="skills">
+						<li>
+							<strong>Feeling</strong>
+							<span class="bar"></span>
+							<span class="rate">selecione</span>
+						</li>
+						<li>
+							<strong>Experiência</strong>
+							<span class="bar"></span>
+							<span class="rate">selecione</span>
+						</li>
+						<li>
+							<strong>Versatilidade</strong>
+							<span class="bar"></span>
+							<span class="rate">selecione</span>
+						</li>
+						<li>
+							<strong>Originalidade</strong>
+							<span class="bar"></span>
+							<span class="rate">selecione</span>
+						</li>
+						<li>
+							<strong>Comprometimento</strong>
+							<span class="bar"></span>
+							<span class="rate">selecione</span>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div class="fl mysound">
-			<h2 class="marker small">Meu<strong>Som</strong></h2>
-			<div class="soundcloud">
-				<a href="#">Adicione aqui seu player do soundcloud</a>	
+			<div class="fl mysound">
+				<h2 class="marker small">Meu<strong>Som</strong></h2>
+				<div class="soundcloud">
+					<a href="#">Adicione aqui seu player do soundcloud</a>	
+				</div>
 			</div>
 		</div>
 
-		<div class="fl myequipaments">
-			<h2 class="marker small">Meus<strong>Equipamentos</strong></h2>
-			<a href="#" class="add">Adicionar instrumento</a>
-		</div>
-		<div class="fl influences">
-			<h2 class="marker small">Influências</h2>
-			<textarea type="text" class="post-on-edit">Digite aqui suas influências</textarea>
+		<div class="modules">	
+			<div class="fl myequipaments">
+				<h2 class="marker small">Meus<strong>Equipamentos</strong></h2>
+				<a href="#" class="add">Adicionar instrumento</a>
+			</div>
+			<div class="fl influences">
+				<h2 class="marker small">Influências</h2>
+				<textarea type="text" class="post-on-edit">Digite aqui suas influências</textarea>
+			</div>
 		</div>
 	</div>
 
