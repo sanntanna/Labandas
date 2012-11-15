@@ -99,8 +99,14 @@
 	{% endif %}
 
 			
-		 <div class="about fl">
-			<textarea type="text" class="post-on-edit" name="about">{% if musician.about %}{{musician.about}}{% else %}Fale sobre você{% endif %}</textarea>
+		<div class="about fl">
+			<div class="about-you editable" data-field="about" data-single="true">
+				{% if musician.about %}
+					{{musician.about}}
+				{% else %}
+					Fale sobre você
+				{% endif %}
+			</div>
 		</div>
 
 		<div id="all-media" class="fl">

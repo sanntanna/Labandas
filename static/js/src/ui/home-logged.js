@@ -9,9 +9,9 @@
 	function setupInlineEdition(){
 
 		var updateData = function(){
-			var $elem = $(this);
+			var $elm = $(this);
 
-			var dataField = (this.name || $elem.attr('data-field')).split('.'),
+			var dataField = (this.name || $elm.attr('data-field')).split('.'),
 				val = this.value || $.trim(this.innerHTML);
 
 			var postData = {},
@@ -23,6 +23,10 @@
 			} else {
 				postData[dataField[1]] = val;
 				url = dataField[0] + '/' + dataField[1];
+			}
+
+			if($elm.attr('data-single')){
+				postData['single'] = true;
 			}
 
 			$.post('/musico/atualizar/' + url, postData);
@@ -43,26 +47,6 @@
 
 		$("form.inline-form input").change(function(){
 			$(this).closest('form').trigger('submit');
-		});
-
-		$(document).delegate('.editable', 'change', function(e){
-			var $elem = $(this);
-
-			var dataField = (this.name || $elm.attr('data-field')).split('.'),
-				val = this.value || $.trim(this.innerHTML);
-
-			var postData = {},
-				url = "";
-
-			if(dataField.length == 1){
-				postData[dataField[0]] = val;
-				url = dataField[0];
-			} else {
-				postData[dataField[1]] = val;
-				url = dataField[0] + '/' + dataField[1];
-			}
-
-			$.post('/musico/atualizar/' + url, postData);
 		});
 	}
 	

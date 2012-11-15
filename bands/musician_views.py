@@ -27,7 +27,8 @@ def subscribe_musician(request):
 @onlypost
 @onlyajax
 def update_field(request, field):
-    updated_field = request.POST.getlist(field)
+
+    updated_field = request.POST.getlist(field) if not request.POST.get('single') else request.POST.get(field)
     musician = request.user.get_profile()
 
     setattr(musician, field, updated_field)
