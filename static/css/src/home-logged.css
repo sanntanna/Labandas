@@ -270,7 +270,7 @@
 .mysound{
 	width: 370px;
 		.soundcloud{
-			background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 125px -615px #F78910;
+			background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 125px -625px #F78910;
 		    .border-radius(7px);
 		    height: 170px;
 		    line-height: 235px;
