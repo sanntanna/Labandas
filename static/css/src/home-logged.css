@@ -143,11 +143,12 @@
 			line-height: 30px;
 		}
 
-		input{
-			background: none repeat scroll 0 0 #2E2E2E;
-		    border: 0 none;
-		    color: white;
-		 }
+		span{
+			display:inline-block;
+			min-width: 100px;
+			border-bottom: 1px solid #fff;
+			padding-bottom:3px;
+		}
 	}
 }
 .about {

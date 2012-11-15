@@ -7,26 +7,49 @@
 	};
 	
 	function setupInlineEdition(){
+
+		var updateData = function(){
+			var $elem = $(this);
+
+			var dataField = (this.name || $elem.attr('data-field')).split('.'),
+				val = this.value || $.trim(this.innerHTML);
+
+			var postData = {},
+				url = "";
+
+			if(dataField.length == 1){
+				postData[dataField[0]] = val;
+				url = dataField[0];
+			} else {
+				postData[dataField[1]] = val;
+				url = dataField[0] + '/' + dataField[1];
+			}
+
+			$.post('/musico/atualizar/' + url, postData);
+		}
+
 		$("#main.can-edit .editable").click(function(){
-			var $div = $(this);
-
-			if($div.find('input').length){return;}
-
-			this.originalContent = $.trim($div.html());
-			var ipt = input($div);
-			$div.html("").append(ipt);
-			ipt[0].focus();
-		}).keyup(function(e){
-			if(e.keyCode == 13){ $(e.target).trigger('enterpress'); }
+			$(this).attr('contenteditable', true)
+					.html($.trim(this.innerHTML));
+		}).keydown(function(e){
+			if(e.keyCode == 13){ 
+				$(e.target).trigger('enterpress'); 
+				return false;
+			}
+		}).bind('blur enterpress', function(){
+			$(this).removeAttr('contenteditable');
+			updateData.apply(this, arguments);
 		});
 
 		$("form.inline-form input").change(function(){
 			$(this).closest('form').trigger('submit');
 		});
 
-		$(document).delegate('.post-on-edit', 'change', function(e){
-			var dataField = this.name.split('.'),
-				val = this.value;
+		$(document).delegate('.editable', 'change', function(e){
+			var $elem = $(this);
+
+			var dataField = (this.name || $elm.attr('data-field')).split('.'),
+				val = this.value || $.trim(this.innerHTML);
 
 			var postData = {},
 				url = "";
@@ -41,21 +64,6 @@
 
 			$.post('/musico/atualizar/' + url, postData);
 		});
-
-		function input($elm, type){
-			return $('<input type="text" class="post-on-edit" />')
-					.attr('name', $elm.attr('data-field'))
-					.width($elm.width())
-					.val($elm[0].originalContent)
-					.bind('blur enterpress', inlineInputBlur);
-		}
-
-		function inlineInputBlur(e){
-			var $parent = $(this).parent(),
-				val = this.value;
-
-			$parent.html(val != "" ? val : $parent[0].originalContent );
-		}
 	}
 	
 	function setupSolicitations(){
