@@ -161,6 +161,25 @@
 			border-bottom: 1px solid #fff;
 			padding-bottom:3px;
 		}
+
+		.musical-style{
+			label{
+				background: none repeat scroll 0 0 #3C3C3C;
+			    border: 1px solid #262525;
+			    .border-radius(3px);
+			    color: white;
+			    display: inline-block;
+			    font-size: 11px;
+			    height: 13px;
+			    line-height: 13px;
+			    margin-right: 5px;
+			    padding: 5px;
+
+			    input{
+			    	vertical-align: middle;
+			    }
+			}
+		}
 	}
 }
 
