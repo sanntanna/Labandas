@@ -243,34 +243,64 @@
     			list-style: none outside none;
     			margin-left: 15px;
 
-    				strong{
-    					display: inline-block;
-					    font-size: 12px;
-					    font-weight: bold;
-					    text-align: left;
-					    width: 95px;
-    				}
-    				span{ 
-    					background: #142010;
-						display: inline-block;
-						height: 19px;
-						overflow: hidden;
-						vertical-align: middle;
-						.border-radius(5px);
-    				}
+				span:first-child{
+					display: inline-block;
+				    font-size: 12px;
+				    text-align: left;
+				    width: 115px;
+				    background: none;
+				}
+				span{ 
+					background: #142010;
+					display: inline-block;
+					height: 19px;
+					vertical-align: middle;
+					.border-radius(5px);
+				}
+				.bar{
+					background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-status.png) no-repeat 2px 0 #142010;
+				    margin-left: 15px;
+				    text-align: left;
+				    width: 177px;
+				    position:relative;
+				    padding-left:5px;
+				    .transition;
+
+
+				    .filled{
+				    	background: @green;
+				    	width:50%;
+				    	height:6px;
+				    	font-size: 1px;
+				    	margin-top:5px;
+				    	.transition(.3s, width);
+				    }
+
+				    .bar-marker{
+				    	background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-status.png) no-repeat -5px -37px transparent;
+				    	width:11px;
+				    	height:11px;
+				    	position:absolute;
+				    	cursor: pointer;
+				    	left:50%;
+				    	top:0px;
+				    	margin-left:-5px;
+				    	.transition;
+				    }
+				}
+
+				.on-off{ margin:0 0 5px 3px; }
+
+				.inactive{
     				.bar{
-    					background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-status.png) repeat scroll 2px 0 #142010;
-					    margin-left: 15px;
-					    text-align: left;
-					    width: 182px;
-					}
-    				.rate{
-    					font-size: 10px;
-						line-height: 20px;
-						margin-left: 0;
-						padding: 2px 5px 0;
-						text-align: left;
+    					opacity:0.3;
+    					.filled{width: 0;}
+    					.bar-marker{
+    						opacity:0;
+    						top:-11px;
+    					}
     				}
+    			}
 			}
 		}
 	}

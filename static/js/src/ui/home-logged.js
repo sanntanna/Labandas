@@ -4,6 +4,7 @@
 	this.domLoaded = function(){
 		setupInlineEdition();
 		setupCheckUncheckIcons();
+		setupSkills();
 		setupSolicitations();
 	};
 	
@@ -76,7 +77,20 @@
 					var fn = $icon.find('input:checked').length ? 'addClass' : 'removeClass';
 					$icon[fn]('active');
 				}, 10)
-			}).trigger('mouseup');
+			}).trigger('click');
+		});
+	}
+
+	function setupSkills(){
+		$(".skills input:checkbox").each(function(){
+
+			$(this).click(function(){
+				var $parent = $(this).closest('li'),
+					fn = this.checked ? 'removeClass' : 'addClass';
+
+				$parent[fn]('inactive');
+				
+			}).triggerHandler('click')
 		});
 	}
 
