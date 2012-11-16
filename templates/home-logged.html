@@ -187,7 +187,7 @@
 			</div>
 			<div class="fl influences">
 				<h2 class="marker small">Influências</h2>
-				<textarea type="text" class="post-on-edit" name="influences">Digite aqui suas influências</textarea>
+				<textarea type="text" class="post-on-edit" name="influences" data-single="true">{% if musician.influences %}{{musician.influences}}{% else %}Digite aqui suas influências{% endif %}</textarea>
 			</div>
 		</div>
 	</div>
