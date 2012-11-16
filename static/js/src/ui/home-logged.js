@@ -13,8 +13,8 @@
 		$(document).delegate('input.post-on-edit, textarea.post-on-edit', 'change', function(e){
 			var $elm = $(this);
 
-			var dataField = (this.name || $elm.attr('data-field')).split('.'),
-				val = this.value || $.trim(this.innerHTML);
+			var dataField = this.name.split('.'),
+				val = this.value;
 
 			var postData = {},
 				url = "";
@@ -77,7 +77,7 @@
 					var fn = $icon.find('input:checked').length ? 'addClass' : 'removeClass';
 					$icon[fn]('active');
 				}, 10)
-			}).trigger('click');
+			}).trigger('mouseup');
 		});
 	}
 
@@ -89,6 +89,7 @@
 					fn = this.checked ? 'removeClass' : 'addClass';
 
 				$parent[fn]('inactive');
+				$parent.find('.skill-value').val('-1').trigger('change');
 
 			}).triggerHandler('click')
 		});
