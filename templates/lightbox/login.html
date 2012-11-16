@@ -1,6 +1,23 @@
-<form id="lb-form-login" action="/login" class="ajax" method="post">
-	<label for="user">Efetuar login:</label>
-	<input type="text" placeholder="email" name="user" id="user" autocomplete="off" />
-	<input type="password" placeholder="senha" name="password" />
-	<input type="submit" value="entrar" />
-</form>
+<div id="lb-lightbox-login">
+	<div class="lightbox-title">
+		<p class="fl">Você também pode utilizar o facebook para se conectar</p>
+		<a href="#" class="fb-login fl">Conecte Facebook</a>
+	</div>
+	
+	<div class="fl login">
+		<h2>Já tenho cadastro</h2>
+		<form id="lb-form-login" action="/login" class="ajax" method="post">
+			<ul>
+				<li><input type="text" placeholder="email" name="user" id="user" autocomplete="off" /></li>
+				<li><input type="password" placeholder="senha" name="password" /></li>
+				<li class="fl"><a href="#">Esqueceu sua senha?</a></li>
+				<li class="fr"><input type="submit" value="Entrar" class="btn" /></li>
+			</ul>
+		</form>
+	</div>
+	<div class="fl sign">
+		<h2>Não tenho cadastro</h2>
+		{% block signup %}
+			cadastro
+		{% endblock %}
+</div>	

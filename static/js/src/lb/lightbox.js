@@ -3,7 +3,7 @@ lb = window.lb || {};
 lb.lightbox = function(param){
 	var instance = this;
 	instance.defaults = {
-		minWidth: 400,
+		minWidth: 780,
 		minHeight: 150,
 		overlay: null
 	};
@@ -46,9 +46,10 @@ lb.lightbox = function(param){
 	}
 	
 	var csssContent = {
-		background: '#fff',
+		background: '#454545',
 		width: '100%',
-		height: '100%'
+		height: '100%',
+		display:'table'
 	}
 	
 	
@@ -90,14 +91,7 @@ lb.lightbox = function(param){
 		                 	'<div class="lightbox-wrapper">',
 			               		'<div class="lightbox-content"></div>',
 			               		'<div class="lightbox-loading"></div>',
-			               		'<div class="t"></div>',
-			                    '<div class="l"></div>',
-			                    '<div class="b"></div>',
-			                    '<div class="r"></div>',
-			                   	'<div class="tl"></div>',
-			                   	'<div class="tr"><a href="#close" class="lightbox-close lightbox-close-tr">x</a></div>',
-			                   	'<div class="bl"></div>',
-			                   	'<div class="br"></div>',
+			               		'<div class="tr"><a href="#close" class="lightbox-close lightbox-close-tr">x</a></div>',
 			               '</div>',
 			             '</div>'].join('')).css(cssContainer);
 		

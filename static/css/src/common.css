@@ -262,3 +262,49 @@ header.logged{
 #footer-container footer{
 	color:white;
 }
+
+#lb-lightbox-login {
+	.fb-login {
+		background: url("http://lasbandas.s3.amazonaws.com/site/lb-sprite-social.png") repeat scroll 0 0 transparent;
+	    display: block;
+	    height: 40px;
+	    margin-left: 20px;
+	    text-indent: -9999px;
+	    width: 260px;
+	}
+	h2{
+		color: white;
+		.semibold;
+		font-size: 18px;
+		margin-bottom: 8px;
+		text-transform: uppercase;
+	}
+
+	input{
+		width: 325px;
+		height: 42px;
+	}
+
+	.login{
+		width: 330px;
+		padding: 35px;
+
+			ul{
+				list-style: none outside none;
+    			margin-left: 0;
+
+    				li{
+    					padding-bottom: 8px;
+
+    					.btn{
+    						height: 28px;
+						    padding-top: 1px;
+						    width: 115px;
+    					}
+    				}
+			}
+	}
+	.sign{
+		padding: 35px 25px 25px;
+	}
+}
