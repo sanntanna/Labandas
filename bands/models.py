@@ -27,14 +27,14 @@ class MusicianSkill(models.Model):
 class Musician(models.Model):
     url = models.SlugField(max_length=50)
     about = models.CharField(max_length=200)
-    #influences = models.CharField(max_length=150)
+    influences = models.CharField(max_length=150)
     
     equipaments = models.ManyToManyField(Equipament)
     type_instruments_play = models.ManyToManyField(EquipamentType, null=True, blank=True)
     musical_styles = models.ManyToManyField(MusicalStyle, null=True, blank=True)
     
     media = models.OneToOneField(MusicianMedia, related_name="musician", null=True, blank=True)
-    #skills = models.OneToOneField(MusicianSkill, related_name="musician", null=True, blank=True)
+    skills = models.OneToOneField(MusicianSkill, related_name="musician", null=True, blank=True)
 
     _address = models.OneToOneField(Address, related_name="musician", null=True, blank=True)
     
