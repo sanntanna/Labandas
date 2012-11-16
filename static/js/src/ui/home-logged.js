@@ -9,7 +9,7 @@
 	
 	function setupInlineEdition(){
 
-		var updateData = function(){
+		$(document).delegate('input.post-on-edit, textarea.post-on-edit', 'change', function(e){
 			var $elm = $(this);
 
 			var dataField = (this.name || $elm.attr('data-field')).split('.'),
@@ -31,19 +31,36 @@
 			}
 
 			$.post('/musico/atualizar/' + url, postData);
+		});
+
+		function input($elm, type){
+			return $('<input type="text" class="post-on-edit" />')
+						.attr('name', $elm.attr('data-field'))
+						.width($elm.width())
+						.val($elm[0].originalContent)
+						.bind('blur enterpress', inlineInputBlur);
+		}
+
+		function inlineInputBlur(e){
+			var $parent = $(this).parent(),
+			val = this.value;
+
+			$parent.html(val != "" ? val : $parent[0].originalContent );
 		}
 
 		$("#main.can-edit .editable").click(function(){
-			$(this).attr('contenteditable', true)
-					.html($.trim(this.innerHTML));
+			var $div = $(this);
+			if($div.find('input').length){ return; }
+
+			this.originalContent = $.trim($div.html());
+			var ipt = input($div);
+			$div.html("").append(ipt);
+			ipt[0].focus();
+
 		}).keydown(function(e){
 			if(e.keyCode == 13){ 
 				$(e.target).trigger('enterpress'); 
-				return false;
 			}
-		}).bind('blur enterpress', function(){
-			$(this).removeAttr('contenteditable');
-			updateData.apply(this, arguments);
 		});
 
 		$("form.inline-form input").change(function(){

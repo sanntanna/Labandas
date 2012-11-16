@@ -41,10 +41,11 @@
 		</div>
 	</div>
 	
-	{% if musician.type_instruments_play.all.count = 0 or not musician.address.city or 1 = 1 %}
 	<div id="container" class="fl">
 		<div id="complete-subscription" class="clearfix">
-			<h3 class="attention">*É PRECISO COMPLETAR SEU CADASTRO</h3>
+			{% if musician.type_instruments_play.all.count = 0 or not musician.address.city %}
+				<h3 class="attention">*É PRECISO COMPLETAR SEU CADASTRO</h3>
+			{% endif %}
 			<div class="musician-info fl">
 				<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">
 				
@@ -97,17 +98,10 @@
 				</div>
 			</div>
 		</div>
-	{% endif %}
 
 		<div class="modules">	
 			<div class="about fl">
-				<div class="about-you editable" data-field="about" data-single="true">
-					{% if musician.about %}
-						{{musician.about}}
-					{% else %}
-						Fale sobre você
-					{% endif %}
-				</div>
+				<textarea class="about-you post-on-edit" name="about" data-single="true">{% if musician.about %}{{musician.about}}{% else %}Fale sobre você{% endif %}</textarea>
 			</div>
 
 			<div id="all-media" class="fl">
