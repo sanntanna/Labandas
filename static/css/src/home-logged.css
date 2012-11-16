@@ -283,9 +283,7 @@
 				    	position:absolute;
 				    	cursor: pointer;
 				    	left:50%;
-				    	top:0px;
 				    	margin-left:-5px;
-				    	.transition;
 				    }
 				}
 
@@ -294,11 +292,8 @@
 				.inactive{
     				.bar{
     					opacity:0.3;
-    					.filled{width: 0;}
-    					.bar-marker{
-    						opacity:0;
-    						top:-11px;
-    					}
+    					.filled{width: 0!important;}
+    					.bar-marker{display:none;}
     				}
     			}
 			}

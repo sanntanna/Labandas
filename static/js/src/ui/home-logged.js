@@ -89,8 +89,39 @@
 					fn = this.checked ? 'removeClass' : 'addClass';
 
 				$parent[fn]('inactive');
-				
+
 			}).triggerHandler('click')
+		});
+
+		$(".bar-marker").each(function(){
+			var $marker = $(this),
+				$barFill = $marker.siblings('.filled'),
+				$input = $marker.siblings('.skill-value');
+
+			var margin = 5;
+			var barContainerOffset = $marker.parent().offset(),
+				maxLeft = $marker.parent().width(),
+				rate = 0;
+
+			$marker.mousedown(function(e){
+				e.preventDefault();
+				
+				$(document).mousemove(function(e){
+					var left = e.clientX - barContainerOffset.left;
+					left = Math.min(Math.max(left, margin), maxLeft);
+
+					var proportion = left / maxLeft;
+					rate = Math.round(proportion * 10);
+
+					$marker.css('left', left);
+					$barFill.width(Math.round(proportion * 100) + '%');
+				});
+
+				$(document).mouseup(function(){
+					$(document).unbind('mousemove mouseup');
+					$input.val(rate).trigger('change');
+				});
+			});
 		});
 	}
 
