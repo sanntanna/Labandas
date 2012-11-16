@@ -15,7 +15,7 @@ class Media(models.Model):
         return "%s %d" % (self.media_type.name, self.id)
 
 class MusicianMedia(models.Model):
-    BASE_URL_USER_IMAGES = "https://lasbandas.s3.amazonaws.com/u/"
+    BASE_URL_USER_IMAGES = "http://lasbandas.s3.amazonaws.com/u/"
     AVATAR_IMG_NAME = "avatar.png"
     AVATAR_SMALL_IMG_NAME = "avatar-small.png"
     COVER_IMG_NAME = "cover.png"
@@ -58,9 +58,9 @@ class MusicianMedia(models.Model):
 
     @property
     def avatar_small(self):
-        if not self.media_list.filter(media_type = AVATAR):
+        if not self.media_list.filter(media_type = self.AVATAR_TYPE):
             return None
-        return "%s%d/%S" % (self.BASE_URL_USER_IMAGES, self.musician.id, self.AVATAR_SMALL_IMG_NAME)
+        return "%s%d/%s" % (self.BASE_URL_USER_IMAGES, self.musician.id, self.AVATAR_SMALL_IMG_NAME)
 
 
     def cover():

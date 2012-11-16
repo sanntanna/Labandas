@@ -42,7 +42,9 @@
 <body>
 
 <div id="header-container">
-	<header class="wrapper">
+	<header class="wrapper
+		{% if user.is_authenticated %} logged{% endif %}
+		">
 		<h1 id="header-logo" class="fl">
 			<a href="/" id="logo" class="ir">LasBandas - conectando músicos</a>
 		</h1>
@@ -56,9 +58,16 @@
 		<nav id="user-menu" class="fr">
 			<ul>
 			{% if user.is_authenticated %}
-			    <li>
-			    	<strong><a href="/" class="name-logged">{{ user.first_name }}</a></strong>
+				<li class="avatar-small">
+					{% if user.get_profile.media.avatar_small %}
+			    		<img src="{{ user.get_profile.media.avatar_small }}" alt="{{ user.first_name }}" width="45" />
+			    	{% endif %}
 			    </li>
+			    <li class="user-name">
+			    	<strong><a href="/">{{ user.first_name }}</a></strong>
+			    </li>
+			    <li class="notifications ir">notificações</li>
+			    <li class="lock ir">dados</li>
 			    <li><a href="/logout">sair</a></li>
 			{% else %}
 				<li><a href="/lightbox/login" class="lightbox">Login</a></li>

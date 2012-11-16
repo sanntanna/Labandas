@@ -168,7 +168,6 @@ h2{
 }
 
 #header-logo{
-
 	#logo{
 		width:144px;
 		height:42px;
@@ -178,14 +177,13 @@ h2{
 }
 
 #main-search{
-	width:650px;
 	padding-top:9px;
 	
 	@search-height:36px;
 	
 	#main-search-field{
+		width:500px;
 		height:@search-height;
-		width:491px;
 		color: #77777;
 		border-radius: 3px 0 0 3px;
 		font-size:18px;
@@ -203,12 +201,31 @@ h2{
 	}
 }
 
+header.logged{
+	#main-search #main-search-field{
+		width:350px;
+	}
+}
+
 
 #user-menu{
-	li{margin:0px 15px 0 0;line-height:54px;}
+	li{
+		margin:6px 10px 0 0;
+		line-height:45px;
+
+		&.user-name{
+			font-size: 12px;
+			width:105px;
+			line-height: 15px;
+			margin-top:13px;
+		}
+
+		&.notifications{width:35px;}
+		&.lock{width:35px;}
+	}
+
 	a{color:#fff;}
 	a:hover{color:@green;}
-	.name-logged{font-size: 12px;}
 }
 
 #content{
