@@ -108,7 +108,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 ::selection { background:@green; color:#fff; text-shadow: none; }
 
 body{
-	background: url("https://lasbandas.s3.amazonaws.com/site/lp/noisepattern.png") repeat scroll 0 0 #C8CCCB;
+	background: url(http://lasbandas.s3.amazonaws.com/site/lp/noisepattern.png) repeat scroll 0 0 #C8CCCB;
 	font:13px Helvetica,Arial,sans-serif;
 }
 
@@ -124,7 +124,7 @@ a:hover {
 }
 
 .banner{
-	background: url(https://lasbandas.s3.amazonaws.com/site/bg-gray-texture.jpg) no-repeat center top transparent;
+	background: url(http://lasbandas.s3.amazonaws.com/site/bg-gray-texture.jpg) no-repeat center top transparent;
 	min-height: 370px;
 }
 
@@ -163,7 +163,7 @@ h2{
 }
 
 #header-container{
-	background:url(https://lasbandas.s3.amazonaws.com/site/sprite-bgs.png) @darkgray 0 -620px repeat-x;
+	background:url(http://lasbandas.s3.amazonaws.com/site/sprite-bgs.png) @darkgray 0 -620px repeat-x;
 	height:57px;
 }
 
@@ -172,7 +172,7 @@ h2{
 		width:144px;
 		height:42px;
 		margin:5px 0 0 0;
-		background:url(https://lasbandas.s3.amazonaws.com/site/logo.png) no-repeat;
+		background:url(http://lasbandas.s3.amazonaws.com/site/logo.png) no-repeat;
 	}
 }
 
@@ -222,6 +222,8 @@ header.logged{
 
 		&.notifications{width:35px;}
 		&.lock{width:35px;}
+
+		.icon{ margin:12px 0 0 5px; }
 	}
 
 	a{color:#fff;}
@@ -232,8 +234,17 @@ header.logged{
 	min-height:360px;
 }
 
+.icon{
+	background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat transparent;
+	display: inline-block;
+	width:25px;
+	height:25px;
+	&.notification{ background-position:0 -106px; }
+	&.lock{ background-position:0 -143px; }
+}
+
 .marker {
-	background: url("https://lasbandas.s3.amazonaws.com/site/sprite-icons.png") no-repeat scroll 0 0 transparent;
+	background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat transparent;
 	line-height: 15px;
     padding-left: 40px;
     .light;
@@ -244,7 +255,7 @@ header.logged{
 }
 
 #footer-container{
-	background:url(https://lasbandas.s3.amazonaws.com/site/sprite-bgs.png) #323232 0 -371px repeat-x;
+	background:url(http://lasbandas.s3.amazonaws.com/site/sprite-bgs.png) #323232 0 -371px repeat-x;
 	height:248px;
 }
 

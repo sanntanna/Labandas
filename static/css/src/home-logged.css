@@ -13,7 +13,7 @@
 #cover-photo{
 	width:100%;
 	height:370px;
-	background: #e5e5e5 url(https://lasbandas.s3.amazonaws.com/site/default-coverphoto.gif) no-repeat center 70px;
+	background: #e5e5e5 url(http://lasbandas.s3.amazonaws.com/site/default-coverphoto.gif) no-repeat center 70px;
 	position: relative;
 	text-align: center;
 	overflow: hidden;
@@ -56,7 +56,7 @@
 	#profile-photo{
 		width:@fotosize;
 		height:@fotosize;
-		background:url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 15px -205px #FFFFFF;
+		background:url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 15px -205px #FFFFFF;
 		border-radius: 5px;
 		border: 3px solid #FFFFFF;
 		text-align: center;
@@ -89,7 +89,7 @@
 	}
 	
 	h1{
-		background: url("https://lasbandas.s3.amazonaws.com/site/sprite-icons.png") no-repeat scroll 0 -1px transparent;
+		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat scroll 0 -1px transparent;
 		margin:@fotosize - 35px 0 0 10px;
 		padding-left: 35px;
 		width:400px;
@@ -117,7 +117,7 @@
 		margin-right: 40px;
 
 			label{
-				background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-icons-instruments.png") no-repeat scroll 0 0 transparent;
+				background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-icons-instruments.png) no-repeat scroll 0 0 transparent;
 			    display: block;
 			    float: left;
 			    font-size: 11px;
@@ -126,12 +126,14 @@
 			    margin: 0 0 30px 7px;
 			    text-align: center;
 			    width: 53px;
+			    border-radius:5px;
+			    .transition;
 			    	&.guitarra	 {background-position: 0 0}
 			    	&.bateria 	 {background-position: 0 -62px;}
 			    	&.teclado	 {background-position: 0 -123px;}
 			    	&.saxofone	 {background-position: 0 -184px;}
 			    	&.sanfona	 {background-position: 0 -244px;}
-			    	&.voz 	 	 {background-position: 0 -306px;}
+			    	&.voz 	 	 {background-position: 0 -305px;}
 			    	&.cavaquinho {background-position: 0 -367px;}
 			    	&.violoncelo {background-position: 0 -428px;}
 			    	&.piano		 {background-position: 0 -489px;}
@@ -202,7 +204,7 @@
 		margin-left: 52px;
 		height: 135px;
 			a{
-				background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 0 0 transparent;
+				background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 0 0 transparent;
 				width: 120px; 
 				height: 85px;
 				color: #000;
@@ -228,7 +230,7 @@
 	    width: 370px;
 
 		.self-assessment{
-			background: url("https://lasbandas.s3.amazonaws.com/site/textura-inner.jpg") repeat scroll 0 0 #383b3b;
+			background: url(http://lasbandas.s3.amazonaws.com/site/textura-inner.jpg) repeat scroll 0 0 #383b3b;
 			.border-radius(7px);
 			color: white;
 			height: 131px;
@@ -257,7 +259,7 @@
 						.border-radius(5px);
     				}
     				.bar{
-    					background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-status.png") repeat scroll 2px 0 #142010;
+    					background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-status.png) repeat scroll 2px 0 #142010;
 					    margin-left: 15px;
 					    text-align: left;
 					    width: 182px;
@@ -275,7 +277,7 @@
 	.mysound{
 		width: 370px;
 			.soundcloud{
-				background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 125px -615px #F78910;
+				background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 125px -615px #F78910;
 			    .border-radius(7px);
 			    height: 170px;
 			    line-height: 235px;
@@ -297,7 +299,7 @@
 
 			a{
 				&.add{
-					background: url("https://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll -90px -540px transparent;
+					background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll -90px -540px transparent;
 				    display: block;
 				    margin-top: 20px;
 				    padding: 20px 20px 20px 55px;
@@ -328,7 +330,7 @@
     .light;
 
     	h2{
-    		background: url("https://lasbandas.s3.amazonaws.com/site/sprite-icons.png") no-repeat scroll 0 -34px transparent;
+    		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat scroll 0 -34px transparent;
 		    font-size: 14px;
 		    padding-left: 35px;
 		    text-transform: uppercase;

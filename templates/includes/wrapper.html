@@ -66,8 +66,12 @@
 			    <li class="user-name">
 			    	<strong><a href="/">{{ user.first_name }}</a></strong>
 			    </li>
-			    <li class="notifications ir">notificações</li>
-			    <li class="lock ir">dados</li>
+			    <li class="notifications">
+			    	<a href="#notificacoes" class="icon notification ir" title="Nenhuma nova notificação">notificações</a>
+			   	</li>
+			    <li class="lock">
+			    	<a href="#dados-pessoais" class="icon lock ir" title="Dados pessoais">dados pessoais</a>
+			    </li>
 			    <li><a href="/logout">sair</a></li>
 			{% else %}
 				<li><a href="/lightbox/login" class="lightbox">Login</a></li>
