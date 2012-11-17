@@ -203,7 +203,7 @@ h2{
 
 header.logged{
 	#main-search #main-search-field{
-		width:350px;
+		width:395px;
 	}
 }
 
@@ -215,7 +215,7 @@ header.logged{
 
 		&.user-name{
 			font-size: 12px;
-			width:105px;
+			width:65px;
 			line-height: 15px;
 			margin-top:13px;
 		}
@@ -228,6 +228,12 @@ header.logged{
 
 	a{color:#fff;}
 	a:hover{color:@green;}
+	.avatar-small{
+			img {
+				margin-top: 2px;
+				.border-radius(3px);
+			}
+		}
 }
 
 #content{
