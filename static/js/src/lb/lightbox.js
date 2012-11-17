@@ -22,7 +22,7 @@ lb.lightbox = function(param){
 		top: '0px',
 		left: '0px',
 		background: '#000',
-		opacity: '0.5',
+		opacity: '0.55',
 		display: 'none',
 		zIndex: 1
 	};
@@ -38,7 +38,7 @@ lb.lightbox = function(param){
 	}
 	
 	var cssWrapper = {
-		margin: 'auto',
+		margin: '180px auto auto',
 		width: '10px',
 		height: '10px',
 		position: 'relative',
