@@ -335,9 +335,10 @@
 	.influences{
 		textarea{
 			background: none repeat scroll 0 0 #504F50;
+			.border-radius(7px);
 		    color: white;
 		    font-size: 20px;
-		    height: 140px;
+		    height: 115px;
 		    margin-top: 20px;
 		    padding: 20px;
 		    width: 330px;
