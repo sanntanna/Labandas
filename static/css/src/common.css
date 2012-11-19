@@ -269,9 +269,13 @@ header.logged{
 	color:white;
 }
 
+/*@lightbox login*/
 #lb-lightbox-login {
+	background: url(http://lasbandas.s3.amazonaws.com/site/lb-slice.png) no-repeat scroll 395px 100px transparent;
+    display: table-row;
+
 	.fb-login {
-		background: url("http://lasbandas.s3.amazonaws.com/site/lb-sprite-social.png") repeat scroll 0 0 transparent;
+		background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-social.png) repeat scroll 0 0 transparent;
 	    display: block;
 	    height: 40px;
 	    margin-left: 20px;
