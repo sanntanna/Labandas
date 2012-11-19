@@ -1,5 +1,4 @@
 {% extends "includes/wrapper.html" %}
-{% extends "lightbox/login.html"}
 {% load staticoptimizer %}
 
 {% block css %}
@@ -14,11 +13,10 @@
 	<article id="call-to-action">
 		<h2>Você é músico?</h2>
 		<span class="higlight">Procura ou quer formar uma banda?</span>
-		<p>então conheça o melhor site de bandas e músicos do brasil!</p> 
+		<p>então conheça o melhor site de bandas e músicos do Brasil!</p> 
 	</article>
 	<article id="subscription">
 		<h2 class="white">Cadastre-se</h2>
-		{% block signup %}
 		<form action="/musico/cadastrar" method="post" id="subscribe-form" class="ajax">{% csrf_token %}
 			{% for field in form %}
 		        <div>
@@ -27,7 +25,6 @@
 		    {% endfor %}
 			<input type="submit" value="Cadastrar" class="btn fr" />
 		</form>
-		{% endblock %}
 	</article>
 {% endblock %}
 
