@@ -1,5 +1,11 @@
-<form enctype="multipart/form-data" action="/musico/atualizar-imagem-capa" method="post">
+<div id="lb-lightbox-avatar">
+	<div class="lightbox-title">
+		<p class="fl">Selecione uma capa para seu perfil</p>
+	</div>
+	
+	<form enctype="multipart/form-data" action="/musico/atualizar-imagem-capa" method="post">
 	{% csrf_token %}
-	<input type="file" name="img" />
-	<input type="submit" />
-</form>
+		<input type="file" name="img" />
+		<input type="submit" />
+	</form>
+</div>

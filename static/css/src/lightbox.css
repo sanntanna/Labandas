@@ -14,8 +14,14 @@
 				.border-radius(10px 10px 0 0);
 				font-size: 20px;
 			    color: white;
-			    padding: 12px 12px 55px 25px;
+			    height: 35px;
+			    padding: 12px 12px 0 25px;
 			    .semibold;
+
+			    	p{
+			    		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat scroll 0 -442px transparent; 
+			    		padding:0 0 0 35px;
+			    	}
 			}
 	}
 	

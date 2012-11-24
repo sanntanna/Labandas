@@ -11,8 +11,7 @@ lb.lightbox = function(param){
 	instance.container = null;
 	instance.box = null;
 	instance.content = null;
-	
-	
+
 	var url, width, height, text;
 	
 	var cssOverlay = {
@@ -23,7 +22,7 @@ lb.lightbox = function(param){
 		left: '0px',
 		background: '#000',
 		opacity: '0.55',
-		display: 'none',
+		display: 'none',	
 		zIndex: 1
 	};
 	

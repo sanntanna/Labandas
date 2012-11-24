@@ -165,8 +165,9 @@
 
 		.musical-style{
 			label{
-				background: none repeat scroll 0 0 #3C3C3C;
+				background: url(http://lasbandas.s3.amazonaws.com/site/bg-musical-style.jpg) repeat-x scroll center top #363636;
 			    border: 1px solid #262525;
+			    box-shadow: 0 1px 0 #4A4A4A;
 			    .border-radius(3px);
 			    color: white;
 			    display: inline-block;
@@ -175,6 +176,7 @@
 			    line-height: 13px;
 			    margin-right: 5px;
 			    padding: 5px;
+			    text-shadow: 1px 1px 0 #313131;
 
 			    input{
 			    	vertical-align: middle;

@@ -1,5 +1,11 @@
-<form enctype="multipart/form-data" action="/musico/atualizar-imagem-perfil" method="post">
-	{% csrf_token %}
-	<input type="file" name="img" />
-	<input type="submit" />
-</form>
+<div id="lb-lightbox-avatar">
+	<div class="lightbox-title">
+		<p class="fl">Selecione um avatar para seu perfil</p>
+	</div>
+	
+	<form enctype="multipart/form-data" action="/musico/atualizar-imagem-perfil" method="post">
+		{% csrf_token %}
+		<input type="file" name="img" />
+		<input type="submit" />
+	</form>
+</div>
