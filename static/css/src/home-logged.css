@@ -133,9 +133,9 @@
 			    	&.teclado	 {background-position: 0 -123px;}
 			    	&.saxofone	 {background-position: 0 -184px;}
 			    	&.sanfona	 {background-position: 0 -244px;}
-			    	&.voz 	 	 {background-position: 0 -305px;}
+			    	&.vocal 	 {background-position: 0 -305px;}
 			    	&.cavaquinho {background-position: 0 -367px;}
-			    	&.violoncelo {background-position: 0 -428px;}
+			    	&.baixo 	 {background-position: 0 -428px;}
 			    	&.piano		 {background-position: 0 -489px;}
 			    	&.violao	 {background-position: 0 -550px;}
 			    	&.pickup	 {background-position: 0 -611px;}
@@ -220,7 +220,7 @@
 					&.bands     {background-position: 0 -417px;}
 
 					.title{
-						 background: none repeat scroll 0 0 #97B62F;
+						background: none repeat scroll 0 0 #97B62F;
 					    display: block;
 					    margin: 82px 0 0 2px;
 					    padding: 5px;
