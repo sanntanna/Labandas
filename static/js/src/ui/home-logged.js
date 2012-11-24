@@ -82,18 +82,6 @@
 	}
 
 	function setupSkills(){
-		$(".skills input:checkbox").each(function(){
-
-			$(this).click(function(){
-				var $parent = $(this).closest('li'),
-					fn = this.checked ? 'removeClass' : 'addClass';
-
-				$parent[fn]('inactive');
-				$parent.find('.skill-value').val('-1').trigger('change');
-
-			}).triggerHandler('click')
-		});
-
 		$(".bar-marker").each(function(){
 			var $marker = $(this),
 				$barFill = $marker.siblings('.filled'),
@@ -123,6 +111,28 @@
 					$input.val(rate).trigger('change');
 				});
 			});
+
+			var val = $input.val();
+			if(val != "" && val != "-1"){
+				var percentage = parseInt(val) * 10 + '%'
+				$barFill.width(percentage);
+				$marker.css('left', percentage)
+					.closest('li').find('.on-off').attr('checked', 'checked');
+			}
+		});
+
+		$(".skills input:checkbox").each(function(){
+			var $check = $(this),
+				$parent = $check.closest('li');
+
+			$check.click(function(e, isTriggered){
+				var fn = this.checked ? 'removeClass' : 'addClass';
+
+				$parent[fn]('inactive');
+				if(!this.checked && !isTriggered) {
+					$parent.find('.skill-value').val('-1').trigger('change');
+				}
+			}).triggerHandler('click', true);
 		});
 	}
 

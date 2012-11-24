@@ -101,11 +101,6 @@ def get_bands(request):
 @onlypost
 def update_avatar(request):
     musician = request.user.get_profile()
-
-    if musician.media is None:
-        musician.media = MusicianMedia.objects.create()
-        musician.media.musician = musician
-
     musician.media.avatar = request.FILES.get('img')
     musician.save()
 
@@ -114,11 +109,6 @@ def update_avatar(request):
 @onlypost
 def update_cover_photo(request):
     musician = request.user.get_profile()
-
-    if musician.media is None:
-        musician.media = MusicianMedia.objects.create()
-        musician.media.musician = musician
-
     musician.media.cover = request.FILES.get('img')
     musician.save()
 

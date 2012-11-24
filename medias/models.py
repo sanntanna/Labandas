@@ -83,4 +83,4 @@ class MusicianMedia(models.Model):
 
 
     def __unicode__(self):
-        return "Midia %d" % self.id
+        return "Midia %s" % self.id

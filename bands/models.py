@@ -18,11 +18,11 @@ class MusicalStyle(models.Model):
         return self.name
 
 class MusicianSkill(models.Model):
-    feeling = models.IntegerField()
-    experience = models.IntegerField()
-    versatility = models.IntegerField()
-    stage_performace = models.IntegerField()
-    commitment = models.IntegerField()
+    feeling = models.IntegerField(null=True, blank=True)
+    experience = models.IntegerField(null=True, blank=True)
+    versatility = models.IntegerField(null=True, blank=True)
+    stage_performace = models.IntegerField(null=True, blank=True)
+    commitment = models.IntegerField(null=True, blank=True)
 
 class Musician(models.Model):
     url = models.SlugField(max_length=50)
@@ -35,8 +35,7 @@ class Musician(models.Model):
     
     media = models.OneToOneField(MusicianMedia, related_name="musician", null=True, blank=True)
     skills = models.OneToOneField(MusicianSkill, related_name="musician", null=True, blank=True)
-
-    _address = models.OneToOneField(Address, related_name="musician", null=True, blank=True)
+    address = models.OneToOneField(Address, related_name="musician", null=True, blank=True)
     
     user = models.OneToOneField(User)
     
@@ -50,21 +49,7 @@ class Musician(models.Model):
     @property
     def bands_list(self):
         return [b.band for b in self.bands] 
-    
-    @property
-    def address(self):
-        if self._address is None:
-            self._address = Address()
-        return self._address
-    
-    @property
-    def profile_image(self):
-        return "https://lasbandas.s3.amazonaws.com/u/%d/profile.png" % self.pk
-    
-    @property
-    def profile_image_small(self):
-        return "https://lasbandas.s3.amazonaws.com/u/%d/profile_small.png" % self.pk
-    
+
     def is_in_band(self, band):
         return MusicianBand.objects.filter(musician=self, band=band, active=True).exists()
     
@@ -74,16 +59,14 @@ class Musician(models.Model):
     def save(self, *args, **kwargs):
         self.url = slugify(self.name())
 
-        if not self._address is None:
-            self._address.fill_by_cep()
-            
-            if self._address.id is None:
-                addr_temp = copy(self._address)
-                self._address = Address.objects.create()
-                addr_temp.id = self._address.id
-                self._address = addr_temp
+        if self.address is None:
+            self.address = Address.objects.create()
 
-            self._address.save()
+        if self.skills is None:
+            self.skills = MusicianSkill.objects.create()
+
+        if self.media is None:
+            self.media = MusicianMedia.objects.create()
 
         super(Musician, self).save(*args, **kwargs)
    
