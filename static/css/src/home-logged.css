@@ -183,6 +183,10 @@
 			    }
 			}
 		}
+		#born{
+			font-size: 12px;
+    		width: 170px;
+		}
 	}
 }
 
