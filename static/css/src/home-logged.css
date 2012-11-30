@@ -29,7 +29,7 @@
 		.transition;
 	}
 
-	&.with_photo{
+	&.with-photo{
 		.change-cover-photo{
 			opacity: 0;
 			bottom: 15px;
@@ -141,7 +141,6 @@
 			    	&.pickup	 {background-position: 0 -611px;}
 			    	&.plus		 {background-position: 0 -611px;}
 			    	&.active{
-			    		background-position-x:-71px;
 			    		.box-shadow(0px 0px 15px @green);
 			    	}
 			    	input{display: none;}
@@ -185,7 +184,7 @@
 		}
 		#born{
 			font-size: 12px;
-    		width: 170px;
+    		width: 90px;
 		}
 	}
 }

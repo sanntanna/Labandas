@@ -6,6 +6,7 @@
 		setupCheckUncheckIcons();
 		setupSkills();
 		setupSolicitations();
+		setupBornDate();
 	};
 	
 	function setupInlineEdition(){
@@ -154,6 +155,17 @@
 				}
 			});
 		});
+	}
+
+	function setupBornDate(){
+		var $select = $("#born"),
+			$target = $("#same-year-as");
+
+		$select.change(function(e){
+			var musicians = $select.find('option[value='+ this.value +']').attr('data-artists').split(',');
+			var someMusician = musicians[Math.round(Math.random() * musicians.length - 1)];
+			$target.html(someMusician);
+		}).trigger('change');
 	}
 	
 	this.init();
