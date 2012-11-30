@@ -164,7 +164,7 @@
 		$select.change(function(e){
 			var musicians = $select.find('option[value='+ this.value +']').attr('data-artists').split(',');
 			var someMusician = musicians[Math.round(Math.random() * musicians.length - 1)];
-			$target.html(someMusician);
+			$target.html(someMusician == "" ? "--" : someMusician);
 		}).trigger('change');
 	}
 	
