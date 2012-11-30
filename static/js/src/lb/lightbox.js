@@ -3,7 +3,7 @@ lb = window.lb || {};
 lb.lightbox = function(param){
 	var instance = this;
 	instance.defaults = {
-		minWidth: 780,
+		minWidth: 380,
 		minHeight: 150,
 		overlay: null
 	};
@@ -38,8 +38,6 @@ lb.lightbox = function(param){
 	
 	var cssWrapper = {
 		margin: '180px auto auto',
-		width: '10px',
-		height: '10px',
 		position: 'relative',
 		textAlign:'left'
 	}
@@ -58,6 +56,8 @@ lb.lightbox = function(param){
 				text = param;
 			} else {
 				url = param;
+				width = url.param('width');
+				height = url.param('height');
 			}
 		} else if(typeof param == 'object'){
 			url = param.url || url;
@@ -122,18 +122,14 @@ lb.lightbox = function(param){
 		
 		var _width = Math.max(width || 0, instance.defaults.minWidth);
 		var _height = Math.max(height || 0, instance.defaults.minHeight);
-		instance.box.centralize(height);
-		instance.box.animate({'height': _height});
-		instance.box.animate({'width': _width}, 500, function(){
-			var _content = response || text;
-			if(_content) instance.content.hide().html(_content).fadeIn();
-		});
+
+		instance.box.centralize(_height).width(_width).height(_height);
+		instance.content.hide().html(response || text).fadeIn();
 	}
 	
 	
 	instance.close = function(){
-		instance.box.animate({'width': 10});
-		instance.box.animate({'height': 0}, 500, function(){
+		instance.box.fadeOut(300, function(){
 			instance.container.remove();
 			instance.defaults.overlay.hide();
 		});
@@ -153,5 +149,7 @@ lb.lightbox.globalSetup = function(settings){
 			totalHeight = t.parent().height();
 		
 		t.css('margin-top', ((totalHeight - height) / 2) + 'px');
+
+		return this;
 	}
 }(jQuery));
