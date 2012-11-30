@@ -114,6 +114,10 @@ lb.lightbox = function(param){
 		$.get(url, null, function(response){
 			instance.loading.hide();
 			callback.apply(null, arguments);
+		}).error(function(){
+			var msg = 'Erro ao carregar a url "<a href="' +  url + '" target="_blank">' + url + '</a>"';
+			new lb.message(msg, lb.message.ERROR);
+			instance.close();
 		});
 	}
 	
