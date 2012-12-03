@@ -23,31 +23,28 @@
 			    		padding:0 0 0 35px;
 			    	}
 			}
+
+			.lightbox-text{
+				padding:20px;
+				font-size:15px;
+				&, p{ color:#fff; }
+			}
 	}
 	
-	.lightbox-close {
-		background-image: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png);
-		border:none;
-		height:15px;
-		position:absolute;
-		width:15px;
-	}
-
 	.lightbox-wrapper{
 		background:	#454545;
 		.border-radius(10px);
 	}
 
 	.tr .lightbox-close-tr{
-		background-position: 0 -395px;
+		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) 0 -395px;
 	    display: block;
+	    position:absolute;
 	    height: 41px;
+	    width: 41px;
 	    outline-width: 0;
 	    right: -25px;
 	    text-indent: -9999em;
 	    top: -21px;
-    	width: 41px;
 	}
-
-	p{ color:#fff; }
 }
