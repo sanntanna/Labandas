@@ -86,7 +86,7 @@ class Band(models.Model):
     
     @property
     def musicians_list(self):
-        return [m.musician for m in  self.musicians]
+        return [m.musician for m in self.musicians]
     
     def encode_page(self):
         return "/banda/%s/%d" % (self.url, self.pk)

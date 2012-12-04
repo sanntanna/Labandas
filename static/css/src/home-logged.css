@@ -355,6 +355,18 @@
 	
 }
 
+#lb-lightbox-soundcloud{
+	#sound-cloud-url{
+		width:370px;
+	}
+
+	.preview{
+		width:370px;
+		height:166px;
+		background: #f5f5f5;
+	}	
+}
+
 .advertising{
 	background: none repeat scroll 0 0 white;
 	border-radius: 3px;
