@@ -27,7 +27,7 @@
 			.lightbox-text{
 				padding:20px;
 				font-size:15px;
-				&, p{ color:#fff; }
+				p,&{ color:#fff; }
 			}
 
 			.lightbox-buttons{

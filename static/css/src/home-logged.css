@@ -374,7 +374,7 @@
 			input{
 				cursor:pointer; 
 				position:absolute; 
-				filter:alpha(opacity=0); 
+				filter:~'alpha(opacity=0)'; 
 				-moz-opacity:0; 
 				opacity:0;
 				width: 200px;
@@ -393,7 +393,7 @@
 			    height: 30px;
 			    left: 66px;
 			    margin-top: 50px;
-			    ofilter:alpha(opacity=100); 
+			    filter:~'alpha(opacity=100)'; 
 				-moz-opacity:100; 
 				opacity:100;
 			    text-transform: uppercase;
