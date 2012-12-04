@@ -7,7 +7,6 @@
 
 {% block js %}
 	{% js "js/src/ui/home-logged.js" %}
-	{% js "js/src/ui/soundcloud.js" %}
 {% endblock %}
 
 {% block mainclass %}can-edit{% endblock %}
@@ -243,13 +242,7 @@
 				<h2 class="marker small">Meu<strong>Som</strong></h2>
 				
 				{% if musician.media.sound_cloud %}
-					<iframe 
-						width="100%" 
-						height="166" 
-						scrolling="no" 
-						frameborder="no" 
-						src="https://w.soundcloud.com/player/?color=ff6600&amp;auto_play=false&amp;show_artwork=false&amp;url={{ musician.media.sound_cloud }}">
-					</iframe>
+					<div class="soundcloud-player" data-src="{{ musician.media.sound_cloud }}"></div>
 					<a href="/lightbox/soundcloud?width=550&amp;height=250" class="lightbox">Alterar musica</a>
 				{% else %}
 					<div class="soundcloud">

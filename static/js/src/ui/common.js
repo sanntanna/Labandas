@@ -5,6 +5,7 @@
 		setupLogin();
 		setupHideParent();
 		setupLightboxes();
+		setupSoundCloudPlayers();
 	};
 	
 	this.domLoaded = function(){
@@ -67,6 +68,10 @@
 			e.preventDefault();
 			new lb.lightbox(this.href);
 		});
+	}
+
+	function setupSoundCloudPlayers(){
+		lb.soundcloud.globalInit();
 	}
 	
 	this.init();

@@ -6,19 +6,15 @@
 	<div class="lightbox-text">
 		<p>Insira o link da sua musica no <a href="https://soundcloud.com/" target="_blank">sound cloud.</a></p>
 		<input type="text" id="sound-cloud-url" placeholder="Cole aqui o link da sua musica" />
+		<input type="button" class="btn" value="ok" id="sound-cloud-url-ok" />
 		<input type="hidden" class="post-on-edit" name="media.sound_cloud" id="sound-cloud-url-value" />
 		<p>Preview</p>
 		<div class="preview">
-			<div id="preview-message-default">Nenhuma musica adicionada</div>
-			<iframe src="about:blank"width="100%" 
-						height="166" 
-						scrolling="no" 
-						frameborder="no" 
-						id="sound-cloud-player-preview">
-			</iframe>
+			<div id="preview-message-default">Cole a url da sua musica acima</div>
+			<div id="sound-cloud-player-preview"></div>
 		</div>
 		<p class="clearfix lightbox-buttons">
-			<a href="#inserir" class="lightbox-close fr">Inserir</a>
+			<a href="#inserir" class="lightbox-close fr" id="confirm-soundcloud-music">Inserir</a>
 			<a href="#fechar" class="lightbox-close fl">Cancelar</a>
 		</p>
 	</div>

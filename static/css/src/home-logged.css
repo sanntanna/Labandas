@@ -306,12 +306,15 @@
 	}
 	.mysound{
 		width: 370px;
+			.soundcloud, .soundcloud-player{
+				margin-top: 10px;
+			}
+
 			.soundcloud{
 				background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 125px -615px #F78910;
 			    .border-radius(7px);
 			    height: 170px;
 			    line-height: 235px;
-			    margin-top: 10px;
 			    padding-left: 10px;
 
 				a{
@@ -357,7 +360,8 @@
 
 #lb-lightbox-soundcloud{
 	#sound-cloud-url{
-		width:490px;
+		width: 400px;
+		margin-right: 10px;
 	}
 
 	.preview{

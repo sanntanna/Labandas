@@ -140,6 +140,8 @@ lb.lightbox = function(param){
 	};
 	
 	init(param);
+
+	return instance;
 };
 
 lb.lightbox.globalSetup = function(settings){

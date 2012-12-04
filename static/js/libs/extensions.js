@@ -1,12 +1,11 @@
 (function(s){
 
 	s.param = function(name, value){
-		var url = this.substr(0, this.indexOf('?') + 1),
-			params = this.indexOf('?') > -1 ? this.substr(this.indexOf('?') + 1) : '';
+		var paramIndex = this.indexOf('?');
+		var url = paramIndex > -1 ? this.substr(0, paramIndex + 1) : this,
+			params = paramIndex > -1 ? this.substr(paramIndex + 1) : '';
 		
-		if(params == "" || !params)  { return undefined; }
-
-		params = eval("({'" + params.split('&').join("','").split('=').join("':'")  + "'})");
+		params = params == "" ? {} : eval("({'" + params.split('&').join("','").split('=').join("':'")  + "'})");
 
 		if(value == undefined) {
 			return params[name];
@@ -17,7 +16,7 @@
 										.split(',').join('&')
 										.split(':').join('=');
 
-		return url + params;
+		return (url.indexOf('?') > -1 ? url : url + '?') + params;
 	}
 
 }(String.prototype));

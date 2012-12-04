@@ -45,6 +45,8 @@ lb.message = function(text, type, timeInSecconds){
 	}
 	
 	showBox(text, type, timeInSecconds);
+
+	return instance;
 };
 
 lb.message.ERROR = 'error';

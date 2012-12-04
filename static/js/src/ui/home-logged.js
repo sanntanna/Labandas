@@ -170,25 +170,20 @@
 	}
 
 	function setupSoundCloud(){
-
-		function isUrlSoundCloud(url){
-			return url.indexOf("//soundcloud.com/") > -1;
-		}
-
-		$(document).delegate("#sound-cloud-url", 'change', function(e){
-			if(isUrlSoundCloud(this.value)){
-				var url = 'https://w.soundcloud.com/player/?color=ff6600&amp;auto_play=true&amp;show_artwork=false&amp;url=' + escape(this.value);
+		$(document).delegate("#sound-cloud-url-ok", 'click', function(e){
+			try{
+				new lb.soundcloud({url: $("#sound-cloud-url").val(), autoPlay: true}, "#sound-cloud-player-preview");
 				$("#preview-message-default").hide();
-				$("#sound-cloud-player-preview").attr('src', url);
-				return;
-			}
-
-			$("#preview-message-default").show();
-			$("#sound-cloud-player-preview").attr('src', "about:blank");
-
-			if(this.value != ""){
+			} catch(e){
+				$("#preview-message-default").show();
 				new lb.message("Url de música inválida", lb.message.ERROR);
 			}
+		});
+
+		$(document).delegate("#confirm-soundcloud-music", "click", function(){
+			var url = $("#sound-cloud-url").val();
+			$("#sound-cloud-url-value").val(url).trigger('change');
+			new lb.soundcloud(url, ".soundcloud-player");
 		});
 	}
 	
