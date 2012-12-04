@@ -2,7 +2,7 @@
 	<p class="fl">Escolha que estilo musical você quer tocar.</p>
 </div>
 
-<<form action="/musico/atualizar/musical_styles" method="post" class="ajax inline-form musical-style">
+<form action="/musico/atualizar/musical_styles" method="post" class="ajax inline-form musical-style">
 {% for style in musical_styles %}
 	<label>
 		<input type="checkbox" value="{{ style.id }}" name="musical_styles" 
