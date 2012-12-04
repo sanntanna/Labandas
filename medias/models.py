@@ -43,7 +43,7 @@ class MusicianMedia(models.Model):
 
     @property
     def avatar_small(self):
-        if not self.media_list.filter(media_type = self.AVATAR_TYPE):
+        if not self.media_list.filter(media_type__name = "avatar"):
             return None
         return "%s%d/%s" % (self.BASE_URL_USER_IMAGES, self.musician.id, self.AVATAR_SMALL_IMG_NAME)
 
