@@ -402,13 +402,22 @@
 
 #lb-lightbox-soundcloud{
 	#sound-cloud-url{
-		width:370px;
+		width:490px;
 	}
 
 	.preview{
-		width:370px;
+		width:500px;
 		height:166px;
 		background: #f5f5f5;
+
+		#preview-message-default{
+			color:#bdbdbd;
+			font:30px arial;
+			cursor: default;
+			position: absolute;
+			top: 190px;
+			left: 66px;
+		}
 	}	
 }
 

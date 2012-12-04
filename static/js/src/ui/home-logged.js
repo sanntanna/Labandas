@@ -7,6 +7,7 @@
 		setupSkills();
 		setupSolicitations();
 		setupBornDate();
+		setupSoundCloud();
 	};
 	
 	function setupInlineEdition(){
@@ -166,6 +167,29 @@
 			var someMusician = musicians[Math.round(Math.random() * musicians.length - 1)];
 			$target.html(someMusician == "" ? "--" : someMusician);
 		}).trigger('change');
+	}
+
+	function setupSoundCloud(){
+
+		function isUrlSoundCloud(url){
+			return url.indexOf("//soundcloud.com/") > -1;
+		}
+
+		$(document).delegate("#sound-cloud-url", 'change', function(e){
+			if(isUrlSoundCloud(this.value)){
+				var url = 'https://w.soundcloud.com/player/?color=ff6600&amp;auto_play=true&amp;show_artwork=false&amp;url=' + escape(this.value);
+				$("#preview-message-default").hide();
+				$("#sound-cloud-player-preview").attr('src', url);
+				return;
+			}
+
+			$("#preview-message-default").show();
+			$("#sound-cloud-player-preview").attr('src', "about:blank");
+
+			if(this.value != ""){
+				new lb.message("Url de música inválida", lb.message.ERROR);
+			}
+		});
 	}
 	
 	this.init();
