@@ -352,7 +352,52 @@
 }
 
 #lb-lightbox-avatar {
-	
+	.upload-wrapper{
+		padding: 40px 60px 60px 85px;
+
+			.upload{
+				display:inline-block; 
+				position:relative; 
+				overflow:hidden; 
+				cursor: pointer;
+			}
+			.action{
+				color: white;
+				font-size: 20px;
+				text-decoration: underline;
+				width: 210px;
+				height: 40px;
+			}
+			input{
+				cursor:pointer; 
+				position:absolute; 
+				filter:alpha(opacity=0); 
+				-moz-opacity:0; 
+				opacity:0;
+				width: 200px;
+			}
+			.or{
+				color: white;
+			    font-size: 33px;
+			    padding:0 50px 0 50px;
+			}
+			.send{
+				background: @green;
+				.border-radius(3px);
+				border: 0;
+			    color: white;
+			    font-size: 17px;
+			    height: 30px;
+			    left: 66px;
+			    margin-top: 50px;
+			    ofilter:alpha(opacity=100); 
+				-moz-opacity:100; 
+				opacity:100;
+			    text-transform: uppercase;
+			    top: 99px;
+			    width: 540px;
+			}
+	}
 }
 
 #lb-lightbox-soundcloud{

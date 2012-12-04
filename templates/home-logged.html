@@ -19,7 +19,7 @@
 		{% if musician.media.cover %}
 			<img src="{{musician.media.cover}}" alt="{{ musician.name }}"/>
 		{% endif %}
-		<a href="/lightbox/foto-capa" class="lightbox change-cover-photo">
+		<a href="/lightbox/foto-capa?width=665&amp;height=200" class="lightbox change-cover-photo">
 			<span class="highlight">+</span> 
 
 			{% if musician.media.cover %}
@@ -34,7 +34,7 @@
 				{% if musician.media.avatar %}
 				<img src="{{musician.media.avatar}}" alt="{{ musician.name }}"/>
 				{% endif %}
-				<a href="/lightbox/foto-perfil" class="lightbox">Alterar foto</a>
+				<a href="/lightbox/foto-perfil?width=665&amp;height=200" class="lightbox">Alterar foto</a>
 			</div>
 			<h1 class="fl editable" data-field="user.first_name">
 				{{ user.get_full_name }}
