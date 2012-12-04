@@ -29,6 +29,10 @@
 				font-size:15px;
 				&, p{ color:#fff; }
 			}
+
+			.lightbox-buttons{
+				margin:20px 40px 0 40px;
+			}
 	}
 	
 	.lightbox-wrapper{

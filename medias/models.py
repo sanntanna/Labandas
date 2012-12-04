@@ -13,7 +13,7 @@ class Media(models.Model):
     media = models.CharField(max_length=255)
     media_type = models.ForeignKey(MediaType)
     def __unicode__(self):
-        return "%s %d" % (self.media_type.name, self.id)
+        return self.media
 
 class MusicianMedia(models.Model):
     BASE_URL_USER_IMAGES = "http://lasbandas.s3.amazonaws.com/u/"
