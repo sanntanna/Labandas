@@ -44,8 +44,6 @@ lb.lightbox = function(param){
 	
 	var csssContent = {
 		background: '#454545',
-		width: '100%',
-		height: '100%',
 		display:'table'
 	}
 	
@@ -53,12 +51,12 @@ lb.lightbox = function(param){
 	function init(param){
 		if(typeof param == 'string'){
 			if(isCssSelector(param)) {
-				text = $(param);
-				width = param.param('width');
-				height = param.param('height');
-			} else if(isText(param)){
+				text = $(param).show();
+			} 
+			else if(isText(param)){
 				text = param;
-			} else {
+			} 
+			else {
 				url = param;
 				width = url.param('width');
 				height = url.param('height');
@@ -78,7 +76,7 @@ lb.lightbox = function(param){
 	}
 
 	function isCssSelector(str){
-		return str.match(/^(#|\.|[a-zA-Z])([^\/?<]*?)$/g) != null;
+		return str.match(/^(#|\.|[a-zA-Z])([^\/?<]*)$/g) != null;
 	}
 
 	function open(){
@@ -133,10 +131,20 @@ lb.lightbox = function(param){
 	function show(response){
 		instance.defaults.overlay.show();
 		
-		instance.content.html(response || text);
+		var content = response || text;
 
-		var _width = Math.max(width || instance.content.width() || 0, instance.defaults.minWidth);
-		var _height = Math.max(height || instance.content.height() || 0, instance.defaults.minHeight);
+		if(content instanceof jQuery){
+			instance.originalContent = content;
+			content.after('<input type="hidden" id="lightbox-replacer" />');
+		}
+
+		instance.content.html(content);
+
+		if(width){ instance.content.width(width); }
+		if(height){ instance.content.height(height); }
+
+		var _width = Math.max(instance.content.width() || 0, instance.defaults.minWidth);
+		var _height = Math.max(instance.content.height() || 0, instance.defaults.minHeight);
 
 		
 		instance.box.centralize(_height).width(_width).height(_height);
@@ -148,6 +156,7 @@ lb.lightbox = function(param){
 		instance.box.fadeOut(300, function(){
 			instance.container.remove();
 			instance.defaults.overlay.hide();
+			$("#lightbox-replacer").replaceWith(instance.originalContent.hide())
 		});
 	};
 	

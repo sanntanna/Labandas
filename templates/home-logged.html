@@ -71,7 +71,25 @@
 
 				<div>
 					<label>Estilo de música:</label>
-					<a href="/lightbox/musical-style?width=620&amp;height=300" class="lightbox">selecione</a>
+					<a href="#lb-lightbox-musical-styles" class="lightbox">selecione</a>
+
+					<div id="lb-lightbox-musical-styles" class="hidden">
+						<div class="lightbox-title">
+							<p class="fl">Escolha que estilo musical você quer tocar.</p>
+						</div>
+						<form action="/musico/atualizar/musical_styles" method="post" class="ajax inline-form musical-style">
+						{% for style in musical_styles %}
+							<label>
+								<input type="checkbox" value="{{ style.id }}" name="musical_styles" 
+									{% if style in musician.musical_styles.all|dictsort:"id" %}
+										checked="checked"
+									{% endif %}
+								/> 
+								{{ style.name }}
+							</label>
+						{% endfor %}
+						</form>
+					</div>
 				</div>
 				
 				<div>
@@ -275,7 +293,7 @@
 	
 
 
-<!	<div class="message">
+<!--<div class="message">
 		{% for solicitation in band_solicitations %}
 			<div class="box solicitation">
 				<p>

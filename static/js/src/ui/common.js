@@ -66,7 +66,7 @@
 	function setupLightboxes(){
 		$(document).delegate("a.lightbox", "click", function(e){
 			e.preventDefault();
-			new lb.lightbox(this.href);
+			new lb.lightbox($(this).attr('href'));
 		});
 	}
 
