@@ -17,10 +17,11 @@ lb.soundcloud = function(instanceParams, targetElement){
 		}
 
 		if(p.width == undefined) p.width = '100%';
-		if(p.height == undefined) p.height = '270';
+		if(p.height == undefined) p.height = '250';
 		if(p.autoPlay == undefined) p.autoPlay = false;
-		if(p.showArtwork == undefined) p.showArtwork = false;
-
+		if(p.showArtwork == undefined) p.showArtwork = true;
+		if(p.show_comments == undefined) p.show_comments = false;
+		if(p.liking == undefined) p.liking = false;
 		return p;
 	}
 
@@ -50,10 +51,12 @@ lb.soundcloud = function(instanceParams, targetElement){
 	function frameUrl(p){
 		var userName = p.url.replace(urlRegex, "$3")
 
-		return ('https://w.soundcloud.com/player/?color=ff6600')
+		return ('https://w.soundcloud.com/player/?color=8fb04e')
 				.param('auto_play', p.autoPlay)
 				.param('auto_play', p.autoPlay)
 				.param('show_artwork', p.showArtwork)
+				.param('liking', p.liking)
+				.param('show_comments', p.show_comments)
 				.param('url', escape("http://api.soundcloud.com/users/" + userName));
 	}
 
