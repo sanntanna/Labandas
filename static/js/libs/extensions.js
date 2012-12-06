@@ -20,3 +20,11 @@
 	}
 
 }(String.prototype));
+
+$(document).delegate('input[type=text],textarea', 'keyup', function(e){
+	var elm = this;
+	clearTimeout(elm.interval);
+	elm.interval = setTimeout(function(){
+		$(elm).trigger('textchanged');
+	}, 1000);
+});

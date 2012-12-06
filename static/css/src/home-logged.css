@@ -306,7 +306,7 @@
 	}
 	.mysound{
 		width: 370px;
-			.soundcloud, .soundcloud-player{
+			.soundcloud, #user-soundcloud-player{
 				margin-top: 10px;
 			}
 
@@ -405,13 +405,13 @@
 
 #lb-lightbox-soundcloud{
 	#sound-cloud-url{
-		width: 400px;
+		width: 500px;
 		margin-right: 10px;
 	}
 
 	.preview{
 		width:500px;
-		height:166px;
+		height:270px;
 		background: #f5f5f5;
 
 		#preview-message-default{
@@ -419,7 +419,7 @@
 			font:30px arial;
 			cursor: default;
 			position: absolute;
-			top: 190px;
+			top: 255px;
 			left: 66px;
 		}
 	}	

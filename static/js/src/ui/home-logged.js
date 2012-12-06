@@ -170,20 +170,22 @@
 	}
 
 	function setupSoundCloud(){
-		$(document).delegate("#sound-cloud-url-ok", 'click', function(e){
+		$(document).delegate("#sound-cloud-url", "textchanged", function(){
 			try{
-				new lb.soundcloud({url: $("#sound-cloud-url").val(), autoPlay: true}, "#sound-cloud-player-preview");
+				var config = {url: $("#sound-cloud-url").val(), autoPlay: true};
+				new lb.soundcloud(config, "#sound-cloud-player-preview");
 				$("#preview-message-default").hide();
 			} catch(e){
 				$("#preview-message-default").show();
-				new lb.message("Url de música inválida", lb.message.ERROR);
+				new lb.message("Url de perfil do soundcloud inválida", lb.message.ERROR);
 			}
 		});
 
 		$(document).delegate("#confirm-soundcloud-music", "click", function(){
 			var url = $("#sound-cloud-url").val();
 			$("#sound-cloud-url-value").val(url).trigger('change');
-			new lb.soundcloud(url, ".soundcloud-player");
+			$(".soundcloud").hide();
+			new lb.soundcloud(url, "#user-soundcloud-player");
 		});
 	}
 	

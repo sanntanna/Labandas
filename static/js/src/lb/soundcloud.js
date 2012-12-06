@@ -3,6 +3,8 @@ lb = window.lb || {};
 lb.soundcloud = function(instanceParams, targetElement){
 	var instance = this;
 	
+	var urlRegex = /^(https\:\/\/)?([a-z.]*)\/([^\/?]*)([^\/]*)$/gi;
+
 	function init(){
 		instanceParams = handleDefaults(instanceParams);
 		render(instanceParams);
@@ -15,7 +17,7 @@ lb.soundcloud = function(instanceParams, targetElement){
 		}
 
 		if(p.width == undefined) p.width = '100%';
-		if(p.height == undefined) p.height = '166';
+		if(p.height == undefined) p.height = '270';
 		if(p.autoPlay == undefined) p.autoPlay = false;
 		if(p.showArtwork == undefined) p.showArtwork = false;
 
@@ -24,11 +26,11 @@ lb.soundcloud = function(instanceParams, targetElement){
 
 	function render(p){
 		if(p.url == undefined) {
-			throw new Error("Informe a url do player");
+			throw new Error("Informe a url do perfil");
 		}
 
 		if(!isUrlSoundCloud(p.url)){
-			throw new Error("Url de player do soundcloud inválida");	
+			throw new Error("Url de perfil do soundcloud inválida");	
 		}
 
 		instance.frame = $("<iframe></iframe>");
@@ -46,14 +48,17 @@ lb.soundcloud = function(instanceParams, targetElement){
 	}
 
 	function frameUrl(p){
+		var userName = p.url.replace(urlRegex, "$3")
+
 		return ('https://w.soundcloud.com/player/?color=ff6600')
 				.param('auto_play', p.autoPlay)
+				.param('auto_play', p.autoPlay)
 				.param('show_artwork', p.showArtwork)
-				.param('url', escape(p.url));
+				.param('url', escape("http://api.soundcloud.com/users/" + userName));
 	}
 
 	function isUrlSoundCloud(url){
-		return url.indexOf("//soundcloud.com/") > -1;
+		return url.match(urlRegex) != null;
 	}
 
 	init();
