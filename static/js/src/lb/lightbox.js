@@ -156,7 +156,10 @@ lb.lightbox = function(param){
 		instance.box.fadeOut(300, function(){
 			instance.container.remove();
 			instance.defaults.overlay.hide();
-			$("#lightbox-replacer").replaceWith(instance.originalContent.hide())
+			
+			if(instance.originalContent){
+				$("#lightbox-replacer").replaceWith(instance.originalContent.hide())
+			}
 		});
 	};
 	
