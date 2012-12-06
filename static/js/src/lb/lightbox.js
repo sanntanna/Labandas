@@ -52,7 +52,11 @@ lb.lightbox = function(param){
 	
 	function init(param){
 		if(typeof param == 'string'){
-			if(isText(param)){
+			if(isCssSelector(param)) {
+				text = $(param);
+				width = param.param('width');
+				height = param.param('height');
+			} else if(isText(param)){
 				text = param;
 			} else {
 				url = param;
@@ -68,11 +72,15 @@ lb.lightbox = function(param){
 		
 		open();
 	}
-	
+
 	function isText(str){
 		return typeof str == 'string' && str.match(/^([^<>'"])*(\.|#|\/)/gi) == null;
 	}
-	
+
+	function isCssSelector(str){
+		return str.match(/^(#|\.|[a-zA-Z])([^\/?<]*?)$/g) != null;
+	}
+
 	function open(){
 		instance.container = render().appendTo('body');
 		instance.box = instance.container.find('.lightbox-wrapper');
@@ -106,11 +114,12 @@ lb.lightbox = function(param){
 	
 	function loadContent(callback){
 		if(url == null){
-			callback.call(null, null);
+			callback.call();
 			return;
 		}
-		
+
 		instance.loading.show();
+
 		$.get(url, null, function(response){
 			instance.loading.hide();
 			callback.apply(null, arguments);
@@ -124,14 +133,17 @@ lb.lightbox = function(param){
 	function show(response){
 		instance.defaults.overlay.show();
 		
-		var _width = Math.max(width || 0, instance.defaults.minWidth);
-		var _height = Math.max(height || 0, instance.defaults.minHeight);
+		instance.content.html(response || text);
 
+		var _width = Math.max(width || instance.content.width() || 0, instance.defaults.minWidth);
+		var _height = Math.max(height || instance.content.height() || 0, instance.defaults.minHeight);
+
+		
 		instance.box.centralize(_height).width(_width).height(_height);
-		instance.content.hide().html(response || text).fadeIn();
+
+		instance.content.hide().fadeIn();
 	}
-	
-	
+
 	instance.close = function(){
 		instance.box.fadeOut(300, function(){
 			instance.container.remove();
