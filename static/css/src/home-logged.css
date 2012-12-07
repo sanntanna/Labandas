@@ -112,6 +112,27 @@
 		margin-bottom:10px;
 	}
 
+	.born-celebrity {
+		background: #606060;
+		.border-radius(3px);
+		.bold;
+		color: white;
+	    clear: both;
+	    display: none;
+	    font-size: 14px;
+	    padding: 10px;
+	    margin-left: 8px;
+	    text-align: center;
+	    text-transform: uppercase;
+	    width: 695px;
+
+	    	#same-year-as{
+	    		color:@green; 
+	    		font-size: 18px;
+	    		padding-left: 5px;
+	    	}
+	}
+
 	.musician-info{
 		width:365px;
 		margin-right: 18px;
