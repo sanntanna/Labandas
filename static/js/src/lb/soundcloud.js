@@ -53,7 +53,6 @@ lb.soundcloud = function(instanceParams, targetElement){
 
 		return ('https://w.soundcloud.com/player/?color=8fb04e')
 				.param('auto_play', p.autoPlay)
-				.param('auto_play', p.autoPlay)
 				.param('show_artwork', p.showArtwork)
 				.param('liking', p.liking)
 				.param('show_comments', p.show_comments)
