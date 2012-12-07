@@ -139,7 +139,7 @@
 			    	&.piano		 {background-position: 0 -489px;}
 			    	&.violao	 {background-position: 0 -550px;}
 			    	&.pickup	 {background-position: 0 -611px;}
-			    	&.plus		 {background-position: 0 -611px;}
+			    	&.plus		 {background-position: 0 -671px; text-indent: -9999px;}
 			    	&.active{
 			    		.box-shadow(0px 0px 15px @green);
 			    	}
@@ -185,11 +185,14 @@
 		width: 375px;
 
 			.about-you{
-				background: transparent;
+				background: none repeat scroll 0 0 transparent;
+			    border: 0 none;
+			    height: auto;
+			    line-height: 20px;
+			    margin: 10px 0 0 10px;
 			    min-height: 125px;
 			    overflow: hidden;
 			    width: 375px;
-			    margin:10px 0 0 10px;
 			}
 	}
 
