@@ -171,15 +171,10 @@
 						<option value="1940" data-artists="John Lennon, Frank Zappa">1940</option>
 					</select>
 				</div>
-				<div>
+				<div id="cep">
 					<label>Digite seu cep:</label>
-					<span data-field="address.cep" class="editable">
-						{% if musician.address.cep %}
-							{{ musician.address.cep }}
-						{% else %}
-							&nbsp;
-						{% endif %}
-					</span>
+					<input data-field="address.cep" class="editable" value="{{ musician.address.cep }}"/>
+					<a href="#">Não sei meu CEP</a>
 				</div>
 			</div>
 			<p class="born-celebrity">Você nasceu no mesmo ano que <span id="same-year-as">--</span></p>

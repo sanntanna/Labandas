@@ -195,6 +195,28 @@
     		width: 150px;
     		height: 20px;
 		}
+		#cep {
+			margin-bottom: 10px;
+
+			label{
+				font-size: 18px;
+    			text-transform: uppercase;
+			}
+			input{
+				border: 0 none;
+			    .border-radius(3px);
+			    font-size: 20px;
+			    height: 30px;
+			    margin-left: 7px;
+			    padding: 0 5px 0 10px;
+			    width: 35%;
+			}
+			a{
+				float: right;
+			    padding-right: 30px;
+			    padding-top: 8px;
+			}
+		}
 	}
 }
 
