@@ -59,8 +59,27 @@
 						{{ instrument.name }}
 					</label>
 				{% endfor %}
-					<label class="plus">Veja mais</label>
+					<a href="#lb-lightbox-more-instruments" class="lightbox"><label class="plus">Veja mais</label></a>
 				</form>
+				
+				<div id="lb-lightbox-more-instruments" class="hidden see-all-option">
+					<div class="lightbox-title">
+							<p class="fl">Escolha seu instrumento</p>
+						</div>
+					<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form instruments-play">
+						{% for instrument in equipament_types %}
+							<label class="{{ instrument.normalized_name }} check-icon">
+								<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
+									{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
+										checked="checked"
+									{% endif %}
+								/> 
+								{{ instrument.name }}
+							</label>
+						{% endfor %}
+					</form>
+					<button class="lightbox-close">Enviar</button>
+				</div>
 			</div>
 
 			<div class="personal-info fl">
@@ -73,7 +92,7 @@
 					<label>Estilo de música:</label>
 					<a href="#lb-lightbox-musical-styles" class="lightbox">selecione o que você procura!</a>
 
-					<div id="lb-lightbox-musical-styles" class="hidden">
+					<div id="lb-lightbox-musical-styles" class="hidden see-all-option">
 						<div class="lightbox-title">
 							<p class="fl">Escolha que estilo musical você quer tocar.</p>
 						</div>

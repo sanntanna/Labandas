@@ -460,12 +460,11 @@
 }
 
 
-#lb-lightbox-musical-styles{
+.see-all-option{
 	width:500px;
 
-	.musical-style {
-		padding:20px;
-	}
+	.musical-style {padding:20px;}
+	.instruments-play{padding: 20px;}
 
 	label{
 		background: url(http://lasbandas.s3.amazonaws.com/site/bg-musical-style.jpg) repeat-x scroll center top #363636;
