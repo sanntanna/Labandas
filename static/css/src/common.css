@@ -260,6 +260,15 @@ header.logged{
 		&.big {background-position: 0 -1px}
 }
 
+.btn-edit{
+	background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat scroll -2px -480px #B9B9BA;
+    border: 1px solid #CBCBCB;
+    .border-radius(3px);
+    color: #434343;
+    float: right;
+    padding: 4px 4px 4px 28px;
+}
+
 #footer-container{
 	background:url(http://lasbandas.s3.amazonaws.com/site/sprite-bgs.png) #323232 0 -371px repeat-x;
 	height:248px;
