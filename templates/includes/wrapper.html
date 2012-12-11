@@ -63,7 +63,7 @@
 			    	{% endif %}
 			    </li>
 			    <li class="user-name">
-			    	<strong><a href="/">{{ user.first_name }}</a></strong>
+			    	<strong><a href="{{ user.get_profile.profile_url }}">{{ user.first_name }}</a></strong>
 			    </li>
 			    <li class="notifications">
 			    	<a href="#notificacoes" class="icon notification ir" title="Nenhuma nova notificação">notificações</a>

@@ -1,78 +1,223 @@
 {% extends "includes/wrapper.html" %}
+{% load staticoptimizer %}
+{% load mathfilters %}
 
 {% block css %}
-	<link rel="stylesheet" href="/s/css/profile.css">
+	{% css "css/src/home-logged.css" %}
 {% endblock %}
 
 {% block js %}
-	<script src="/s/js/ui/musician-profile.js"></script>
+	
 {% endblock %}
+
+{% block mainclass %}can-edit{% endblock %}
 
 {% block content %}
+	<div id="cover-photo"
+		{% if musician.media.cover %} class="with-photo" {% endif %} >
 
-	{% if owner.pk != user.get_profile.pk %}
-		<div id="box-ask-musician">
-			<a href="#convidar-musico" id="ask-musician">Adicionar na banda...</a>
-			<div id="list-your-bands">
-				<ul id="bands"></ul>
+		{% if owner.media.cover %}
+			<img src="{{owner.media.cover}}" alt="{{ owner.name }}"/>
+		{% endif %}
+
+		<div id="user-header" class="clearfix">
+			<div id="profile-photo" class="fl">
+				{% if owner.media.avatar %}
+					<img src="{{owner.media.avatar}}" alt="{{ owner.name }}"/>
+				{% endif %}
 			</div>
-			
-			<div id="instruments">
-				<form id="add-to-band" action="/solicitacao/enviar-para-musico" class="ajax" method="post">
-					<input type="hidden" name="band_id" id="band_id" />
-					<input type="hidden" name="target_id" id="target_id" value="{{ owner.pk }}" />
-					
-					<div id="list-instruments"></div>
-					<input type="submit" value="ok" />
-				</form>
+			<h1 class="fl">{{ owner.name }}</h1>
+		</div>
+	</div>
+	
+	<div id="container" class="fl">
+		<div id="complete-subscription" class="clearfix">
+			<div class="musician-info fl">
+
+				{% for instrument in owner.type_instruments_play.all %}
+					<label class="{{ instrument.normalized_name }} check-icon">
+						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
+							{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
+								checked="checked"
+							{% endif %}
+						/> 
+						{{ instrument.name }}
+					</label>
+				{% endfor %}
+			</div>
+
+			<div class="personal-info fl">
+				<div>
+					<label>Nome completo:</label>
+					<span data-field="user.first_name" class="editable">{{ owner.name }}</span>
+				</div>
+
+				<div>
+					<label>Estilo de música:</label>
+					{% for style in owner.musical_styles.all %}
+						{{ style.name }}
+						{% if not forloop.last %}, {%endif%}
+					{% endfor %}
+				</div>
+				
+				<div>
+					<label>Ano de Nascimento:</label> {{ owner.born_date }}
+					{% if owner.born_date %}
+						{{ owner.born_date }}
+					{% else %}
+					 	--
+					{% endif %}
+				</div>
+				<div>
+					<label>Cidade:</label>
+					{% if owner.address.city %}
+						{{ owner.address.city }}
+					{% else %}
+					 	--
+					{% endif %}
+				</div>
+			</div>
+			<p class="born-celebrity">Você nasceu no mesmo ano que <span id="same-year-as">--</span></p>
+		</div>
+
+		<div class="modules">	
+			<div class="about fl">
+				<textarea class="about-you">{{ musician.about }}</textarea>
+			</div>
+
+			<div id="all-media" class="fl">
+				
+				<a href="#" class="pictures fl">
+					<span class="title">Fotos <span class="count">(68)</span></span>
+				</a>
+				<a href="#" class="movies fl">
+					<span class="title">Vídeos <span class="count">(68)</span></span>
+				</a>
+				<a href="#" class="bands fl">
+					<span class="title">Bandas</span>
+				</a>
 			</div>
 		</div>
-	{% endif %}
-	
-	<h3>{{ owner.user.get_full_name }}</h3>
-	
-	<div class="clearfix">
-		<section id="bands" class="profile-block">
-			<header>
-				<h4>Bandas que toca</h4>
-			</header>
-			<ul>
-				{% for music_band in owner.bands %}
-					<li> 
-						<a href="{{ music_band.band.encode_page }}" data-owner-band-id="{{ music_band.band.id }}">
-						{{ music_band.band.name }} (
-							{%for instrument in music_band.instruments.all %}
-								{{instrument.name}}
-								{% if not forloop.last %}, {%endif%}
-							{% endfor %}
-						)
-						</a>
-					</li>
-				{% endfor %}
-			</ul>
-		</section>
+
+		<div class="modules">	
+			<div class="fl status">
+				<h2 class="marker small">Status</h2>
+				<div class="self-assessment">
+					<ul class="skills">
+						<li>
+							<span>Feeling</span>
+							<span class="bar 
+								{% if owner.skills.feeling <= 0 %} disabled{% endif %}
+								">
+								<div class="filled" style="width:{{owner.skills.feeling|mul:10}}%;"></div>
+							</span>
+						</li>
+						<li>
+							<span>Experiência</span>
+							<span class="bar
+								{% if owner.skills.experience <= 0 %} disabled{% endif %}
+								">
+								<div class="filled" style="width:{{owner.skills.experience|mul:10}}%;"></div>
+							</span>
+						</li>
+						<li>
+							<span>Versatilidade</span>
+							<span class="bar
+								{% if owner.skills.versatility <= 0 %} disabled{% endif %}
+								">
+								<div class="filled" style="width:{{owner.skills.versatility|mul:10}}%;"></div>
+							</span>
+						</li>
+						<li>
+							<span>Performace de palco</span>
+							<span class="bar
+								{% if owner.skills.stage_performace <= 0 %} disabled{% endif %}
+								">
+								<div class="filled" style="width:{{ owner.skills.stage_performace|mul:10}}%;"></owner.skills 1 10div>
+							</span>
+						</li>
+						<li>
+							<span>Comprometimento</span>
+							<span class="bar
+								{% if owner.skills.commitment <= 0 %} disabled{% endif %}
+								">
+								<div class="filled" style="width:{{owner.skills.commitment|mul:10}}%;"></div>
+							</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="fl mysound">
+				<h2 class="marker small">Meu<strong>Som</strong></h2>
+				
+				{% if owner.media.sound_cloud %}
+					<div id="user-soundcloud-player" class="soundcloud-player" data-src="{{ owner.media.sound_cloud }}"></div>
+				{% endif %}
 		
-		<section id="musical-styles" class="profile-block">
-			<header>
-				<h4>Estilos musicais</h4>
-			</header>
-			<ul>
-				{% for style in owner.musical_styles.all %}
-					<li>{{ style.name }}</li>
-				{% endfor %}
-			</ul>
-		</section>
+			</div>
+		</div>
+
+		<div class="modules">	
+			<div class="fl myequipaments">
+				<h2 class="marker small">Meus<strong>Equipamentos</strong></h2>
+			</div>
+			<div class="fl influences">
+				<h2 class="marker small">Influências</h2>
+				<textarea>{% if owner.influences %}{{owner.influences}}{% else %}--{% endif %}</textarea>
+			</div>
+		</div>
 	</div>
-	<section id="instruments-play" class="profile-block">
-		<header>
-			<h4>Instrumentos que toca</h4>
-		</header>
-		<ul>
-			{% for instrument in owner.type_instruments_play.all %}
-				<li>{{ instrument.name }}</li>
-			{% endfor %}
-		</ul>
-	</section>
+
+<div class="fl advertising">
+	<h2>Ofertas</h2>
+</div>
+
+
+	
+
+
+<!--<div class="message">
+		{% for solicitation in band_solicitations %}
+			<div class="box solicitation">
+				<p>
+				<strong>{{ solicitation.from_musician.user.get_full_name }}</strong> 
+				disse que você toca
+				{%for instrument in solicitation.instruments.all %}
+					{{ instrument.name }}{% if not forloop.last %}, {%endif%}
+				{% endfor %}
+				na banda <strong>{{ solicitation.band.name }}</strong>
+				</p>
+				<a href="#accept" class="accept-solicitation" data-id="{{ solicitation.pk }}">Está certo</a>
+				<a href="#decline" class="decline-solicitation" data-id="{{ solicitation.pk }}">Ele viajou</a>
+			</div>
+		{% endfor %}
+	
+		{% if user.get_profile.bands.count = 0 %}
+			<div class="box without-bands">
+				Você ainda não está em nenhuma banda cadastrada no Lasbandas.<br />
+				<a href="/banda/cadastrar">Crie uma banda</a> ou <a href="#">Encontre uma banda que precisa de você</a>.
+			</div>
+		{% else %}
+			<div class="box with-bands">
+				Suas bandas:
+				<ul>
+					{% for music_band in user.get_profile.bands %}
+						<li> 
+							<a href="{{ music_band.band.encode_page }}" target="_blank">
+							{{ music_band.band.name }} (
+								{%for instrument in music_band.instruments.all %}
+									{{instrument.name}}
+									{% if not forloop.last %}, {%endif%}
+								{% endfor %}
+							)
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+				
+				<a href="/banda/cadastrar">[+] Cadastrar nova banda</a>
+			</div>
+		{% endif %}
+	</div> -->
 {% endblock %}
 
-{% block aside %}{% endblock %}

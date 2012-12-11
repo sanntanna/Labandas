@@ -53,7 +53,8 @@ class Musician(models.Model):
     def is_in_band(self, band):
         return MusicianBand.objects.filter(musician=self, band=band, active=True).exists()
     
-    def encode_profile(self):
+    @property
+    def profile_url(self):
         return "/musico/%s/%d" % (self.url, self.pk)
    
     def save(self, *args, **kwargs):

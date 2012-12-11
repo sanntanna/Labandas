@@ -74,7 +74,7 @@ def edit_musician_post(request):
 def profile(request, user_id, name):
     owner = get_object_or_404(Musician, pk=user_id)
     
-    correct_url = owner.encode_profile()
+    correct_url = owner.profile_url
     if correct_url != request.path_info:
         return HttpResponsePermanentRedirect(correct_url)
     

@@ -305,6 +305,10 @@
 				    padding-left:5px;
 				    .transition;
 
+				    &.disabled{
+				    	opacity: 0.4;
+				    	.filled{ display:none; }
+				    }
 
 				    .filled{
 				    	background: @green;
