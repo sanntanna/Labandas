@@ -451,12 +451,7 @@
 			    padding:0 50px 0 50px;
 			}
 			.send{
-				background: @green;
-				.border-radius(3px);
-				border: 0;
-			    color: white;
 			    font-size: 17px;
-			    height: 30px;
 			    left: 66px;
 			    margin-top: 50px;
 			    filter:~'alpha(opacity=100)'; 
