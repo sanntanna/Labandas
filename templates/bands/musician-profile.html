@@ -82,7 +82,7 @@
 
 		<div class="modules">	
 			<div class="about fl">
-				<textarea class="about-you">{{ musician.about }}</textarea>
+				<div class="about-you">{{ owner.about }}</div>
 			</div>
 
 			<div id="all-media" class="fl">
@@ -110,6 +110,9 @@
 								{% if owner.skills.feeling <= 0 %} disabled{% endif %}
 								">
 								<div class="filled" style="width:{{owner.skills.feeling|mul:10}}%;"></div>
+								{% if owner.skills.feeling >= 0 %}
+									{{ owner.skills.feeling }}
+								{% endif %}
 							</span>
 						</li>
 						<li>
@@ -118,6 +121,9 @@
 								{% if owner.skills.experience <= 0 %} disabled{% endif %}
 								">
 								<div class="filled" style="width:{{owner.skills.experience|mul:10}}%;"></div>
+								{% if owner.skills.experience >= 0 %}
+									{{ owner.skills.experience }}
+								{% endif %}
 							</span>
 						</li>
 						<li>
@@ -126,6 +132,9 @@
 								{% if owner.skills.versatility <= 0 %} disabled{% endif %}
 								">
 								<div class="filled" style="width:{{owner.skills.versatility|mul:10}}%;"></div>
+								{% if owner.skills.versatility >= 0 %}
+									{{ owner.skills.versatility }}
+								{% endif %}
 							</span>
 						</li>
 						<li>
@@ -133,7 +142,10 @@
 							<span class="bar
 								{% if owner.skills.stage_performace <= 0 %} disabled{% endif %}
 								">
-								<div class="filled" style="width:{{ owner.skills.stage_performace|mul:10}}%;"></owner.skills 1 10div>
+								<div class="filled" style="width:{{ owner.skills.stage_performace|mul:10}}%;"></div>
+								{% if  owner.skills.stage_performace >= 0 %}
+									{{ owner.skills.stage_performace }}
+								{% endif %}
 							</span>
 						</li>
 						<li>
@@ -142,6 +154,9 @@
 								{% if owner.skills.commitment <= 0 %} disabled{% endif %}
 								">
 								<div class="filled" style="width:{{owner.skills.commitment|mul:10}}%;"></div>
+								{% if owner.skills.commitment >= 0 %}
+									{{ owner.skills.commitment }}
+								{% endif %}
 							</span>
 						</li>
 					</ul>
