@@ -523,10 +523,6 @@
 	}
 
 	.lightbox-close{
-    	background: @green;
-	    border: 0 none;
-	    .border-radius(3px);
-	    color: white;
 	    font-size: 15px;
 	    height: 30px;
 	    margin-bottom: 15px;
