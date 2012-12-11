@@ -149,21 +149,53 @@
 			    width: 53px;
 			    border-radius:5px;
 			    .transition;
-			    	&.guitarra	 {background-position: 0 0}
-			    	&.bateria 	 {background-position: 0 -62px;}
-			    	&.teclado	 {background-position: 0 -123px;}
-			    	&.saxofone	 {background-position: 0 -184px;}
-			    	&.sanfona	 {background-position: 0 -244px;}
-			    	&.vocal 	 {background-position: 0 -305px;}
-			    	&.cavaquinho {background-position: 0 -367px;}
-			    	&.baixo 	 {background-position: 0 -428px;}
-			    	&.piano		 {background-position: 0 -489px;}
-			    	&.violao	 {background-position: 0 -550px;}
-			    	&.pickup	 {background-position: 0 -611px;}
-			    	&.plus		 {background-position: 0 -671px; text-indent: -9999px;}
-			    	&.active{
-			    		.box-shadow(0px 0px 15px @green);
+			    	&.guitarra{
+			    		background-position: 0 0;
+			    			&:hover {background-position:-71px 0;}
 			    	}
+			    	&.bateria{
+			    		background-position: 0 -62px;
+			    			&:hover {background-position:-71px -62px;}
+			    	}
+			    	&.teclado{
+			    		background-position: 0 -123px;
+			    			&:hover {background-position:-71px -123px;}
+			    	}
+			    	&.saxofone{
+			    		background-position: 0 -184px;
+			    			&:hover {background-position:-71px -184px;}
+			    	}
+			    	&.sanfona{
+			    		background-position: 0 -244px;
+			    			&:hover {background-position:-71px -244px;}
+			    	}
+			    	&.vocal {
+			    		background-position: 0 -305px;
+			    			&:hover {background-position:-71px -305px;}
+			    	}
+			    	&.cavaquinho{
+			    		background-position: 0 -367px;
+			    			&:hover {background-position:-71px -367px;}
+			    	}
+			    	&.baixo{
+			    		background-position: 0 -428px;
+			    			&:hover {background-position:-71px -428px;}
+			    	}
+			    	&.piano{
+			    		background-position: 0 -489px;
+			    			&:hover {background-position:-71px -489px;}
+			    	}
+			    	&.violao{
+			    		background-position: 0 -550px;
+			    			&:hover {background-position:-71px -550px;}
+			    	}
+			    	&.pickup{
+			    		background-position: 0 -611px;
+			    			&:hover {background-position:-71px -611px;}
+			    	}
+			    	&.plus	{
+			    		background-position: 0 -671px; text-indent: -9999px;}
+			    	&.active {.box-shadow(0px 0px 15px @green);}
 			    	input{display: none;}
 			}
 	}
@@ -423,12 +455,7 @@
 			    padding:0 50px 0 50px;
 			}
 			.send{
-				background: @green;
-				.border-radius(3px);
-				border: 0;
-			    color: white;
 			    font-size: 17px;
-			    height: 30px;
 			    left: 66px;
 			    margin-top: 50px;
 			    filter:~'alpha(opacity=100)'; 
@@ -485,9 +512,8 @@
 	    padding: 8px 15px;
 	    text-shadow: 1px 1px 0 #313131;
 
-	    &.active{
-			   .box-shadow(0px 0px 8px @green);
-		}
+	    &.active{.box-shadow(0px 0px 8px @green);background: #2c2c2c;}
+	    &:hover{background: #2c2c2c;}
 
 	    input{
 	    	vertical-align: middle;
@@ -496,10 +522,6 @@
 	}
 
 	.lightbox-close{
-    	background: @green;
-	    border: 0 none;
-	    .border-radius(3px);
-	    color: white;
 	    font-size: 15px;
 	    height: 30px;
 	    margin-bottom: 15px;

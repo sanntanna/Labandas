@@ -148,11 +148,21 @@ h2{
 
 .btn{
 	background-color: @green;
-	border:none;
+	background-image:linear-gradient(to bottom, @green, @hover);
+	border-color:rgba(0, 0, 0, 0.02) rgba(0, 0, 0, 0.02) rgba(0, 0, 0, 0.1);
 	border-radius: 3px;
 	color:#fff;
 	padding:5px 30px;
 	font-size:17px;
+	text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
+	box-shadow: 1px 1px 10px #333333; 
+
+	&:hover {
+		background:@hover;
+	    background-position: 0 -15px;
+	    text-decoration: none;
+	    transition: background-position 0.1s linear 0s;
+	}
 }
 
 .white{color:#fff;}
@@ -267,6 +277,11 @@ header.logged{
     color: #434343;
     float: right;
     padding: 4px 4px 4px 28px;
+
+    	&:hover{
+    		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat scroll -2px -480px #383B3B;
+    		color: white;
+    	}
 }
 
 #footer-container{
@@ -314,7 +329,9 @@ header.logged{
 		height: 42px;
 	}
 
-	.btn {font-size:12px;}
+	.btn {
+		font-size:15px;
+	}
 
 	.login{
 		width: 330px;
