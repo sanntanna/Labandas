@@ -277,6 +277,11 @@ header.logged{
     color: #434343;
     float: right;
     padding: 4px 4px 4px 28px;
+
+    	&:hover{
+    		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat scroll -2px -480px #383B3B;
+    		color: white;
+    	}
 }
 
 #footer-container{

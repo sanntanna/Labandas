@@ -513,9 +513,8 @@
 	    padding: 8px 15px;
 	    text-shadow: 1px 1px 0 #313131;
 
-	    &.active{
-			   .box-shadow(0px 0px 8px @green);
-		}
+	    &.active{.box-shadow(0px 0px 8px @green);background: #2c2c2c;}
+	    &:hover{background: #2c2c2c;}
 
 	    input{
 	    	vertical-align: middle;
