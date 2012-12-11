@@ -149,21 +149,53 @@
 			    width: 53px;
 			    border-radius:5px;
 			    .transition;
-			    	&.guitarra	 {background-position: 0 0}
-			    	&.bateria 	 {background-position: 0 -62px;}
-			    	&.teclado	 {background-position: 0 -123px;}
-			    	&.saxofone	 {background-position: 0 -184px;}
-			    	&.sanfona	 {background-position: 0 -244px;}
-			    	&.vocal 	 {background-position: 0 -305px;}
-			    	&.cavaquinho {background-position: 0 -367px;}
-			    	&.baixo 	 {background-position: 0 -428px;}
-			    	&.piano		 {background-position: 0 -489px;}
-			    	&.violao	 {background-position: 0 -550px;}
-			    	&.pickup	 {background-position: 0 -611px;}
-			    	&.plus		 {background-position: 0 -671px; text-indent: -9999px;}
-			    	&.active{
-			    		.box-shadow(0px 0px 15px @green);
+			    	&.guitarra{
+			    		background-position: 0 0;
+			    			&:hover {background-position:-71px 0;}
 			    	}
+			    	&.bateria{
+			    		background-position: 0 -62px;
+			    			&:hover {background-position:-71px -62px;}
+			    	}
+			    	&.teclado{
+			    		background-position: 0 -123px;
+			    			&:hover {background-position:-71px -123px;}
+			    	}
+			    	&.saxofone{
+			    		background-position: 0 -184px;
+			    			&:hover {background-position:-71px -184px;}
+			    	}
+			    	&.sanfona{
+			    		background-position: 0 -244px;
+			    			&:hover {background-position:-71px -244px;}
+			    	}
+			    	&.vocal {
+			    		background-position: 0 -305px;
+			    			&:hover {background-position:-71px -305px;}
+			    	}
+			    	&.cavaquinho{
+			    		background-position: 0 -367px;
+			    			&:hover {background-position:-71px -367px;}
+			    	}
+			    	&.baixo{
+			    		background-position: 0 -428px;
+			    			&:hover {background-position:-71px -428px;}
+			    	}
+			    	&.piano{
+			    		background-position: 0 -489px;
+			    			&:hover {background-position:-71px -489px;}
+			    	}
+			    	&.violao{
+			    		background-position: 0 -550px;
+			    			&:hover {background-position:-71px -550px;}
+			    	}
+			    	&.pickup{
+			    		background-position: 0 -611px;
+			    			&:hover {background-position:-71px -611px;}
+			    	}
+			    	&.plus	{
+			    		background-position: 0 -671px; text-indent: -9999px;}
+			    	&.active {.box-shadow(0px 0px 15px @green);}
 			    	input{display: none;}
 			}
 	}
