@@ -251,6 +251,7 @@
 		ul{
 			margin: 0;
 			width: auto;
+			max-width: 540px;
 
 				li{
 					color: white;
