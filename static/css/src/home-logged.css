@@ -42,6 +42,25 @@
 			.change-cover-photo{opacity: 1;}
 		}
 	}
+	.invite-me{
+		background: #000;
+		.border-radius(3px);
+		color: #FFFFFF;
+	    font-size: 16px;
+	    padding: 0 15px;
+	    position: absolute;
+	    right: 30px;
+	    top: 270px;
+
+	    	.highlight{
+	    		margin-right: 5px;
+	    	}
+		    &:hover{
+		    	background:@green;
+		    	color: white;
+		    	.transition;
+		    }
+	}
 }
 
 .can-edit .editable{cursor:pointer;}
@@ -94,12 +113,14 @@
 		padding-left: 35px;
 		width:400px;
 
+		.complement{.normal;}
+
 	}
 } 
 
 #complete-subscription{
 	border-radius:4px;
-	background: @darkgray;
+	background:#434343;
 	margin:20px 20px 20px 0;
 	padding:15px 0 15px 30px;
 	color:#fff;
@@ -137,67 +158,40 @@
 		width:365px;
 		margin-right: 18px;
 
-			label{
-				background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-icons-instruments.png) no-repeat scroll 0 0 transparent;
-			    display: block;
-			    float: left;
-			    font-size: 11px;
-			    height: 53px;
-			    line-height: 140px;
-			    margin: 0 0 30px 7px;
-			    text-align: center;
-			    width: 53px;
-			    border-radius:5px;
-			    .transition;
-			    	&.guitarra{
-			    		background-position: 0 0;
-			    			&:hover {background-position:-71px 0;}
-			    	}
-			    	&.bateria{
-			    		background-position: 0 -62px;
-			    			&:hover {background-position:-71px -62px;}
-			    	}
-			    	&.teclado{
-			    		background-position: 0 -123px;
-			    			&:hover {background-position:-71px -123px;}
-			    	}
-			    	&.saxofone{
-			    		background-position: 0 -184px;
-			    			&:hover {background-position:-71px -184px;}
-			    	}
-			    	&.sanfona{
-			    		background-position: 0 -244px;
-			    			&:hover {background-position:-71px -244px;}
-			    	}
-			    	&.vocal {
-			    		background-position: 0 -305px;
-			    			&:hover {background-position:-71px -305px;}
-			    	}
-			    	&.cavaquinho{
-			    		background-position: 0 -367px;
-			    			&:hover {background-position:-71px -367px;}
-			    	}
-			    	&.baixo{
-			    		background-position: 0 -428px;
-			    			&:hover {background-position:-71px -428px;}
-			    	}
-			    	&.piano{
-			    		background-position: 0 -489px;
-			    			&:hover {background-position:-71px -489px;}
-			    	}
-			    	&.violao{
-			    		background-position: 0 -550px;
-			    			&:hover {background-position:-71px -550px;}
-			    	}
-			    	&.pickup{
-			    		background-position: 0 -611px;
-			    			&:hover {background-position:-71px -611px;}
-			    	}
-			    	&.plus	{
-			    		background-position: 0 -671px; text-indent: -9999px;}
-			    	&.active {.box-shadow(0px 0px 15px @green);}
-			    	input{display: none;}
-			}
+		.box-label{
+			background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-icons-instruments.png) no-repeat scroll 0 -732px transparent;
+		    .border-radius(5px);
+		    float: left;
+		    font-size: 11px;
+		    line-height: 140px;
+		    margin: 0 0 30px;
+		  	padding-right:7px;
+		    text-align: center;
+				&:hover{background-position: 0 -793px;}
+		}
+		
+		.icons-instruments{
+			background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-icons-instruments.png) no-repeat scroll 0 0 transparent;
+			display: block;
+			line-height: 140px;
+			height: 53px;
+			width: 53px;
+
+		    	&.guitarra  {background-position: 0 0;}
+		    	&.bateria   {background-position: 0 -62px;}
+		    	&.teclado   {background-position: 0 -123px;}
+		    	&.saxofone  {background-position: 0 -184px;}
+		    	&.sanfona   {background-position: 0 -244px;}
+		    	&.vocal     {background-position: 0 -305px;}
+		    	&.cavaquinho{background-position: 0 -367px;}
+		    	&.baixo     {background-position: 0 -428px;}
+		    	&.piano     {background-position: 0 -489px;}
+		    	&.violao    {background-position: 0 -550px;}
+		    	&.pickup    {background-position: 0 -611px;}
+		    	&.plus	    {background-position: 0 -671px; text-indent: -9999px;}
+		    	&.active    {.box-shadow(0px 0px 15px @green);}
+		    	input{display: none;}
+		}
 	}
 
 	.personal-info{
@@ -248,6 +242,31 @@
 			    padding-right: 30px;
 			    padding-top: 8px;
 			}
+		}
+	}
+	&.public{
+		padding: 0;
+		width: 780px;
+
+		ul{
+			margin: 0;
+			width: auto;
+
+				li{
+					color: white;
+				    display: inline-block !important;
+				    font-size: 16px;
+				    line-height: 53px !important;
+				    padding: 0 10px 0 45px;
+				    .semibold;
+				    text-transform: uppercase;
+				    width: auto!important;
+				}
+		}
+		.personal-info {
+		    padding: 14px 0 0 25px;
+		    text-transform: uppercase;
+		    width: auto;
 		}
 	}
 }

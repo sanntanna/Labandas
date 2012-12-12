@@ -50,14 +50,16 @@
 				<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">
 				
 				{% for instrument in equipament_types %}
-					<label class="{{ instrument.normalized_name }} check-icon">
-						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
-							{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
-								checked="checked"
-							{% endif %}
-						/> 
-						{{ instrument.name }}
-					</label>
+					<div class="box-label">
+						<label class="{{ instrument.normalized_name }} check-icon icons-instruments">
+							<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
+								{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
+									checked="checked"
+								{% endif %}
+							/> 
+							{{ instrument.name }}
+						</label>
+					</div>
 				{% endfor %}
 					<a href="#lb-lightbox-more-instruments" class="lightbox"><label class="plus">Veja mais</label></a>
 				</form>
