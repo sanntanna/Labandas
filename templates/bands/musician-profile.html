@@ -34,6 +34,7 @@
 					{% if owner.born_year %}
 						{{ current_year|sub:owner.born_year }}  anos
 					{% endif %}
+					
 					{% if owner.address.state %}
 						{% if owner.address.city %}
 						, {{ owner.address.city }}

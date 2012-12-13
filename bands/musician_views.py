@@ -50,10 +50,8 @@ def update_obj_field(request, obj, attr):
 
     setattr(musician_obj, attr, updated_attr)
 
-    if musician_obj.id is None:
-        musician.save()
-    else:
-        musician_obj.save()
+    musician.save()
+    musician_obj.save()
     
     return JSONResponse({ "success": True })
 

@@ -1,3 +1,4 @@
+import sys
 from django.db import models
 from django.utils.encoding import smart_str
 from django.utils.http import urlquote
@@ -21,6 +22,7 @@ class Address(models.Model):
     def fill_by_cep(self, cep=None):
         finder = AddressFinder()
         result = finder.find(cep or self.cep)
+
         if result.status == Status.NOT_FOUND:
             return
         
