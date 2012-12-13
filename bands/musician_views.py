@@ -1,3 +1,5 @@
+import datetime
+
 from bands.forms import ExpressRegistrationForm, UserInfoForm
 from bands.models import Musician
 from django.contrib.auth import authenticate, login
@@ -82,6 +84,7 @@ def profile(request, user_id, name):
     
     c = RequestContext(request, {
         'owner': owner,
+        'current_year': datetime.datetime.now().year
     })
     
     return HttpResponse(t.render(c))

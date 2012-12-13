@@ -111,10 +111,7 @@
 		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat scroll 0 -1px transparent;
 		margin:@fotosize - 35px 0 0 10px;
 		padding-left: 35px;
-		width:400px;
-
 		.complement{.normal;}
-
 	}
 } 
 

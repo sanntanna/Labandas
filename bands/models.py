@@ -28,6 +28,8 @@ class Musician(models.Model):
     url = models.SlugField(max_length=50)
     about = models.CharField(max_length=200)
     influences = models.CharField(max_length=150)
+
+    born_year = models.IntegerField(null=True, blank=True)
     
     equipaments = models.ManyToManyField(Equipament)
     type_instruments_play = models.ManyToManyField(EquipamentType, null=True, blank=True)
@@ -60,14 +62,18 @@ class Musician(models.Model):
     def save(self, *args, **kwargs):
         self.url = slugify(self.name())
 
-        if self.address is None:
-            self.address = Address.objects.create()
-
         if self.skills is None:
             self.skills = MusicianSkill.objects.create()
 
         if self.media is None:
             self.media = MusicianMedia.objects.create()
+
+        if self.address is None:
+            self.address = Address.objects.create()
+
+        if self.address.city is None and self.address.state is None and self.address.cep != "":
+            self.address.fill_by_cep()
+            self.address.save()
 
         super(Musician, self).save(*args, **kwargs)
    

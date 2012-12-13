@@ -116,7 +116,7 @@
 				
 				<div>
 					<label>Ano de Nascimento:</label>
-					<select name="born" id="born">
+					<select name="born_year" id="born" class="post-on-edit" data-single="true">
 						<option data-artists="" value="">Selecione uma data:</option>
 						<option value="2011" data-artists="">2011</option>
 						<option value="2010" data-artists="">2010</option>
@@ -191,10 +191,16 @@
 						<option value="1941" data-artists="Bob Dylan">1941</option>
 						<option value="1940" data-artists="John Lennon, Frank Zappa">1940</option>
 					</select>
+
+					<input type="hidden" id="current-born-year" value="{{ musician.born_year }}" />
 				</div>
 				<div id="cep">
 					<label>Digite seu cep:</label>
-					<input data-field="address.cep" class="editable" value="{{ musician.address.cep }}"/>
+					<input name="address.cep" class="post-on-edit" 
+					{% if musician.address.cep %}
+						value="{{ musician.address.cep }}"
+					{% endif %}
+					/>
 					<a href="#">Não sei meu CEP</a>
 				</div>
 			</div>

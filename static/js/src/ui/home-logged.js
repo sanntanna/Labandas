@@ -12,7 +12,7 @@
 	
 	function setupInlineEdition(){
 
-		$(document).delegate('input.post-on-edit, textarea.post-on-edit', 'change', function(e){
+		$(document).delegate('input.post-on-edit, textarea.post-on-edit, select.post-on-edit', 'change', function(e){
 			var $elm = $(this);
 
 			var dataField = this.name.split('.'),
@@ -159,17 +159,26 @@
 	}
 
 	function setupBornDate(){
+		function onchange(e){
+			var musicians = $select.find('option[value='+ $select.val() +']').attr('data-artists').split(',');
+			var someMusician = musicians[Math.round(Math.random() * musicians.length - 1)];
+			$target.html(someMusician == "" ? "--" : someMusician);
+			$phrase.show();
+		}
+		
 		var $select = $("#born"),
 			$target = $("#same-year-as");
 			$phrase = $(".born-celebrity")
 
-		$select.change(function(e){
-			var musicians = $select.find('option[value='+ this.value +']').attr('data-artists').split(',');
-			var someMusician = musicians[Math.round(Math.random() * musicians.length - 1)];
-			$target.html(someMusician == "" ? "--" : someMusician);
-			$phrase.show();
+		var currentYear = parseInt($("#current-born-year").val());
 
-		}).trigger('change');
+		if(!isNaN(currentYear)){
+			$select.find("option[value=" + currentYear + "]").attr('selected', 'selected');
+		}
+
+		$select.change(onchange);
+
+		onchange();
 	}
 
 	function setupSoundCloud(){

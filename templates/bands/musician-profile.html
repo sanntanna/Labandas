@@ -28,7 +28,20 @@
 					<img src="{{owner.media.avatar}}" alt="{{ owner.name }}"/>
 				{% endif %}
 			</div>
-			<h1 class="fl">{{ owner.name }}, <span class="complement">{{ owner.born_date }} anos, {{ owner.address.city }}</span></h1>
+			<h1 class="fl">
+				{{ owner.name }}, 
+				<span class="complement">
+					{% if owner.born_year %}
+						{{ current_year|sub:owner.born_year }}  anos
+					{% endif %}
+					{% if owner.address.state %}
+						{% if owner.address.city %}
+						, {{ owner.address.city }}
+						{% endif %}
+						, {{ owner.address.state }}
+					{% endif %}
+				</span>
+			</h1>
 		</div>
 	</div>
 	
