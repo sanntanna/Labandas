@@ -71,7 +71,7 @@ class Musician(models.Model):
         if self.address is None:
             self.address = Address.objects.create()
 
-        if self.address.cep != "":
+        if not self.address.cep is None and self.address.cep != "":
             self.address.fill_by_cep()
             self.address.save()
 
