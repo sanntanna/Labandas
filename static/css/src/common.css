@@ -312,7 +312,7 @@ header.logged{
 		background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-social.png) repeat scroll 0 0 transparent;
 	    display: block;
 	    height: 40px;
-	    margin-left: 20px;
+	    margin-left: 9px;
 	    text-indent: -9999px;
 	    width: 260px;
 	}
@@ -353,6 +353,6 @@ header.logged{
 			}
 	}
 	.sign{
-		padding: 35px 25px 25px;
+		padding: 35px 20px 25px;
 	}
 }
