@@ -16,7 +16,7 @@ def home(request):
     
     t = loader.get_template('home.html')
     c = RequestContext(request, {
-        'form': ExpressRegistrationForm(),
+        'subscribe_form': ExpressRegistrationForm(),
     })
     c.update(csrf(request))
     
@@ -50,5 +50,13 @@ def logout(request):
 def lightbox(request, lightbox_file):
     t = loader.get_template('lightbox/%s.html' % lightbox_file)
     c = RequestContext(request)
+    c.update(csrf(request))
+    return HttpResponse(t.render(c))
+
+def lightbox_login(request):
+    t = loader.get_template('lightbox/login.html')
+    c = RequestContext(request, {
+        'subscribe_form': ExpressRegistrationForm(),
+    })
     c.update(csrf(request))
     return HttpResponse(t.render(c))

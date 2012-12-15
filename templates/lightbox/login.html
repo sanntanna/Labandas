@@ -19,11 +19,7 @@
 	<div class="fl sign">
 		<h2>Não tenho cadastro</h2>
 		<form action="/musico/cadastrar" method="post" id="subscribe-form" class="ajax">{% csrf_token %}
-			{% for field in form %}
-		        <div>
-		            {{ field }}
-		        </div>
-		    {% endfor %}
+			{% include "includes/subscription-form.html" %}
 			<input type="submit" value="ACEITO OS TERMOS DE USO E QUERO ME CADASTRAR" class="btn fr" />
 		</form>
 	</div>
