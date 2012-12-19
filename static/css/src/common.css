@@ -325,33 +325,30 @@ header.logged{
 	}
 
 	input{
+		margin-bottom:8px;
 		width: 325px;
 		height: 42px;
 	}
 
 	.btn {
 		font-size:15px;
+		width:330px;
+		padding-left: 0px;
+		padding-right: 0px;
+		text-align: center;
+
+		&.enter{
+			height: 28px;
+		    padding-top: 1px;
+		    width: 115px;
+		}
 	}
 
 	.login{
 		width: 330px;
 		padding: 35px;
-
-			ul{
-				list-style: none outside none;
-    			margin-left: 0;
-
-    				li{
-    					padding-bottom: 8px;
-
-    					.btn{
-    						height: 28px;
-						    padding-top: 1px;
-						    width: 115px;
-    					}
-    				}
-			}
 	}
+
 	.sign{
 		padding: 35px 20px 25px;
 	}
