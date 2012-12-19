@@ -115,7 +115,7 @@
 			});
 
 			var val = $input.val();
-			if(val != "" && val != "-1"){
+			if(val && val != "" && val.toLowerCase() != "none" && val != "-1"){
 				var percentage = parseInt(val) * 10 + '%'
 				$barFill.width(percentage);
 				$marker.css('left', percentage)
