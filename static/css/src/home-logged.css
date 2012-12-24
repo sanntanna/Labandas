@@ -157,6 +157,7 @@
 
 		.box-label{
 			background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-icons-instruments.png) no-repeat scroll 0 -732px transparent;
+			.light;
 		    .border-radius(5px);
 		    float: left;
 		    font-size: 11px;
