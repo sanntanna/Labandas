@@ -56,7 +56,7 @@ lb.soundcloud = function(instanceParams, targetElement){
 				.param('show_artwork', p.showArtwork)
 				.param('liking', p.liking)
 				.param('show_comments', p.show_comments)
-				.param('url', escape("http://api.soundcloud.com/users/" + userName));
+				.param('url', escape("http://api.soundcloud.com/" + userName));
 	}
 
 	function isUrlSoundCloud(url){
