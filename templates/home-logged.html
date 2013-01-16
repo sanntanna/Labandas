@@ -7,10 +7,7 @@
 
 {% block js %}
 	{% js "js/src/ui/home-logged.js" %}
-{% endblock %}
-
-{% block mainclass %}can-edit{% endblock %}
-
+{% endblock %} 
 {% block content %}
 	<div id="cover-photo"
 		{% if musician.media.cover %} class="with-photo" {% endif %} >
@@ -68,8 +65,8 @@
 				
 				<div id="lb-lightbox-more-instruments" class="hidden see-all-option">
 					<div class="lightbox-title">
-							<p class="fl">Escolha seu instrumento</p>
-						</div>
+						<p class="fl">Escolha seu instrumento</p>
+					</div>
 					<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form instruments-play">
 						{% for instrument in equipament_types %}
 							<label class="{{ instrument.normalized_name }} check-icon">
@@ -94,7 +91,14 @@
 
 				<div>
 					<label>Estilo de música:</label>
-					<a href="#lb-lightbox-musical-styles" class="lightbox">selecione o que você procura!</a>
+					{% if musician.musical_styles.count = 0 %}
+						<a href="#lb-lightbox-musical-styles" class="lightbox">selecione o que você procura!</a>
+					{% else %}
+						{% for style in musician.musical_styles.all %}
+							{{ style.name }}{% if not forloop.last %},{% endif %}
+						{% endfor %}
+						<a href="#lb-lightbox-musical-styles" class="lightbox">[+] editar</a>
+					{% endif %}
 
 					<div id="lb-lightbox-musical-styles" class="hidden see-all-option">
 						<div class="lightbox-title">

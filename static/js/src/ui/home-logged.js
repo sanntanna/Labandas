@@ -8,6 +8,7 @@
 		setupSolicitations();
 		setupBornDate();
 		setupSoundCloud();
+		musicalStyles();
 	};
 	
 	function setupInlineEdition(){

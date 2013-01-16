@@ -47,6 +47,9 @@
 	</div>
 	
 	<div id="container" class="fl">
+
+		{% if owner.type_instruments_play.count > 0 or owner.musical_styles.count > 0 %}
+
 		<div id="complete-subscription" class="clearfix public">
 			<ul class="musician-info fl">	
 				{% for instrument in owner.type_instruments_play.all %}
@@ -73,6 +76,10 @@
 			</div>
 			<p class="born-celebrity">Você nasceu no mesmo ano que <span id="same-year-as">--</span></p>
 		</div>
+
+		{% else %}
+			<div class=""></div>
+		{% endif %}
 
 		<div class="modules">	
 			<div class="about fl">
