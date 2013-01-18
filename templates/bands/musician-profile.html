@@ -13,7 +13,7 @@
 {% block mainclass %}can-edit{% endblock %}
 
 {% block content %}
-	<div id="cover-photo">
+	<div id="cover-photo"
 		{% if musician.media.cover %} class="with-photo" {% endif %} >
 
 		<a href="#" class="invite-me"><span class="highlight">+</span>Convide-me para sua banda</a> 
@@ -168,6 +168,9 @@
 				
 				{% if owner.media.sound_cloud %}
 					<div id="user-soundcloud-player" class="soundcloud-player" data-src="{{ owner.media.sound_cloud }}"></div>
+				{% else %}
+					<div id="user-soundcloud-player"></div>
+					<div class="soundcloud">Este usuário não possui playlist :(</div>
 				{% endif %}
 		
 			</div>

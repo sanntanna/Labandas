@@ -415,6 +415,9 @@
 			    height: 170px;
 			    line-height: 235px;
 			    padding-left: 10px;
+			    text-align: center;
+			    font-size: 15px;
+			    color: #fff;
 
 				a{
 					color: white;
