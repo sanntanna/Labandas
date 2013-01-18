@@ -369,6 +369,17 @@
 				    	.transition(.3s, width);
 				    }
 
+				    .rating{
+				    	background: #162112;
+					    .border-radius(5px);
+					    font-size: 12px;
+					    height: 20px;
+					    margin: -14px -50px 0 0;
+					    padding: 0 7px 2px;
+					    text-align: center;
+					    width: 20px;
+				    }
+
 				    .bar-marker{
 				    	background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-status.png) no-repeat -5px -37px transparent;
 				    	width:11px;

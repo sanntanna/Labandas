@@ -13,7 +13,7 @@
 {% block mainclass %}can-edit{% endblock %}
 
 {% block content %}
-	<div id="cover-photo"
+	<div id="cover-photo">
 		{% if musician.media.cover %} class="with-photo" {% endif %} >
 
 		<a href="#" class="invite-me"><span class="highlight">+</span>Convide-me para sua banda</a> 
@@ -112,7 +112,7 @@
 								">
 								<div class="filled" style="width:{{owner.skills.feeling|mul:10}}%;"></div>
 								{% if owner.skills.feeling >= 0 %}
-									{{ owner.skills.feeling }}
+									<div class="fr rating">{{ owner.skills.feeling }}</div>
 								{% endif %}
 							</span>
 						</li>
@@ -123,7 +123,7 @@
 								">
 								<div class="filled" style="width:{{owner.skills.experience|mul:10}}%;"></div>
 								{% if owner.skills.experience >= 0 %}
-									{{ owner.skills.experience }}
+									<div class="fr rating">{{ owner.skills.experience }}</div>
 								{% endif %}
 							</span>
 						</li>
@@ -134,7 +134,7 @@
 								">
 								<div class="filled" style="width:{{owner.skills.versatility|mul:10}}%;"></div>
 								{% if owner.skills.versatility >= 0 %}
-									{{ owner.skills.versatility }}
+									<div class="fr rating">{{ owner.skills.versatility }}</div>
 								{% endif %}
 							</span>
 						</li>
@@ -145,7 +145,7 @@
 								">
 								<div class="filled" style="width:{{ owner.skills.stage_performace|mul:10}}%;"></div>
 								{% if  owner.skills.stage_performace >= 0 %}
-									{{ owner.skills.stage_performace }}
+									<div class="fr rating">{{ owner.skills.stage_performace }}</div>
 								{% endif %}
 							</span>
 						</li>
@@ -156,7 +156,7 @@
 								">
 								<div class="filled" style="width:{{owner.skills.commitment|mul:10}}%;"></div>
 								{% if owner.skills.commitment >= 0 %}
-									{{ owner.skills.commitment }}
+									<div class="fr rating">{{ owner.skills.commitment }}</div>
 								{% endif %}
 							</span>
 						</li>
