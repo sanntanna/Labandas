@@ -53,6 +53,12 @@
 				location.reload()
 			}
 		});
+
+		$(document).delegate("#subscribe-form", "ajaxcomplete", function(e, data){
+			if(data.success) {
+				location.reload();
+			}
+		});
 	}
 	
 	function setupHideParent(){
