@@ -1,8 +1,10 @@
+#coding=UTF-8
 import datetime
 
 from bands.forms import ExpressRegistrationForm, UserInfoForm
 from bands.models import Musician
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404, redirect
@@ -21,8 +23,14 @@ def subscribe_musician(request):
     if not form.is_valid():
         return JSONResponse({'success': False, 'errors': form.errors})
     
+    email = form.cleaned_data['email']
+
+    if User.objects.filter(username=email).count():
+        message = "%s ja esta cadastrado" % email
+        return JSONResponse({'success': False, 'errors': {'email': [message]}})    
+
     form.save()
-    user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
+    user = authenticate(username=email, password=form.cleaned_data['password'])
     login(request, user)
     return JSONResponse({'success': True, 'user': user})
 
