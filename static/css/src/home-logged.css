@@ -115,13 +115,65 @@
 	}
 } 
 
-#complete-subscription{
-	border-radius:4px;
+#myPanel{
+	.border-radius(4px);
 	background:#434343;
-	margin:20px 20px 20px 0;
-	padding:15px 0 15px 30px;
+    color: #FFFFFF;
+    margin: 20px 0 30px;
+    padding: 15px 20px;
+    width: 738px;
+    .light;
+
+    	a{color: white; text-decoration: underline;}
+		.title{font-size: 18px;}
+		.add-band{
+			height: 25px;
+			background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat 375px -753px #2a2a2a;
+			border: 1px solid #4c4c4c;
+			.border-radius(5px);
+			padding: 10px 15px 15px;
+			margin: 10px 0;
+			color: #FFFFFF;
+
+				p{font-size: 18px; .normal}
+				.btn{
+					font-size: 13px;
+				    padding-left: 5px;
+				    padding-right: 5px;
+				    text-transform: uppercase;
+				}
+		}
+		.hd{
+			background:#6F6F6F;
+			.border-radius(4px);
+    		padding: 5px;
+    		margin-bottom: 15px;
+		}
+
+		.more{
+			font-size: 12px;
+		    text-transform: uppercase;
+		    width: 100%;
+		    margin-top: 5px;
+		}
+		.related-musicians{
+			.thumb{
+				background:url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll -4px -217px #FFFFFF;
+				width: 50px; 
+				height: 50px; 
+				margin-right: 15px;
+			}
+			.description{width: 270px; margin-bottom: 5px;}
+		}
+}
+
+#complete-subscription{
+	.border-radius(4px);
+	background:#434343;
+	padding:15px 0 15px 20px;
 	color:#fff;
-	width: 750px;
+	width: 760px;
+	margin-bottom: 30px;
 
 	.attention{
 		color:#e93b58;
@@ -139,10 +191,9 @@
 	    display: none;
 	    font-size: 14px;
 	    padding: 10px;
-	    margin-left: 8px;
 	    text-align: center;
 	    text-transform: uppercase;
-	    width: 695px;
+	    width: 720px;
 
 	    	#same-year-as{
 	    		color:@green; 

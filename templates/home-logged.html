@@ -39,9 +39,62 @@
 	</div>
 	
 	<div id="container" class="fl">
+		<div id="myPanel" class="clearfix">
+			<div class="line">
+				<div class="fl title">Meu Painel</div>
+				<a href="#" class="fr">ocultar</a>
+			</div>
+			<div class="add-band">
+				<p class="fl">Você também pode criar um perfil pra sua banda.</p>
+				<button class="btn fr">Criar perfil da minha banda</button>
+			</div>
+			<div class="line">
+				<div class="hd line">
+					<p class="icons ads fl">Anúncios relacionado ao seu perfil</p>
+					<a href="#" class="fr">ver todos</a>
+				</div>
+				<div class="related-musicians">
+					<div class="fl size1of2">
+						<div class="thumb fl"></div>
+						<span class="description fl">
+							<strong>Marcos Vinicius Andrade Dutra</strong>
+							<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+						</span>
+						<div class="thumb fl"></div>
+						<span class="description fl">
+							<strong>Marcos Vinicius Andrade Dutra</strong>
+							<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+						</span>
+						<div class="thumb fl"></div>
+						<span class="description fl">
+							<strong>Marcos Vinicius Andrade Dutra</strong>
+							<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+						</span>
+					</div>
+					<div class="fr size1of2">
+						<div class="thumb fl"></div>
+						<span class="description fl">
+							<strong>Marcos Vinicius Andrade Dutra</strong>
+							<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+						</span>
+						<div class="thumb fl"></div>
+						<span class="description fl">
+							<strong>Marcos Vinicius Andrade Dutra</strong>
+							<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+						</span>
+						<div class="thumb fl"></div>
+						<span class="description fl">
+							<strong>Marcos Vinicius Andrade Dutra</strong>
+							<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+						</span>
+					</div>
+				</div>
+				<button class="btn more">Veja mais anúncios</button>
+			</div>
+		</div>
 		<div id="complete-subscription" class="clearfix">
 			{% if musician.type_instruments_play.all.count = 0 or not musician.address.city %}
-				<h3 class="attention">*COMPLETE SEU CADASTRO</h3>
+				<h3 class="attention">SEUS DADOS</h3>
 			{% endif %}
 			<div class="musician-info fl">
 				<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">

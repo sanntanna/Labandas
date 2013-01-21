@@ -82,6 +82,12 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 .clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
+.line{
+	clear: both;
+    display: block;
+    overflow: hidden;
+}
+.size1of2 {width: 50%;}
 
 
 @media all and (orientation:portrait) {}
@@ -351,4 +357,13 @@ header.logged{
 	.sign{
 		padding: 35px 20px 25px;
 	}
+}
+
+.icons {
+	background:url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat 0 0 transparent;
+	padding-left: 20px;
+	font-size: 14px;
+	.semibold;
+
+		&.ads{background-position: 0 -304px;}
 }
