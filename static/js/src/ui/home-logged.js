@@ -201,6 +201,34 @@
 			new lb.soundcloud(url, "#user-soundcloud-player");
 		});
 	}
+
+	function musicalStyles(){
+		function handleLabelAndGetSelecteds(){
+			var $selectedStyles = $('input[name=musical_styles]:checked'),
+				$link = $("#edit-musical-styles-button");
+
+			var textAttr = $selectedStyles.length > 0 ? "withselection" : "withoutselection";
+			
+			$link.text( $link.data(textAttr) );
+
+			return $selectedStyles;
+		}
+
+		$(document).bind('lightboxclosed', function(e, lightboxInstance){
+			if(lightboxInstance.id != "#lb-lightbox-musical-styles"){
+				return;
+			}
+
+			var $selecteds = handleLabelAndGetSelecteds();
+			var content = $selecteds.map(function(i){
+				return $(this).closest('label').text().trim();
+			}).get().join(', ');
+
+			$("#selected-musical-styles").text(content);
+		});
+
+		handleLabelAndGetSelecteds();
+	}
 	
 	this.init();
 	$(this.domLoaded);

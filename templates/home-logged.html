@@ -144,15 +144,19 @@
 
 				<div>
 					<label>Estilo de música:</label>
-					{% if musician.musical_styles.count = 0 %}
-						<a href="#lb-lightbox-musical-styles" class="lightbox">selecione o que você procura!</a>
-					{% else %}
+					<span id="selected-musical-styles">
 						{% for style in musician.musical_styles.all %}
 							{{ style.name }}{% if not forloop.last %},{% endif %}
 						{% endfor %}
-						<a href="#lb-lightbox-musical-styles" class="lightbox">[+] editar</a>
-					{% endif %}
+					</span>
 
+					<a href="#lb-lightbox-musical-styles" 
+						class="lightbox" 
+						id="edit-musical-styles-button" 
+						data-withselection="[+]editar"
+						data-withoutselection="selecione o que você procura!"></a>
+					
+					
 					<div id="lb-lightbox-musical-styles" class="hidden see-all-option">
 						<div class="lightbox-title">
 							<p class="fl">Escolha que estilo musical você quer tocar.</p>

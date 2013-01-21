@@ -52,6 +52,7 @@ lb.lightbox = function(param){
 		if(typeof param == 'string'){
 			if(isCssSelector(param)) {
 				text = $(param).show();
+				instance.id = param;
 			} 
 			else if(isText(param)){
 				text = param;
@@ -60,14 +61,16 @@ lb.lightbox = function(param){
 				url = param;
 				width = url.param('width');
 				height = url.param('height');
+				instance.id = url;
 			}
 		} else if(typeof param == 'object'){
 			url = param.url || url;
 			text = param.content || text;
 			width = param.width;
 			height = param.height;
+			instance.id = url;
 		}
-		
+
 		open();
 	}
 
@@ -154,6 +157,8 @@ lb.lightbox = function(param){
 
 	instance.close = function(){
 		instance.box.fadeOut(300, function(){
+			$(document).trigger('lightboxclosed', instance);
+
 			instance.container.remove();
 			instance.defaults.overlay.hide();
 			
