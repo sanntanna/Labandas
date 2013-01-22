@@ -15,34 +15,8 @@ import logging
 
 logger = logging.getLogger('labandas')
 
-def add_band(request):
-    t = loader.get_template('bands/edit-band.html')
-    c = RequestContext(request, {
-        'form': BandForm(), 
-        'musician_form':BandMusicianForm()
-    })
-    
-    return HttpResponse(t.render(c))
-
-@onlyajax
-@onlypost
-def add_band_post(request):
-    form = BandForm(data=request.POST)
-    band = None
-    success = True
-    current_musician = request.user.get_profile()
-    form_musician = BandMusicianForm(data=request.POST)
-    
-    if form.is_valid() and form_musician.is_valid():
-        band = form.save()
-        form_musician.save_admin(band=band, musician=current_musician)
-    else:
-        success = False
-    
-    if success:
-        return JSONResponse({'success': success})
-    
-    return JSONResponse({'success': False, 'errors': form.errors})
+def create_band(request, band_name):
+    return JSONResponse({'success': True})
     
 def edit_band(request, band_id):
     band = get_object_or_404(Band, pk=band_id)
