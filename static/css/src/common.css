@@ -245,10 +245,12 @@ header.logged{
 	a{color:#fff;}
 	a:hover{color:@green;}
 	.avatar-small{
-			img {
-				margin-top: 2px;
-				.border-radius(3px);
-			}
+		background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll -125px -236px #FFFFFF;
+	    height: 35px;
+	    width: 40px;
+		.border-radius(3px);	
+		margin-top: 10px;
+			img{.border-radius(3px);}
 		}
 }
 
