@@ -63,22 +63,6 @@ def update_obj_field(request, obj, attr):
     
     return JSONResponse({ "success": True })
 
-def edit_musician(request):
-    t = loader.get_template('bands/edit-musician.html')
-    c = RequestContext(request, {'form': UserInfoForm(instance=request.user)})
-    
-    return HttpResponse(t.render(c))
-
-@onlypost
-@onlyajax
-def edit_musician_post(request):
-    form = UserInfoForm(data=request.POST, instance=request.user)
-    if not form.is_valid():
-        return JSONResponse({'success':False, 'errors': form.errors})
-    
-    form.save()
-    return JSONResponse({'success': True})
-
 def profile(request, user_id, name):
     owner = get_object_or_404(Musician, pk=user_id)
     
