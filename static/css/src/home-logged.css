@@ -276,10 +276,6 @@
 		#cep {
 			margin-bottom: 10px;
 
-			label{
-				font-size: 18px;
-    			text-transform: uppercase;
-			}
 			input{
 				border: 0 none;
 			    .border-radius(3px);
