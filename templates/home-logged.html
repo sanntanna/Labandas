@@ -8,6 +8,9 @@
 {% block js %}
 	{% js "js/src/ui/home-logged.js" %}
 {% endblock %} 
+
+{% block mainclass %}can-edit{% endblock %}
+
 {% block content %}
 	<div id="cover-photo"
 		{% if musician.media.cover %} class="with-photo" {% endif %} >

@@ -15,8 +15,17 @@ import logging
 
 logger = logging.getLogger('labandas')
 
-def create_band(request, band_name):
-    return JSONResponse({'success': True})
+@onlypost
+def create_band(request):
+    band_name = request.POST['band_name']
+
+    if band_name is None or band_name == "":
+        return JSONResponse({'success': False})
+
+    created_band = Band.objects.create(name=band_name)
+    created_band.add_musician(request.user.get_profile(), None, True)
+
+    return JSONResponse({'success': True, 'band_page_url': created_band.page_url})
     
 def edit_band(request, band_id):
     band = get_object_or_404(Band, pk=band_id)
@@ -74,7 +83,7 @@ def edit_band_post(request, band_id):
 def band_page(request, band_id, name):
     band = get_object_or_404(Band, pk=band_id)
     
-    correct_url = band.encode_page()
+    correct_url = band.page_url
     if correct_url != request.path_info:
         return HttpResponsePermanentRedirect(correct_url)
     

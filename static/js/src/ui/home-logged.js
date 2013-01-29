@@ -9,6 +9,7 @@
 		setupBornDate();
 		setupSoundCloud();
 		musicalStyles();
+		bandCreation();
 	};
 	
 	function setupInlineEdition(){
@@ -230,6 +231,13 @@
 		handleLabelAndGetSelecteds();
 	}
 	
+	function bandCreation(){
+		$(document).delegate("#new-band-form", "ajaxcomplete", function(e, response){
+			if(!response.success){ return; }
+			location.href = response.band_page_url;
+		});
+	}
+
 	this.init();
 	$(this.domLoaded);
 })();

@@ -95,19 +95,21 @@ class Band(models.Model):
     def musicians_list(self):
         return [m.musician for m in self.musicians]
     
-    def encode_page(self):
+    @property
+    def page_url(self):
         return "/banda/%s/%d" % (self.url, self.pk)
     
     def is_admin(self, musician):
         return self.all_musicians.get(active=True, musician=musician).is_admin
     
-    def add_musician(self, musician, instruments=None):
+    def add_musician(self, musician, instruments=None, is_admin=False):
         if musician in self.musicians_list:
             raise ValueError("O musico %d ja esta na banda '%d'" %  (musician.id, self.id))
         
         musician_band = MusicianBand()
         musician_band.band = self
         musician_band.musician = musician
+        musician_band.is_admin = is_admin
         musician_band.save()
         
         if instruments != None:
