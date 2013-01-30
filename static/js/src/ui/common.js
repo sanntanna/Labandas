@@ -6,6 +6,7 @@
 		setupHideParent();
 		setupLightboxes();
 		setupSoundCloudPlayers();
+		slide();
 	};
 	
 	this.domLoaded = function(){
@@ -78,6 +79,12 @@
 
 	function setupSoundCloudPlayers(){
 		lb.soundcloud.globalInit();
+	}
+
+	function slide(){
+		$('.slide').click(function() {
+			$('#myPanel').slideDown('slow')
+		})
 	}
 	
 	this.init();

@@ -169,6 +169,7 @@
 			}
 			.description{width: 270px; margin-bottom: 5px;}
 		}
+		.inner{display:none;}
 }
 
 #complete-subscription{
@@ -180,10 +181,17 @@
 	margin-bottom: 30px;
 
 	.attention{
-		color:#e93b58;
-		.semibold;
-		font-size:18px;
-		margin-bottom:10px;
+		.light;
+		color: #E93B58;
+	    font-size: 18px;
+	    font-weight: normal;
+	    margin-bottom: 20px;
+	}
+
+	a{
+		color: white;
+    	text-decoration: underline;
+    	margin-right: 20px;
 	}
 
 	.born-celebrity {
@@ -207,7 +215,7 @@
 	}
 
 	.musician-info{
-		width:365px;
+		width:380px;
 		margin-right: 18px;
 
 		.box-label{
