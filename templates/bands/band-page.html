@@ -1,44 +1,97 @@
 {% extends "includes/wrapper.html" %}
+{% load staticoptimizer %}
 
 {% block css %}
-	<link rel="stylesheet" href="/s/css/profile.css">
+	{% css "css/src/home-logged.css" %}
+	{% css "css/src/profile.css" %}
 {% endblock %}
 
 {% block js %}
-{% endblock %}
+	{% js "js/src/ui/home-logged.js" %}
+{% endblock %} 
+
+{% block mainclass %}can-edit{% endblock %}
 
 {% block content %}
-	<h3>{{ band.name }}</h3>
+	<div id="cover-photo"
+		{% if musician.media.cover %} class="with-photo" {% endif %} >
+
+		{% if musician.media.cover %}
+			<img src="{{musician.media.cover}}" alt="{{ musician.name }}"/>
+		{% endif %}
+		<a href="/lightbox/foto-capa?width=665&amp;height=200" class="lightbox change-cover-photo">
+			<span class="highlight">+</span> 
+
+			{% if musician.media.cover %}
+				Alterar foto da capa
+			{% else %}
+				Adicionar foto da capa
+			{% endif %}
+		</a>
+
+		<div id="user-header" class="clearfix">
+			<h1 class="fl editable" data-field="user.first_name"><span>Banda</span>{{ band.name }}</h1>
+		</div>
+	</div>
+		
+	<div id="container" class="fl">
+		<div class="modules">	
+			<div class="about fl">
+				<textarea class="about-you post-on-edit" name="about" data-single="true">{% if musician.about %}{{musician.about}}{% else %}Fale sobre você{% endif %}</textarea>
+				<button class="btn-edit">Editar</button>
+			</div>
+
+			<div id="all-media" class="fl">
+				
+				<a href="#" class="pictures fl">
+					<span class="title">Fotos <span class="count">(68)</span></span>
+				</a>
+				<a href="#" class="movies fl">
+					<span class="title">Vídeos <span class="count">(68)</span></span>
+				</a>
+				<a href="#" class="bands fl">
+					<span class="title">Setlist</span>
+				</a>
+			</div>
+			
+			<div class="fl mysound">
+				<h2 class="marker small">Meu<strong>Som</strong></h2>
+				
+				{% if musician.media.sound_cloud %}
+					<div id="user-soundcloud-player" class="soundcloud-player" data-src="{{ musician.media.sound_cloud }}"></div>
+					<a href="/lightbox/soundcloud?width=550&amp;height=420" class="lightbox btn-edit">Editar</a>
+				{% else %}
+					<div id="user-soundcloud-player"></div>
+					<div class="soundcloud">
+						<a href="/lightbox/soundcloud?width=550&amp;height=420" class="lightbox">Adicione aqui seu player do soundcloud</a>	
+					</div>
+				{% endif %}
+		
+			</div>
+		</div>
+		<div class="modules">	
+			<div class="fl band-members">
+				<h2 class="marker small">Integrantes</h2>
+				<ul class="members">
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div class="fl influences">
+				<h2 class="marker small">Influências</h2>
+				<textarea type="text" class="post-on-edit" name="influences" data-single="true">{% if musician.influences %}{{musician.influences}}{% else %}Digite aqui suas influências{% endif %}</textarea>
+			</div>
+		</div>
+	</div>
+	<div class="fl advertising">
+		<h2>Ofertas</h2>
+	</div>
+		
+		
+		
 	
-	<section id="musicians" class="profile-block">
-		<header>
-			<h4>Formação</h4>
-		</header>
-		<ul>
-			{% for music_band in band.musicians %}
-				<li> 
-					<a href="{{ music_band.musician.encode_profile }}">
-					{%for instrument in music_band.instruments.all %}
-						{{instrument.name}}
-						{% if not forloop.last %}, {%endif%}
-					{% endfor %}:
-					{{ music_band.musician.user.get_full_name }}
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
-	</section>
-	
-	<section id="musical-styles" class="profile-block">
-		<header>
-			<h4>Estilos musicais</h4>
-		</header>
-		<ul>
-			{% for style in band.musical_styles.all %}
-				<li>{{ style.name }}</li>
-			{% endfor %}
-		</ul>
-	</section>
 {% endblock %}
 
 {% block aside %}{% endblock %}

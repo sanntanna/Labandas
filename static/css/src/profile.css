@@ -1,3 +1,38 @@
+@import "_colors.less";
+@import "_utils.less";
+
+#cover-photo{
+	#user-header h1{margin: 0; height: 38px;}
+}
+.modules{
+	margin-top: 20px;
+		.about{
+			height: 340px;
+				.about-you {height: 340px;  margin: 0 10px;}
+		}
+
+	.mysound {margin-left: 35px;}
+	.band-members{
+		margin-right: 45px;
+    	width: 370px;
+
+    		.members{
+    			 margin: 20px 0;
+    				li{
+		    			background:url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 15px -205px #FFFFFF;
+		    			.border-radius(3px);
+					    display: inline-table;
+					    height: 92px;
+					    margin-right: 20px;
+					    width: 92px;
+    				}
+    		}
+	}
+}
+
+
+
+
 #box-ask-musician{
 	float:right;
 	border-radius:10px;

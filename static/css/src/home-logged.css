@@ -503,7 +503,8 @@
 	.influences{
 		textarea{
 			background: none repeat scroll 0 0 #504F50;
-			.border-radius(7px);
+		    border: 0 none;
+		    box-shadow: none;
 		    color: white;
 		    font-size: 20px;
 		    height: 115px;
