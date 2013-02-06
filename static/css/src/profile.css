@@ -13,18 +13,21 @@
 
 	.mysound {margin-left: 35px;}
 	.band-members{
-		margin-right: 45px;
-    	width: 370px;
+		margin-right: 20px;
+    	width: 390px;
 
     		.members{
     			 margin: 20px 0;
     				li{
-		    			background:url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 15px -205px #FFFFFF;
-		    			.border-radius(3px);
+					    background: url("http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 14px -205px #FFFFFF;
+					    .border-radius(7px);
+					    border:1px solid #cccccc;
 					    display: inline-table;
 					    height: 92px;
-					    margin-right: 20px;
-					    width: 92px;
+					    margin-right: 10px;
+					    width: 85px;
+
+					    &.last {margin-right: 0;}
     				}
     		}
 	}
