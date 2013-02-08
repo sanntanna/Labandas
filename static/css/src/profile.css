@@ -2,7 +2,16 @@
 @import "_utils.less";
 
 #cover-photo{
-	#user-header h1{margin: 0; height: 38px;}
+	#user-header {
+		h1{
+			margin: 0;
+			height: 38px; 
+			font-size: 30px; 
+			.bold;
+			line-height: 28px;
+		}
+		span{.light; font-size: 24px;}
+	}
 }
 .modules{
 	margin-top: 20px;
