@@ -169,7 +169,7 @@
 			}
 			.description{width: 270px; margin-bottom: 5px;}
 		}
-		.inner{display:none;}
+		/*.inner{display:none;}*/
 }
 
 #complete-subscription{
@@ -620,6 +620,24 @@
 	    text-transform: uppercase;
 	    width: 250px;
     }
+}
+
+#new-band-form{
+	.band_name {
+		color:#FF6600;
+		display: block;
+	    font-size: 22px;
+	    font-weight: bold;
+	    height: 35px;
+	    margin: 30px auto 0;
+	    text-align: center;
+	    text-transform: uppercase;
+	    width: 60%;
+	}
+	.btn{
+		display: block;
+    	margin: 20px auto 0;
+	}
 }
 
 .advertising{
