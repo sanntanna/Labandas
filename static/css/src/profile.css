@@ -38,6 +38,17 @@
 					    float: left;
 
 					    &.last {margin-right: 0;}
+
+					    span{
+					    	float: left;
+						    .light;
+						    font-size: 14px;
+						    line-height: 16px;
+						    padding-top: 100px;
+						    position: absolute;
+						    text-align: left;
+						    width: 87px;
+					    }
     				}
 
     			a{
