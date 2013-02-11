@@ -28,16 +28,32 @@
     		.members{
     			 margin: 20px 0;
     				li{
-					    background: url("http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png") no-repeat scroll 14px -205px #FFFFFF;
+					    background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 14px -205px #FFFFFF;
 					    .border-radius(7px);
 					    border:1px solid #cccccc;
 					    display: inline-table;
 					    height: 92px;
 					    margin-right: 10px;
 					    width: 85px;
+					    float: left;
 
 					    &.last {margin-right: 0;}
     				}
+
+    			a{
+					&.add{
+						background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll -85px -542px transparent;
+					    color: #000000;
+					    display: block;
+					    font-weight: bold;
+					    margin-left: 20px;
+					    margin-top: 12px;
+					    padding: 50px 20px 20px 0;
+					    text-align: center;
+					    text-decoration: underline;
+					    width: 30px;
+					}
+				}
     		}
 	}
 }
@@ -75,67 +91,4 @@
 		    top: 435px;
 		    width: 30px;
     	}
-}
-
-
-#box-ask-musician{
-	float:right;
-	border-radius:10px;
-	background:#F4F3A4;
-	padding:15px;
-	position:relative;
-}
-
-
-#ask-musician-complete{
-	float:right;
-}
-
-#list-your-bands{
-	display:none;
-}
-
-#list-your-bands a{
-	padding:3px 10px;
-	display:block;
-}
-
-#list-your-bands .already-in-band{
-	text-decoration: line-through;
-}
-
-#list-your-bands a.selected{
-	background-color:#EFE26F;
-}
-
-
-#instruments{
-	display:none;
-	border-radius:5px;
-	background:#fff;
-	padding:4px 10px;
-	position:absolute;
-	top:0px;
-	left:110%;
-	width:150px;
-	border:3px solid #EFE26F;
-}
-
-#instruments label{display:block;}
-
-.profile-block{
-	float:left;
-	border-radius:10px;
-	background:#F4F3A4;
-	width:300px;
-	margin:0 15px 15px 0;
-	padding:30px;
-	-webkit-transition: all .4s linear;
-	   -moz-transition: all .4s linear;
-	     -o-transition: all .4s linear;
-			transition: all .4s linear; 
-}
-
-.profile-block:hover{
-	background-color:#EFE26F;
 }

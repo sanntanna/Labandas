@@ -496,6 +496,9 @@
 				    display: block;
 				    margin-top: 20px;
 				    padding: 20px 20px 20px 55px;
+				    color: #000;
+				    text-decoration: underline;
+					font-weight: bold;
 				}
 			}
 	}
