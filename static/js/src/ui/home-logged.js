@@ -232,6 +232,7 @@
 	}
 	
 	function bandCreation(){
+		console.log("p");
 		$(document).delegate("#new-band-form", "ajaxcomplete", function(e, response){
 			if(!response.success){ return; }
 			location.href = response.band_page_url;

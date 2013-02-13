@@ -63,6 +63,8 @@
 					    text-align: center;
 					    text-decoration: underline;
 					    width: 30px;
+
+					    &:hover{color:#97B62F;}
 					}
 				}
     		}
