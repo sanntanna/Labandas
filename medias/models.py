@@ -96,3 +96,58 @@ class MusicianMedia(models.Model):
 
     def __unicode__(self):
         return "Midia %s" % self.id
+
+
+class BandMedia(models.Model):
+    BASE_URL_USER_IMAGES = "http://lasbandas.s3.amazonaws.com/banda/"
+    COVER_IMG_NAME = "cover.png"
+
+    media_list = models.ManyToManyField(Media, null=True, blank=True)
+
+    def get_cover(self):
+        if not self.media_list.filter(media_type__name = "cover_photo"):
+            return None
+        return "%s%d/%s" % (self.BASE_URL_USER_IMAGES, self.band.id, self.COVER_IMG_NAME)
+
+    def set_cover(self, uploaded_image):
+        handler = ImageHandler()
+        images = handler.handle_cover_image(uploaded_image)
+        
+        s3 = AmazonS3()
+        s3.upload_file(images['default'], '/banda/%d/%s' % (self.band.id, self.COVER_IMG_NAME))
+
+        if not self.media_list.filter(media_type__name = "cover_photo"):
+            self.media_list.add(Media.objects.create(media = "cover", media_type = self.__type("cover_photo")))
+
+    cover = property(get_cover, set_cover)
+
+    def get_sound_cloud(self):
+        objs = self.media_list.filter(media_type__name = "sound_cloud")
+        return None if len(objs) == 0 else objs[0]
+    
+    def set_sound_cloud(self, value):
+        validate = URLValidator(verify_exists=False)
+
+        try:
+            validate(value)
+            if value.find("soundcloud.com/") == -1:
+                raise ValidationError()
+        except ValidationError, e:
+            raise ValidationError("Url do sound cloud invalida")
+
+        sound_cloud = self.get_sound_cloud()
+
+        if sound_cloud is None:
+            self.media_list.add(Media.objects.create(media = value, media_type = self.__type("sound_cloud")))
+            return
+
+        sound_cloud.media = value
+        sound_cloud.save()
+
+    sound_cloud = property(get_sound_cloud, set_sound_cloud)
+
+    def __type(self, name):
+        return MediaType.objects.get(name=name)
+
+    def __unicode__(self):
+        return "Midia %s" % self.id

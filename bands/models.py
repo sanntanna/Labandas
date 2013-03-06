@@ -8,7 +8,7 @@ from django.template.defaultfilters import slugify
 from django.utils import timezone
 from equipaments.models import Equipament, EquipamentType
 from geoapi.models import Address
-from medias.models import MusicianMedia
+from medias.models import MusicianMedia, BandMedia
 
 class MusicalStyle(models.Model):
     name = models.CharField(max_length=50)
@@ -86,6 +86,8 @@ class Band(models.Model):
     registration_date = models.DateTimeField('Registration date')
     musical_styles = models.ManyToManyField(MusicalStyle)
     url = models.SlugField(max_length=50)
+
+    media = models.OneToOneField(BandMedia, related_name="band", null=True, blank=True)
     
     @property
     def musicians(self):
