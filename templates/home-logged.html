@@ -386,53 +386,5 @@
 <div class="fl advertising">
 	<h2>Ofertas</h2>
 </div>
-
-
-	
-
-
-<!--<div class="message">
-		{% for solicitation in band_solicitations %}
-			<div class="box solicitation">
-				<p>
-				<strong>{{ solicitation.from_musician.user.get_full_name }}</strong> 
-				disse que você toca
-				{%for instrument in solicitation.instruments.all %}
-					{{ instrument.name }}{% if not forloop.last %}, {%endif%}
-				{% endfor %}
-				na banda <strong>{{ solicitation.band.name }}</strong>
-				</p>
-				<a href="#accept" class="accept-solicitation" data-id="{{ solicitation.pk }}">Está certo</a>
-				<a href="#decline" class="decline-solicitation" data-id="{{ solicitation.pk }}">Ele viajou</a>
-			</div>
-		{% endfor %}
-	
-		{% if user.get_profile.bands.count = 0 %}
-			<div class="box without-bands">
-				Você ainda não está em nenhuma banda cadastrada no Lasbandas.<br />
-				<a href="/banda/cadastrar">Crie uma banda</a> ou <a href="#">Encontre uma banda que precisa de você</a>.
-			</div>
-		{% else %}
-			<div class="box with-bands">
-				Suas bandas:
-				<ul>
-					{% for music_band in user.get_profile.bands %}
-						<li> 
-							<a href="{{ music_band.band.encode_page }}" target="_blank">
-							{{ music_band.band.name }} (
-								{%for instrument in music_band.instruments.all %}
-									{{instrument.name}}
-									{% if not forloop.last %}, {%endif%}
-								{% endfor %}
-							)
-							</a>
-						</li>
-					{% endfor %}
-				</ul>
-				
-				<a href="/banda/cadastrar">[+] Cadastrar nova banda</a>
-			</div>
-		{% endif %}
-	</div> -->
 {% endblock %}
 

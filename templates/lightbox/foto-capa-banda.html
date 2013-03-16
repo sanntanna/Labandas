@@ -1,0 +1,19 @@
+<div id="lb-lightbox-avatar">
+	<div class="lightbox-title">
+		<p class="fl">Selecione uma capa para a fanpage da sua banda</p>
+	</div>
+	
+	<form enctype="multipart/form-data" action="/banda/atualizar-img-capa" method="post" class="upload-wrapper">
+	{% csrf_token %}
+		<span class="upload">
+			<input type="file" name="img" />
+			<span class="action">Escolher a partir de fotos</span>
+		</span>
+		<span class="or">OU</span>
+		<span class="upload">
+			<input type="file" name="img" />
+			<span class="action">Enviar uma imagem</span>
+		</span>
+		<input type="submit" class="send btn" value="Enviar"/>
+	</form>
+</div>

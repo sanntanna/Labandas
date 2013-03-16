@@ -47,3 +47,10 @@ def remove_musician_from_band(request):
     success = MusicianBand.objects.get(pk=request.POST.get('id')).deactivate()
     return JSONResponse({'success': success})
 
+@onlypost
+def update_cover_photo_band(request):
+    band = request.user.get_profile()
+    band.media.cover = request.FILES.get('img')
+    band.save()
+
+    return redirect('/')
