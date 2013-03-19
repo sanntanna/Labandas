@@ -49,7 +49,7 @@ def logout(request):
 
 def lightbox(request, lightbox_file):
     t = loader.get_template('lightbox/%s.html' % lightbox_file)
-    c = RequestContext(request)
+    c = RequestContext(request, request.GET)
     c.update(csrf(request))
     return HttpResponse(t.render(c))
 

@@ -14,15 +14,15 @@
 
 {% block content %}
 	<div id="cover-photo"
-		{% if musician.media.cover %} class="with-photo" {% endif %} >
+		{% if band.media.cover %} class="with-photo" {% endif %} >
 
-		{% if musician.media.cover %}
-			<img src="{{musician.media.cover}}" alt="{{ musician.name }}"/>
+		{% if band.media.cover %}
+			<img src="{{band.media.cover}}" alt="{{ band.name }}"/>
 		{% endif %}
-		<a href="/lightbox/foto-capa-banda?width=665&amp;height=200" class="lightbox change-cover-photo">
+		<a href="/lightbox/foto-capa-banda?width=665&amp;height=200&amp;band_id={{ band.id }}" class="lightbox change-cover-photo">
 			<span class="highlight">+</span> 
 
-			{% if musician.media.cover %}
+			{% if band.media.cover %}
 				Alterar foto da capa
 			{% else %}
 				Adicionar foto da capa

@@ -121,6 +121,11 @@ class Band(models.Model):
         self.url = slugify(self.name)
         if self.pk == None:
             self.registration_date = timezone.now()
+
+
+        if self.media is None:
+            self.media = BandMedia.objects.create()
+
         
         super(Band, self).save(*args, **kwargs)
         

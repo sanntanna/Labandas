@@ -3,7 +3,7 @@
 		<p class="fl">Selecione uma capa para a fanpage da sua banda</p>
 	</div>
 	
-	<form enctype="multipart/form-data" action="/banda/atualizar-img-capa" method="post" class="upload-wrapper">
+	<form enctype="multipart/form-data" action="/banda/atualizar-img-capa/{{ band_id }}" method="post" class="upload-wrapper">
 	{% csrf_token %}
 		<span class="upload">
 			<input type="file" name="img" />

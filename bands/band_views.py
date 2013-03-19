@@ -3,14 +3,14 @@ from announcements.forms import AnnouncementForm
 from bands.forms import BandForm, BandMusicianForm
 from bands.models import Band, MusicianBand
 from django.http import HttpResponse, HttpResponsePermanentRedirect, HttpResponseNotFound
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.template import loader
 from django.template.context import RequestContext
 from httpmethod.decorators import onlypost, onlyajax
 from jsonui.response import JSONResponse
 from solicitations.models import Solicitation
+from medias.models import BandMedia
 import logging
-
 
 logger = logging.getLogger('labandas')
 
@@ -48,9 +48,8 @@ def remove_musician_from_band(request):
     return JSONResponse({'success': success})
 
 @onlypost
-def update_cover_photo_band(request):
-    band = request.user.get_profile()
+def update_cover_photo(request, band_id):
+    band = Band.objects.get(pk=band_id)
     band.media.cover = request.FILES.get('img')
-    band.save()
 
-    return redirect('/')
+    return redirect(band.page_url)
