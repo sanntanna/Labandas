@@ -3,7 +3,6 @@ from bands.models import Musician, Band
 from datetime import datetime
 from django.db import models
 from equipaments.models import EquipamentType
-from twisted.test.test_pbfailure import SecurityError
 
 class Type(object):
     RESPONSE_BAND_ANNOUNCEMENT, INVITE_TO_BAND, ADD_TO_BAND = range(3)
@@ -21,7 +20,7 @@ class SolicitationManager(models.Manager):
      
     def ask_to_add(self, sender_musician, target_musician, band, instruments):
         if not band.musicians.get(musician=sender_musician).is_admin:
-            raise SecurityError('Esse musico nao pode enviar solicitacao para essa banda')
+            raise ValueError('Esse musico nao pode enviar solicitacao para essa banda')
         
         
         if target_musician.is_in_band(band):

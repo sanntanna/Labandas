@@ -40,11 +40,41 @@ def band_page(request, band_id, name):
     
     return HttpResponse(t.render(c))
 
+
+@onlypost
+@onlyajax
+def update_field(request, field):
+
+    updated_field = request.POST.getlist(field) if not request.POST.get('single') else request.POST.get(field)
+    band = Band.objects.get(pk=request.GET.get('id'))
+
+    setattr(band, field, updated_field)
+
+    band.save()
+    return JSONResponse({ "success": True })
+
+@onlypost
+@onlyajax
+def update_obj_field(request, obj, attr):
+
+    updated_attr = request.POST.get(attr)
+
+    band = Band.objects.get(pk=request.GET.get('id'))
+
+    band_obj = getattr(band, obj)
+
+    setattr(band_obj, attr, updated_attr)
+
+    band.save()
+    band_obj.save()
+    
+    return JSONResponse({ "success": True })
+
 @onlyajax
 @onlypost
-def remove_musician_from_band(request):
+def remove_band_from_band(request):
     #TODO: adicionar validação para nao remover todos os admins, sempre deve ficar um
-    success = MusicianBand.objects.get(pk=request.POST.get('id')).deactivate()
+    success = bandBand.objects.get(pk=request.POST.get('id')).deactivate()
     return JSONResponse({'success': success})
 
 @onlypost

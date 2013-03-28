@@ -5,6 +5,7 @@
 		setupLogin();
 		setupHideParent();
 		setupLightboxes();
+		setupInlineEdit();
 		setupSoundCloudPlayers();
 		slide();
 	};
@@ -51,7 +52,7 @@
 	function setupLogin(){
 		$(document).delegate('#lb-form-login', 'ajaxcomplete', function(e, data){
 			if(data.success) {
-				location.reload()
+				location.reload();
 			}
 		});
 
@@ -75,6 +76,10 @@
 			e.preventDefault();
 			new lb.lightbox($(this).attr('href'));
 		});
+	}
+
+	function setupInlineEdit(){
+		lb.inlineEdit.globalSetup();
 	}
 
 	function setupSoundCloudPlayers(){

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic.simple import direct_to_template, redirect_to
+from django.views.generic import TemplateView
 
 admin.autodiscover()
 

@@ -83,8 +83,11 @@ class Musician(models.Model):
 class Band(models.Model):
     about = models.CharField(max_length=1000)
     name = models.CharField(max_length=50)
+    influences = models.CharField(max_length=150)
+
     registration_date = models.DateTimeField('Registration date')
     musical_styles = models.ManyToManyField(MusicalStyle)
+    
     url = models.SlugField(max_length=50)
 
     media = models.OneToOneField(BandMedia, related_name="band", null=True, blank=True)
@@ -122,9 +125,8 @@ class Band(models.Model):
         if self.pk == None:
             self.registration_date = timezone.now()
 
-
-        if self.media is None:
-            self.media = BandMedia.objects.create()
+            if self.media is None:
+                self.media = BandMedia.objects.create()
 
         
         super(Band, self).save(*args, **kwargs)

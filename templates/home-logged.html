@@ -11,6 +11,8 @@
 
 {% block mainclass %}can-edit{% endblock %}
 
+{% block bodyattr %} data-inline-edit-path="/musico/atualizar/" {% endblock %}
+
 {% block content %}
 	<div id="cover-photo"
 		{% if musician.media.cover %} class="with-photo" {% endif %} >

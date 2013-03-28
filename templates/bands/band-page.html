@@ -11,6 +11,7 @@
 {% endblock %} 
 
 {% block mainclass %}can-edit{% endblock %}
+{% block bodyattr %} data-inline-edit-path="/banda/atualizar/" data-id="{{ band.id }}" {% endblock %}
 
 {% block content %}
 	<div id="cover-photo"
@@ -45,7 +46,7 @@
 			
 		<div class="modules">	
 			<div class="about fl">
-				<textarea class="about-you post-on-edit" name="about" data-single="true">{% if musician.about %}{{musician.about}}{% else %}Fale sobre você{% endif %}</textarea>
+				<textarea class="about-you post-on-edit" name="about" data-single="true">{% if band.about %}{{band.about}}{% else %}Fale sobre a sua banda{% endif %}</textarea>
 				<button class="btn-edit">Editar</button>
 			</div>
 
@@ -87,7 +88,7 @@
 			</div>
 			<div class="fl influences">
 				<h2 class="marker small">Influências</h2>
-				<textarea type="text" class="post-on-edit" name="influences" data-single="true">{% if musician.influences %}{{musician.influences}}{% else %}Digite aqui suas influências{% endif %}</textarea>
+				<textarea type="text" class="post-on-edit" name="influences" data-single="true">{% if band.influences %}{{band.influences}}{% else %}Digite aqui as influencias da banda{% endif %}</textarea>
 			</div>
 		</div>
 	</div>
