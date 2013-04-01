@@ -38,8 +38,13 @@ lb.inlineEdit = function(){
 
 			this.originalContent = $.trim($div.html());
 			var ipt = input($div);
+
+			if($div.data('single')){
+				ipt.attr('data-single', true);
+			}
+
 			$div.html("").append(ipt);
-			ipt[0].focus();
+			ipt.focus();
 
 		}).keydown(function(e){
 			if(e.keyCode == 13){ 
