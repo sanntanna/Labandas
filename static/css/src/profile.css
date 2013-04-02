@@ -25,49 +25,51 @@
 		margin-right: 20px;
     	width: 390px;
 
-    		.members{
-    			 margin: 20px 0;
-    				li{
-					    background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 14px -205px #FFFFFF;
-					    .border-radius(7px);
-					    border:1px solid #cccccc;
-					    display: inline-table;
-					    height: 92px;
-					    margin-right: 10px;
-					    width: 85px;
-					    float: left;
+		.members{
+			 margin: 20px 0;
 
-					    &.last {margin-right: 0;}
+			li{
+			    background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 14px -205px #FFFFFF;
+			    border:1px solid #cccccc;
+			    display: inline-table;
+			    height: 92px;
+			    margin-right: 10px;
+			    width: 85px;
+			    float: left;
 
-					    span{
-					    	float: left;
-						    .light;
-						    font-size: 14px;
-						    line-height: 16px;
-						    padding-top: 100px;
-						    position: absolute;
-						    text-align: left;
-						    width: 87px;
-					    }
-    				}
+			    &.last {margin-right: 0;}
 
-    			a{
-					&.add{
-						background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll -85px -542px transparent;
-					    color: #000000;
-					    display: block;
-					    font-weight: bold;
-					    margin-left: 20px;
-					    margin-top: 12px;
-					    padding: 50px 20px 20px 0;
-					    text-align: center;
-					    text-decoration: underline;
-					    width: 30px;
+			    a{
+			    	float: left;
+				    .light;
+				    font-size: 14px;
+				    line-height: 16px;
+				    position: absolute;
+				    text-align: left;
+				    width: 87px;
+				    color:@textcolor;
 
-					    &:hover{color:#97B62F;}
-					}
-				}
-    		}
+					&.without-avatar{ padding-top:100px; }
+
+				    img{ .border-radius(7px); }
+			    }
+			}
+
+		a.add{
+				background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll -85px -542px transparent;
+			    color: #000000;
+			    display: block;
+			    font-weight: bold;
+			    margin-left: 20px;
+			    margin-top: 12px;
+			    padding: 50px 20px 20px 0;
+			    text-align: center;
+			    text-decoration: underline;
+			    width: 30px;
+
+			    &:hover{color:#97B62F;}
+			}
+		}
 	}
 }
 

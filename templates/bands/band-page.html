@@ -95,7 +95,17 @@
 			<div class="fl band-members">
 				<h2 class="marker small">Integrantes</h2>
 				<ul class="members">
-					<li><span>Nome do Músico</span></li>
+					{% for musician in band.musicians_list %}
+						<li>
+							<a href="{{ musician.profile_url }}"
+								{% if not musician.media.avatar %} class="without-avatar" {% endif %} >
+								{% if musician.media.avatar %}
+									<img src="{{ musician.media.avatar }}" title="{{ musician.name }}" />
+								{% endif %}
+								{{ musician.name }}
+							</a>
+						</li>
+					{% endfor %}
 					<a href="#" class="add fl">Adicionar integrante</a>
 				</ul>
 			</div>

@@ -505,7 +505,7 @@
 	}
 
 	.influences{
-		textarea{
+		textarea, div.influences-content{
 			background: none repeat scroll 0 0 #504F50;
 		    border: 0 none;
 		    box-shadow: none;
