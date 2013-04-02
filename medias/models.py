@@ -1,8 +1,6 @@
 #coding=ISO-8859-1
-from django.core.validators import URLValidator
-from django.core.exceptions import ValidationError
 from django.db import models
-from utils import ImageHandler, AmazonS3
+from utils import ImageHandler, AmazonS3, SoundCloud
 
 class MediaType(models.Model):
     name = models.CharField(max_length=50)
@@ -71,14 +69,9 @@ class MusicianMedia(models.Model):
         return None if len(objs) == 0 else objs[0]
     
     def set_sound_cloud(self, value):
-        validate = URLValidator(verify_exists=False)
-
-        try:
-            validate(value)
-            if value.find("soundcloud.com/") == -1:
-                raise ValidationError()
-        except ValidationError, e:
-            raise ValidationError("Url do sound cloud invalida")
+        
+        if not SoundCloud.validate_url(value):
+            return
 
         sound_cloud = self.get_sound_cloud()
 
@@ -126,15 +119,10 @@ class BandMedia(models.Model):
         return None if len(objs) == 0 else objs[0]
     
     def set_sound_cloud(self, value):
-        validate = URLValidator(verify_exists=False)
-
-        try:
-            validate(value)
-            if value.find("soundcloud.com/") == -1:
-                raise ValidationError()
-        except ValidationError, e:
-            raise ValidationError("Url do sound cloud invalida")
-
+        
+        if not SoundCloud.validate_url(value):
+            return
+            
         sound_cloud = self.get_sound_cloud()
 
         if sound_cloud is None:

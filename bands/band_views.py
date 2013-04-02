@@ -33,7 +33,10 @@ def band_page(request, band_id, name):
     if correct_url != request.path_info:
         return HttpResponsePermanentRedirect(correct_url)
     
-    t = loader.get_template('bands/band-page.html')
+    current_musician = request.user.get_profile()
+    template = 'bands/band-page.html' if current_musician.is_in_band(band) else 'bands/band-page-public.html'
+
+    t = loader.get_template(template)
     c = RequestContext(request, {
         'band': band,
     })

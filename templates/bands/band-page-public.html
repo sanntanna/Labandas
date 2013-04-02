@@ -14,25 +14,17 @@
 {% block bodyattr %} data-inline-edit-path="/banda/atualizar/" data-id="{{ band.id }}" {% endblock %}
 
 {% block content %}
+	>>>pagina publica <<<
 	<div id="cover-photo"
 		{% if band.media.cover %} class="with-photo" {% endif %} >
  
 		{% if band.media.cover %}
 			<img src="{{band.media.cover}}" alt="{{ band.name }}"/>
 		{% endif %}
-		<a href="/lightbox/foto-capa-banda?width=665&amp;height=200&amp;band_id={{ band.id }}" class="lightbox change-cover-photo">
-			<span class="highlight">+</span> 	
-
-			{% if band.media.cover %}
-				Alterar foto da capa
-			{% else %}
-				Adicionar foto da capa
-			{% endif %}
-		</a>	
 
 		<div id="user-header" class="clearfix">
 			<h1 class="fl">
-				<span>Banda</span> <strong class="editable" data-single="true" data-field="name">{{ band.name }}</strong>
+				<span>Banda</span> <strong>{{ band.name }}</strong>
 			</h1>
 		</div>
 	</div>

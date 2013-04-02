@@ -1,3 +1,5 @@
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
 from boto.s3.key import Key
 from labandas import settings
 import Image
@@ -30,8 +32,6 @@ class AmazonS3(object):
         return bucket_key.generate_url(1 * 60 * 60 * 24)
 
 class ImageHandler():
-    
-
     def __resize_image(self, image, size, crop=True):
         factor = 1
 
@@ -78,3 +78,17 @@ class ImageHandler():
         return {
             'default': self.__resize_image(image, (948,315))
         }
+
+
+class SoundCloud(object):
+    @classmethod
+    def validate_url(cls, url):
+        validate = URLValidator()
+        try:
+            validate(url)
+            if url.find("soundcloud.com/") == -1:
+                raise ValidationError()
+        except ValidationError, e:
+            raise ValidationError("Url do sound cloud invalida")
+
+        return True
