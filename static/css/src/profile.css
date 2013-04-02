@@ -15,10 +15,11 @@
 }
 .modules{
 	margin-top: 20px;
-		.about{
-			height: 340px;
-				.about-you {height: 340px;  margin: 0 10px;}
-		}
+	
+	.about{
+		height: 340px;
+		.about-you {height: 340px;  margin: 0 10px;}
+	}
 
 	.mysound {margin-left: 35px;}
 	.band-members{

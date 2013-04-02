@@ -62,7 +62,7 @@ class AddressFinder(object):
     def get_address(self, cep):
         page = pq(url=self.CORREIOS_URL, method="POST", data={'relaxation': cep, 'Metodo':'listaLogradouro', 'TipoConsulta': 'relaxation'})
         content = page.find(".ctrlcontent > div table:first tr")
-        error = page.find("title")[1].text
+        error = None#page.find("title")[1].text
         
         result = SearchAddrResult()
         

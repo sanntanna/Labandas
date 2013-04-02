@@ -3,11 +3,10 @@
 	this.init = function(){
 		setupAjax();
 		setupLogin();
-		setupHideParent();
+		setupCollapseButtons()
 		setupLightboxes();
 		setupInlineEdit();
 		setupSoundCloudPlayers();
-		slide();
 	};
 	
 	this.domLoaded = function(){
@@ -62,12 +61,23 @@
 			}
 		});
 	}
-	
-	function setupHideParent(){
-		$(document).delegate('.hide-parent', 'click', function(){
-			var elm = $(this);
-			
-			elm.parent()[elm.attr('data-effect') || 'hide']();
+
+	function setupCollapseButtons(){
+		var collapsedClass = 'hidden';
+		$('.toggle-button').each(function(){
+			var $link = $(this);
+
+			this.targetElement = $($link.data('target'));
+			this.noncollapsedlabel = $link.data('noncollapsedlabel');
+			this.collapsedlabel = $link.data('collapsedlabel');
+
+			this.innerHTML = this.targetElement.hasClass(collapsedClass) ? this.collapsedlabel : this.noncollapsedlabel;
+
+			$link.click(function(e){
+				e.preventDefault();
+				this.innerHTML = this.targetElement.is(':visible') ? this.collapsedlabel : this.noncollapsedlabel;
+				this.targetElement.slideToggle();
+			});
 		});
 	}
 	
@@ -86,12 +96,7 @@
 		lb.soundcloud.globalInit();
 	}
 
-	function slide(){
-		$('.slide').click(function() {
-			$('#myPanel').slideDown('slow')
-		})
-	}
-	
 	this.init();
 	$(this.domLoaded);
+	
 }());

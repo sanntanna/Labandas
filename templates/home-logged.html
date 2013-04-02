@@ -44,69 +44,16 @@
 	</div>
 	
 	<div id="container" class="fl">
-		<div id="myPanel" class="clearfix">
+		<div id="complete-subscription" class="clearfix pannel">
 			<div class="line">
-				<div class="fl title">Meu Painel</div>
-				<a href="#" class="fr slide">ocultar</a>
+				<h3 class="fl title {% if not has_personal_data %}attention{% endif %}">Meus dados</h3>
+				{% if has_personal_data %}
+					<a href="#" class="fr toggle-button" data-noncollapsedlabel="ocultar" data-collapsedlabel="exibir" data-target="#complete-subscription-inner"></a>
+				{% endif %}
 			</div>
-			<div class="inner">
-				<div class="add-band">
-					<p class="fl">Você também pode criar um perfil pra sua banda.</p>
-					<a href="/lightbox/new-band?width=500&amp;height=200" class="btn fr lightbox">Criar perfil da minha banda</a>
-				</div>
-				<div class="line">
-					<div class="hd line">
-						<p class="icons ads fl">Anúncios relacionado ao seu perfil</p>
-						<a href="#" class="fr">ver todos</a>
-					</div>
-					<div class="related-musicians">
-						<div class="fl size1of2">
-							<div class="thumb fl"></div>
-							<span class="description fl">
-								<strong>Marcos Vinicius Andrade Dutra</strong>
-								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
-							</span>
-							<div class="thumb fl"></div>
-							<span class="description fl">
-								<strong>Marcos Vinicius Andrade Dutra</strong>
-								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
-							</span>
-							<div class="thumb fl"></div>
-							<span class="description fl">
-								<strong>Marcos Vinicius Andrade Dutra</strong>
-								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
-							</span>
-						</div>
-						<div class="fr size1of2">
-							<div class="thumb fl"></div>
-							<span class="description fl">
-								<strong>Marcos Vinicius Andrade Dutra</strong>
-								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
-							</span>
-							<div class="thumb fl"></div>
-							<span class="description fl">
-								<strong>Marcos Vinicius Andrade Dutra</strong>
-								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
-							</span>
-							<div class="thumb fl"></div>
-							<span class="description fl">
-								<strong>Marcos Vinicius Andrade Dutra</strong>
-								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
-							</span>
-						</div>
-					</div>
-					<button class="btn more">Veja mais anúncios</button>
-				</div>
-			</div>
-		</div>
-		<div id="complete-subscription" class="clearfix">
-			{% if musician.type_instruments_play.all.count = 0 or not musician.address.city %}
-				<div class="line">
-					<h3 class="fl attention">Seus dados</h3>
-					<a href="#" class="fr slide">ocultar</a>
-				</div>
-			{% endif %}
-			<div class="inner">
+
+			<div id="complete-subscription-inner"
+				class="inner{% if has_personal_data %} hidden {% endif %}">
 				<div class="musician-info fl">
 					<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form">
 					
@@ -281,6 +228,64 @@
 					</div>
 				</div>
 				<p class="born-celebrity">Você nasceu no mesmo ano que <span id="same-year-as">--</span></p>
+			</div>
+		</div>
+
+
+		<div id="my-pannel" class="clearfix pannel">
+			<div class="line">
+				<h3 class="fl title">Meu painel</h3>
+				<a href="#hide" class="fr toggle-button" data-noncollapsedlabel="ocultar" data-collapsedlabel="exibir" data-target="#my-pannel-inner"></a>
+			</div>
+			<div id="my-pannel-inner" 
+				class="inner{% if not has_personal_data %} hidden {% endif %}">
+				<div class="add-band">
+					<p class="fl">Você também pode criar um perfil pra sua banda.</p>
+					<a href="/lightbox/new-band?width=500&amp;height=200" class="btn fr lightbox">Criar perfil da minha banda</a>
+				</div>
+				<div class="line">
+					<div class="hd line">
+						<p class="icons ads fl">Anúncios relacionado ao seu perfil</p>
+						<a href="#" class="fr">ver todos</a>
+					</div>
+					<div class="related-musicians">
+						<div class="fl size1of2">
+							<div class="thumb fl"></div>
+							<span class="description fl">
+								<strong>Marcos Vinicius Andrade Dutra</strong>
+								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+							</span>
+							<div class="thumb fl"></div>
+							<span class="description fl">
+								<strong>Marcos Vinicius Andrade Dutra</strong>
+								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+							</span>
+							<div class="thumb fl"></div>
+							<span class="description fl">
+								<strong>Marcos Vinicius Andrade Dutra</strong>
+								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+							</span>
+						</div>
+						<div class="fr size1of2">
+							<div class="thumb fl"></div>
+							<span class="description fl">
+								<strong>Marcos Vinicius Andrade Dutra</strong>
+								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+							</span>
+							<div class="thumb fl"></div>
+							<span class="description fl">
+								<strong>Marcos Vinicius Andrade Dutra</strong>
+								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+							</span>
+							<div class="thumb fl"></div>
+							<span class="description fl">
+								<strong>Marcos Vinicius Andrade Dutra</strong>
+								<p>Estou procurando banda para fazer freelance, em BH. SOU BAIXISTA.</p>
+							</span>
+						</div>
+					</div>
+					<button class="btn more">Veja mais anúncios</button>
+				</div>
 			</div>
 		</div>
 

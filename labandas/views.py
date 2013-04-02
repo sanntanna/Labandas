@@ -25,10 +25,17 @@ def home(request):
 def homeLogged(request):
     t = loader.get_template('home-logged.html')
     musician = request.user.get_profile()
+    has_personal_data = musician.type_instruments_play.all().count() > 0 \
+                        and musician.musical_styles.all().count() > 0 \
+                        and not musician.address.city is None
+
+    print musician.type_instruments_play.all().count
+
     c = RequestContext(request, {
         'band_solicitations': Solicitation.objects.bands_pending(musician),
         'musical_styles': MusicalStyle.objects.all(),
         'equipament_types': EquipamentType.objects.all(),
+        'has_personal_data': has_personal_data,
         'musician':musician
     })
     
