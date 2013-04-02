@@ -70,12 +70,16 @@
 				$parent = $check.closest('li');
 
 			$check.click(function(e, isTriggered){
-				var fn = this.checked ? 'removeClass' : 'addClass';
+				var fn = this.checked ? 'removeClass' : 'addClass',
+					$input = $parent.find('.skill-value');
 
 				$parent[fn]('inactive');
-				if(!this.checked && !isTriggered) {
-					$parent.find('.skill-value').val('-1').trigger('change');
-				}
+
+				if(isTriggered){ return; }
+				
+				$input.val(this.checked ? 5 : -1).trigger('change');
+
+				//alert($parent.find('.skill-value').val());
 			}).triggerHandler('click', true);
 		});
 	}
