@@ -65,7 +65,7 @@
 			</ul>
 
 			<div class="personal-info fl">
-
+				{% if owner.musical_styles.count > 0 %}
 				<div>
 					<label>Quero tocar:</label>
 					{% for style in owner.musical_styles.all %}
@@ -73,6 +73,7 @@
 						{% if not forloop.last %} | {%endif%}
 					{% endfor %}
 				</div>
+				{% endif %}
 			</div>
 			<p class="born-celebrity">Você nasceu no mesmo ano que <span id="same-year-as">--</span></p>
 		</div>
