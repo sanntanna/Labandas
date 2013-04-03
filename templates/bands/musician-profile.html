@@ -83,9 +83,15 @@
 		{% endif %}
 
 		<div class="modules">	
+		{% if owner.about != "" %}
 			<div class="about fl">
 				<div class="about-you">{{ owner.about }}</div>
 			</div>
+			{% else %}
+			<div class="about empty fl">
+				Infelizmente essa músico não adicionou nenhuma informação sobre seu perfil
+			</div>
+		{% endif %}
 
 			<div id="all-media" class="fl">
 				
@@ -171,7 +177,7 @@
 					<div id="user-soundcloud-player" class="soundcloud-player" data-src="{{ owner.media.sound_cloud }}"></div>
 				{% else %}
 					<div id="user-soundcloud-player"></div>
-					<div class="soundcloud">Este usuário não possui playlist :(</div>
+					<div class="soundcloud">Este músico não possui playlist :(</div>
 				{% endif %}
 		
 			</div>
