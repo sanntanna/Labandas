@@ -4,6 +4,7 @@
 #container{
 	width: 800px; 
 	padding-left: 20px;
+	overflow: hidden;
 
 	h2{
 		.light;
