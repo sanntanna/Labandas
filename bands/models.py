@@ -104,6 +104,10 @@ class Band(models.Model):
     def page_url(self):
         return "/banda/%s/%d" % (self.url, self.pk)
     
+    @property
+    def setlist_url(self):
+        return "/banda/%s/%d/setlist" % (self.url, self.pk)
+
     def is_admin(self, musician):
         return self.all_musicians.get(active=True, musician=musician).is_admin
     

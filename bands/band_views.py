@@ -86,3 +86,19 @@ def update_cover_photo(request, band_id):
     band.media.cover = request.FILES.get('img')
 
     return redirect(band.page_url)
+
+def band_setlist(request, name, band_id):
+    band = get_object_or_404(Band, pk=band_id)
+
+    t = loader.get_template("bands/band-setlist.html")
+    c = RequestContext(request, {
+        'band': band,
+    })
+    
+    return HttpResponse(t.render(c))
+
+def band_photos(request, band_id):
+    pass
+
+def band_videos(request, band_id):
+    pass

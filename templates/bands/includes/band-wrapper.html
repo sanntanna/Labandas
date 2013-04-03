@@ -1,0 +1,49 @@
+{% extends "includes/wrapper.html" %}
+{% load staticoptimizer %}
+
+{% block css %}
+	{% css "css/src/home-logged.css" %}
+	{% css "css/src/profile.css" %}
+{% endblock %}
+
+{% block js %}
+	{% js "js/src/ui/band.js" %}
+{% endblock %} 
+
+{% block mainclass %}can-edit{% endblock %}
+{% block bodyattr %} data-inline-edit-path="/banda/atualizar/" data-id="{{ band.id }}" {% endblock %}
+
+{% block content %}
+	<div id="cover-photo"
+		{% if band.media.cover %} class="with-photo" {% endif %} >
+ 
+		{% if band.media.cover %}
+			<img src="{{band.media.cover}}" alt="{{ band.name }}"/>
+		{% endif %}
+
+		<div id="user-header" class="clearfix">
+			<h1 class="fl">
+				<span>Banda</span> <strong>{{ band.name }}</strong>
+			</h1>
+		</div>
+	</div>
+		
+	<div id="container" class="fl">
+		
+		<nav>
+		  	<ul class="menu">
+		        <li><a href="#">Geral</a></li>
+		        <li><a href="#">Fotos</a></li>
+		        <li><a href="#">Videos</a></li>
+		        <li class="no_border"><a href="#">Setlist</a></li>                
+			</ul>
+		</nav>
+		
+		{% block bandcontent %}{% endblock %}
+	</div>
+	<div class="fl advertising">
+		<h2>Ofertas</h2>
+	</div>
+{% endblock %}
+
+{% block aside %}{% endblock %}

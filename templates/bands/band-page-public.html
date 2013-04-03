@@ -1,98 +1,56 @@
-{% extends "includes/wrapper.html" %}
+{% extends "bands/includes/band-wrapper.html" %}
 {% load staticoptimizer %}
 
-{% block css %}
-	{% css "css/src/home-logged.css" %}
-	{% css "css/src/profile.css" %}
-{% endblock %}
+{% block bandcontent %}
 
-{% block js %}
-	{% js "js/src/ui/band.js" %}
-{% endblock %} 
-
-{% block mainclass %}can-edit{% endblock %}
-{% block bodyattr %} data-inline-edit-path="/banda/atualizar/" data-id="{{ band.id }}" {% endblock %}
-
-{% block content %}
-	<div id="cover-photo"
-		{% if band.media.cover %} class="with-photo" {% endif %} >
- 
-		{% if band.media.cover %}
-			<img src="{{band.media.cover}}" alt="{{ band.name }}"/>
-		{% endif %}
-
-		<div id="user-header" class="clearfix">
-			<h1 class="fl">
-				<span>Banda</span> <strong>{{ band.name }}</strong>
-			</h1>
-		</div>
+<div class="modules">	
+	<div class="about fl">
+		{{band.about}}
 	</div>
-		
-	<div id="container" class="fl">
-		
-		<nav>
-		  	<ul class="menu">
-		        <li><a href="#">Geral</a></li>
-		        <li><a href="#">Fotos</a></li>
-		        <li><a href="#">Videos</a></li>
-		        <li class="no_border"><a href="#">Setlist</a></li>                
-			</ul>
-		</nav>
-		
-		<div class="modules">	
-			<div class="about fl">
-				{{band.about}}
-			</div>
 
-			<div id="all-media" class="fl">
-				
-				<a href="#" class="pictures fl">
-					<span class="title">Fotos <span class="count">(68)</span></span>
-				</a>
-				<a href="#" class="movies fl">
-					<span class="title">Vídeos <span class="count">(68)</span></span>
-				</a>
-				<a href="#" class="bands fl">
-					<span class="title">Setlist</span>
-				</a>
-			</div>
-
-			{% if band.media.sound_cloud %}
-			<div class="fl mysound">
-				<h2 class="marker small">Som da<strong>Banda</strong></h2>
-				<div id="user-soundcloud-player" class="soundcloud-player" data-src="{{ band.media.sound_cloud }}"></div>
-			</div>
-			{% endif %}
-		</div>
-		<div class="modules">	
-			<div class="fl band-members">
-				<h2 class="marker small">Integrantes</h2>
-				<ul class="members">
-					{% for musician in band.musicians_list %}
-						<li>
-							<a href="{{ musician.profile_url }}"
-								{% if not musician.media.avatar %} class="without-avatar" {% endif %} >
-								{% if musician.media.avatar %}
-									<img src="{{ musician.media.avatar }}" title="{{ musician.name }}" />
-								{% endif %}
-								{{ musician.name }}
-							</a>
-						</li>
-					{% endfor %}
-				</ul>
-			</div>
-			{% if band.influences != "" %}
-				<div class="fl influences">
-					<h2 class="marker small">Influências</h2>
-					<div class="influences-content">{{band.influences}}</div>
-				</div>
-			{% endif %}
-		</div>
+	<div id="all-media" class="fl">
+		
+		<a href="#" class="pictures fl">
+			<span class="title">Fotos <span class="count">(68)</span></span>
+		</a>
+		<a href="#" class="movies fl">
+			<span class="title">Vídeos <span class="count">(68)</span></span>
+		</a>
+		<a href="#" class="bands fl">
+			<span class="title">Setlist</span>
+		</a>
 	</div>
-	<div class="fl advertising">
-		<h2>Ofertas</h2>
-	</div>
-	
-{% endblock %}
 
-{% block aside %}{% endblock %}
+	{% if band.media.sound_cloud %}
+	<div class="fl mysound">
+		<h2 class="marker small">Som da<strong>Banda</strong></h2>
+		<div id="user-soundcloud-player" class="soundcloud-player" data-src="{{ band.media.sound_cloud }}"></div>
+	</div>
+	{% endif %}
+</div>
+<div class="modules">	
+	<div class="fl band-members">
+		<h2 class="marker small">Integrantes</h2>
+		<ul class="members">
+			{% for musician in band.musicians_list %}
+				<li>
+					<a href="{{ musician.profile_url }}"
+						{% if not musician.media.avatar %} class="without-avatar" {% endif %} >
+						{% if musician.media.avatar %}
+							<img src="{{ musician.media.avatar }}" title="{{ musician.name }}" />
+						{% endif %}
+						{{ musician.name }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+	{% if band.influences != "" %}
+		<div class="fl influences">
+			<h2 class="marker small">Influências</h2>
+			<div class="influences-content">{{band.influences}}</div>
+		</div>
+	{% endif %}
+</div>
+
+{% endblock bandcontent %}
