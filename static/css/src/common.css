@@ -132,6 +132,7 @@ a:hover {
 .banner{
 	background: url(http://lasbandas.s3.amazonaws.com/site/bg-gray-texture.jpg) no-repeat center top transparent;
 	min-height: 381px;
+	margin-top: 57px;
 }
 
 .wrapper{
@@ -181,6 +182,10 @@ h2{
 #header-container{
 	background:url(http://lasbandas.s3.amazonaws.com/site/sprite-bgs.png) @darkgray 0 -620px repeat-x;
 	height:57px;
+	position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0;
 }
 
 #header-logo{

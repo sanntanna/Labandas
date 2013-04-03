@@ -17,7 +17,7 @@
 	position: relative;
 	text-align: center;
 	overflow: hidden;
-	padding-top: 5px;
+	padding-top: 11px;
 
 	.change-cover-photo{
 		color: @textcolor;
@@ -119,7 +119,8 @@
 	.title{
 		font-size: 18px;
 		font-weight: normal;
-		&.attention{ color: #E93B58; }
+		
+			&.attention{ color: #E93B58; }
 	}
 }
 
@@ -157,7 +158,7 @@
 		background:#6F6F6F;
 		.border-radius(4px);
 		padding: 5px;
-		margin-bottom: 15px;
+		margin: 15px 0;
 	}
 
 	.more{
@@ -510,6 +511,7 @@
 	.influences{
 		textarea, div.influences-content{
 			background: none repeat scroll 0 0 #504F50;
+			.border-radius(5px);
 		    border: 0 none;
 		    box-shadow: none;
 		    color: white;
