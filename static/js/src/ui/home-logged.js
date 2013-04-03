@@ -192,11 +192,11 @@
 	            return false;
 	        }
         	return true;
-    	});
+    	}
 
     	$.fn.slideTo = function(data) {
         	var width = parseInt($('#container').css('width'));
-        	var transfer = $('<div class="transfer"></div>').css({ 'width': (2 * width) + 'px' });
+        	var transfer = $('<div class="	"></div>').css({ 'width': (2 * width) + 'px' });
         	var current = $('<div class="current"></div>').css({ 'width': width + 'px', 'left': '0', 'float': 'left' }).html($('#container').html());
         	var next = $('<div class="next"></div>').css({ 'width': width + 'px', 'left': width + 'px', 'float': 'left' }).html(data);
         	transfer.append(current).append(next);

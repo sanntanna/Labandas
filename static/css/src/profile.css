@@ -31,6 +31,7 @@
 
 			li{
 			    background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 14px -205px #FFFFFF;
+			    .border-radius(10px);
 			    border:1px solid #cccccc;
 			    display: inline-table;
 			    height: 92px;
@@ -39,6 +40,11 @@
 			    float: left;
 
 			    &.last {margin-right: 0;}
+
+			    img{
+					width:85px; 
+					height: 92px;
+			    }
 
 			    a{
 			    	float: left;
