@@ -192,7 +192,7 @@
 	            return false;
 	        }
         	return true;
-    	}
+    	});
 
     	$.fn.slideTo = function(data) {
         	var width = parseInt($('#container').css('width'));
