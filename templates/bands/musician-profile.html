@@ -187,10 +187,13 @@
 			<div class="fl myequipaments">
 				<h2 class="marker small">Meus<strong>Equipamentos</strong></h2>
 			</div>
-			<div class="fl influences">
-				<h2 class="marker small">Influências</h2>
-				<div class="influences-content">{% if owner.influences %}{{owner.influences}}{% else %}--{% endif %}</div>
-			</div>
+			
+			{% if owner.influences %}{
+				<div class="fl influences">
+					<h2 class="marker small">Influências</h2>
+					<div class="influences-content">{owner.influences}</div>
+				</div>
+			{% endif %}
 		</div>
 	</div>
 
