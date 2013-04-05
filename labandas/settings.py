@@ -107,6 +107,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'facebook.djangofb.FacebookMiddleware', 
+    'facebookconnect.middleware.FacebookConnectMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -116,8 +118,8 @@ ROOT_URLCONF = 'labandas.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'labandas.wsgi.application'
 
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, 'templates'),
+TEMPLATE_DIRS = ( 
+    os.path.join(os.path.dirname(__file__), 'templates').replace('','/'), 
 )
 
 INSTALLED_APPS = (
@@ -128,6 +130,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'djangonyc.exampleapp',
+    'djangonyc.facebookconnect',
     'staticoptimizer',
     'mathfilters',
     'geoapi',
@@ -204,4 +208,9 @@ AWS_SECRET_ACCESS_KEY = 'ecG69fBVGsxmIUjLpHQSIwmcU77XpY78TMaN2R53'
 #package settings
 PACKAGE_DIR = 'pkg'
 LESS_EXECUTABLE = "lessc"
+
+AUTHETICATION_BACKENDS = (
+    'facebookconnect.models.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
