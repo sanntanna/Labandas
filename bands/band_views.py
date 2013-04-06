@@ -8,6 +8,8 @@ from django.template import loader
 from django.template.context import RequestContext
 from httpmethod.decorators import onlypost, onlyajax
 from jsonui.response import JSONResponse
+from partialview.decorators import Partialhandled
+from partialview.utils import HttpPartialResponseHandler
 from solicitations.models import Solicitation
 from medias.models import BandMedia
 import logging
@@ -26,6 +28,8 @@ def create_band(request):
 
     return JSONResponse({'success': True, 'band_page_url': created_band.page_url})
     
+
+@Partialhandled('bands/includes/band-wrapper.html', 'bands/includes/band-wrapper-partial.html')
 def band_page(request, band_id, name):  
     band = get_object_or_404(Band, pk=band_id)
     
@@ -36,13 +40,45 @@ def band_page(request, band_id, name):
     current_musician = request.user.get_profile()
     template = 'bands/band-page.html' if current_musician.is_in_band(band) else 'bands/band-page-public.html'
 
-    t = loader.get_template(template)
+    template = loader.get_template(template)
+    context = RequestContext(request, {
+        'band': band,
+    })
+    
+    return HttpPartialResponseHandler(template, context)
+
+@Partialhandled('bands/includes/band-wrapper.html', 'bands/includes/band-wrapper-partial.html')
+def band_setlist(request, name, band_id):
+    band = get_object_or_404(Band, pk=band_id)
+
+    t = loader.get_template("bands/band-setlist.html")
     c = RequestContext(request, {
         'band': band,
     })
     
-    return HttpResponse(t.render(c))
+    return HttpPartialResponseHandler(t, c)
 
+@Partialhandled('bands/includes/band-wrapper.html', 'bands/includes/band-wrapper-partial.html')
+def band_photos(request, name, band_id):
+    band = get_object_or_404(Band, pk=band_id)
+
+    template = loader.get_template("bands/band-photos.html")
+    context = RequestContext(request, {
+        'band': band,
+    })
+    
+    return HttpPartialResponseHandler(template, context)
+
+@Partialhandled('bands/includes/band-wrapper.html', 'bands/includes/band-wrapper-partial.html')
+def band_videos(request, name, band_id):
+    band = get_object_or_404(Band, pk=band_id)
+
+    template = loader.get_template("bands/band-videos.html")
+    context = RequestContext(request, {
+        'band': band,
+    })
+    
+    return HttpPartialResponseHandler(template, context)
 
 @onlypost
 @onlyajax
@@ -86,19 +122,3 @@ def update_cover_photo(request, band_id):
     band.media.cover = request.FILES.get('img')
 
     return redirect(band.page_url)
-
-def band_setlist(request, name, band_id):
-    band = get_object_or_404(Band, pk=band_id)
-
-    t = loader.get_template("bands/band-setlist.html")
-    c = RequestContext(request, {
-        'band': band,
-    })
-    
-    return HttpResponse(t.render(c))
-
-def band_photos(request, band_id):
-    pass
-
-def band_videos(request, band_id):
-    pass
