@@ -20,10 +20,19 @@
 		{% if band.media.cover %}
 			<img src="{{band.media.cover}}" alt="{{ band.name }}"/>
 		{% endif %}
+		<a href="/lightbox/foto-capa-banda?width=665&amp;height=200&amp;band_id={{ band.id }}" class="lightbox change-cover-photo">
+			<span class="highlight">+</span> 	
+
+			{% if band.media.cover %}
+				Alterar foto da capa
+			{% else %}
+				Adicionar foto da capa
+			{% endif %}
+		</a>	
 
 		<div id="user-header" class="clearfix">
 			<h1 class="fl">
-				<span>Banda</span> <strong>{{ band.name }}</strong>
+				<span>Banda</span> <strong class="editable" data-single="true" data-field="name">{{ band.name }}</strong>
 			</h1>
 		</div>
 	</div>
@@ -31,15 +40,17 @@
 	<div id="container" class="fl">
 		
 		<nav>
-		  	<ul class="menu">
-		        <li><a href="{{ band.page_url }}">Geral</a></li>
-		        <li><a href="{{ band.photos_url }}">Fotos</a></li>
-		        <li><a href="{{ band.videos_url }}">Videos</a></li>
-		        <li class="no_border"><a href="{{ band.setlist_url }}">Setlist</a></li>                
+		  	<ul class="menu markable">
+		        <li><a href="{{ band.page_url }}" class="no-refresh">Geral</a></li>
+		        <li><a href="{{ band.photos_url }}" class="no-refresh">Fotos</a></li>
+		        <li><a href="{{ band.videos_url }}" class="no-refresh">Videos</a></li>
+		        <li class="no_border"><a href="{{ band.setlist_url }}" class="no-refresh">Setlist</a></li>                
 			</ul>
 		</nav>
 		
+		<div id="no-refresh-content">
 		{% block bandcontent %}{% endblock %}
+		</div>
 	</div>
 	<div class="fl advertising">
 		<h2>Ofertas</h2>

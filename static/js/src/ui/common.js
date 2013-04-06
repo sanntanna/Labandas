@@ -3,10 +3,12 @@
 	this.init = function(){
 		setupAjax();
 		setupLogin();
-		setupCollapseButtons()
+		setupCollapseButtons();
+		handleActiveMenus();
 		setupLightboxes();
 		setupInlineEdit();
 		setupSoundCloudPlayers();
+		setupPushState();
 	};
 	
 	this.domLoaded = function(){
@@ -80,6 +82,24 @@
 			});
 		});
 	}
+
+	function handleActiveMenus(){
+		$('ul.markable').each(function(){
+			var $links = $(this).find('a');
+			$links.each(function(){
+				var $link = $(this);
+
+				if(location.href.indexOf(this.href) > -1){
+					$link.addClass('active');
+				}
+
+				$link.click(function(){
+					$links.filter('.active').removeClass('active');
+					$link.addClass('active');
+				});
+			});
+		});
+	}
 	
 	function setupLightboxes(){
 		$(document).delegate("a.lightbox", "click", function(e){
@@ -94,6 +114,27 @@
 
 	function setupSoundCloudPlayers(){
 		lb.soundcloud.globalInit();
+	}
+
+	function setupPushState(){
+		if(!Modernizr.history){
+			return;
+		}
+
+		$('a.no-refresh').click(function(e){
+			e.preventDefault();
+			var url = this.href;
+
+			$.get(url.param('partial', true), function(response){
+				$("#no-refresh-content").html(response);
+				history.pushState({html: response}, null, url);
+			});
+		});
+
+		window.onpopstate = function(event){
+			if(!event.state){ return; }
+			$("#no-refresh-content").html(event.state.html);
+		}
 	}
 
 	this.init();

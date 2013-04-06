@@ -27,9 +27,11 @@ def create_band(request):
     created_band.add_musician(request.user.get_profile(), None, True)
 
     return JSONResponse({'success': True, 'band_page_url': created_band.page_url})
-    
 
-@Partialhandled('bands/includes/band-wrapper.html', 'bands/includes/band-wrapper-partial.html')
+full_template = 'bands/includes/band-wrapper.html'
+partial_template = 'bands/includes/band-wrapper-partial.html'
+
+@Partialhandled(full_template, partial_template)
 def band_page(request, band_id, name):  
     band = get_object_or_404(Band, pk=band_id)
     
@@ -38,16 +40,16 @@ def band_page(request, band_id, name):
         return HttpResponsePermanentRedirect(correct_url)
     
     current_musician = request.user.get_profile()
-    template = 'bands/band-page.html' if current_musician.is_in_band(band) else 'bands/band-page-public.html'
+    template_file = 'bands/band-page.html' if current_musician.is_in_band(band) else 'bands/band-page-public.html'
 
-    template = loader.get_template(template)
+    template = loader.get_template(template_file)
     context = RequestContext(request, {
         'band': band,
     })
     
     return HttpPartialResponseHandler(template, context)
 
-@Partialhandled('bands/includes/band-wrapper.html', 'bands/includes/band-wrapper-partial.html')
+@Partialhandled(full_template, partial_template)
 def band_setlist(request, name, band_id):
     band = get_object_or_404(Band, pk=band_id)
 
@@ -58,7 +60,7 @@ def band_setlist(request, name, band_id):
     
     return HttpPartialResponseHandler(t, c)
 
-@Partialhandled('bands/includes/band-wrapper.html', 'bands/includes/band-wrapper-partial.html')
+@Partialhandled(full_template, partial_template)
 def band_photos(request, name, band_id):
     band = get_object_or_404(Band, pk=band_id)
 
@@ -69,7 +71,7 @@ def band_photos(request, name, band_id):
     
     return HttpPartialResponseHandler(template, context)
 
-@Partialhandled('bands/includes/band-wrapper.html', 'bands/includes/band-wrapper-partial.html')
+@Partialhandled(full_template, partial_template)
 def band_videos(request, name, band_id):
     band = get_object_or_404(Band, pk=band_id)
 

@@ -690,22 +690,22 @@
     position: relative;
     width: 225px;
 
-    	li{
-    		border-right: 1px solid @green;
+	li{
+		border-right: 1px solid @green;
 
-    			a{
-					color: @defaultgray;
-					padding: 10px;
+		a{
+			color: @defaultgray;
+			padding: 10px;
 
-    					&:hover{
-    						background:@green;
-						    .border-radius(5px);
-						    color: white;
-    					}
-    			}
+			&:hover, &.active{
+				background:@green;
+			    .border-radius(5px);
+			    color: white;
+			}
+		}
 
-    		&.no_border{border: 0;}
-    	}
+		&.no_border{border: 0;}
+	}
 }
 
 
