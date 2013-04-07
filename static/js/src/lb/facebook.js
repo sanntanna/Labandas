@@ -16,6 +16,7 @@ lb.facebook = (function(){
 
 	function load(){
 		facebookApi = new facebook('363555127094643');
+		facebookApi.permissionsNeeded('email,user_birthday,user_hometown,publish_stream,create_event');
 	}
 
 	return public;

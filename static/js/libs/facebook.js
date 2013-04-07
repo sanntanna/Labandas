@@ -1,6 +1,7 @@
 facebook = function(appid){
 
-	var ready = false;
+	var ready = false,
+		permissions ={};
 
 	function init(){
 		prepare();
@@ -16,12 +17,21 @@ facebook = function(appid){
 		});
 	};
 
-	function executeLogin(callback){
-		FB.login(function(response) {
-			console.log(response);
+	this.permissionsNeeded = function(perms){
+		permissions = {scope: perms};
+	};
 
-			callback.call(response);
-		}, {scope: 'email,user_birthday,user_hometown,publish_stream,create_event'});
+	function executeLogin(callback){
+		FB.getLoginStatus(function(response){
+			if(response.status == 'connected'){
+				callback.call(null, response);
+				return;
+			}
+
+			FB.login(function(loginResponse) {
+				callback.call(null, loginResponse);
+			}, permissions);
+		});
 	}
 
 	function prepare(){
