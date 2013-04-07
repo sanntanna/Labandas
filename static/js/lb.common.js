@@ -1,5 +1,7 @@
 libs/extensions.js
+libs/facebook.js
 src/lb/form-ajax.js
+src/lb/facebook.js
 src/lb/inline-edit.js
 src/lb/soundcloud.js
 src/lb/message.js

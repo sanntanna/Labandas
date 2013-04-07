@@ -13,6 +13,7 @@
 	
 	this.domLoaded = function(){
 		new lb.formAjax().globalInit();
+		initFacebook();
 	};
 	
 	function setupAjax(){
@@ -135,6 +136,15 @@
 			if(!event.state){ return; }
 			$("#no-refresh-content").html(event.state.html);
 		}
+	}
+
+	function initFacebook(){
+		lb.facebook.init();
+		
+		$(document).delegate('.fb-login', 'click', function(e){
+			e.preventDefault();
+			lb.facebook.login();
+		});
 	}
 
 	this.init();
