@@ -113,4 +113,36 @@
 		    top: 487px;
 		    width: 30px;
     	}
+
+    	&.edit{
+    		background: #434343;
+
+    		a{    
+    			color: white;
+    			margin-right: 20px;
+    			text-decoration: underline;
+			}
+
+    		h2{
+    			color: #FFFFFF;
+    		}
+
+    		input{
+    			border: 1px solid lightGrey !important;
+			    .border-radius(3px);
+			    color: #000000;
+			    display: block;
+			    float: left;
+			    font-size: 14px;
+			    height: 25px;
+			    padding: 4px 5px;
+			    transition: all 0.2s ease 0s;
+			    width: 90%;
+			    margin: 10px 0 0 35px;
+
+			    	&.adTxt{
+			    		padding-bottom: 90px;
+			    	}
+    		}
+    	}
 }
