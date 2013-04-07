@@ -127,14 +127,28 @@
 			var url = this.href;
 
 			$.get(url.param('partial', true), function(response){
-				$("#no-refresh-content").html(response);
-				history.pushState({html: response}, null, url);
+			    var width = parseInt($('#no-refresh-content').css('width'));
+		        var transfer = $('<div class="transfer"></div>').css({ 'width': (2 * width) + 'px' });
+		        var current = $('<div class="current"></div>').css({ 'width': width + 'px', 'left': '0', 'float': 'left' }).html($('#no-refresh-content').html());
+		        var next = $('<div class="next"></div>').css({ 'width': width + 'px', 'left': width + 'px', 'float': 'left' }).html(response);
+		        
+		        transfer.append(current).append(next);
+		        
+		        $('#no-refresh-content').html('').append(transfer);
+		        transfer.animate({ 'margin-left': '-' + width + 'px' }, 300, function () {
+		            $("#no-refresh-content").html(response);
+					history.pushState({html: response}, null, url);
+		        });
+
+
+		   
 			});
 		});
 
 		window.onpopstate = function(event){
 			if(!event.state){ return; }
 			$("#no-refresh-content").html(event.state.html);
+
 		}
 	}
 
