@@ -122,6 +122,10 @@
 			return;
 		}
 
+		var $container = $("#no-refresh-content");
+
+		if($container.length)
+
 		$('a.no-refresh').click(function(e){
 			e.preventDefault();
 			var url = this.href;
@@ -136,19 +140,18 @@
 		        
 		        $('#no-refresh-content').html('').append(transfer);
 		        transfer.animate({ 'margin-left': '-' + width + 'px' }, 300, function () {
-		            $("#no-refresh-content").html(response);
+		            $container.html(response);
 					history.pushState({html: response}, null, url);
 		        });
-
-
 		   
 			});
 		});
 
+		history.pushState({html: $container.html()});
+
 		window.onpopstate = function(event){
 			if(!event.state){ return; }
-			$("#no-refresh-content").html(event.state.html);
-
+			$container.html(event.state.html);
 		}
 	}
 
