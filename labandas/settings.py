@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'staticoptimizer',
     'mathfilters',
     'geoapi',
+    'networkconnect',
     'equipaments',
     'medias',
     'bands',
@@ -204,4 +205,9 @@ AWS_SECRET_ACCESS_KEY = 'ecG69fBVGsxmIUjLpHQSIwmcU77XpY78TMaN2R53'
 #package settings
 PACKAGE_DIR = 'pkg'
 LESS_EXECUTABLE = "lessc"
+
+#network auth settings
+KEYS = {
+    'facebook': { 'key': '363555127094643', 'secret_key': 'c6b942d21ba141a67695ed6f090b8d1b' },
+}
 
