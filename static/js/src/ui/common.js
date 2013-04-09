@@ -147,7 +147,7 @@
 			});
 		});
 
-		history.pushState({html: $container.html()});
+		history.pushState({html: $container.html()}, null, location.href);
 
 		window.onpopstate = function(event){
 			if(!event.state){ return; }

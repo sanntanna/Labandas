@@ -8,10 +8,10 @@ from models import UserNetwork
 class UserFinder(object):
 
 	def get_user(self, network, token, user_id):
-		user = UserNetwork.objects.get_by_network_id(user_id, network)
+		network_user = UserNetwork.objects.get_by_network_id(user_id, network)
 
-		if not user is None:
-			return user
+		if not network_user is None:
+			return network_user.user, False, {}
 
 		if not hasattr(self, network):
 			raise ValueError('Rede %s nao encontrada'% network)
@@ -26,13 +26,16 @@ class UserFinder(object):
 
 		if stored_users.count() > 0:
 			user = stored_users[0]
-			self.__bind_user_in_network(user, user_id, token, 'facebook')
+			self.__bind_user_in_network(user, user_id, 'facebook')
 			return user
 
-		user = User.objects.create_user(fb_data['email'], fb_data['email'], "78%s123%s3˜" % (user_id,user_id), first_name=fb_data['first_name'], last_name=fb_data['last_name'])
-		self.__bind_user_in_network(user, user_id, token, 'facebook')
+		user = User.objects.create_user(fb_data['email'], fb_data['email'], "78%s123%s309" % (user_id,user_id))
+		user.first_name=fb_data['first_name']
+		user.last_name=fb_data['last_name']
+		user.save()
+		self.__bind_user_in_network(user, user_id, 'facebook')
 
-		return user
+		return user, True, fb_data
 
-	def __bind_user_in_network(self, user, network_id, network_token, network_name):
-		UserNetwork.objects.create(user=user, network_id=network_id, network_token=network_token, network_name=network_name)
+	def __bind_user_in_network(self, user, network_id, network_name):
+		UserNetwork.objects.create(user=user, network_id=network_id, network_name=network_name)

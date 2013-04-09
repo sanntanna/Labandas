@@ -24,12 +24,16 @@ facebook = function(appid){
 	function executeLogin(callback){
 		FB.getLoginStatus(function(response){
 			if(response.status == 'connected'){
-				callback.call(null, response);
+				callback.call(null, response.authResponse);
 				return;
 			}
 
 			FB.login(function(loginResponse) {
-				callback.call(null, loginResponse);
+				if(loginResponse.status != 'connected'){
+					return;
+				}
+				
+				callback.call(null, loginResponse.authResponse);
 			}, permissions);
 		});
 	}

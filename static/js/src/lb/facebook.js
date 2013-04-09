@@ -9,8 +9,18 @@ lb.facebook = (function(){
 
 	public.login = function(){
 		facebookApi.login(function(user){
-			console.log('lb class');
-			console.log(user);
+
+			var connectData = {
+				token: user.accessToken,
+				id: user.userID,
+				name: 'facebook'
+			};
+
+			$.post('network/connect', connectData, function(response){
+				if(response.success){
+					location.reload();
+				}
+			});
 		});
 	};
 

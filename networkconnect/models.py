@@ -13,7 +13,6 @@ class UserNetworkManager(models.Manager):
 class UserNetwork(models.Model):
 	user = models.OneToOneField(User)
 	network_id = models.CharField(max_length=50)
-	network_token = models.CharField(max_length=50)
 	network_name = models.CharField(max_length=20)
 
 	objects = UserNetworkManager()
