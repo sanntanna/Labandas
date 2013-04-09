@@ -43,8 +43,6 @@ def homeLogged(request):
 
 def login(request):
     user = auth.authenticate(username=request.POST['user'], password=request.POST['password'])
-    
-    print type(user)
 
     if user == None:
         return JSONResponse({'success': False, 'errors': {'login':["Usuario e/ou senha invalidos"]}})

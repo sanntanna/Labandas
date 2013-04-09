@@ -1,5 +1,4 @@
 #coding=ISO-8859-1
-from django.conf import settings
 from django.contrib import auth
 from models import UserNetwork
 from utils import UserFinder
@@ -18,15 +17,6 @@ def connect(request):
 		musician = user.get_profile()
 		musician.born_year = extra_fields['birthday'].split('/')[2]
 		musician.save()
-
-	print type(user)
-
-	from django.contrib.auth import load_backend, login
-	if not hasattr(user, 'backend'):
-		for backend in settings.AUTHENTICATION_BACKENDS:
-			if user == load_backend(backend).get_user(user.pk):
-				user.backend = backend
-				break
 
 	auth.login(request, user)
 

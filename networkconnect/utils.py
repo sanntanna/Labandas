@@ -1,4 +1,5 @@
 #coding=ISO-8859-1
+from django.conf import settings as django_settings
 from django.contrib.auth.models import User
 import json
 from labandas import settings
@@ -11,6 +12,7 @@ class UserFinder(object):
 		network_user = UserNetwork.objects.get_by_network_id(user_id, network)
 
 		if not network_user is None:
+			self.__add_user_backend(network_user.user)
 			return network_user.user, False, {}
 
 		if not hasattr(self, network):
@@ -34,8 +36,19 @@ class UserFinder(object):
 		user.last_name=fb_data['last_name']
 		user.save()
 		self.__bind_user_in_network(user, user_id, 'facebook')
+		self.__add_user_backend(user)
 
 		return user, True, fb_data
 
 	def __bind_user_in_network(self, user, network_id, network_name):
 		UserNetwork.objects.create(user=user, network_id=network_id, network_name=network_name)
+
+	def __add_user_backend(self, user):
+		if hasattr(user, 'backend'):
+			return
+
+		from django.contrib.auth import load_backend	
+		for backend in django_settings.AUTHENTICATION_BACKENDS:
+			if user == load_backend(backend).get_user(user.pk):
+				user.backend = backend
+				return
