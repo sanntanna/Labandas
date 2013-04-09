@@ -2,7 +2,7 @@
 from django.contrib.auth.models import User
 import json
 from labandas import settings
-from pyquery import PyQuery as pq
+from httplib2 import Http
 from models import UserNetwork
 
 class UserFinder(object):
@@ -19,9 +19,8 @@ class UserFinder(object):
 		return getattr(self, network)(user_id, token)
 
 	def facebook(self, user_id, token):
-		content = pq("https://graph.facebook.com/100001327309249?access_token=%s" % token)
-		str_json = content.find('p').html()
-		fb_data = json.loads(str_json)
+		response, content = Http().request("https://graph.facebook.com/100001327309249?access_token=%s" % token)
+		fb_data = json.loads(content)
 
 		stored_users = User.objects.filter(username=fb_data['email'])
 
