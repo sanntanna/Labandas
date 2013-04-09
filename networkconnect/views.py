@@ -11,12 +11,7 @@ def connect(request):
 	network_id = request.POST.get('id')
 
 	finder = UserFinder()
-	user, is_new, extra_fields = finder.get_user(network_name, network_token, network_id)
-
-	if is_new and 'birthday' in extra_fields:
-		musician = user.get_profile()
-		musician.born_year = extra_fields['birthday'].split('/')[2]
-		musician.save()
+	user, extra_fields = finder.get_user(network_name, network_token, network_id)
 
 	auth.login(request, user)
 

@@ -1,6 +1,7 @@
 #coding=UTF-8
 from copy import copy
 from django.contrib.auth.models import User
+from networkconnect.models import UserNetwork
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
@@ -165,3 +166,24 @@ class MusicianBand(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Musician(user=instance).save()
+
+
+@receiver(post_save, sender=UserNetwork)
+def handle_network_data(sender, instance, created, **kwargs):
+    musician = instance.user.get_profile()
+    changed = False
+
+    if 'birthday' in instance.extra_fields:
+        musician.born_year = instance.extra_fields['birthday'].split('/')[2]
+        changed = True
+
+    if 'avatar_url' in instance.extra_fields:
+        import urllib, cStringIO
+
+        avatar_image = cStringIO.StringIO(urllib.urlopen(instance.extra_fields['avatar_url']).read())
+        musician.media.avatar = avatar_image
+        changed = True
+
+    if changed:
+        musician.save()
+    

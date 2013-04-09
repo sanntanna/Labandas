@@ -15,4 +15,6 @@ class UserNetwork(models.Model):
 	network_id = models.CharField(max_length=50)
 	network_name = models.CharField(max_length=20)
 
+	extra_fields = {}
+
 	objects = UserNetworkManager()
