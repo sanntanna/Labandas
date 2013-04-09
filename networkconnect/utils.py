@@ -21,7 +21,7 @@ class UserFinder(object):
 		return getattr(self, network)(user_id, token)
 
 	def facebook(self, user_id, token):
-		response, content = Http().request("https://graph.facebook.com/100001327309249?access_token=%s" % token)
+		response, content = Http().request("https://graph.facebook.com/%s?access_token=%s" % (user_id, token))
 		fb_data = json.loads(content)
 
 		stored_users = User.objects.filter(username=fb_data['email'])

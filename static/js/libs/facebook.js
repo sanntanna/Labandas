@@ -22,20 +22,21 @@ facebook = function(appid){
 	};
 
 	function executeLogin(callback){
-		FB.getLoginStatus(function(response){
+		/*FB.getLoginStatus(function(response){
 			if(response.status == 'connected'){
 				callback.call(null, response.authResponse);
 				return;
-			}
-
+			}*/
+			console.log(permissions);
 			FB.login(function(loginResponse) {
+				console.log(loginResponse);
 				if(loginResponse.status != 'connected'){
 					return;
 				}
 				
 				callback.call(null, loginResponse.authResponse);
 			}, permissions);
-		});
+		//});
 	}
 
 	function prepare(){
