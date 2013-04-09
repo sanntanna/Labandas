@@ -10,6 +10,8 @@ class Partialhandled(object):
 		def wrapped(*args, **kwargs):
 			respose_handler = func(*args, **kwargs)
 
+ 			print respose_handler
+
 			if not hasattr(respose_handler, 'buildHttpResponse'):
 				return respose_handler
 

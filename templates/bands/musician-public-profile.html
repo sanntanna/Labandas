@@ -1,0 +1,238 @@
+{% extends base_template %}
+{% load staticoptimizer %}
+{% load mathfilters %}
+
+{% block musiciancontent %}
+	<!-- <div id="cover-photo"
+		{% if musician.media.cover %} class="with-photo" {% endif %} >
+
+		<a href="#" class="invite-me"><span class="highlight">+</span>Convide-me para sua banda</a> 
+
+		{% if owner.media.cover %}
+			<img src="{{owner.media.cover}}" alt="{{ owner.name }}"/>
+		{% endif %}
+
+		<div id="user-header" class="clearfix">
+			<div id="profile-photo" class="fl">
+				{% if owner.media.avatar %}
+					<img src="{{owner.media.avatar}}" alt="{{ owner.name }}"/>
+				{% endif %}
+			</div>
+			<h1 class="fl">
+				{{ owner.name }}, 
+				<span class="complement">
+					{% if owner.born_year %}
+						{{ current_year|sub:owner.born_year }}  anos
+					{% endif %}
+					
+					{% if owner.address.state %}
+						{% if owner.address.city %}
+						, {{ owner.address.city }}
+						{% endif %}
+						, {{ owner.address.state }}
+					{% endif %}
+				</span>
+			</h1>
+		</div>
+	</div> -->
+	
+	<div id="container" class="fl">
+
+		{% if owner.type_instruments_play.count > 0 or owner.musical_styles.count > 0 %}
+
+		<div id="complete-subscription" class="clearfix public">
+			<ul class="musician-info fl">	
+				{% for instrument in owner.type_instruments_play.all %}
+					<li class="{{ instrument.normalized_name }} check-icon icons-instruments">
+						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
+							{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
+								checked="checked"
+							{% endif %}
+						/>
+						<span>{{ instrument.name }}</span>
+					</li>
+				{% endfor %}
+			</ul>
+
+			<div class="personal-info fl">
+				{% if owner.musical_styles.count > 0 %}
+				<div>
+					<label>Quero tocar:</label>
+					{% for style in owner.musical_styles.all %}
+						{{ style.name }}
+						{% if not forloop.last %} | {%endif%}
+					{% endfor %}
+				</div>
+				{% endif %}
+			</div>
+			<p class="born-celebrity">Você nasceu no mesmo ano que <span id="same-year-as">--</span></p>
+		</div>
+
+		{% else %}
+			<div class="musician-info-empty">Não sei tocar nenhum instrumento, eu acho! :( </div>
+		{% endif %}
+
+		<div class="modules">	
+		{% if owner.about != "" %}
+			<div class="about fl">
+				<div class="about-you">{{ owner.about }}</div>
+			</div>
+			{% else %}
+			<div class="about empty fl">
+				Infelizmente essa músico não adicionou informação no seu perfil
+			</div>
+		{% endif %}
+
+			<div id="all-media" class="fl">
+				
+				<a href="#" class="pictures fl">
+					<span class="title">Fotos <span class="count">(68)</span></span>
+				</a>
+				<a href="#" class="movies fl">
+					<span class="title">Vídeos <span class="count">(68)</span></span>
+				</a>
+				<a href="#" class="bands fl">
+					<span class="title">Bandas</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="modules">	
+			<div class="fl status">
+				<h2 class="marker small">Status</h2>
+				<div class="self-assessment">
+					<ul class="skills">
+						<li>
+							<span>Feeling</span>
+							<span class="bar 
+								{% if owner.skills.feeling <= 0 %} disabled{% endif %}
+								">
+								<div class="filled" style="width:{{owner.skills.feeling|mul:10}}%;"></div>
+								{% if owner.skills.feeling >= 0 %}
+									<div class="fr rating">{{ owner.skills.feeling }}</div>
+								{% endif %}
+							</span>
+						</li>
+						<li>
+							<span>Experiência</span>
+							<span class="bar
+								{% if owner.skills.experience <= 0 %} disabled{% endif %}
+								">
+								<div class="filled" style="width:{{owner.skills.experience|mul:10}}%;"></div>
+								{% if owner.skills.experience >= 0 %}
+									<div class="fr rating">{{ owner.skills.experience }}</div>
+								{% endif %}
+							</span>
+						</li>
+						<li>
+							<span>Versatilidade</span>
+							<span class="bar
+								{% if owner.skills.versatility <= 0 %} disabled{% endif %}
+								">
+								<div class="filled" style="width:{{owner.skills.versatility|mul:10}}%;"></div>
+								{% if owner.skills.versatility >= 0 %}
+									<div class="fr rating">{{ owner.skills.versatility }}</div>
+								{% endif %}
+							</span>
+						</li>
+						<li>
+							<span>Performace de palco</span>
+							<span class="bar
+								{% if owner.skills.stage_performace <= 0 %} disabled{% endif %}
+								">
+								<div class="filled" style="width:{{ owner.skills.stage_performace|mul:10}}%;"></div>
+								{% if  owner.skills.stage_performace >= 0 %}
+									<div class="fr rating">{{ owner.skills.stage_performace }}</div>
+								{% endif %}
+							</span>
+						</li>
+						<li>
+							<span>Comprometimento</span>
+							<span class="bar
+								{% if owner.skills.commitment <= 0 %} disabled{% endif %}
+								">
+								<div class="filled" style="width:{{owner.skills.commitment|mul:10}}%;"></div>
+								{% if owner.skills.commitment >= 0 %}
+									<div class="fr rating">{{ owner.skills.commitment }}</div>
+								{% endif %}
+							</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="fl mysound">
+				<h2 class="marker small">Meu<strong>Som</strong></h2>
+				
+				{% if owner.media.sound_cloud %}
+					<div id="user-soundcloud-player" class="soundcloud-player" data-src="{{ owner.media.sound_cloud }}"></div>
+				{% else %}
+					<div id="user-soundcloud-player"></div>
+					<div class="soundcloud">Este músico não possui playlist :(</div>
+				{% endif %}
+		
+			</div>
+		</div>
+
+		<div class="modules">	
+			<div class="fl myequipaments">
+				<h2 class="marker small">Meus<strong>Equipamentos</strong></h2>
+			</div>
+			
+			{% if owner.influences %}{
+				<div class="fl influences">
+					<h2 class="marker small">Influências</h2>
+					<div class="influences-content">{owner.influences}</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+
+	
+
+
+<!--<div class="message">
+		{% for solicitation in band_solicitations %}
+			<div class="box solicitation">
+				<p>
+				<strong>{{ solicitation.from_musician.user.get_full_name }}</strong> 
+				disse que você toca
+				{%for instrument in solicitation.instruments.all %}
+					{{ instrument.name }}{% if not forloop.last %}, {%endif%}
+				{% endfor %}
+				na banda <strong>{{ solicitation.band.name }}</strong>
+				</p>
+				<a href="#accept" class="accept-solicitation" data-id="{{ solicitation.pk }}">Está certo</a>
+				<a href="#decline" class="decline-solicitation" data-id="{{ solicitation.pk }}">Ele viajou</a>
+			</div>
+		{% endfor %}
+	
+		{% if user.get_profile.bands.count = 0 %}
+			<div class="box without-bands">
+				Você ainda não está em nenhuma banda cadastrada no Lasbandas.<br />
+				<a href="/banda/cadastrar">Crie uma banda</a> ou <a href="#">Encontre uma banda que precisa de você</a>.
+			</div>
+		{% else %}
+			<div class="box with-bands">
+				Suas bandas:
+				<ul>
+					{% for music_band in user.get_profile.bands %}
+						<li> 
+							<a href="{{ music_band.band.encode_page }}" target="_blank">
+							{{ music_band.band.name }} (
+								{%for instrument in music_band.instruments.all %}
+									{{instrument.name}}
+									{% if not forloop.last %}, {%endif%}
+								{% endfor %}
+							)
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+				
+				<a href="/banda/cadastrar">[+] Cadastrar nova banda</a>
+			</div>
+		{% endif %}
+	</div> -->
+{% endblock %}
+

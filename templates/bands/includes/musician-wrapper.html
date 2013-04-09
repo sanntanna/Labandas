@@ -1,0 +1,68 @@
+{% extends "includes/wrapper.html" %}
+{% load staticoptimizer %}
+
+{% block css %}
+	{% css "css/src/home-logged.css" %}	
+{% endblock %}
+
+{% block js %}
+	{% js "js/src/ui/home-logged.js" %}
+{% endblock %} 
+
+{% block mainclass %}can-edit{% endblock %}
+{% block bodyattr %} data-inline-edit-path="/musico/atualizar/" data-id="{{ user.id }}" {% endblock %}
+
+{% block content %}
+	<div id="cover-photo"
+		{% if musician.media.cover %} class="with-photo" {% endif %} >
+
+		{% if musician.media.cover %}
+			<img src="{{musician.media.cover}}" alt="{{ musician.name }}"/>
+		{% endif %}
+		
+		{% if owner.media.cover %}
+			<a href="/lightbox/foto-capa-musico?width=665&amp;height=200" class="lightbox change-cover-photo">
+				<span class="highlight">+</span> 
+
+				{% if musician.media.cover %}
+					Alterar foto da capa
+				{% else %}
+					Adicionar foto da capa
+				{% endif %}
+			</a>
+		{% endif %}
+
+		<div id="user-header" class="clearfix">
+			<div id="profile-photo" class="fl">
+				{% if musician.media.avatar %}
+				<img src="{{musician.media.avatar}}" alt="{{ musician.name }}"/>
+				{% endif %}
+				<a href="/lightbox/foto-perfil-musico?width=665&amp;height=200" class="lightbox">Alterar foto</a>
+			</div>
+			<h1 class="fl editable" data-field="user.first_name">
+				{{ user.get_full_name }}
+			</h1>
+		</div>
+	</div>
+		
+	<div id="container" class="fl">
+		
+		<nav>
+		  	<ul class="menu markable">
+		        <li><a href="{{ band.page_url }}" class="no-refresh">Geral</a></li>
+		        <li><a href="{{ band.photos_url }}" class="no-refresh">Fotos</a></li>
+		        <li><a href="{{ band.videos_url }}" class="no-refresh">Videos</a></li>
+		        <li class="no_border"><a href="{{ band.setlist_url }}" class="no-refresh">Setlist</a></li>                
+			</ul>
+		</nav>
+		
+		<div id="no-refresh-content">
+		{% block musiciancontent %}{% endblock %}
+		</div>
+	</div>
+	<div class="fl advertising">
+		<h2>Ofertas</h2>
+	</div>
+{% endblock %}
+
+{% block aside %}{% endblock %}
