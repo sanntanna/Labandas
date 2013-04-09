@@ -1,11 +1,14 @@
 #coding=ISO-8859-1
+from django.contrib.auth.models import User
+import json
 from labandas import settings
+from pyquery import PyQuery as pq
 from models import UserNetwork
 
 class UserFinder(object):
 
-	def get_user(self, token, network):
-		user = UserNetwork.objects.get_by_token(token, network)
+	def get_user(self, network, token, user_id):
+		user = UserNetwork.objects.get_by_network_id(user_id, network)
 
 		if not user is None:
 			return user
@@ -13,8 +16,24 @@ class UserFinder(object):
 		if not hasattr(self, network):
 			raise ValueError('Rede %s nao encontrada'% network)
 
-		return getattr(self, network)(token)
+		return getattr(self, network)(user_id, token)
 
-	def facebook(self, token):
-		print token
-		return None
+	def facebook(self, user_id, token):
+		content = pq("https://graph.facebook.com/100001327309249?access_token=%s" % token)
+		str_json = content.find('p').html()
+		fb_data = json.loads(str_json)
+
+		stored_users = User.objects.filter(username=fb_data['email'])
+
+		if stored_users.count() > 0:
+			user = stored_users[0]
+			self.__bind_user_in_network(user, user_id, token, 'facebook')
+			return user
+
+		user = User.objects.create_user(fb_data['email'], fb_data['email'], "78%s123%s3˜" % (user_id,user_id), first_name=fb_data['first_name'], last_name=fb_data['last_name'])
+		self.__bind_user_in_network(user, user_id, token, 'facebook')
+
+		return user
+
+	def __bind_user_in_network(self, user, network_id, network_token, network_name):
+		UserNetwork.objects.create(user=user, network_id=network_id, network_token=network_token, network_name=network_name)
