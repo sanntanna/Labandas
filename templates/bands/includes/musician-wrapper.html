@@ -15,12 +15,15 @@
 {% block content %}
 	<div id="cover-photo"
 		{% if musician.media.cover %} class="with-photo" {% endif %} >
-
+		
+		{% if owner %}
+		<a href="#" class="invite-me"><span class="highlight">+</span>Convide-me para sua banda</a> 
+		{% endif %}
+		
 		{% if musician.media.cover %}
 			<img src="{{musician.media.cover}}" alt="{{ musician.name }}"/>
 		{% endif %}
 		
-		{% if owner.media.cover %}
 			<a href="/lightbox/foto-capa-musico?width=665&amp;height=200" class="lightbox change-cover-photo">
 				<span class="highlight">+</span> 
 
@@ -30,7 +33,6 @@
 					Adicionar foto da capa
 				{% endif %}
 			</a>
-		{% endif %}
 
 		<div id="user-header" class="clearfix">
 			<div id="profile-photo" class="fl">
