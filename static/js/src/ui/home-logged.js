@@ -106,8 +106,12 @@
 
 	function setupBornDate(){
 		function onchange(e){
-			var musicians = $select.find('option[value='+ $select.val() +']').attr('data-artists').split(',');
-			var someMusician = musicians[Math.round(Math.random() * musicians.length - 1)];
+			var artists = $select.find('option[value='+ $select.val() +']').attr('data-artists');
+
+			if(!artists){ return; }
+
+			var musicians = artists.split(','),
+				someMusician = musicians[Math.round(Math.random() * musicians.length - 1)];
 			$target.html(someMusician == "" ? "--" : someMusician);
 			$phrase.show();
 		}
@@ -122,7 +126,7 @@
 			$select.find("option[value=" + currentYear + "]").attr('selected', 'selected');
 		}
 
-		$select.change(onchange);
+		$(document).delegate("#born", 'change', onchange);
 
 		onchange();
 	}

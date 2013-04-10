@@ -87,6 +87,7 @@
 	function handleActiveMenus(){
 		$('ul.markable').each(function(){
 			var $links = $(this).find('a');
+
 			$links.each(function(){
 				var $link = $(this);
 
@@ -103,10 +104,7 @@
 			});
 
 			$(document).bind('popstate', function(e, url){
-				console.log(url);
-				console.log($links.filter('href[$="' + url + '"]'));
-				var $link = $links.filter('href[$="' + url + '"]');
-
+				var $link = $links.filter('[href$="' + url + '"]');
 				if(!$link.length){ return; }
 
 				$links.filter('.active').removeClass('active');
@@ -135,11 +133,12 @@
 			return;
 		}
 
-		var $container = $("#no-refresh-content");
+		var $container = $("#no-refresh-content"),
+			initialContent = $container.html();
 
-		if($container.length)
+		if(!$container.length) {return;}
 
-		$('a.no-refresh').click(function(e){
+		$(document).delegate('a.no-refresh', 'click', function(e){
 			e.preventDefault();
 			var url = this.href,
 				link = this;
@@ -161,12 +160,12 @@
 			});
 		});
 
-		history.pushState({html: $container.html(), location:location.href}, null, location.href);
-
 		window.onpopstate = function(event){
-			if(!event.state){ return; }
-			console.log(event.state);
-			$(document).trigger('popstate', event.state.location);
+			$(document).trigger('popstate', (event.state) ? event.state.location : location.href);
+			if(!event.state){ 
+				$container.html(initialContent);
+				return; 
+			}
 			$container.html(event.state.html);
 		}
 	}
