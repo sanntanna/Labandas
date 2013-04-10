@@ -90,7 +90,9 @@
 			$links.each(function(){
 				var $link = $(this);
 
-				if(location.href.indexOf(this.href) > -1){
+				var ex = new RegExp(this.href + '$');
+
+				if(location.href.match(ex)){
 					$link.addClass('active');
 				}
 
@@ -98,6 +100,17 @@
 					$links.filter('.active').removeClass('active');
 					$link.addClass('active');
 				});
+			});
+
+			$(document).bind('popstate', function(e, url){
+				console.log(url);
+				console.log($links.filter('href[$="' + url + '"]'));
+				var $link = $links.filter('href[$="' + url + '"]');
+
+				if(!$link.length){ return; }
+
+				$links.filter('.active').removeClass('active');
+				$link.addClass('active');
 			});
 		});
 	}
@@ -128,7 +141,8 @@
 
 		$('a.no-refresh').click(function(e){
 			e.preventDefault();
-			var url = this.href;
+			var url = this.href,
+				link = this;
 
 			$.get(url.param('partial', true), function(response){
 			    var width = parseInt($('#no-refresh-content').css('width'));
@@ -141,16 +155,18 @@
 		        $('#no-refresh-content').html('').append(transfer);
 		        transfer.animate({ 'margin-left': '-' + width + 'px' }, 300, function () {
 		            $container.html(response);
-					history.pushState({html: response}, null, url);
+					history.pushState({html: response, location: $(link).attr('href')}, null, url);
 		        });
 		   
 			});
 		});
 
-		history.pushState({html: $container.html()}, null, location.href);
+		history.pushState({html: $container.html(), location:location.href}, null, location.href);
 
 		window.onpopstate = function(event){
 			if(!event.state){ return; }
+			console.log(event.state);
+			$(document).trigger('popstate', event.state.location);
 			$container.html(event.state.html);
 		}
 	}
