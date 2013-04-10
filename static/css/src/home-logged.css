@@ -689,11 +689,11 @@
     font-size: 16px;
     .normal;
     height: 13px;
-    left: 67%;
+    left: 60%;
     margin-top: 20px;
     padding: 5px 10px 13px;
     position: relative;
-    width: 225px;
+    width: 280px;
 
 	li{
 		border-right: 1px solid @green;

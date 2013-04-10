@@ -59,6 +59,22 @@ class Musician(models.Model):
     @property
     def profile_url(self):
         return "/musico/%s/%d" % (self.url, self.pk)
+
+    @property
+    def page_url(self):
+        return "/musico/%s/%d" % (self.url, self.pk)
+
+    @property
+    def photos_url(self):
+        return "/musico/%s/%d/fotos" % (self.url, self.pk)
+
+    @property
+    def videos_url(self):
+        return "/musico/%s/%d/videos" % (self.url, self.pk)
+
+    @property
+    def mybands_url(self):
+        return "/musico/%s/%d/minhas-bandas" % (self.url, self.pk)
    
     def save(self, *args, **kwargs):
         self.url = slugify(self.name())

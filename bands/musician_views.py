@@ -119,7 +119,7 @@ def musician_photos(request, name, user_id):
 
 @Partialhandled(full_template, partial_template)
 def musician_videos(request, name, user_id):
-    musician = get_object_or_404(Band, pk=user_id)
+    musician = get_object_or_404(Musician, pk=user_id)
 
     template = loader.get_template("bands/musician-videos.html")
     context = RequestContext(request, {
