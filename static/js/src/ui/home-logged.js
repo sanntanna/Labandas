@@ -11,22 +11,23 @@
 		bandCreation();
 	};
 	
-	
-	
 	function setupCheckUncheckIcons(){
-		$('.check-icon').each(function(){
-			$(this).bind('mouseup', function(){
-				var $icon = $(this);
-				setTimeout(function(){
-					var fn = $icon.find('input:checked').length ? 'addClass' : 'removeClass';
-					$icon[fn]('active');
-				}, 10)
-			}).trigger('mouseup');
+		$(document).delegate('.check-icon', 'mouseup', function(){
+			var $icon = $(this);
+			setTimeout(function(){
+				var fn = $icon.find('input:checked').length ? 'addClass' : 'removeClass';
+				$icon[fn]('active');
+			}, 10)
+		});
+
+		$(document).bind('popstate', function(){
+			$('.check-icon').trigger('mouseup');
 		});
 	}
 
 	function setupSkills(){
-		$(".bar-marker").each(function(){
+		$(document).delegate('.bar-marker', 'mousedown', function(e){
+			e.preventDefault();
 			var $marker = $(this),
 				$barFill = $marker.siblings('.filled'),
 				$input = $marker.siblings('.skill-value');
@@ -36,51 +37,39 @@
 				maxLeft = $marker.parent().width(),
 				rate = 0;
 
-			$marker.mousedown(function(e){
-				e.preventDefault();
-				
-				$(document).mousemove(function(e){
-					var left = e.clientX - barContainerOffset.left;
-					left = Math.min(Math.max(left, margin), maxLeft);
+			$(document).mousemove(function(e){
+				var left = e.clientX - barContainerOffset.left;
+				left = Math.min(Math.max(left, margin), maxLeft);
 
-					var proportion = left / maxLeft;
-					rate = Math.round(proportion * 10);
+				var proportion = left / maxLeft;
+				rate = Math.round(proportion * 10);
 
-					$marker.css('left', left);
-					$barFill.width(Math.round(proportion * 100) + '%');
-				});
-
-				$(document).mouseup(function(){
-					$(document).unbind('mousemove mouseup');
-					$input.val(rate).trigger('change');
-				});
+				$marker.css('left', left);
+				$barFill.width(Math.round(proportion * 100) + '%');
 			});
 
-			var val = $input.val();
-			if(val && val != "" && val.toLowerCase() != "none" && val != "-1"){
-				var percentage = parseInt(val) * 10 + '%'
-				$barFill.width(percentage);
-				$marker.css('left', percentage)
-					.closest('li').find('.on-off').attr('checked', 'checked');
-			}
+			$(document).mouseup(function(){
+				$(document).unbind('mousemove mouseup');
+				$input.val(rate).trigger('change');
+			});
 		});
 
-		$(".skills input:checkbox").each(function(){
+		$(document).delegate('.skills input:checkbox', 'click', function(e, isTriggered){
 			var $check = $(this),
 				$parent = $check.closest('li');
 
-			$check.click(function(e, isTriggered){
-				var fn = this.checked ? 'removeClass' : 'addClass',
-					$input = $parent.find('.skill-value');
+			var fn = this.checked ? 'removeClass' : 'addClass',
+				$input = $parent.find('.skill-value');
 
-				$parent[fn]('inactive');
+			$parent[fn]('inactive');
 
-				if(isTriggered){ return; }
-				
-				$input.val(this.checked ? 5 : -1).trigger('change');
+			if(isTriggered){ return; }
+			
+			$input.val(this.checked ? 5 : -1).trigger('change');
+		});
 
-				//alert($parent.find('.skill-value').val());
-			}).triggerHandler('click', true);
+		$(document).bind('popstate', function(){
+			$(".skills input:checkbox").trigger('click', true);
 		});
 	}
 

@@ -32,7 +32,7 @@ lb.inlineEdit = function(){
 			$.post(pathToPost + url, postData);
 		});
 
-		$("#main.can-edit .editable").click(function(){
+		$(document).delegate("#main.can-edit .editable", 'click', function(){
 			var $div = $(this);
 			if($div.find('input').length){ return; }
 
@@ -46,13 +46,13 @@ lb.inlineEdit = function(){
 			$div.html("").append(ipt);
 			ipt.focus();
 
-		}).keydown(function(e){
+		}).delegate('#main.can-edit .editable', 'keydown', function(e){
 			if(e.keyCode == 13){ 
 				$(e.target).trigger('enterpress'); 
 			}
 		});
 
-		$("form.inline-form input").change(function(){
+		$(document).delegate("form.inline-form input", 'change', function(){
 			$(this).closest('form').trigger('submit');
 		});
 	};

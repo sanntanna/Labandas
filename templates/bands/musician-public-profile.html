@@ -3,44 +3,11 @@
 {% load mathfilters %}
 
 {% block musiciancontent %}
-	<!-- <div id="cover-photo"
-		{% if musician.media.cover %} class="with-photo" {% endif %} >
-
-		<a href="#" class="invite-me"><span class="highlight">+</span>Convide-me para sua banda</a> 
-
-		{% if owner.media.cover %}
-			<img src="{{owner.media.cover}}" alt="{{ owner.name }}"/>
-		{% endif %}
-
-		<div id="user-header" class="clearfix">
-			<div id="profile-photo" class="fl">
-				{% if owner.media.avatar %}
-					<img src="{{owner.media.avatar}}" alt="{{ owner.name }}"/>
-				{% endif %}
-			</div>
-			<h1 class="fl">
-				{{ owner.name }}, 
-				<span class="complement">
-					{% if owner.born_year %}
-						{{ current_year|sub:owner.born_year }}  anos
-					{% endif %}
-					
-					{% if owner.address.state %}
-						{% if owner.address.city %}
-						, {{ owner.address.city }}
-						{% endif %}
-						, {{ owner.address.state }}
-					{% endif %}
-				</span>
-			</h1>
-		</div>
-	</div> -->
-
-		{% if owner.type_instruments_play.count > 0 or owner.musical_styles.count > 0 %}
+		{% if musician.type_instruments_play.count > 0 or musician.musical_styles.count > 0 %}
 		<div id="complete-subscription" class="clearfix public">
 			<ul class="musician-info fl">	
-				{% for instrument in owner.type_instruments_play.all %}
-					<li class="{{ instrument.normalized_name }} check-icon icons-instruments">
+				{% for instrument in musician.type_instruments_play.all %}
+					<li class="{{ instrument.normalized_name }} icons-instruments">
 						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
 							{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
 								checked="checked"
@@ -52,10 +19,10 @@
 			</ul>
 
 			<div class="personal-info fl">
-				{% if owner.musical_styles.count > 0 %}
+				{% if musician.musical_styles.count > 0 %}
 				<div>
 					<label>Quero tocar:</label>
-					{% for style in owner.musical_styles.all %}
+					{% for style in musician.musical_styles.all %}
 						{{ style.name }}
 						{% if not forloop.last %} | {%endif%}
 					{% endfor %}
@@ -70,9 +37,9 @@
 		{% endif %}
 
 		<div class="modules">	
-		{% if owner.about != "" %}
+		{% if musician.about != "" %}
 			<div class="about fl">
-				<div class="about-you">{{ owner.about }}</div>
+				<div class="about-you">{{ musician.about }}</div>
 			</div>
 			{% else %}
 			<div class="about empty fl">
@@ -102,55 +69,55 @@
 						<li>
 							<span>Feeling</span>
 							<span class="bar 
-								{% if owner.skills.feeling <= 0 %} disabled{% endif %}
+								{% if musician.skills.feeling <= 0 %} disabled{% endif %}
 								">
-								<div class="filled" style="width:{{owner.skills.feeling|mul:10}}%;"></div>
-								{% if owner.skills.feeling >= 0 %}
-									<div class="fr rating">{{ owner.skills.feeling }}</div>
+								<div class="filled" style="width:{{musician.skills.feeling|mul:10}}%;"></div>
+								{% if musician.skills.feeling >= 0 %}
+									<div class="fr rating">{{ musician.skills.feeling }}</div>
 								{% endif %}
 							</span>
 						</li>
 						<li>
 							<span>Experiência</span>
 							<span class="bar
-								{% if owner.skills.experience <= 0 %} disabled{% endif %}
+								{% if musician.skills.experience <= 0 %} disabled{% endif %}
 								">
-								<div class="filled" style="width:{{owner.skills.experience|mul:10}}%;"></div>
-								{% if owner.skills.experience >= 0 %}
-									<div class="fr rating">{{ owner.skills.experience }}</div>
+								<div class="filled" style="width:{{musician.skills.experience|mul:10}}%;"></div>
+								{% if musician.skills.experience >= 0 %}
+									<div class="fr rating">{{ musician.skills.experience }}</div>
 								{% endif %}
 							</span>
 						</li>
 						<li>
 							<span>Versatilidade</span>
 							<span class="bar
-								{% if owner.skills.versatility <= 0 %} disabled{% endif %}
+								{% if musician.skills.versatility <= 0 %} disabled{% endif %}
 								">
-								<div class="filled" style="width:{{owner.skills.versatility|mul:10}}%;"></div>
-								{% if owner.skills.versatility >= 0 %}
-									<div class="fr rating">{{ owner.skills.versatility }}</div>
+								<div class="filled" style="width:{{musician.skills.versatility|mul:10}}%;"></div>
+								{% if musician.skills.versatility >= 0 %}
+									<div class="fr rating">{{ musician.skills.versatility }}</div>
 								{% endif %}
 							</span>
 						</li>
 						<li>
 							<span>Performace de palco</span>
 							<span class="bar
-								{% if owner.skills.stage_performace <= 0 %} disabled{% endif %}
+								{% if musician.skills.stage_performace <= 0 %} disabled{% endif %}
 								">
-								<div class="filled" style="width:{{ owner.skills.stage_performace|mul:10}}%;"></div>
-								{% if  owner.skills.stage_performace >= 0 %}
-									<div class="fr rating">{{ owner.skills.stage_performace }}</div>
+								<div class="filled" style="width:{{ musician.skills.stage_performace|mul:10}}%;"></div>
+								{% if  musician.skills.stage_performace >= 0 %}
+									<div class="fr rating">{{ musician.skills.stage_performace }}</div>
 								{% endif %}
 							</span>
 						</li>
 						<li>
 							<span>Comprometimento</span>
 							<span class="bar
-								{% if owner.skills.commitment <= 0 %} disabled{% endif %}
+								{% if musician.skills.commitment <= 0 %} disabled{% endif %}
 								">
-								<div class="filled" style="width:{{owner.skills.commitment|mul:10}}%;"></div>
-								{% if owner.skills.commitment >= 0 %}
-									<div class="fr rating">{{ owner.skills.commitment }}</div>
+								<div class="filled" style="width:{{musician.skills.commitment|mul:10}}%;"></div>
+								{% if musician.skills.commitment >= 0 %}
+									<div class="fr rating">{{ musician.skills.commitment }}</div>
 								{% endif %}
 							</span>
 						</li>
@@ -160,8 +127,8 @@
 			<div class="fl mysound">
 				<h2 class="marker small">Meu<strong>Som</strong></h2>
 				
-				{% if owner.media.sound_cloud %}
-					<div id="user-soundcloud-player" class="soundcloud-player" data-src="{{ owner.media.sound_cloud }}"></div>
+				{% if musician.media.sound_cloud %}
+					<div id="user-soundcloud-player" class="soundcloud-player" data-src="{{ musician.media.sound_cloud }}"></div>
 				{% else %}
 					<div id="user-soundcloud-player"></div>
 					<div class="soundcloud">Este músico não possui playlist :(</div>
@@ -175,10 +142,10 @@
 				<h2 class="marker small">Meus<strong>Equipamentos</strong></h2>
 			</div>
 			
-			{% if owner.influences %}
+			{% if musician.influences %}
 				<div class="fl influences">
 					<h2 class="marker small">Influências</h2>
-					<div class="influences-content">{owner.influences}</div>
+					<div class="influences-content">{{musician.influences}}</div>
 				</div>
 			{% endif %}
 		</div>

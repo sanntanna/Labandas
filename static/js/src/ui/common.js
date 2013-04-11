@@ -67,21 +67,25 @@
 
 	function setupCollapseButtons(){
 		var collapsedClass = 'hidden';
-		$('.toggle-button').each(function(){
-			var $link = $(this);
 
-			this.targetElement = $($link.data('target'));
-			this.noncollapsedlabel = $link.data('noncollapsedlabel');
-			this.collapsedlabel = $link.data('collapsedlabel');
+		$(document).delegate('.toggle-button', 'click', function(e){
+			e.preventDefault();
+			var $link = $(this),
+				$target = $($link.data('target'));
 
-			this.innerHTML = this.targetElement.hasClass(collapsedClass) ? this.collapsedlabel : this.noncollapsedlabel;
+			this.innerHTML = $target.is(':visible') ? $link.data('collapsedlabel') : $link.data('noncollapsedlabel');
+			$target.slideToggle();
+		});
 
-			$link.click(function(e){
-				e.preventDefault();
-				this.innerHTML = this.targetElement.is(':visible') ? this.collapsedlabel : this.noncollapsedlabel;
-				this.targetElement.slideToggle();
+		$(document).bind('popstate', function(){
+			$('.toggle-button').each(function(){
+				var $link = $(this),
+					$target = $($link.data('target'));
+				
+				this.innerHTML = $target.is(':visible') ? $link.data('noncollapsedlabel') : $link.data('collapsedlabel');
 			});
 		});
+
 	}
 
 	function handleActiveMenus(){
@@ -161,12 +165,13 @@
 		});
 
 		window.onpopstate = function(event){
-			$(document).trigger('popstate', (event.state) ? event.state.location : location.href);
 			if(!event.state){ 
 				$container.html(initialContent);
-				return; 
+			} else {
+				$container.html(event.state.html);
 			}
-			$container.html(event.state.html);
+
+			$(document).trigger('popstate', (event.state) ? event.state.location : location.href);
 		}
 	}
 
