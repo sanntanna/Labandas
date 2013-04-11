@@ -92,15 +92,15 @@ def update_obj_field(request, obj, attr):
 
 @Partialhandled(full_template, partial_template)
 def public_profile(request, user_id, name):
-    owner = get_object_or_404(Musician, pk=user_id)
+    musician = get_object_or_404(Musician, pk=user_id)
     
-    correct_url = owner.profile_url
+    correct_url = musician.profile_url
     if correct_url != request.path_info:
         return HttpResponsePermanentRedirect(correct_url)
     
     template = loader.get_template('bands/musician-public-profile.html')
     context = RequestContext(request, {
-        'owner': owner,
+        'musician': musician,
         'current_year': datetime.datetime.now().year
     })
     
@@ -128,6 +128,16 @@ def musician_videos(request, name, user_id):
     
     return HttpPartialResponseHandler(template, context)
 
+@Partialhandled(full_template, partial_template)
+def musician_bands(request, name, user_id):
+    musician = get_object_or_404(Musician, pk=user_id)
+
+    template = loader.get_template("bands/musician-bands.html")
+    context = RequestContext(request, {
+        'musician': musician,
+    })
+    
+    return HttpPartialResponseHandler(template, context)
 
 @onlyajax    
 def search_musician(request):

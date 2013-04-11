@@ -59,11 +59,11 @@
 			{% if user.is_authenticated %}
 				<li class="avatar-small">
 					{% if user.get_profile.media.avatar_small %}
-			    		<img src="{{ user.get_profile.media.avatar_small }}" alt="{{ user.first_name }}" width="40" />
+			    		<img src="{{ user.get_profile.media.avatar_small }}" alt="{{ user.get_full_name }}" width="40" />
 			    	{% endif %}
 			    </li>
 			    <li class="user-name">
-			    	<strong><a href="{{ user.get_profile.profile_url }}">{{ user.first_name }}</a></strong>
+			    	<strong><a href="{{ user.get_profile.profile_url }}" title="{{ user.get_full_name }}">{{ user.get_full_name|truncatechars:20 }}</a></strong>
 			    </li>
 			    <li class="notifications">
 			    	<a href="#notificacoes" class="icon notification ir" title="Nenhuma nova notificação">notificações</a>
