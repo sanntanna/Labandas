@@ -46,10 +46,13 @@
 	</div>
 		
 	<div id="container" class="fl">
-		
 		<nav>
 		  	<ul class="menu markable">
+		  		{% if user.pk = musician.pk %}
+		        <li><a href="/" class="no-refresh">Geral</a></li>
+		        {% else %}
 		        <li><a href="{{ musician.profile_url }}" class="no-refresh">Geral</a></li>
+		        {% endif %}
 		        <li><a href="{{ musician.photos_url }}" class="no-refresh">Fotos</a></li>
 		        <li><a href="{{ musician.videos_url }}" class="no-refresh">Videos</a></li>
 		        <li class="no_border"><a href="{{ musician.bands_url }}" class="no-refresh">Minhas bandas</a></li>                
@@ -57,7 +60,7 @@
 		</nav>
 		
 		<div id="no-refresh-content">
-		{% block musiciancontent %}{% endblock %}
+			{% block musiciancontent %}{% endblock %}
 		</div>
 	</div>
 	<div class="fl advertising">
