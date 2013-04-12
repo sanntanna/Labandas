@@ -1,5 +1,6 @@
 {% extends "includes/wrapper.html" %}
 {% load staticoptimizer %}
+{% load mathfilters %}
 
 {% block css %}
 	{% css "css/src/home-logged.css" %}	
@@ -53,8 +54,12 @@
 					</h1>
 				{% else %}
 					<h1 class="fl">
-						{{ user.get_full_name }}, 
+						{{ user.get_full_name }}
 						<span class="complement">
+							{% if musician.born_year %}
+								,{{ current_year|sub:musician.born_year }}  anos
+							{% endif %}
+							
 							{% if musician.address.state %}
 								{% if musician.address.city %}
 								, {{ musician.address.city }}
