@@ -718,7 +718,15 @@
 	margin: 30px;
 	.semibold;
 
-		li{margin-bottom: 20px;}
+		li{
+			margin-bottom: 20px;
+
+			a:hover img{
+				filter:~'alpha(opacity=0.50)'; 
+	  			-moz-opacity:0.50;   				
+	  			opacity:0.50;
+			}
+		}
 
 		.name-band {
 			background:@green;
