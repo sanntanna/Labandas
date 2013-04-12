@@ -713,7 +713,48 @@
 	}
 }
 
+#bands-musician{
+	list-style: none outside none;
+	margin: 30px;
 
+		li{margin-bottom: 20px;}
+
+		.name-band {
+			background:@green;
+			.border-radius(0 5px 5px 0);
+		    color: white;
+		    font-size: 20px;
+		    margin: 75px 0 0 12px;
+		    padding: 10px 15px;
+		    position: absolute;
+		    width: 20%;
+		    text-align: right;
+		}
+
+		img{
+			background: url("http://lasbandas.s3.amazonaws.com/site/default-coverphoto.gif") no-repeat scroll center -14px #E5E5E5;
+			border: 2px solid #FFFFFF;
+		    .border-radius(5px);
+		    height: 130px;
+		    margin-left: 10px;
+		    width: 744px;
+			margin-left: 10px;
+			display: block;
+		}
+
+		.btn{
+			background: @darkgray;
+		    margin-left: 10px;
+		    font-size: 13px;
+		    text-align: center;
+		    width: 688px;
+		    height: 27px;
+		    line-height: 30px;
+		    text-transform: uppercase;
+
+		    	&:hover{color:@green;}
+		}
+}
 
 /*AD*/
 

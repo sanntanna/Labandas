@@ -151,6 +151,8 @@ def get_bands(request):
     return JSONResponse({'success': True, 'bands':bands})
 
 
+
+
 @onlypost
 def update_avatar(request):
     musician = request.user.get_profile()
