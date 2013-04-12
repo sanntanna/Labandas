@@ -716,6 +716,7 @@
 #bands-musician{
 	list-style: none outside none;
 	margin: 30px;
+	.semibold;
 
 		li{margin-bottom: 20px;}
 
@@ -723,9 +724,9 @@
 			background:@green;
 			.border-radius(0 5px 5px 0);
 		    color: white;
-		    font-size: 20px;
+		    font-size: 18px;
 		    margin: 75px 0 0 12px;
-		    padding: 10px 15px;
+		    padding: 5px 15px;
 		    position: absolute;
 		    width: 20%;
 		    text-align: right;
