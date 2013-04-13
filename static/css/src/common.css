@@ -379,5 +379,5 @@ header.logged{
 	background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat scroll 0 -31px transparent;
     font-size: 18px;
     padding-left: 35px;
-    .light;
+    .semibold;
 }

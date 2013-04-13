@@ -1,0 +1,32 @@
+@import "_colors.less";
+@import "_utils.less";
+
+#album-photos {
+	margin-top: 25px;
+
+	li {
+		
+		list-style: none;
+
+		a{
+			background: #2E2E2E;
+			 border: 1px dashed #FFFFFF;
+			.border-radius(5px);
+		    float: left;
+		    font-size: 15px;
+		    height: 121px;
+		    line-height: 125px;
+		    text-align: center;
+		    text-decoration: underline;
+		    text-transform: uppercase;
+		    width: 177px;
+		    .bold;
+		    color: #FFF;
+		    .box-shadow(1px 10px 15px #E7E7E7);
+
+		    	&:hover{
+		    		background:@green;
+		    	}
+		}
+	}
+}

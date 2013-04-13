@@ -7,7 +7,6 @@
 	overflow: hidden;
 
 	h2{
-		.light;
 		strong{.normal;}
 	}
 
@@ -754,7 +753,7 @@
 		.btn{
 			background: @darkgray;
 		    margin-left: 10px;
-		    font-size: 13px;
+		    font-size: 15px;
 		    text-align: center;
 		    width: 688px;
 		    height: 27px;
