@@ -20,7 +20,7 @@
 			}, 10)
 		});
 
-		$(document).bind('popstate', function(){
+		$(document).bind('popstate pushstate', function(){
 			$('.check-icon').trigger('mouseup');
 		});
 	}
@@ -166,7 +166,6 @@
 				$link = $("#edit-musical-styles-button");
 
 			var textAttr = $selectedStyles.length > 0 ? "withselection" : "withoutselection";
-			
 			$link.text( $link.data(textAttr) );
 
 			return $selectedStyles;
@@ -185,7 +184,7 @@
 			$("#selected-musical-styles").text(content);
 		});
 
-		$(document).bind('popstate', function(e){
+		$(document).bind('popstate pushstate', function(e){
 			handleLabelAndGetSelecteds();
 		});
 	}

@@ -77,7 +77,7 @@
 			$target.slideToggle();
 		});
 
-		$(document).bind('popstate', function(){
+		$(document).bind('popstate pushstate', function(){
 			$('.toggle-button').each(function(){
 				var $link = $(this),
 					$target = $($link.data('target'));
@@ -107,7 +107,7 @@
 				});
 			});
 
-			$(document).bind('popstate', function(e, url){
+			$(document).bind('popstate pushstate', function(e, url){
 				var $link = $links.filter('[href$="' + url + '"]');
 				if(!$link.length){ return; }
 
@@ -159,6 +159,7 @@
 		        transfer.animate({ 'margin-left': '-' + width + 'px' }, 300, function () {
 		            $container.html(response);
 					history.pushState({html: response, location: $(link).attr('href')}, null, url);
+					$(document).trigger('pushstate');
 		        });
 		   
 			});
@@ -170,7 +171,6 @@
 			} else {
 				$container.html(event.state.html);
 			}
-
 			$(document).trigger('popstate', (event.state) ? event.state.location : location.href);
 		}
 	}
