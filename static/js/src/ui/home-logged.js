@@ -69,7 +69,22 @@
 		});
 
 		$(document).bind('popstate', function(){
-			$(".skills input:checkbox").trigger('click', true);
+			$(".skills.editable li").each(function(){
+				var $skill = $(this),
+					$check = $skill.find('input:checkbox'),
+					$ipt = $skill.find('input.skill-value'),
+					value = parseInt($ipt.val());
+
+				if(isNaN(value) || value < 0 ){
+					$skill.addClass('inactive');
+					return;
+				}
+
+				$check.attr('checked', true);
+
+				$skill.find('.filled').width((value * 10 )+ '%');
+				$skill.find('.bar-marker').css('left', (value * 10 )+ '%')
+			});
 		});
 	}
 

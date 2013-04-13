@@ -1,5 +1,7 @@
 {% extends base_template %}
+
 {% load staticoptimizer %}
+{% load mathfilters %}
 
 {% block mainclass %}can-edit{% endblock %}
 {% block bodyattr %} data-inline-edit-path="/musico/atualizar/" data-id="{{ user.id }}" {% endblock %}
@@ -277,7 +279,7 @@
 		<div class="fl status">
 			<h2 class="marker small">Status</h2>
 			<div class="self-assessment">
-				<ul class="skills">
+				<ul class="skills editable">
 					<li>
 						<span>Feeling</span>
 						<span class="bar">
