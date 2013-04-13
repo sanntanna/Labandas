@@ -93,12 +93,13 @@ class Musician(models.Model):
     def __unicode__(self):
         return self.name()
 
+
 class Band(models.Model):
     about = models.CharField(max_length=1000)
     name = models.CharField(max_length=50)
     influences = models.CharField(max_length=150)
-
     registration_date = models.DateTimeField('Registration date')
+
     musical_styles = models.ManyToManyField(MusicalStyle)
     
     url = models.SlugField(max_length=50)
@@ -158,6 +159,22 @@ class Band(models.Model):
         
     def __unicode__(self):
         return self.name
+
+class SetlistMusic(models.Model):
+    band = models.ForeignKey(Band, related_name="setlist")
+    title = models.CharField(max_length=150)
+    url = models.CharField(max_length=150, null=True, blank=True)
+
+    registration_date = models.DateTimeField('Registration date')
+
+    def save(self, *args, **kwargs):
+        if self.pk == None:
+            self.registration_date = timezone.now()
+        
+        super(SetlistMusic, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.title
 
 class MusicianBand(models.Model):
     band = models.ForeignKey(Band, related_name="all_musicians")
