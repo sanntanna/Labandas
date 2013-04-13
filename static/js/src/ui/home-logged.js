@@ -185,7 +185,9 @@
 			$("#selected-musical-styles").text(content);
 		});
 
-		handleLabelAndGetSelecteds();
+		$(document).bind('popstate', function(e){
+			handleLabelAndGetSelecteds();
+		});
 	}
 	
 	function bandCreation(){
