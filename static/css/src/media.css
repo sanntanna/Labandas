@@ -55,4 +55,11 @@
 		    width: 440px;
     	}
     	.btn{font-size: 13px; text-transform: uppercase;}
+
+    	.terms{
+    		color: #E5E5E5;
+		    display: block;
+		    font-size: 9px;
+		    margin:15px 0 0 33px;
+    	}
 }
