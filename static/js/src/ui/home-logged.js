@@ -120,19 +120,24 @@
 			$phrase.show();
 		}
 		
-		var $select = $("#born"),
-			$target = $("#same-year-as");
-			$phrase = $(".born-celebrity")
-
-		var currentYear = parseInt($("#current-born-year").val());
-
-		if(!isNaN(currentYear)){
-			$select.find("option[value=" + currentYear + "]").attr('selected', 'selected');
-		}
+		var $select = null,
+			$target = null,
+			$phrase = null;
 
 		$(document).delegate("#born", 'change', onchange);
 
-		onchange();
+		$(document).bind('popstate', function(){
+			$select = $("#born");
+			$target = $("#same-year-as");
+			$phrase = $(".born-celebrity");
+
+			var currentYear = parseInt($("#current-born-year").val());
+
+			if(!isNaN(currentYear)){
+				$select.find("option[value=" + currentYear + "]").attr('selected', 'selected');
+			}
+			onchange();
+		});
 	}
 
 	function setupSoundCloud(){
