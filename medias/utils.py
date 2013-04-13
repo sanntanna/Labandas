@@ -73,11 +73,16 @@ class ImageHandler():
             'small': self.__resize_image(image, (40,36))
         }
 
-    def handle_cover_image(self, new_file):
+    def handle_cover_image(self, new_file, generate_small=False):
         image = Image.open(new_file)
-        return {
+        response = {
             'default': self.__resize_image(image, (948,315))
         }
+
+        if generate_small:
+            response['small'] = self.__resize_image(image, (744,130))
+
+        return response 
 
 
 class SoundCloud(object):

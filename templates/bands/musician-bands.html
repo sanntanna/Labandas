@@ -10,7 +10,13 @@
 		<li>
 			<a href="{{ band.page_url }}" class="without-avatar">
 				<span class="name-band">{{ band.name }}</span>
-				<img src="{{band.media.cover}}" alt="{{ band.name }}"/>
+				
+				<img alt="{{ band.name }}"
+					{% if band.media.cover_small %}
+					src="{{band.media.cover_small}}"
+					{% endif %}
+					/>
+				
 			</a>
 		</li>
 	{% endfor %}

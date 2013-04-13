@@ -94,6 +94,7 @@ class MusicianMedia(models.Model):
 class BandMedia(models.Model):
     BASE_URL_USER_IMAGES = "http://lasbandas.s3.amazonaws.com/banda/"
     COVER_IMG_NAME = "cover.png"
+    COVER_SMALL_IMG_NAME = "cover-small.png"
 
     media_list = models.ManyToManyField(Media, null=True, blank=True)
 
@@ -102,12 +103,19 @@ class BandMedia(models.Model):
             return None
         return "%s%d/%s" % (self.BASE_URL_USER_IMAGES, self.band.id, self.COVER_IMG_NAME)
 
+    @property
+    def cover_small(self):
+        if not self.media_list.filter(media_type__name = "cover_photo"):
+            return None
+        return "%s%d/%s" % (self.BASE_URL_USER_IMAGES, self.band.id, self.COVER_SMALL_IMG_NAME)
+
     def set_cover(self, uploaded_image):
         handler = ImageHandler()
-        images = handler.handle_cover_image(uploaded_image)
+        images = handler.handle_cover_image(uploaded_image, True)
         
         s3 = AmazonS3()
         s3.upload_file(images['default'], '/banda/%d/%s' % (self.band.id, self.COVER_IMG_NAME))
+        s3.upload_file(images['small'], '/banda/%d/%s' % (self.band.id, self.COVER_SMALL_IMG_NAME))
 
         if not self.media_list.filter(media_type__name = "cover_photo"):
             self.media_list.add(Media.objects.create(media = "cover", media_type = self.__type("cover_photo")))
