@@ -48,8 +48,11 @@
 
     	input{
     		.border-radius(6px);
-		    margin-top: -5px;
-		    padding: 5px 5px 8px;
-		    width: 435px;
+		    font-size: 16px;
+		    margin-top: -1px;
+		    padding: 3px;
+		    color: #bdbdbd;
+		    width: 440px;
     	}
+    	.btn{font-size: 13px; text-transform: uppercase;}
 }
