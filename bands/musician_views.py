@@ -30,8 +30,6 @@ def profile(request):
                         and musician.musical_styles.all().count() > 0 \
                         and not musician.address.city is None
 
-    print musician.type_instruments_play.all().count
-
     c = RequestContext(request, {
         'band_solicitations': Solicitation.objects.bands_pending(musician),
         'musical_styles': MusicalStyle.objects.all(),
