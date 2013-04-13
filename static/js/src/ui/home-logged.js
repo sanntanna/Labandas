@@ -68,7 +68,7 @@
 			$input.val(this.checked ? 5 : -1).trigger('change');
 		});
 
-		$(document).bind('popstate', function(){
+		$(document).bind('popstate pushstate', function(){
 			$(".skills.editable li").each(function(){
 				var $skill = $(this),
 					$check = $skill.find('input:checkbox'),
