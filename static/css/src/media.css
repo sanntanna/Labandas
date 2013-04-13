@@ -30,3 +30,26 @@
 		}
 	}
 }
+
+#movies{
+	background:#434343;
+    .border-radius(8px);
+    border-top: 2px solid #e5e5e5;
+    margin: 25px 0 0 33px;
+    padding: 20px 40px;
+    width: 83%;
+    color: #FFF;
+
+    	h3{
+    		font-size: 18px;
+    		.normal;
+    		padding-bottom: 20px;
+    	}
+
+    	input{
+    		.border-radius(6px);
+		    margin-top: -5px;
+		    padding: 5px 5px 8px;
+		    width: 435px;
+    	}
+}

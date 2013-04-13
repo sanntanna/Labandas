@@ -740,7 +740,7 @@
 		}
 
 		img{
-			background: url("http://lasbandas.s3.amazonaws.com/site/default-coverphoto.gif") no-repeat scroll center -14px #E5E5E5;
+			background: url(http://lasbandas.s3.amazonaws.com/site/default-coverphoto.gif) no-repeat scroll center -14px #E5E5E5;
 			border: 2px solid #FFFFFF;
 		    .border-radius(5px);
 		    height: 130px;
