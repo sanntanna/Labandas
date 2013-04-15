@@ -1,7 +1,7 @@
 #coding=ISO-8859-1
 from announcements.forms import AnnouncementForm
 from bands.forms import BandForm, BandMusicianForm
-from bands.models import Band, MusicianBand
+from bands.models import Band, MusicianBand, SetlistMusic
 from django.http import HttpResponse, HttpResponsePermanentRedirect, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect
 from django.template import loader
@@ -111,16 +111,31 @@ def update_obj_field(request, obj, attr):
     
     return JSONResponse({ "success": True })
 
-@onlyajax
-@onlypost
-def remove_band_from_band(request):
-    #TODO: adicionar validação para nao remover todos os admins, sempre deve ficar um
-    success = bandBand.objects.get(pk=request.POST.get('id')).deactivate()
-    return JSONResponse({'success': success})
-
 @onlypost
 def update_cover_photo(request, band_id):
     band = Band.objects.get(pk=band_id)
     band.media.cover = request.FILES.get('img')
 
     return redirect(band.page_url)
+
+
+@onlypost
+@onlyajax
+def update_setlist(request):
+    band = Band.objects.get(pk=request.POST.get('id'))
+
+    if not 'all-setlist' in request.POST:
+        band.add_music_to_setlist(request.POST.get('music'))
+        return JSONResponse({ "success": True })
+
+    musics = request.POST.get('all-setlist').splitlines(True)
+    band.add_music_to_setlist(musics)
+
+    return JSONResponse({ "success": True })
+
+@onlyajax
+@onlypost
+def remove_band_from_band(request):
+    #TODO: adicionar validação para nao remover todos os admins, sempre deve ficar um
+    success = bandBand.objects.get(pk=request.POST.get('id')).deactivate()
+    return JSONResponse({'success': success})

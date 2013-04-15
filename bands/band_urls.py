@@ -7,6 +7,7 @@ urlpatterns = patterns('bands.band_views',
     (r'^(?P<name>[a-z0-9-]+)/(?P<band_id>\d+)/setlist$', 'band_setlist'),
     (r'^(?P<name>[a-z0-9-]+)/(?P<band_id>\d+)/fotos$', 'band_photos'),
     (r'^(?P<name>[a-z0-9-]+)/(?P<band_id>\d+)/videos$', 'band_videos'),
+    (r'^atualizar/setlist$', 'update_setlist'),
     (r'^atualizar/(?P<field>[a-z_]+)$', 'update_field'),
     (r'^atualizar/(?P<obj>[a-z_]+)/(?P<attr>[a-z_]+)$', 'update_obj_field'),
 )

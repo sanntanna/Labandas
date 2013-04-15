@@ -5,5 +5,23 @@
 
 <h2 class="subtitle">Setlist da Banda</h2>
 
+
+<form method="post" action="/banda/atualizar/setlist" id="form-setlist" class="ajax">
+	<input type="hidden" name="id" value="{{ band.id }}" />
+	{% if band.setlist.all.count > 0 %}
+		<ul>
+		{% for music in band.setlist.all %}
+			<li>{{ music.title }}</li>
+		{% endfor %}
+		</ul>
+		<input type="text" name="music" placeholder="Digite aqui o nome da musica" />
+	{% else %}
+		Cole ou digite seu setilist baixo, colocando uma música por linha:<br />
+		<textarea name="all-setlist"></textarea>
+	{% endif %}
+
+	<input type="submit" value="salvar setlist" />
+</form>
+
 {% endblock bandcontent %}
 

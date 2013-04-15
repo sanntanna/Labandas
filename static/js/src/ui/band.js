@@ -3,6 +3,7 @@
 	
 	this.domLoaded = function(){
 		setupSoundCloud();
+		setupSetlist();
 	};
 	
 	function setupSoundCloud(){
@@ -24,6 +25,13 @@
 			new lb.soundcloud(url, "#user-soundcloud-player");
 		});
 	}
+
+	function setupSetlist(){
+		$(document).delegate('#form-setlist', 'ajaxcomplete', function(e, response){
+			console.log('response');
+		});
+	}
+
 	this.init();
 	$(this.domLoaded);
 })();

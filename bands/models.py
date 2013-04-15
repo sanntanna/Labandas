@@ -146,6 +146,14 @@ class Band(models.Model):
         if instruments != None:
             musician_band.instruments = instruments
     
+    def add_music_to_setlist(self, music):
+        if isinstance(music, basestring):
+            SetlistMusic.objects.create(band=self, title=music)
+            return
+        
+        for m in music:
+            SetlistMusic.objects.create(band=self, title=m)
+
     def save(self, *args, **kwargs):
         self.url = slugify(self.name)
         if self.pk == None:
@@ -154,18 +162,29 @@ class Band(models.Model):
             if self.media is None:
                 self.media = BandMedia.objects.create()
 
-        
         super(Band, self).save(*args, **kwargs)
         
     def __unicode__(self):
         return self.name
 
+
+class SetlistMusicManager(models.Manager):
+    def create(self, *args, **kwargs):
+        title =kwargs['title']
+        band =kwargs['band']
+
+        if title == '' or title == '\n' or self.filter(title=title, band=band):
+            return
+
+        return super(SetlistMusicManager, self).create(*args, **kwargs)
+
 class SetlistMusic(models.Model):
     band = models.ForeignKey(Band, related_name="setlist")
     title = models.CharField(max_length=150)
     url = models.CharField(max_length=150, null=True, blank=True)
-
     registration_date = models.DateTimeField('Registration date')
+
+    objects = SetlistMusicManager()
 
     def save(self, *args, **kwargs):
         if self.pk == None:
@@ -173,8 +192,14 @@ class SetlistMusic(models.Model):
         
         super(SetlistMusic, self).save(*args, **kwargs)
 
+    def exists(self, band, title):
+        return self.objects.filter(band = band, title = title).count() > 0
+
     def __unicode__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-registration_date']
 
 class MusicianBand(models.Model):
     band = models.ForeignKey(Band, related_name="all_musicians")
