@@ -30,6 +30,11 @@
 		$(document).delegate('#form-setlist', 'ajaxcomplete', function(e, response){
 			console.log('response');
 		});
+
+		$(document).delegate(".remove-music", "click", function(e){
+			e.preventDefault();
+			alert('remover musica');
+		});
 	}
 
 	this.init();

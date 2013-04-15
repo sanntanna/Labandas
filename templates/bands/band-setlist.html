@@ -11,7 +11,10 @@
 	{% if band.setlist.all.count > 0 %}
 		<ul>
 		{% for music in band.setlist.all %}
-			<li>{{ music.title }}</li>
+			<li>
+				{{ music.title }}
+				<a href="#remove-music" data-id="{{ music.id }}" class="remove-music">remover</a>
+			</li>
 		{% endfor %}
 		</ul>
 		<input type="text" name="music" placeholder="Digite aqui o nome da musica" />
