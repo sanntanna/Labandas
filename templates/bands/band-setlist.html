@@ -16,14 +16,10 @@
 		</div>
 		<ul class="list-music">
 		{% for music in band.setlist.all %}
-<<<<<<< HEAD
-			<li>
-				{{ music.title }}
-				<a href="#remove-music" data-id="{{ music.id }}" class="remove-music">remover</a>
+			<li class="item-list">
+				<span>{{ music.title }}</span>
+				<a href="#remove-music" data-id="{{ music.id }}" class="fr remove remove-music">remover</a>
 			</li>
-=======
-			<li class="item-list"><span>{{ music.title }}</span></li>
->>>>>>> inserindo front do setlist
 		{% endfor %}
 		</ul>
 	{% else %}
