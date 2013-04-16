@@ -13,6 +13,7 @@ from partialview.utils import HttpPartialResponseHandler
 from solicitations.models import Solicitation
 from medias.models import BandMedia
 import logging
+from equipaments.models import EquipamentType
 
 logger = logging.getLogger('labandas')
 
@@ -45,6 +46,7 @@ def band_page(request, band_id, name):
     template = loader.get_template(template_file)
     context = RequestContext(request, {
         'band': band,
+        'equipament_types': EquipamentType.objects.all(),
     })
     
     return HttpPartialResponseHandler(template, context)

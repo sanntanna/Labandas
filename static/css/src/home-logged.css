@@ -226,42 +226,6 @@
 	.musician-info{
 		width:380px;
 		margin-right: 18px;
-
-		.box-label{
-			background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-icons-instruments.png) no-repeat scroll 0 -732px transparent;
-			.light;
-		    .border-radius(5px);
-		    float: left;
-		    font-size: 11px;
-		    line-height: 140px;
-		    margin: 0 0 30px;
-		  	padding-right:7px;
-		    text-align: center;
-				&:hover{background-position: 0 -793px;}
-		}
-		
-		.icons-instruments{
-			background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-icons-instruments.png) no-repeat scroll 0 0 transparent;
-			display: block;
-			line-height: 140px;
-			height: 53px;
-			width: 53px;
-
-		    	&.guitarra  {background-position: 0 0;}
-		    	&.bateria   {background-position: 0 -62px;}
-		    	&.teclado   {background-position: 0 -123px;}
-		    	&.saxofone  {background-position: 0 -184px;}
-		    	&.sanfona   {background-position: 0 -244px;}
-		    	&.vocal     {background-position: 0 -305px;}
-		    	&.cavaquinho{background-position: 0 -367px;}
-		    	&.baixo     {background-position: 0 -428px;}
-		    	&.piano     {background-position: 0 -489px;}
-		    	&.violao    {background-position: 0 -550px;}
-		    	&.pickup    {background-position: 0 -611px;}
-		    	&.plus	    {background-position: 0 -671px; text-indent: -9999px;}
-		    	&.active    {.box-shadow(0px 0px 15px @green);}
-		    	input{display: none;}
-		}
 	}
 
 	.personal-info{

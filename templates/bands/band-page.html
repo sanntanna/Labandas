@@ -11,6 +11,25 @@
 			<a href="#" class="fr toggle-button" data-noncollapsedlabel="ocultar" data-collapsedlabel="exibir" data-target="#band-looking-inner"></a>
 		</div>
 		<div id="band-looking-inner">
+			A Vaga é para tocar:
+			<div class="instruments">
+			{% for instrument in equipament_types %}
+				<div class="box-label">
+					<label class="{{ instrument.normalized_name }} check-icon icons-instruments">
+						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
+							{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
+								checked="checked"
+							{% endif %}
+						/> 
+						{{ instrument.name }}
+					</label>
+				</div>
+			{% endfor %}
+				<div class="box-label">
+					<a href="#lb-lightbox-more-instruments" class="lightbox plus icons-instruments"><label class="plus">Outros</label></a>
+				</div>
+			</div>
+
 			<input name="find_musician_title" class="post-on-edit" placeholder="Título"/>
 			<input name="find_musician_ad" class="post-on-edit adTxt" placeholder="Digite aqui o anúncio da sua banda"/>
 		</div>
