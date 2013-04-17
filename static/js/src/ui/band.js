@@ -52,10 +52,17 @@
 
 		$(document).delegate(".remove-music", "click", function(e){
 			e.preventDefault();
-			var $link = $(this);
-			$.post('/banda/remover/setlist' {id: $link.data('id')}, function(){
-				$link.hide(300, function(){
-					$link.remove();
+			var $link = $(this),
+				$li = $link.closest('li');
+			$.post('/banda/remover/setlist', {id: $link.data('id')}, function(){
+
+				if($(".list-music li").length <= 1){
+					location.reload();
+					return;
+				}
+
+				$li.hide(300, function(){
+					$li.remove();
 				});
 			});
 		});
