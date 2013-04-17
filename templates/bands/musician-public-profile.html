@@ -5,7 +5,7 @@
 {% block musiciancontent %}
 		{% if musician.type_instruments_play.count > 0 or musician.musical_styles.count > 0 %}
 		<div id="complete-subscription" class="clearfix public">
-			<ul class="musician-info fl">	
+			<ul class="instruments fl">	
 				{% for instrument in musician.type_instruments_play.all %}
 					<li class="{{ instrument.normalized_name }} icons-instruments">
 						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
