@@ -66,12 +66,10 @@
 
 				<div>
 					<label>Estilo de música:</label>
-					<span id="selected-musical-styles"> {{musician.musical_styles.all }}
-						{% if musician.musical_styles.all %}
-							{% for style in musician.musical_styles.all %}
-								{{ style.name }}{% if not forloop.last %},{% endif %}
-							{% endfor %}
-						{% endif %}
+					<span id="selected-musical-styles">
+						{% for style in musician.musical_styles.all %}
+							{{ style.name }}{% if not forloop.last %},{% endif %}
+						{% endfor %}
 					</span>
 
 					<a href="#lb-lightbox-musical-styles" 

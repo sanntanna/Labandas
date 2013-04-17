@@ -20,7 +20,7 @@
 			}, 10)
 		});
 
-		$(document).bind('popstate pushstate', function(){
+		$(window).bind('popstate pushstate', function(){
 			$('.check-icon').trigger('mouseup');
 		});
 	}
@@ -68,7 +68,7 @@
 			$input.val(this.checked ? 5 : -1).trigger('change');
 		});
 
-		$(document).bind('popstate pushstate', function(){
+		$(window).bind('popstate pushstate', function(){
 			$(".skills.editable li").each(function(){
 				var $skill = $(this),
 					$check = $skill.find('input:checkbox'),
@@ -126,7 +126,7 @@
 
 		$(document).delegate("#born", 'change', onchange);
 
-		$(document).bind('popstate', function(){
+		$(window).bind('popstate', function(){
 			$select = $("#born");
 			$target = $("#same-year-as");
 			$phrase = $(".born-celebrity");
@@ -184,7 +184,7 @@
 			$("#selected-musical-styles").text(content);
 		});
 
-		$(document).bind('popstate pushstate', function(e){
+		$(window).bind('popstate pushstate', function(e){
 			handleLabelAndGetSelecteds();
 		});
 	}

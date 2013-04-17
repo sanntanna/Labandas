@@ -14,6 +14,13 @@
 	this.domLoaded = function(){
 		new lb.formAjax().globalInit();
 		initFacebook();
+
+		//TODO: ver uma solução melhor para o trigger inicial do popstate.
+		if(!$.browser.webkit){
+			$(window).load(function(){
+				$(window).trigger('popstate');
+			});
+		}
 	};
 	
 	function setupAjax(){
@@ -77,7 +84,7 @@
 			$target.slideToggle();
 		});
 
-		$(document).bind('popstate pushstate', function(){
+		$(window).bind('popstate pushstate', function(){
 			$('.toggle-button').each(function(){
 				var $link = $(this),
 					$target = $($link.data('target'));
@@ -107,7 +114,7 @@
 				});
 			});
 
-			$(document).bind('popstate pushstate', function(e, url){
+			$(window).bind('popstate pushstate', function(e, url){
 				var $link = $links.filter('[href$="' + url + '"]');
 				if(!$link.length){ return; }
 
@@ -159,20 +166,19 @@
 		        transfer.animate({ 'margin-left': '-' + width + 'px' }, 300, function () {
 		            $container.html(response);
 					history.pushState({html: response, location: $(link).attr('href')}, null, url);
-					$(document).trigger('pushstate');
+					$(window).trigger('pushstate');
 		        });
 		   
 			});
 		});
 
-		window.onpopstate = function(event){
+		$(window).bind('popstate', function(event){
 			if(!event.state){ 
 				$container.html(initialContent);
 			} else {
 				$container.html(event.state.html);
 			}
-			$(document).trigger('popstate', (event.state) ? event.state.location : location.href);
-		}
+		});
 	}
 
 	function initFacebook(){
