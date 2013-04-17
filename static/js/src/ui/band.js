@@ -27,13 +27,37 @@
 	}
 
 	function setupSetlist(){
-		$(document).delegate('#form-setlist', 'ajaxcomplete', function(e, response){
-			console.log('response');
+		$(document).delegate('#setlist', 'ajaxcomplete', function(e, response){
+			if(!response.success){
+				new lb.message("Erro ao adicionar a musica", lb.message.ERROR);
+				return;
+			}
+
+			if(!response.music_title){
+				location.reload();
+				return;
+			}
+
+			var $list = $(".list-music"),
+				$newItem = $list.find("li:first").clone();
+
+			$newItem.find('span').html(response.music_title);
+			$newItem.find('a').attr('data-id', response.music_id);
+
+			$list.prepend($newItem);
+
+			$("#music-title").val("");
+
 		});
 
 		$(document).delegate(".remove-music", "click", function(e){
 			e.preventDefault();
-			alert('remover musica');
+			var $link = $(this);
+			$.post('/banda/remover/setlist' {id: $link.data('id')}, function(){
+				$link.hide(300, function(){
+					$link.remove();
+				});
+			});
 		});
 	}
 

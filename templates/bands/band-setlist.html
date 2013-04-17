@@ -5,15 +5,15 @@
 
 <h2 class="subtitle">Setlist da Banda</h2>
 
-
 <form id="setlist" method="post" action="/banda/atualizar/setlist" id="form-setlist" class="ajax">
 	<input type="hidden" name="id" value="{{ band.id }}" />
 	{% if band.setlist.all.count > 0 %}
 		<div class="box line">
 			<h3>Para adicionar mais músicas, insira no campo abaixo</h3>
-			<input type="text" name="music" placeholder="Digite aqui" />
+			<input type="text" name="music" id="music-title" placeholder="Digite aqui" />
 			<input type="submit" value="salvar música" class="btn" />
 		</div>
+
 		<ul class="list-music">
 		{% for music in band.setlist.all %}
 			<li class="item-list">

@@ -148,11 +148,13 @@ class Band(models.Model):
     
     def add_music_to_setlist(self, music):
         if isinstance(music, basestring):
-            SetlistMusic.objects.create(band=self, title=music)
-            return
+            return SetlistMusic.objects.create(band=self, title=music)
         
+        musics = []
         for m in music:
-            SetlistMusic.objects.create(band=self, title=m)
+            musics.append(SetlistMusic.objects.create(band=self, title=m))
+
+        return musics
 
     def save(self, *args, **kwargs):
         self.url = slugify(self.name)
@@ -170,10 +172,10 @@ class Band(models.Model):
 
 class SetlistMusicManager(models.Manager):
     def create(self, *args, **kwargs):
-        title =kwargs['title']
-        band =kwargs['band']
+        title = kwargs['title'].rstrip().rstrip('\r\n')
+        band = kwargs['band']
 
-        if title == '' or title == '\n' or self.filter(title=title, band=band):
+        if title == '' or self.filter(title=title, band=band):
             return
 
         return super(SetlistMusicManager, self).create(*args, **kwargs)

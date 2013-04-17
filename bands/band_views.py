@@ -127,12 +127,18 @@ def update_setlist(request):
     band = Band.objects.get(pk=request.POST.get('id'))
 
     if not 'all-setlist' in request.POST:
-        band.add_music_to_setlist(request.POST.get('music'))
-        return JSONResponse({ "success": True })
+        music = band.add_music_to_setlist(request.POST.get('music'))
+        return JSONResponse({ "success": True, "music_title":  music.title, "music_id": music.id})
 
     musics = request.POST.get('all-setlist').splitlines(True)
     band.add_music_to_setlist(musics)
 
+    return JSONResponse({ "success": True })
+
+@onlypost
+@onlyajax
+def remove_music_from_setlist(request):
+    SetlistMusic.objects.get(id=request.POST.get('id')).delete()
     return JSONResponse({ "success": True })
 
 @onlyajax
