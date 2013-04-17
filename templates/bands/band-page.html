@@ -11,7 +11,17 @@
 			<a href="#" class="fr toggle-button" data-noncollapsedlabel="ocultar" data-collapsedlabel="exibir" data-target="#band-looking-inner"></a>
 		</div>
 		<div id="band-looking-inner">
-			A Vaga é para tocar:
+
+			<form method="post" action="" class="ajax validate">
+				A Vaga é para tocar:<br />
+				{{ form.instruments }}
+
+				{{ form.title }}
+				{{ form.text }}
+				<input type="submit" value="salvar" />
+			</form>
+
+			
 			<div class="instruments">
 			{% for instrument in equipament_types %}
 				<div class="box-label">

@@ -46,7 +46,7 @@ def band_page(request, band_id, name):
     template = loader.get_template(template_file)
     context = RequestContext(request, {
         'band': band,
-        'equipament_types': EquipamentType.objects.all(),
+        'form': AnnouncementForm(),
     })
     
     return HttpPartialResponseHandler(template, context)

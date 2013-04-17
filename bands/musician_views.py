@@ -1,7 +1,7 @@
 #coding=UTF-8
 import datetime
 
-from bands.forms import ExpressRegistrationForm, UserInfoForm
+from bands.forms import ExpressRegistrationForm
 from bands.models import Musician
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
