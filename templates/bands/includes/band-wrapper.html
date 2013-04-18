@@ -2,9 +2,7 @@
 {% load staticoptimizer %}
 
 {% block css %}
-	{% css "css/src/home-logged.css" %}
-	{% css "css/src/profile.css" %}
-	{% css "css/src/media.css" %}
+	{% css "css/lb.bands.css" %}
 {% endblock %}
 
 {% block js %}
@@ -41,7 +39,7 @@
 	<div id="container" class="fl">
 		
 		<nav>
-		  	<ul class="menu markable">
+		  	<ul class="menu band markable">
 		        <li><a href="{{ band.page_url }}" class="no-refresh">Geral</a></li>
 		        <li><a href="{{ band.photos_url }}" class="no-refresh">Fotos</a></li>
 		        <li><a href="{{ band.videos_url }}" class="no-refresh">Videos</a></li>
@@ -54,7 +52,7 @@
 		</div>
 	</div>
 	<div class="fl advertising">
-		<h2>Ofertas</h2>
+		<h2 class="subtitle">Ofertas</h2>
 	</div>
 {% endblock %}
 

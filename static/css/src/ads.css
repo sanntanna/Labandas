@@ -1,0 +1,20 @@
+@import "_colors.less";
+@import "_utils.less";
+
+.advertising{
+	background:white;
+	border-radius: 3px;
+	color: @darkgray;
+    margin-top: 20px;
+    min-height: 640px;
+    padding: 10px;
+    width: 120px;
+    .light;
+
+    	h2{
+		    font-size: 14px;
+            line-height: 25px;
+            padding-left: 35px;
+            text-transform: uppercase;
+    	}
+}

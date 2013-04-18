@@ -13,8 +13,8 @@
 	#no-refresh-content{
 		overflow: hidden;
 	}
-
 }
+
 #cover-photo{
 	width:100%;
 	height:375px;
@@ -182,7 +182,6 @@
 		}
 		.description{width: 270px; margin-bottom: 5px;}
 	}
-	/*.inner{display:none;}*/
 }
 
 #complete-subscription{
@@ -674,76 +673,11 @@
 
 		&.no_border{border: 0;}
 	}
+
+	&.band {
+		width: 232px;
+		left: 66%;
+	}
 }
 
-#bands-musician{
-	list-style: none outside none;
-	margin: 30px;
-	.semibold;
 
-		li{
-			margin-bottom: 20px;
-
-			a:hover img{
-				filter:~'alpha(opacity=0.50)'; 
-	  			-moz-opacity:0.50;   				
-	  			opacity:0.50;
-			}
-		}
-
-		.name-band {
-			background:@green;
-			.border-radius(0 5px 5px 0);
-		    color: white;
-		    font-size: 18px;
-		    margin: 75px 0 0 12px;
-		    padding: 5px 15px;
-		    position: absolute;
-		    width: 20%;
-		    text-align: right;
-		}
-
-		img{
-			background: url(http://lasbandas.s3.amazonaws.com/site/default-coverphoto.gif) no-repeat scroll center -14px #E5E5E5;
-			border: 2px solid #FFFFFF;
-		    .border-radius(5px);
-		    height: 130px;
-		    margin-left: 10px;
-		    width: 744px;
-			margin-left: 10px;
-			display: block;
-		}
-
-		.btn{
-			background: @darkgray;
-		    margin-left: 10px;
-		    font-size: 15px;
-		    text-align: center;
-		    width: 688px;
-		    height: 27px;
-		    line-height: 30px;
-		    text-transform: uppercase;
-
-		    	&:hover{color:@green;}
-		}
-}
-
-/*AD*/
-
-.advertising{
-	background: none repeat scroll 0 0 white;
-	border-radius: 3px;
-	color: @darkgray;
-    margin-top: 20px;
-    min-height: 640px;
-    padding: 10px;
-    width: 120px;
-    .light;
-
-    	h2{
-    		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat scroll 0 -34px transparent;
-		    font-size: 14px;
-		    padding-left: 35px;
-		    text-transform: uppercase;
-    	}
-}
