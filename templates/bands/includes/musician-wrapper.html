@@ -50,11 +50,11 @@
 			
 				{% if user.pk = musician.pk %}
 					<h1 class="fl editable" data-field="user.first_name">
-						{{ user.get_full_name }}
+						{{ musician.user.get_full_name }}
 					</h1>
 				{% else %}
 					<h1 class="fl">
-						{{ user.get_full_name }}
+						{{ musician.user.get_full_name }}
 						<span class="complement">
 							{% if musician.born_year %}
 								,{{ current_year|sub:musician.born_year }}  anos
