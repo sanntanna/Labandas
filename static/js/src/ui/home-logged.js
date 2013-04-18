@@ -2,7 +2,6 @@
 	this.init = function(){};
 	
 	this.domLoaded = function(){
-		setupCheckUncheckIcons();
 		setupSkills();
 		setupSolicitations();
 		setupBornDate();
@@ -11,20 +10,6 @@
 		bandCreation();
 	};
 	
-	function setupCheckUncheckIcons(){
-		$(document).delegate('.check-icon', 'mouseup', function(){
-			var $icon = $(this);
-			setTimeout(function(){
-				var fn = $icon.find('input:checked').length ? 'addClass' : 'removeClass';
-				$icon[fn]('active');
-			}, 10)
-		});
-
-		$(window).bind('popstate pushstate', function(){
-			$('.check-icon').trigger('mouseup');
-		});
-	}
-
 	function setupSkills(){
 		$(document).delegate('.bar-marker', 'mousedown', function(e){
 			e.preventDefault();

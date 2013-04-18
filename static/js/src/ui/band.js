@@ -4,6 +4,7 @@
 	this.domLoaded = function(){
 		setupSoundCloud();
 		setupSetlist();
+		setupAnouncementForm();
 	};
 	
 	function setupSoundCloud(){
@@ -65,6 +66,17 @@
 					$li.remove();
 				});
 			});
+		});
+	}
+
+	function setupAnouncementForm(){
+		$(document).delegate("#create-announcement-form", "ajaxcomplete", function(e, response){
+			if(!response.success){
+				return;
+			}
+			$("#collpase-announcement").trigger("click");
+			new lb.message("O anuncio foi criado. Busque musicos que se enquadram nele.", lb.message.SUCCESS);
+
 		});
 	}
 
