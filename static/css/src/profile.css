@@ -1,3 +1,6 @@
+@import "_colors.less";
+@import "_utils.less";
+
 #cover-photo{
 	#user-header {
 		h1{
@@ -80,27 +83,29 @@
 }
 
 #band-looking {
-	background:#FFF9DD;
-	color:#fff;
-    border:#DEDEDE;
+	background: #FFF9DD;
+    border: medium none #DEDEDE;
     .border-radius(8px);
+    color: #5D5D59;
     font-size: 12px;
-    line-height: 20px;
+    line-height: 17px;
     margin-top: 20px;
     padding: 20px;
     width: 740px;
 
-    	.title{
-    		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat scroll 0 -34px transparent;
-    		font-size: 16px;
+    	.subtitle{
     		font-weight: bold;
+    		font-size: 16px;
     		padding-left: 35px;
+    		line-height: 25px;
     	}
-    	p{margin:10px 0 20px;}
+
+    	p{margin:10px 0 30px;}
+
     	span{
 		    font-size: 14px;
 		    font-weight: bold;
-		    margin-top: 15px;
+		    margin: 15px 20px 0 0;
     	}
     	.close{
     		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) no-repeat scroll 0 -505px transparent;
