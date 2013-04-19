@@ -16,7 +16,7 @@ lb.facebook = (function(){
 				name: 'facebook'
 			};
 
-			$.post('network/connect', connectData, function(response){
+			$.post('/network/connect', connectData, function(response){
 				if(response.success){
 					location.reload();
 				}

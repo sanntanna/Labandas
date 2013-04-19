@@ -8,26 +8,34 @@
 <form id="setlist" method="post" action="/banda/atualizar/setlist" id="form-setlist" class="ajax">
 	<input type="hidden" name="id" value="{{ band.id }}" />
 	{% if band.setlist.all.count > 0 %}
+		{% if can_edit %}
 		<div class="box line">
 			<h3>Para adicionar mais músicas, insira no campo abaixo</h3>
 			<input type="text" name="music" id="music-title" placeholder="Digite aqui" />
 			<input type="submit" value="salvar música" class="btn" />
 		</div>
+		{% endif %}
 
 		<ul class="list-music">
 		{% for music in band.setlist.all %}
 			<li class="item-list">
 				<span>{{ music.title }}</span>
+				{% if can_edit %}
 				<a href="#remove-music" data-id="{{ music.id }}" class="fr remove remove-music">remover</a>
+				{% endif %}
 			</li>
 		{% endfor %}
 		</ul>
 	{% else %}
+		{% if can_edit %}
 		<div class="add-list-music">
 			<h3>Cole ou digite seu setlist abaixo, colocando uma música por linha:</h3>
 			<textarea name="all-setlist" class="all-list"></textarea>
 			<input type="submit" value="salvar setlist" class="btn save-list" />
 		</div>
+		{% else %}
+			<div class="musician-info-empty">Nenhuma música no setlist :( </div>
+		{% endif %}
 	{% endif %}
 </form>
 

@@ -40,8 +40,7 @@ def band_page(request, band_id, name):
     if correct_url != request.path_info:
         return HttpResponsePermanentRedirect(correct_url)
     
-    current_musician = request.user.get_profile()
-    template_file = 'bands/band-page.html' if current_musician.is_in_band(band) else 'bands/band-page-public.html'
+    template_file = 'bands/band-page.html' if user_can_edit(request.user, band) else 'bands/band-page-public.html'
 
     template = loader.get_template(template_file)
     context = RequestContext(request, {
@@ -58,6 +57,7 @@ def band_setlist(request, name, band_id):
     t = loader.get_template("bands/band-setlist.html")
     c = RequestContext(request, {
         'band': band,
+        'can_edit': user_can_edit(request.user, band)
     })
     
     return HttpPartialResponseHandler(t, c)
@@ -69,6 +69,7 @@ def band_photos(request, name, band_id):
     template = loader.get_template("bands/band-photos.html")
     context = RequestContext(request, {
         'band': band,
+        'can_edit': user_can_edit(request.user, band)
     })
     
     return HttpPartialResponseHandler(template, context)
@@ -80,6 +81,7 @@ def band_videos(request, name, band_id):
     template = loader.get_template("bands/band-videos.html")
     context = RequestContext(request, {
         'band': band,
+        'can_edit': user_can_edit(request.user, band)
     })
     
     return HttpPartialResponseHandler(template, context)
@@ -147,3 +149,8 @@ def remove_band_from_band(request):
     #TODO: adicionar validação para nao remover todos os admins, sempre deve ficar um
     success = bandBand.objects.get(pk=request.POST.get('id')).deactivate()
     return JSONResponse({'success': success})
+
+
+def user_can_edit(user, band):
+    return hasattr(user, 'get_profile') and user.get_profile().is_in_band(band)
+
