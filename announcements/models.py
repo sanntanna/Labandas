@@ -23,10 +23,11 @@ class Announcement(models.Model):
     def add_candidate(self, musician):
         if not self.active:
             raise ValueError("O anúncio %d está inativo" % self.id)
-        
+
         if musician in self.candidates.all():
             return False
 
+        #TODO: notificar isso
         self.candidates.add(musician)
         return True
     
