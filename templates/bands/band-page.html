@@ -40,6 +40,24 @@
 					<input type="submit" value="Criar anuncio" class="btn"/>
 				</div>
 			</form>
+			<div id="lb-lightbox-more-instruments" class="hidden see-all-option">
+				<div class="lightbox-title">
+					<p class="fl">Escolha seu instrumento</p>
+				</div>
+				<form action="/musico/atualizar/type_instruments_play" method="post" class="ajax inline-form instruments-play">
+					{% for instrument in equipament_types %}
+						<label class="{{ instrument.normalized_name }} check-icon">
+							<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
+								{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
+									checked="checked"
+								{% endif %}
+							/> 
+							{{ instrument.name }}
+						</label>
+					{% endfor %}
+				</form>
+				<button class="lightbox-close btn">Enviar</button>
+			</div>
 		</div>
 	</div>
 
