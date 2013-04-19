@@ -8,9 +8,14 @@
 <div id="band-looking">
 	<h2 class="subtitle">{{ announcement.title }}</h2>
 	<p>{{ announcement.text }}</p>
-	<span>Pra quem se interessar em fazer um teste.</span>
-	<a href="#" class="btn">Quero entrar nessa banda</a>
-	<a class="close" href="#close">x</a>
+	{% if not announcement in user.get_profile.announcements.all|dictsort:"id" %}
+		<div class="candidade-wrapper">
+			<span>Pra quem se interessar em fazer um teste.</span>
+			<a href="#se-candidatar" class="btn candidate-to-announcement" data-id="{{ announcement.id }}">Quero entrar nessa banda</a>
+		</div>
+	{% else %}
+		<div class="already-candidated">Você se candidatou para esse anuncio, agora só aguardar.</div>
+	{% endif %}
 </div>
 
 {% endfor %}

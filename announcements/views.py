@@ -18,4 +18,13 @@ def new_announcement(request):
 	announcement.owner_band = Band(id=request.POST.get('band_id'))
 	announcement.save()
 
-	return JSONResponse({ "success": True, "teste": 1 })
+	return JSONResponse({ "success": True })
+
+
+@onlyajax
+@onlypost
+def candidate_to_announcement(request):
+	announcement = Announcement.objects.get(id=request.POST.get('id'))
+	success = announcement.add_candidate(request.user.get_profile())
+
+	return JSONResponse({ "success": success})

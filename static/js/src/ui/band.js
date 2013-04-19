@@ -4,7 +4,7 @@
 	this.domLoaded = function(){
 		setupSoundCloud();
 		setupSetlist();
-		setupAnouncementForm();
+		announcements();
 	};
 	
 	function setupSoundCloud(){
@@ -69,7 +69,7 @@
 		});
 	}
 
-	function setupAnouncementForm(){
+	function announcements(){
 		$(document).delegate("#create-announcement-form", "ajaxcomplete", function(e, response){
 			if(!response.success){
 				return;
@@ -77,6 +77,19 @@
 			$("#collpase-announcement").trigger("click");
 			new lb.message("O anuncio foi criado. Busque musicos que se enquadram nele.", lb.message.SUCCESS);
 
+		});
+
+		$(document).delegate(".candidate-to-announcement", "click", function(e){
+			e.preventDefault();
+			var $link = $(this);
+
+			$.post('/anuncio/se-candidatar', {id: $link.data('id') }, function(response){
+				if(!response.success){ return; }
+
+				$link.closest('.candidade-wrapper')
+					.after('<div class="already-candidated">Você se candidatou para esse anuncio, agora só aguardar.</div>')
+					.fadeOut();
+			});
 		});
 	}
 
