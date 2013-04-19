@@ -398,11 +398,12 @@ header.logged{
 		.light;
 	    .border-radius(5px);
 	    float: left;
-	    font-size: 11px;
+	    font-size: 12px;
 	    line-height: 140px;
 	    margin: 0 0 30px;
 	  	padding-right:7px;
 	    text-align: center;
+	    color: #FFF;
 
 		&:hover{background-position: 0 -793px;}
 	}
@@ -424,7 +425,7 @@ header.logged{
     	&.baixo     {background-position: 0 -428px;}
     	&.piano     {background-position: 0 -489px;}
     	&.violao    {background-position: 0 -550px;}
-    	&.pickup    {background-position: 0 -611px;}
+    	&.dj    {background-position: 0 -611px;}
     	&.plus	    {background-position: 0 -671px; text-indent: -9999px;}
     	&.active    {.box-shadow(0px 0px 15px @green);}
     	input{display: none;}

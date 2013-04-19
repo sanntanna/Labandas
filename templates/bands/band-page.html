@@ -14,25 +14,31 @@
 
 			<form method="post" action="/anuncio/criar" id="create-announcement-form" class="ajax">
 				<input type="hidden" name="band_id" value="{{ band.id }}" />
-				A Vaga é para:<br />
-			
-				<div class="instruments">
-					{% for instrument in equipament_types %}
-						<div class="box-label">
-							<label class="{{ instrument.normalized_name }} check-icon icons-instruments">
-								<input type="checkbox" value="{{ instrument.id }}" name="instruments" /> 
-								{{ instrument.name }}
-							</label>
+				
+				<div class="line">
+					<div class="choose-instrument fl">
+						<h3>Preciso de: <span class="active">guitarrista</span></h3>
+						<div class="instruments">
+							{% for instrument in equipament_types %}
+								<div class="box-label">
+									<label class="{{ instrument.normalized_name }} check-icon icons-instruments">
+										<input type="checkbox" value="{{ instrument.id }}" name="instruments" /> 
+										{{ instrument.name }}
+									</label>
+								</div>
+							{% endfor %}
+							<div class="box-label">
+								<a href="#lb-lightbox-more-instruments" class="lightbox plus icons-instruments"><label class="plus">Outros</label></a>
+							</div>
 						</div>
-					{% endfor %}
-					<div class="box-label">
-						<a href="#lb-lightbox-more-instruments" class="lightbox plus icons-instruments"><label class="plus">Outros</label></a>
 					</div>
-				</div>
 
-				<input name="title" placeholder="Título"/>
-				<input name="text" class="adTxt" placeholder="Digite aqui o anúncio da sua banda"/>
-				<input type="submit" value="Criar anuncio" class="btn"/>
+					<div class="info-job fl">
+						<input name="title" placeholder="Título" class="input"/>
+						<input name="text" class="adTxt input" placeholder="Digite aqui o anúncio da sua banda"/>
+					</div>
+					<input type="submit" value="Criar anuncio" class="btn"/>
+				</div>
 			</form>
 		</div>
 	</div>

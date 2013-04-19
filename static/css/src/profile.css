@@ -93,11 +93,39 @@
     padding: 20px;
     width: 740px;
 
+    	.choose-instrument{
+    		width: 360px;
+
+
+		    	h3{
+		    		background: #6f6f6f;
+		    		.border-radius(3px);
+		    		font-size: 16px;
+		    		.light;
+		    		color: #FFF;
+		    		padding: 7px 0 7px 15px;
+		    		width: 337px;
+		    		margin-bottom: 10px;
+
+		    			.active{
+		    				color: @green; 
+		    				.semibold;
+		    				font-size: 16px;
+		    				text-transform: uppercase;
+		    			}
+		    	}
+    	}
+
+    	.info-job{
+    		margin: 0 0 15px 8px;
+    		width: 360px;
+    	}
+
     	.subtitle{
-    		font-weight: bold;
     		font-size: 16px;
     		padding-left: 35px;
     		line-height: 25px;
+    		.normal;
     	}
 
     	p{margin:10px 0 30px;}
@@ -122,7 +150,7 @@
     	&.edit{
     		background: #434343;
 
-    		a{    
+    		.toggle-button{    
     			color: white;
     			margin-right: 20px;
     			text-decoration: underline;
@@ -130,23 +158,31 @@
 
     		h2{
     			color: #FFFFFF;
+			    font-size: 18px;
+			    margin-bottom: 30px;
     		}
 
-    		input{
+    		.input{
     			border: 1px solid lightGrey !important;
 			    .border-radius(3px);
 			    color: #000000;
 			    float: left;
 			    font-size: 14px;
-			    height: 25px;
+			    height: 20px;
 			    padding: 4px 5px;
 			    transition: all 0.2s ease 0s;
-			    width: 90%;
-			    margin: 10px 0 0 35px;
+			    width: 100%;
+			    margin: 0 0 12px;
 
 			    	&.adTxt{
-			    		padding-bottom: 90px;
+			    		padding-bottom: 130px;
 			    	}
+    		}
+
+    		.btn{
+    			height: 30px;
+			    padding-top: 0;
+			    width: 100%;
     		}
     	}
 }
