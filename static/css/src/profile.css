@@ -125,7 +125,8 @@
     		font-size: 16px;
     		padding-left: 35px;
     		line-height: 25px;
-    		.normal;
+    		.semibold;
+    		text-transform: uppercase;
     	}
 
     	p{margin:10px 0 30px;}
@@ -184,5 +185,23 @@
 			    padding-top: 0;
 			    width: 100%;
     		}
+    	}
+
+    .already-candidated	{
+	    	background: #9F5570;
+		    .border-radius(5px);
+		    color: white;
+		    font-family: dosis;
+		    font-size: 16px;
+		    font-weight: 500;
+		    margin: 20px 0 0;
+		    padding: 10px 0 10px 15px;
+		    width: 98%;
+
+		    	.name{
+		    		text-transform: uppercase;
+		    		font-size: 16px;
+		    		
+		    	}
     	}
 }
