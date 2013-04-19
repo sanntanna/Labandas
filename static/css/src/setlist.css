@@ -79,4 +79,15 @@
 			    width: 135px;
 			}
 		}
+	.empty{ 
+			background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icon-alerts.png) no-repeat scroll 235px 20px #C4C7C6;
+		    .border-radius(10px);
+		    font-size: 17px;
+		    height: 80px;
+		    padding: 30px 45px 0 100px;
+		    line-height: 55px;
+		    text-align: center;
+		    width: 636px;
+		    .normal;
+		}
 }
