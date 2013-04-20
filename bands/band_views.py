@@ -86,6 +86,9 @@ def band_videos(request, name, band_id):
     
     return HttpPartialResponseHandler(template, context)
 
+def add_to_band(request):
+    pass
+
 @onlypost
 @onlyajax
 def update_field(request, field):
