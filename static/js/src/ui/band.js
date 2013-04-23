@@ -103,9 +103,9 @@
 
 			var result = musicians.map(function(musician){
 				return ['<li>',
-					'<img class="fl" src="http://lasbandas.s3.amazonaws.com/u/', musician.pk, '/avatar.png"/>',
-					'<div class="name fl">', musician.user__first_name, '</div>',
-					'<div class="button fl"><a href="#add-to-band" data-id="', musician.pk, '" class="btn add">Adicionar a banda</a></div>',
+					musician.avatar ? '<img class="fl" src="' + musician.avatar + '"/>' : '',
+					'<div class="name fl">', musician.name, '</div>',
+					'<div class="button fl"><a href="#add-to-band" data-id="', musician.id, '" class="btn add">Adicionar a banda</a></div>',
 				'</li>'].join('');
 			});
 
