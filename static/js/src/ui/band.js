@@ -5,6 +5,7 @@
 		setupSoundCloud();
 		setupSetlist();
 		announcements();
+		addMusician();
 	};
 	
 	function setupSoundCloud(){
@@ -90,6 +91,31 @@
 					.after('<div class="already-candidated">Você se candidatou para esse anuncio, agora só aguardar.</div>')
 					.fadeOut();
 			});
+		});
+	}
+
+	function addMusician(){
+		function printResults(musicians){
+			if(musicians.length == 0){
+				$('#founded-musicians').html('<li> <em>Nenhum musico encontrado</em> </li>')
+				return;
+			}
+
+			var result = musicians.map(function(musician){
+				return ['<li>',
+					'<img class="fl" src="http://lasbandas.s3.amazonaws.com/u/', musician.pk, '/avatar.png"/>',
+					'<div class="name fl">', musician.user__first_name, '</div>',
+					'<div class="button fl"><a href="#add-to-band" data-id="', musician.pk, '" class="btn add">Adicionar a banda</a></div>',
+				'</li>'].join('');
+			});
+
+			$('#founded-musicians').html(result.join(''));
+		}
+
+		$(document).delegate('#find-musicians-to-band', 'click', function(e){
+			$.get('/musico/buscar', {kw: $('#musician-kw').val()}, function(response){
+				printResults(response.musicians);
+			})
 		});
 	}
 

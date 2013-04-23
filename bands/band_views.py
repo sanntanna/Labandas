@@ -12,8 +12,9 @@ from partialview.decorators import Partialhandled
 from partialview.utils import HttpPartialResponseHandler
 from solicitations.models import Solicitation
 from medias.models import BandMedia
-import logging
 from equipaments.models import EquipamentType
+
+import logging
 
 logger = logging.getLogger('labandas')
 
@@ -86,9 +87,6 @@ def band_videos(request, name, band_id):
     
     return HttpPartialResponseHandler(template, context)
 
-def add_to_band(request):
-    pass
-
 @onlypost
 @onlyajax
 def update_field(request, field):
@@ -149,7 +147,7 @@ def remove_music_from_setlist(request):
 @onlyajax
 @onlypost
 def remove_band_from_band(request):
-    #TODO: adicionar validação para nao remover todos os admins, sempre deve ficar um
+    #TODO: adicionar validaÃ§Ã£o para nao remover todos os admins, sempre deve ficar um
     success = bandBand.objects.get(pk=request.POST.get('id')).deactivate()
     return JSONResponse({'success': success})
 

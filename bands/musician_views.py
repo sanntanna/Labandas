@@ -137,18 +137,11 @@ def musician_bands(request, name, user_id):
     
     return HttpPartialResponseHandler(template, context)
 
-@onlyajax    
-def search_musician(request):
-    search = request.GET.get('q')
+@onlyajax
+def find_musician(request):
+    search = request.GET.get('kw')
     musicians = Musician.objects.filter(user__first_name__icontains=search).values('pk', 'user__first_name')
     return JSONResponse({'success': True, 'musicians': musicians}) 
-
-@onlyajax
-def get_bands(request):
-    bands = [{'id': b.id, 'name': b.name} for b in request.user.get_profile().bands_list]
-    return JSONResponse({'success': True, 'bands':bands})
-
-
 
 
 @onlypost

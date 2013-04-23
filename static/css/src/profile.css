@@ -230,20 +230,20 @@
 			padding: 15px 0 40px;
 
 			li{
-				float: left;
 				color: @green;
 				list-style: none;
 				margin-right: 20px;
+				clear:both;
 
 					img{width: 60px; height: 60px;}
 
-					&.name{
+					.name{
 						font-size: 18px;
 					    padding-top: 14px;
 					    width: 25%;
 					}
 
-					&.button{
+					.button{
 						  padding-top: 34px;
 					}
 
