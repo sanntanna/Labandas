@@ -10,8 +10,8 @@ from solicitations.models import Solicitation
 @onlypost
 def send_solicitation(request):
     source_musician = request.user.get_profile()
-    band = Band.objects.get(pk=request.POST.get('band_id'))
-    target_musician = Musician.objects.get(pk=request.POST.get('target_id'))
+    band = Band.objects.get(pk=request.POST.get('band'))
+    target_musician = Musician.objects.get(pk=request.POST.get('target'))
     instruments_ids = request.POST.getlist('instruments')
     instruments = EquipamentType.objects.in_bulk(instruments_ids)
     

@@ -256,12 +256,12 @@
 			    width: 70px;
 			}
 		}
+	}
 
-		.other-option{
-			color: #FFF;
-			.normal;
-			font-size: 22px;
-			margin: 75px 0 10px;
-		}
+	h3{
+		color: #FFF;
+		.normal;
+		font-size: 22px;
+		margin: 75px 0 10px;
 	}
 }

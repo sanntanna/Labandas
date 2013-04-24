@@ -2,6 +2,9 @@ lb = window.lb || {};
 
 lb.lightbox = function(param){
 	var instance = this;
+
+	window.lastLightbox = instance;
+
 	instance.defaults = {
 		minWidth: 380,
 		minHeight: 150,

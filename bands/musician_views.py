@@ -140,7 +140,7 @@ def musician_bands(request, name, user_id):
 @onlyajax
 def find_musician(request):
     search = request.GET.get('kw')
-    musicians = Musician.objects.filter(user__first_name__icontains=search)
+    musicians = Musician.objects.filter(user__first_name__icontains=search, id__gt=1)
 
     response = [{'name': m.name(), 'avatar': m.media.avatar, 'id': m.id} for m in musicians]
     return JSONResponse({'success': True, 'musicians': response}) 

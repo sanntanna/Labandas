@@ -7,7 +7,11 @@
 {% block bodyattr %} data-inline-edit-path="/musico/atualizar/" data-id="{{ user.id }}" {% endblock %}
 
 {% block musiciancontent %}
-	
+	#para teste
+	{% for s in musician.solicitation_to.all %}
+		{{ s }}
+	{% endfor %}
+
 	<div id="complete-subscription" class="clearfix pannel">
 		<div class="line">
 			<h3 class="fl subtitle title {% if not has_personal_data %}attention{% endif %}">Meus dados</h3>

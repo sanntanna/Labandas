@@ -117,6 +117,46 @@
 				printResults(response.musicians);
 			})
 		});
+
+		var currentId = null,
+			$lightbox = null;
+
+		$(document).delegate('#founded-musicians a.add', 'click', function(e){
+			e.preventDefault();
+			var $link = $(this);
+
+			if(!$lightbox){ $lightbox = $("#add-musician-lightbox"); }
+
+			currentId = $link.data('id');
+			$("#target-musician-name").html( $link.closest('li').find('.name').html() );
+			$lightbox.find(".instruments").html( $("#band-looking .instruments").html() );
+
+			$lightbox.find(".search-musician").fadeOut(200, function(){
+				$(".what-play").fadeIn();
+			});
+		});
+
+		$(document).delegate('#back-to-search', 'click', function(){
+			$(".what-play").fadeOut(200, function(){
+				$lightbox.find(".search-musician").fadeIn();
+			});
+		});
+
+		$(document).delegate('#send-solicitation', 'click', function(e){
+			var dataToSend = [$lightbox.find('input:checkbox:checked').serialize(),
+								'target=' + currentId,
+								'band=' + $('body').data('id')].join('&');
+			$.post('/solicitacao/enviar-para-musico', dataToSend, function(response){
+				window.lastLightbox.close();
+
+				if(response.success){
+					new lb.message("Sua solicitação foi enviada", lb.message.SUCCESS);
+					return;
+				}
+
+				new lb.message("Erro ao enviar a solicitação", lb.message.ERROR);
+			});
+		});
 	}
 
 	this.init();

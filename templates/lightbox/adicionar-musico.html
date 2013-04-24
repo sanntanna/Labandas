@@ -3,17 +3,24 @@
 		<p class="fl">Adicione os outros integrantes da sua banda!</p>
 	</div>
 
-	<div class= "container">
+	<div class="container search-musician">
 		<div class="line">
 			<input type="text" id="musician-kw" placeholder="Digite aqui o nome do músico" />
 			<input type="button" class="btn" value="Buscar músico" id="find-musicians-to-band" />
 		</div>
 		<ul class="results" id="founded-musicians"></ul>
-		
+
 		<h3 class="other-option">O cara ainda não está no lasbandas ? Procure no Facebook</h3>
 		<div class="line">
 			<input type="text" id="musician-kw" placeholder="Digite aqui o nome do músico" />
 			<input type="button" class="btn fb" value="Buscar no Facebook" />
 		</div>
+	</div>
+
+	<div class="what-play hidden">
+		<h3 class="other-option">O que <span id="target-musician-name"></span> toca na banda?</h3>
+		<div class="instruments"></div>
+		<input type="button" class="btn fl" value="Continuar" id="send-solicitation" />
+		<input type="button" class="btn fr" value="Voltar" id="back-to-search" />
 	</div>
 </div>
