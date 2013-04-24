@@ -437,12 +437,12 @@ header.logged{
 	.border-radius(5px);
     border: 1px solid #FFFFFF;
     display: block;
-    height: 250px;
+    height: 290px;
     position: relative;
-    right: 200px;
+    right: 260px;
     top: -8px;
     opacity: 0.96;
-    width: 250px;
+    width: 340px;
     font-size: 11px;
     z-index: 100;
     color: #D3D1D1;
@@ -456,7 +456,7 @@ header.logged{
 			    height: 15px;
 			    padding: 17px 15px 0;
 			    text-align: center;
-			    width: 88%;
+			    width: 91%;
 
 			    	li{
 			    		line-height: 0;
@@ -469,7 +469,7 @@ header.logged{
 
     	.all-candidates{
     		display: table;
-		    margin: 15px 0 0 11px;
+		    margin: 15px 0 0 30px;
 		    overflow: auto;
 
 		    	.candidates{
@@ -483,11 +483,13 @@ header.logged{
 		    				&.name{
 		    					line-height: 13px;
 		    					width: 68px;
+		    					padding-left: 10px;
 		    				}
 
 		    				.btn{
-		    					font-size: 11px;
-		    					padding: 7px;
+		    					font-size: 10px;
+							    padding: 8px 25px;
+							    text-transform: uppercase;
 
 		    						&:hover{color:white; background: @darkgray;}
 		    				}
