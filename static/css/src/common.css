@@ -437,7 +437,7 @@ header.logged{
 	.border-radius(5px);
     border: 1px solid #FFFFFF;
     display: block;
-    height: 270px;
+    height: 250px;
     position: relative;
     right: 200px;
     top: -8px;
@@ -445,9 +445,11 @@ header.logged{
     width: 250px;
     font-size: 11px;
     z-index: 100;
+    color: #D3D1D1;
+
 
     	.hd{
-    		ul{
+    		.inner{
     			background:#333333;
 			    border-bottom: 1px solid #2b2a2a;
 			    border-radius: 7px 7px 0 0;
@@ -459,7 +461,38 @@ header.logged{
 			    	li{
 			    		line-height: 0;
     					margin: 0 11px;
+
+    						.active{color: @green;}
 			    	}
     		}
     	}
+
+    	.all-candidates{
+    		display: table;
+		    margin: 15px 0 0 11px;
+		    overflow: auto;
+
+		    	.candidates{
+		    		display: table;
+
+		    		li{
+		    			float: left;
+					    line-height: 35px;
+					    margin: 0 7px 0 0;
+
+		    				&.name{
+		    					line-height: 13px;
+		    					width: 68px;
+		    				}
+
+		    				.btn{
+		    					font-size: 11px;
+		    					padding: 7px;
+
+		    						&:hover{color:white; background: @darkgray;}
+		    				}
+		    		}
+    	}
+    	}
+    	
 }
