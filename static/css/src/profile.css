@@ -64,8 +64,9 @@
 			    }
 
 			    &.pending{
-			    	opacity: 0.7;
-			    	color:lighten(@defaultgray, 20%);
+			    	opacity: 0.35;
+
+			    		span{color: @red;}
 			    }
 			}
 

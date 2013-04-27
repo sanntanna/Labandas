@@ -11,7 +11,7 @@
 		setupSoundCloudPlayers();
 		setupPushState();
 		baloonNotifications();
-		//initCodaSlider();
+		initCodaSlider();
 	};
 	
 	this.domLoaded = function(){
@@ -204,22 +204,39 @@
 	}
 
 	function baloonNotifications(){
-        $(document).delegate('.notification', 'click', function(e){
-        	e.preventDefault();
-			$("#slider-notification").fadeIn();
+		var boxMessages = $('.messages');
+			boxSolicitations = $('.solicitations');
+			messages = $('.nav-messages');
+			invitations = $('.invitations');
 
-			$(document).delegate('.nav.messages', 'click', function(e){
-				alert('a');
-				$('.all-candidates').fadeOut();
-				$('.slider').addClass('msg');
-			})
-		});
+
+	        $(document).delegate('.notification', 'click', function(e){
+                    e.preventDefault();
+                    $("#slider-notification").fadeIn();    
+     
+                $(document).delegate('.nav-messages', 'click', function(e){
+					boxSolicitations.hide();
+					boxMessages.fadeIn();
+					messages.addClass('active');
+					invitations.removeClass('active');
+				});
+
+				$(document).delegate('.invitations', 'click', function(e){
+					boxMessages.hide();
+					boxSolicitations.fadeIn();
+					invitations.addClass('active');
+					messages.removeClass('active');
+				});
+
+ // 				$(document).delegate('body', 'click', function(e){
+ //                           $("#slider-notification").fadeOut();
+ //                           $(document).unbind('click');
+ //                 });
+             });
 	}
 
 	function initCodaSlider(){
-		$('#slider-notifications').codaSlider({
-          	dynamicArrows: false
-        });
+		$('#slider-id').codaSlider();
 	}
 
 	function initFacebook(){

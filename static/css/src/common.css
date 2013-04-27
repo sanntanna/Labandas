@@ -184,7 +184,7 @@ h2{
 	}
 
 	&.red{
-		background: red;
+		background: @red;
 		color: #FFF;
 
 		&:hover{
@@ -453,7 +453,7 @@ header.logged{
     right: 320px;
     top: -8px;
     opacity: 0.96;
-    width: 395px;
+    width: 420px;
     font-size: 11px;
     z-index: 100;
     color: #D3D1D1;
@@ -480,20 +480,17 @@ header.logged{
 		}
 
 		.slider{
-			width: 700px;
-			.transition(color .2s linear);
-
-			&.msg{
-				margin-left: -300px;
-			}
 
 	    	.all-candidates{
-	    		display: table;
 			    margin: 15px 0 0 10px;
 			    overflow: auto;
+			    height: 200px;
+			    width: 95%;
 
 			    	.candidates{
-			    		display: table;
+			    		border-bottom: 1px dotted #727171;
+					    display: table;
+					    margin-bottom: 10px;
 
 			    		li{
 			    			float: left;
@@ -519,9 +516,26 @@ header.logged{
 			    						&:hover{color:white; background: @darkgray;}
 			    				}
 			    		}
+
+			    		.waiting{
+			    			background: #F6F6F6;
+						    .border-radius(10px);
+						    line-height: 14px;
+						    padding: 5px 28px;
+						    width: 200px;
+    							a{
+    								color: #000;
+    							}
+			    		}
 	    			}
 	    		&.messages{display: none;}
 	    	}
+
+	    	.view-all{
+	    		font-size: 12px;
+			    padding-left: 16px;
+			    text-decoration: underline;
+			}
 	    }
     	
 }
