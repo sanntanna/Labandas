@@ -536,6 +536,34 @@ header.logged{
 			    padding-left: 16px;
 			    text-decoration: underline;
 			}
-	    }
-    	
+	    }   	
+}
+
+#send-msg-lightbox{
+	.lightbox-title{
+		font-size: 18px;
+	    height: 27px;
+	    padding-top: 3px;
+	}
+
+	.container{
+		padding: 20px;
+
+			input{
+				width: 98%;
+
+				&.txt{
+					height: 110px;
+    				margin: 8px 0 15px;
+    			}
+			}
+
+			.btn{
+				font-size: 13px;
+			    text-transform: uppercase;
+			    width: 30px;
+			    margin-right: 10px;
+			}
+
+	}
 }

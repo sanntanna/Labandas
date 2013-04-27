@@ -228,6 +228,11 @@
 					messages.removeClass('active');
 				});
 
+				$(document).delegate('.send-msg', 'click', function(e){
+                    e.preventDefault();
+                    $("#slider-notification").fadeOut();  
+ 				});
+
  // 				$(document).delegate('body', 'click', function(e){
  //                           $("#slider-notification").fadeOut();
  //                           $(document).unbind('click');
