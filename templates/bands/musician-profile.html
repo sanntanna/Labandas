@@ -7,10 +7,18 @@
 {% block bodyattr %} data-inline-edit-path="/musico/atualizar/" data-id="{{ user.id }}" {% endblock %}
 
 {% block musiciancontent %}
-	#para teste
+	<div id="solicitations">
 	{% for s in musician.solicitation_to.all %}
-		{{ s }}
+		{{ user.first_name }}, 
+		<a href="{{ s.from_musician.profile_url }}" target="_blank">{{ s.from_musician.name }}</a> disse que você toca 
+		{% for i in s.instruments.all %}
+			{{ i.name }}{% if not forloop.last %},{% endif %}
+		{% endfor %}
+		na banda "{{ s.band.name }}". 
+		É verdade? <br />
+		<a href="aceitar" class="btn respond-invite" data-id="{{ s.id }}">Sim</a> <a href="recusar" class="btn respond-invite" data-id="{{ s.id }}">Não</a>
 	{% endfor %}
+	</div>
 
 	<div id="complete-subscription" class="clearfix pannel">
 		<div class="line">

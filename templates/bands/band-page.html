@@ -107,9 +107,7 @@
 								<img src="{{ m.musician.media.avatar }}" title="{{ m.musician.name }}" />
 							{% endif %}
 							{{ m.musician.name }}
-							{% for i in m.instruments.all %}
-								{{ i.name }},
-							{% endfor %}
+							({% for i in m.instruments.all %}{{ i.name }}{% if not forloop.last %},{% endif %}{% endfor %})
 						</a>
 					</li>
 				{% endfor %}

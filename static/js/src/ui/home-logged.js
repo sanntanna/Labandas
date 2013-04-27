@@ -3,11 +3,11 @@
 	
 	this.domLoaded = function(){
 		setupSkills();
-		setupSolicitations();
 		setupBornDate();
 		setupSoundCloud();
 		musicalStyles();
 		bandCreation();
+		solicitations();
 	};
 	
 	function setupSkills(){
@@ -69,26 +69,6 @@
 
 				$skill.find('.filled').width((value * 10 )+ '%');
 				$skill.find('.bar-marker').css('left', (value * 10 )+ '%')
-			});
-		});
-	}
-
-	function setupSolicitations(){
-		$(".accept-solicitation, .decline-solicitation").click(function(e){
-			e.preventDefault();
-			
-			var link = $(this),
-				isAccepting = link.hasClass('accept-solicitation'),
-				url = "/solicitacao/" + (isAccepting ? 'aceitar' : 'recusar');
-			
-			$.post(url, {id: link.attr('data-id')}, function(response){
-				link.closest('.solicitation').hide(700, function(){
-					$(this).remove();
-				});
-				
-				if(isAccepting){
-					new lb.message("Agora você está na banda #banda#", lb.message.SUCCESS);
-				}
 			});
 		});
 	}
@@ -178,6 +158,23 @@
 		$(document).delegate("#new-band-form", "ajaxcomplete", function(e, response){
 			if(!response.success){ return; }
 			location.href = response.band_page_url;
+		});
+	}
+
+	function solicitations(){
+		$(document).delegate('a.respond-invite', 'click', function(e){
+			e.preventDefault();
+
+			var $link = $(this);
+
+			$.post('/solicitacao/' + $link.attr('href'), {id: $link.data('id')}, function(response){
+				if(response.success){
+					new lb.message("Boa, você foi adicionado a banda!", lb.message.SUCCESS);
+					return
+				}
+
+				new lb.message("Erro ao adicionar seu perfil a banda.", lb.message.ERROR);
+			});
 		});
 	}
 
