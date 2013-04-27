@@ -99,14 +99,28 @@
 		<div class="fl band-members">
 			<h2 class="marker small">Integrantes</h2>
 			<ul class="members">
-				{% for musician in band.musicians_list %}
+				{% for m in band.musicians %}
 					<li>
-						<a href="{{ musician.profile_url }}"
-							{% if not musician.media.avatar %} class="without-avatar" {% endif %} >
-							{% if musician.media.avatar %}
-								<img src="{{ musician.media.avatar }}" title="{{ musician.name }}" />
+						<a href="{{ m.musician.profile_url }}"
+							{% if not m.musician.media.avatar %} class="without-avatar" {% endif %} >
+							{% if m.musician.media.avatar %}
+								<img src="{{ m.musician.media.avatar }}" title="{{ m.musician.name }}" />
 							{% endif %}
-							{{ musician.name }}
+							{{ m.musician.name }}
+							{% for i in m.instruments.all %}
+								{{ i.name }},
+							{% endfor %}
+						</a>
+					</li>
+				{% endfor %}
+				{% for s in solicitations_pending %}
+					<li class="pending">
+						<a href="{{ s.to_musician.profile_url }}"
+							{% if not s.to_musician.media.avatar %} class="without-avatar" {% endif %} >
+							{% if s.to_musician.media.avatar %}
+								<img src="{{ s.to_musician.media.avatar }}" title="{{ s.to_musician.name }}" />
+							{% endif %}
+							{{ s.to_musician.name }} (pendente)
 						</a>
 					</li>
 				{% endfor %}

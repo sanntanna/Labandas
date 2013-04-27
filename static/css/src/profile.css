@@ -62,6 +62,11 @@
 
 				    img{ .border-radius(7px); }
 			    }
+
+			    &.pending{
+			    	opacity: 0.7;
+			    	color:lighten(@defaultgray, 20%);
+			    }
 			}
 
 		a.add{

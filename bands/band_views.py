@@ -41,13 +41,19 @@ def band_page(request, band_id, name):
     if correct_url != request.path_info:
         return HttpResponsePermanentRedirect(correct_url)
     
-    template_file = 'bands/band-page.html' if user_can_edit(request.user, band) else 'bands/band-page-public.html'
-
+    can_edit = user_can_edit(request.user, band)
+    
+    template_file = 'bands/band-page.html' if can_edit else 'bands/band-page-public.html'
     template = loader.get_template(template_file)
-    context = RequestContext(request, {
+    context_data = {
         'band': band,
         'equipament_types': EquipamentType.objects.all(),
-    })
+    }
+
+    if can_edit:
+        context_data['solicitations_pending'] = Solicitation.objects.musicians_pending(band)
+
+    context = RequestContext(request, context_data)
     
     return HttpPartialResponseHandler(template, context)
 
