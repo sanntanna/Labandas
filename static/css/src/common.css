@@ -129,6 +129,8 @@ a:hover {
 	.transition(color .2s linear);
 }
 
+.hide{display: none;}
+
 .banner{
 	background: url(http://lasbandas.s3.amazonaws.com/site/bg-gray-texture.jpg) no-repeat center top transparent;
 	min-height: 381px;
@@ -174,6 +176,15 @@ h2{
 
 	&.gray{
 		background: @darkgray;
+		color: #FFF;
+
+		&:hover{
+			color:@green;
+		}
+	}
+
+	&.red{
+		background: red;
 		color: #FFF;
 
 		&:hover{
@@ -432,69 +443,85 @@ header.logged{
 	}
 }
 
-#notification{
+#slider-notification{
 	background: #434344;
 	.border-radius(5px);
     border: 1px solid #FFFFFF;
-    display: block;
+    display: none;
     height: 290px;
     position: relative;
-    right: 260px;
+    right: 320px;
     top: -8px;
     opacity: 0.96;
-    width: 340px;
+    width: 395px;
     font-size: 11px;
     z-index: 100;
     color: #D3D1D1;
+    float: left;
 
+    	h2{display: none;}
 
-    	.hd{
-    		.inner{
-    			background:#333333;
-			    border-bottom: 1px solid #2b2a2a;
-			    border-radius: 7px 7px 0 0;
-			    height: 15px;
-			    padding: 17px 15px 0;
-			    text-align: center;
-			    width: 91%;
+		.nav .inner{
+			background:#333333;
+		    border-bottom: 1px solid #2b2a2a;
+		    border-radius: 7px 7px 0 0;
+		    height: 15px;
+		    padding: 17px 15px 0;
+		    text-align: center;
+		    width: 91%!important;
 
-			    	li{
-			    		line-height: 0;
-    					margin: 0 11px;
+		    	li{
+		    		line-height: 0;
+					margin: 0 11px;
+					cursor: pointer;
 
-    						.active{color: @green;}
-			    	}
-    		}
-    	}
+						.active{color: @green;}
+		    	}
+		}
 
-    	.all-candidates{
-    		display: table;
-		    margin: 15px 0 0 30px;
-		    overflow: auto;
+		.slider{
+			width: 700px;
+			.transition(color .2s linear);
 
-		    	.candidates{
-		    		display: table;
+			&.msg{
+				margin-left: -300px;
+			}
 
-		    		li{
-		    			float: left;
-					    line-height: 35px;
-					    margin: 0 7px 0 0;
+	    	.all-candidates{
+	    		display: table;
+			    margin: 15px 0 0 10px;
+			    overflow: auto;
 
-		    				&.name{
-		    					line-height: 13px;
-		    					width: 68px;
-		    					padding-left: 10px;
-		    				}
+			    	.candidates{
+			    		display: table;
 
-		    				.btn{
-		    					font-size: 10px;
-							    padding: 8px 25px;
-							    text-transform: uppercase;
+			    		li{
+			    			float: left;
+						    line-height: 35px;
+						    margin: 0 7px 0 0;
 
-		    						&:hover{color:white; background: @darkgray;}
-		    				}
-		    		}
-    	}
-    	}
+						    	img{
+						    		 border: 1px solid #555454;
+						    		 .border-radius(5px);
+						    	}
+
+			    				&.name{
+			    					line-height: 13px;
+			    					width: 60px;
+			    					padding-left: 3px;
+			    				}
+
+			    				.btn{
+			    					font-size: 10px;
+								    padding: 8px 7px;
+								    text-transform: uppercase;
+
+			    						&:hover{color:white; background: @darkgray;}
+			    				}
+			    		}
+	    			}
+	    		&.messages{display: none;}
+	    	}
+	    }
     	
 }

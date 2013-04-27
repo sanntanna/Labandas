@@ -1,5 +1,6 @@
 libs/extensions.js
 libs/facebook.js
+libs/jquery.coda-slider-3.0.js
 src/lb/form-ajax.js
 src/lb/facebook.js
 src/lb/inline-edit.js

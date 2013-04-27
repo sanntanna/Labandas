@@ -10,6 +10,8 @@
 		setupInlineEdit();
 		setupSoundCloudPlayers();
 		setupPushState();
+		baloonNotifications();
+		//initCodaSlider();
 	};
 	
 	this.domLoaded = function(){
@@ -199,6 +201,25 @@
 				$container.html(event.state.html);
 			}
 		});
+	}
+
+	function baloonNotifications(){
+        $(document).delegate('.notification', 'click', function(e){
+        	e.preventDefault();
+			$("#slider-notification").fadeIn();
+
+			$(document).delegate('.nav.messages', 'click', function(e){
+				alert('a');
+				$('.all-candidates').fadeOut();
+				$('.slider').addClass('msg');
+			})
+		});
+	}
+
+	function initCodaSlider(){
+		$('#slider-notifications').codaSlider({
+          	dynamicArrows: false
+        });
 	}
 
 	function initFacebook(){
