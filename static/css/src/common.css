@@ -523,7 +523,8 @@ header.logged{
 			    .border-radius(10px);
 			    line-height: 14px;
 			    padding: 5px 28px;
-				width:190px;
+				width:194px;
+				color: #333;
 				
 				.btn{
 					display: inline-block;
