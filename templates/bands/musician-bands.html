@@ -10,19 +10,13 @@
 		<li>
 			<a href="{{ band.page_url }}" class="without-avatar">
 				<span class="name-band">{{ band.name }}</span>
-				
-				<img alt="{{ band.name }}"
-					{% if band.media.cover_small %}
-					src="{{band.media.cover_small}}"
-					{% endif %}
-					/>
-				
+				<img alt="{{ band.name }}" {% if band.media.cover_small %} src="{{band.media.cover_small}}" {% endif %} />
 			</a>
 		</li>
 	{% endfor %}
 	
 	{% if musician.pk = user.pk %}
-		<a href="/lightbox/new-band?width=500&amp;height=200" class="add fl lightbox btn gray">Criar nova banda</a>
+		<a href="/banda/criar?width=500&amp;height=200" class="add fl lightbox btn gray">Criar nova banda</a>
 	{% endif %}
 </ul>
 

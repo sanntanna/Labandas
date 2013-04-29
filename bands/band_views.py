@@ -1,7 +1,7 @@
 #coding=ISO-8859-1
 from announcements.forms import AnnouncementForm
 from bands.forms import BandForm, BandMusicianForm
-from bands.models import Band, MusicianBand, SetlistMusic
+from bands.models import Band, MusicianBand, SetlistMusic, MusicalStyle
 from django.http import HttpResponse, HttpResponsePermanentRedirect, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect
 from django.template import loader
@@ -17,21 +17,31 @@ from equipaments.models import EquipamentType
 import logging
 
 logger = logging.getLogger('labandas')
+full_template = 'bands/includes/band-wrapper.html'
+partial_template = 'bands/includes/band-wrapper-partial.html'
+
+
+def create_band(request):
+    c = RequestContext(request, {
+        'musical_styles': MusicalStyle.objects.all(),
+        'equipament_types': EquipamentType.objects.all(),
+    })
+
+    t = loader.get_template('lightbox/new-band.html')
+    return HttpResponse(t.render(c))
 
 @onlypost
-def create_band(request):
+def create_band_post(request):
     band_name = request.POST['band_name']
 
     if band_name is None or band_name == "":
         return JSONResponse({'success': False})
 
     created_band = Band.objects.create(name=band_name)
-    created_band.add_musician(request.user.get_profile(), None, True)
+    created_band.musical_styles=request.POST.getlist('musical_styles')
+    created_band.add_musician(request.user.get_profile(), request.POST.getlist('instruments'), True)
 
     return JSONResponse({'success': True, 'band_page_url': created_band.page_url})
-
-full_template = 'bands/includes/band-wrapper.html'
-partial_template = 'bands/includes/band-wrapper-partial.html'
 
 @Partialhandled(full_template, partial_template)
 def band_page(request, band_id, name):  

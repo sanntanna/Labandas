@@ -2,7 +2,30 @@
 	<p class="fl">Adicione o nome da sua banda.</p>
 </div>
 
-<form id="new-band-form" action="/banda/criar" method="post" class="ajax">
-	<input type="text" name="band_name" class="band_name"/>
+<form id="new-band-form" action="/banda/criar-post" method="post" class="ajax">
+	Nome da banda: <input type="text" name="band_name" class="band_name" />
+
+	Estilo musical da banda:
+	<div class="musical-style">
+		{% for style in musical_styles %}
+			<label class="check-icon">
+				<input type="checkbox" value="{{ style.id }}" name="musical_styles" /> 
+				{{ style.name }}
+			</label>
+		{% endfor %}
+	</div>
+
+	Instrumento que você toca na banda:
+	<div class="instruments">
+		{% for instrument in equipament_types %}
+			<div class="box-label">
+				<label class="{{ instrument.normalized_name }} check-icon icons-instruments">
+					<input type="checkbox" value="{{ instrument.id }}" name="instruments" /> 
+					{{ instrument.name }}
+				</label>
+			</div>
+		{% endfor %}
+	</div>
+
 	<input type="submit" value="Continuar" class="btn"/>
 </form>
