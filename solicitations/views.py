@@ -42,3 +42,17 @@ def respond_solicitation(request):
 def cancel_solicitation(request):
     solicitation = Solicitation.objects.get(pk=request.POST.get("id"))
     return JSONResponse({'success': solicitation.cancel(request.user)})
+
+
+@onlyajax
+def list_solicitations(request):
+    solicitations = Solicitation.objects.all_from_music_pending(request.user.get_profile())
+
+    res = [{    'id': s.pk, 
+                'from': s.from_musician, 
+                'from_url': s.from_musician.profile_url, 
+                'from_avatar': s.from_musician.media.avatar_small,
+                'band': s.band.name,
+                'instruments': [i.name for i in s.instruments.all()],} for s in solicitations]
+
+    return JSONResponse({'solicitations': res})

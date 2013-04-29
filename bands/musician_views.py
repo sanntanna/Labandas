@@ -31,7 +31,6 @@ def profile(request):
                         and not musician.address.city is None
 
     c = RequestContext(request, {
-        'band_solicitations': Solicitation.objects.bands_pending(musician),
         'musical_styles': MusicalStyle.objects.all(),
         'equipament_types': EquipamentType.objects.all(),
         'has_personal_data': has_personal_data,

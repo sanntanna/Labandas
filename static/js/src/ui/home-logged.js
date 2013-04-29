@@ -7,7 +7,6 @@
 		setupSoundCloud();
 		musicalStyles();
 		bandCreation();
-		solicitations();
 	};
 	
 	function setupSkills(){
@@ -158,23 +157,6 @@
 		$(document).delegate("#new-band-form", "ajaxcomplete", function(e, response){
 			if(!response.success){ return; }
 			location.href = response.band_page_url;
-		});
-	}
-
-	function solicitations(){
-		$(document).delegate('a.respond-invite', 'click', function(e){
-			e.preventDefault();
-
-			var $link = $(this);
-
-			$.post('/solicitacao/' + $link.attr('href'), {id: $link.data('id')}, function(response){
-				if(response.success){
-					new lb.message("Boa, você foi adicionado a banda!", lb.message.SUCCESS);
-					return
-				}
-
-				new lb.message("Erro ao adicionar seu perfil a banda.", lb.message.ERROR);
-			});
 		});
 	}
 

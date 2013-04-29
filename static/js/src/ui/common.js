@@ -12,6 +12,7 @@
 		setupPushState();
 		baloonNotifications();
 		initCodaSlider();
+		solicitations();
 	};
 	
 	this.domLoaded = function(){
@@ -204,40 +205,65 @@
 	}
 
 	function baloonNotifications(){
+
 		var boxMessages = $('.messages');
 			boxSolicitations = $('.solicitations');
 			messages = $('.nav-messages');
 			invitations = $('.invitations');
 
 
-	        $(document).delegate('.notification', 'click', function(e){
-                    e.preventDefault();
-                    $("#slider-notification").fadeIn();    
-     
-                $(document).delegate('.nav-messages', 'click', function(e){
-					boxSolicitations.hide();
-					boxMessages.fadeIn();
-					messages.addClass('active');
-					invitations.removeClass('active');
-				});
+		function printNotifications(response){
+			if(!response.solicitations || response.solicitations.length == 0){
+				boxSolicitations.html('<li class="default-message">Nenhuma notificação</li>');
+				return;
+			}
 
-				$(document).delegate('.invitations', 'click', function(e){
-					boxMessages.hide();
-					boxSolicitations.fadeIn();
-					invitations.addClass('active');
-					messages.removeClass('active');
-				});
+			var html = response.solicitations.map(function(n){
+				return ['<li>',
+							'<div><img src="', n.from_avatar,'" /></div>',
+							'<div class="name">', n.from,'</div>',
+							'<div class="waiting">',
+							'	<span><a href="', n.from_url,'" target="_blank">', n.from.split(' ')[0] ,
+								'</a> disse que voce toca ', n.instruments, ' na banda ', n.band, '. É verdade?</span>',
+							'	<a href="aceitar" class="btn respond-invite" data-id="', n.id,'">Sim</a>',
+							'	<a href="recusar" class="btn red respond-invite" data-id="', n.id,'">Não</a>',
+							'	<a href="/lightbox/send-message?width=465&amp;height=125" class="lightbox btn send-msg">Enviar mensagem</a>',
+							'</div>',
+						'</li>'].join('');
+			}).join('');
 
-				$(document).delegate('.send-msg', 'click', function(e){
-                    e.preventDefault();
-                    $("#slider-notification").fadeOut();  
- 				});
+			boxSolicitations.html(html);
+		}
 
- // 				$(document).delegate('body', 'click', function(e){
- //                           $("#slider-notification").fadeOut();
- //                           $(document).unbind('click');
- //                 });
-             });
+        $(document).delegate('.notification', 'click', function(e){
+			e.preventDefault();
+			boxSolicitations.html('<li class="default-message">Aguarde...</li>');
+			$("#slider-notification").fadeIn();
+			$.get('/solicitacao/listar', printNotifications);
+		});
+
+		 $(document).delegate('.nav-messages', 'click', function(e){
+			e.preventDefault();
+
+			boxSolicitations.hide();
+			boxMessages.fadeIn();
+			messages.addClass('active');
+			invitations.removeClass('active');
+		});
+
+		$(document).delegate('.invitations', 'click', function(e){
+			e.preventDefault();
+
+			boxMessages.hide();
+			boxSolicitations.fadeIn();
+			invitations.addClass('active');
+			messages.removeClass('active');
+		});
+
+		$(document).delegate('.send-msg', 'click', function(e){
+            e.preventDefault();
+            $("#slider-notification").fadeOut();  
+		});
 	}
 
 	function initCodaSlider(){
@@ -250,6 +276,24 @@
 		$(document).delegate('.fb-login', 'click', function(e){
 			e.preventDefault();
 			lb.facebook.login();
+		});
+	}
+
+	function solicitations(){
+		$(document).delegate('a.respond-invite', 'click', function(e){
+			e.preventDefault();
+
+			var $link = $(this);
+
+			$.post('/solicitacao/' + $link.attr('href'), {id: $link.data('id')}, function(response){
+				if(!response.success){
+					new lb.message("Erro ao adicionar seu perfil a banda.", lb.message.ERROR);
+					return;
+				}
+				
+				new lb.message("Boa, você foi adicionado a banda!", lb.message.SUCCESS);
+				$('.messages').fadeOut();
+			});
 		});
 	}
 
