@@ -468,7 +468,11 @@ header.logged{
 	    border-radius: 7px 7px 0 0;
 	    padding: 3px 15px 0;
 
-	    a.active{color: @green;}
+	    a{
+	    	padding-right: 25px;
+	    		&.active{color: @green;}
+	    }
+
 	}
 
 	.list{
@@ -520,12 +524,14 @@ header.logged{
 			    line-height: 14px;
 			    padding: 5px 28px;
 				width:190px;
+				
 				.btn{
-					display: inline-block;; 
+					display: inline-block;
 					margin:3px 0; 
 				}
+				
 				span{display:block;}
-				&, a{ color: #000; }
+				a{ color: #000; }
     		}
 		}
 		&.messages{display: none;}
