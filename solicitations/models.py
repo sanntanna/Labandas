@@ -87,5 +87,8 @@ class Solicitation(models.Model):
     
     def __unicode__(self):
         return self.from_musician.user.first_name + " convidou " + self.to_musician.user.first_name + " para a banda " + self.band.name
+
+    class Meta:
+        ordering = ['-id']
     
     

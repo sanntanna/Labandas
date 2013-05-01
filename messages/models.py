@@ -5,7 +5,7 @@ from django.utils import timezone
 class MessageManager(models.Manager):
    
    def send_message(self, from_user, to, subject, message):
-        return Message.objects.create(from_user=from_user, to_user=to, message=message, subject=subject)
+        return Message.objects.create(from_user=from_user, to_user=to, text=message, subject=subject)
 
    	def mark_as_read(self, message):
    		message.read_date = timezone.now()
@@ -18,7 +18,7 @@ class Message(models.Model):
 	subject = models.CharField(max_length=200, null=True, blank=True)
 
 	sent_date = models.DateTimeField()
-	read_date = models.DateTimeField()
+	read_date = models.DateTimeField(null=True, blank=True)
 
 	active = models.BooleanField(default=True)
 
@@ -28,3 +28,6 @@ class Message(models.Model):
 		self.sent_date = timezone.now()
 
 		super(Message, self).save(*args, **kwargs)
+
+	class Meta:
+		ordering = ['-id']

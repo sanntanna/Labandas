@@ -13,6 +13,7 @@
 		baloonNotifications();
 		initCodaSlider();
 		solicitations();
+		setupMessages();
 	};
 	
 	this.domLoaded = function(){
@@ -230,7 +231,7 @@
 							'	<div class="line">',
 							'		<a href="aceitar" class="btn respond-invite" data-id="', n.id,'">Aceitar</a>',
 							'		<a href="recusar" class="btn red respond-invite" data-id="', n.id,'">Não agora</a>',
-							'		<a href="/lightbox/send-message?width=465&amp;height=125" class="lightbox btn send-msg">Enviar mensagem</a>',
+							'		<a href="#send-message" data-toid="', n.from_id,'" class="btn send-msg">Enviar mensagem</a>',
 							'	</div>',
 							'</div>',
 						'</li>'].join('');
@@ -250,9 +251,12 @@
 						'	<div class="name">', m.from,'</div>',
 						'	<div class="waiting">',
 						'		<a href="#read-message" data-id="', m.id ,'">', m.message,'</a>',
-						'	</li>',
-						'</li>'];
-			});
+						'	</div>',
+						'	<a href="#respond-message" data-toid="', m.from_id,'" class="btn send-msg">Responder</a>',
+						'</li>'].join('');
+			}).join('');
+
+			boxMessages.html(html);
 		}
 
         $(document).delegate('.notification', 'click', function(e){
@@ -277,6 +281,7 @@
 			boxMessages.fadeIn();
 			messages.addClass('active');
 			invitations.removeClass('active');
+			boxMessages.html('<li class="default-message">Aguarde...</li>');
 			$.get('/mensagem/listar', printMessages);
 		});
 
@@ -323,6 +328,20 @@
 				
 				new lb.message("Boa, você foi adicionado a banda!", lb.message.SUCCESS);
 				$('.messages').fadeOut();
+			});
+		});
+	}
+
+	function setupMessages(){
+		var currentLighbox = null;
+		$(document).delegate('a.send-msg', 'click', function(e){
+			e.preventDefault();
+			currentLighbox = new lb.lightbox('/mensagem/enviar?width=465&height=125'.param('id', $(this).data('toid')) );
+		});
+
+		$(document).delegate('#message-form', 'ajaxcomplete', function(e){
+			currentLighbox.close(function(){
+				new lb.message("Mensagem enviada", lb.message.SUCCESS);
 			});
 		});
 	}

@@ -4,12 +4,19 @@
 	</div>
 
 	<div class="container">
-		<input type="text" placeholder="Para: Nome">
-		<input type="text" placeholder="Escreva sua mensagem" class="txt">
-			
-		<div class="line">
-			<input type="button" class="btn fr gray" value="Cancelar" />
-			<input type="button" class="btn fr" value="Enviar" />
-		</div>
+		<form method="post" action="/mensagem/enviar-post" class="ajax" id="message-form">
+			{% if recipient %}
+			<label style="color:#fff">Para: {{ recipient.get_full_name }}</label>
+			<input type="hidden" name="recipient_id" value="{{ recipient.id }}" />
+			{% else %}
+			<input type="text" placeholder="Para: Nome" />
+			{% endif %}
+			<textarea placeholder="Escreva sua mensagem" class="txt" name="message"></textarea>
+				
+			<div class="line">
+				<input type="button" class="btn fr gray" value="Cancelar" />
+				<input type="submit" class="btn fr" value="Enviar" />
+			</div>
+		</form>
 	</div>
 </div>

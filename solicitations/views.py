@@ -50,6 +50,7 @@ def list_solicitations(request):
 
     res = [{    'id': s.pk, 
                 'from': s.from_musician, 
+                'from_id': s.from_musician.id, 
                 'from_url': s.from_musician.profile_url, 
                 'from_avatar': s.from_musician.media.avatar_small,
                 'band': s.band.name,

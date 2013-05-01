@@ -158,12 +158,16 @@ lb.lightbox = function(param){
 		instance.content.hide().fadeIn();
 	}
 
-	instance.close = function(){
+	instance.close = function(callback){
 		instance.box.fadeOut(300, function(){
 			$(document).trigger('lightboxclosed', instance);
 
 			instance.container.remove();
 			instance.defaults.overlay.hide();
+
+			if(callback){
+				callback.call();
+			}
 			
 			if(instance.originalContent){
 				$("#lightbox-replacer").replaceWith(instance.originalContent.hide())
