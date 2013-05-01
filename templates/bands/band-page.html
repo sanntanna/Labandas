@@ -106,8 +106,8 @@
 							{% if m.musician.media.avatar %}
 								<img src="{{ m.musician.media.avatar }}" title="{{ m.musician.name }}" />
 							{% endif %}
-							{{ m.musician.name }}
-							({% for i in m.instruments.all %}{{ i.name }}{% if not forloop.last %},{% endif %}{% endfor %})
+							<div>{{ m.musician.name }}</div>
+							<strong>{% for i in m.instruments.all %}#{{ i.name }}{% if not forloop.last %},{% endif %}{% endfor %}</strong>
 						</a>
 					</li>
 				{% endfor %}
@@ -118,7 +118,7 @@
 							{% if s.to_musician.media.avatar %}
 								<img src="{{ s.to_musician.media.avatar }}" title="{{ s.to_musician.name }}" />
 							{% endif %}
-							{{ s.to_musician.name }} <span>(Pendente)</span>
+							<span>{{ s.to_musician.name }}</span><span>(Pendente)</span>
 						</a>
 					</li>
 				{% endfor %}
