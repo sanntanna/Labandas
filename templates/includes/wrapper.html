@@ -66,8 +66,8 @@
 			    	<strong><a href="{{ user.get_profile.profile_url }}" title="{{ user.get_full_name }}">{{ user.get_full_name|truncatechars:20 }}</a></strong>
 			    </li>
 			    <li class="notifications">
-			    	<a href="#notificacoes" class="icon notification ir" title="Nenhuma nova notificação">notificações</a>
-			    	<div id="slider-notification">
+			    	<a href="#notificacoes" class="icon prevent-hide notification ir" title="Nenhuma nova notificação">notificações</a>
+			    	<div id="slider-notification" class="prevent-hide">
 			    		<div class="list-header">
 							<a class="invitations" href="#solicitacoes">Solicitações de convites</a>
 							<a class="nav-messages" href="#mensagens">Mensagens</a>

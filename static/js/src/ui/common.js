@@ -246,6 +246,14 @@
 			$.get('/solicitacao/listar', printNotifications);
 		});
 
+		$(document).delegate('body', 'click', function(e){
+			if($(e.target).closest('.prevent-hide').length) {
+				return;
+			}
+
+			$("#slider-notification").fadeOut('fast');
+		});
+
 		 $(document).delegate('.nav-messages', 'click', function(e){
 			e.preventDefault();
 
@@ -263,6 +271,7 @@
 			invitations.addClass('active');
 			messages.removeClass('active');
 		});
+
 
 		$(document).delegate('.send-msg', 'click', function(e){
             e.preventDefault();
