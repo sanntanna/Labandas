@@ -493,38 +493,52 @@ header.logged{
 		    	line-height: 14px;
 		    }
 
-    		div{
-    			float: left;
-			    line-height: 35px;
-			    margin: 0 7px 0 0;
+		    div{float: left;}
 
-		    	img{
-		    		 border: 1px solid #555454;
-		    		 .border-radius(5px);
-		    	}
+		    .info-user{
+				margin: 31px 5px 0;
 
-				&.name{
+		    	.image{
+	    			width: 40px;
+			    	height: 35px;
+	    			background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll -125px -236px #FFFFFF;
+	    			float: left;
+				    line-height: 35px;
+				    margin: 0 7px 0 0;
+			    	.border-radius(5px);
+
+				    	img{ 
+				    		border: 1px solid #555454;
+				    		.border-radius(5px);
+		    				padding: 10px 20px 12px;
+				    	}
+
+				}
+
+		    	.name{
 					line-height: 13px;
-					width: 60px;
+					width: 45px;
 					padding-left: 3px;
 				}
 
-				.btn{
-					font-size: 10px;
-				    padding: 8px 7px;
-				    text-transform: uppercase;
+			}
 
-						&:hover{color:white; background: @darkgray;}
-				}
-    		}
+			.btn{
+				font-size: 10px;
+			    padding: 8px 7px;
+			    text-transform: uppercase;
+
+					&:hover{color:white; background: @darkgray;}
+			}
 
     		.waiting{
-    			background: #F6F6F6;
+    			background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-social.png) repeat scroll 0 49px transparent;
 			    .border-radius(10px);
+			    color: #333333;
 			    line-height: 14px;
-			    padding: 5px 28px;
-				width:194px;
-				color: #333;
+			    padding: 5px 42px 10px;
+			    width: 195px;
+			    height: 30px;
 				
 				.btn{
 					display: inline-block;

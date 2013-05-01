@@ -221,8 +221,10 @@
 
 			var html = response.solicitations.map(function(n){
 				return ['<li>',
-							'<div><img src="', n.from_avatar,'" /></div>',
-							'<div class="name">', n.from,'</div>',
+							'<div class="info-user">',
+							'	<div class="image"><img src="', n.from_avatar,'" /></div>',
+							'	<div class="name">', n.from,'</div>',
+							'</div>',
 							'<div>',
 							'	<div class="waiting">',
 							'		<p><a href="', n.from_url,'" target="_blank"><strong>', n.from ,'</strong>',
@@ -247,12 +249,17 @@
 
 			var html = response.messages.map(function(m){
 				return ['<li>',
-						'	<div><img src="', m.from_avatar,'"></div>',
-						'	<div class="name">', m.from,'</div>',
+						'<div class="info-user">',
+							'	<div class="image"><img src="', m.from_avatar,'" /></div>',
+							'	<div class="name">', m.from,'</div>',
+						'</div>',
+						'<div>',
 						'	<div class="waiting">',
 						'		<a href="#read-message" data-id="', m.id ,'">', m.message,'</a>',
 						'	</div>',
+						'</div>',
 						'	<a href="#respond-message" data-toid="', m.from_id,'" class="btn send-msg">Responder</a>',
+						'	<a href="#respond-message" data-toid="', m.from_id,'" class="btn">Ler mensagem completa</a>',
 						'</li>'].join('');
 			}).join('');
 
