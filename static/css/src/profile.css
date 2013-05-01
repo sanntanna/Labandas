@@ -68,6 +68,13 @@
 
 			    		span{color: @red;}
 			    }
+
+			    strong{
+			    	color: #8BBD0C;
+				    font-size: 12px;
+				    font-weight: bold;
+				    text-transform: uppercase;
+			    }
 			}
 
 		a.add{
