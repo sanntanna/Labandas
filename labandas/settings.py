@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'medias',
     'bands',
     'solicitations',
+    'messages',
     'announcements',
     'precadastro',
 )

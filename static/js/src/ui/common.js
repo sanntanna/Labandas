@@ -239,6 +239,22 @@
 			boxSolicitations.html(html);
 		}
 
+		function printMessages(response){
+			if(!response.messages || response.messages.length == 0){
+				boxMessages.html('<li class="default-message">Nenhuma mensagem</li>');
+			}
+
+			var html = response.messages.map(function(m){
+				return ['<li>',
+						'	<div><img src="', m.from_avatar,'"></div>',
+						'	<div class="name">', m.from,'</div>',
+						'	<div class="waiting">',
+						'		<a href="#read-message" data-id="', m.id ,'">', m.message,'</a>',
+						'	</li>',
+						'</li>'];
+			});
+		}
+
         $(document).delegate('.notification', 'click', function(e){
 			e.preventDefault();
 			boxSolicitations.html('<li class="default-message">Aguarde...</li>');
@@ -261,6 +277,7 @@
 			boxMessages.fadeIn();
 			messages.addClass('active');
 			invitations.removeClass('active');
+			$.get('/mensagem/listar', printMessages);
 		});
 
 		$(document).delegate('.invitations', 'click', function(e){
