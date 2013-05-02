@@ -6,7 +6,7 @@
 	<div class="container">
 		<form method="post" action="/mensagem/enviar-post" class="ajax" id="message-form">
 			{% if recipient %}
-			<label style="color:#fff">Para: {{ recipient.get_full_name }}</label>
+			<label class="for">Para: {{ recipient.get_full_name }}</label>
 			<input type="hidden" name="recipient_id" value="{{ recipient.id }}" />
 			{% else %}
 			<input type="text" placeholder="Para: Nome" />

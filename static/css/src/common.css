@@ -571,11 +571,17 @@ header.logged{
 
 			input{
 				width: 98%;
+			}
 
-				&.txt{
-					height: 110px;
-    				margin: 8px 0 15px;
-    			}
+			.for{
+				color: #FFFFFF;
+    			font-size: 16px;
+			}
+
+			.txt{
+				height: 100px;
+			    margin: 15px 0 20px;
+			    width: 100%;
 			}
 
 			.btn{
