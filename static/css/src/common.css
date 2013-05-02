@@ -576,6 +576,7 @@ header.logged{
 			.for{
 				color: #FFFFFF;
     			font-size: 16px;
+    			.light;
 			}
 
 			.txt{
