@@ -1,31 +1,41 @@
 <div class="lightbox-title">
-	<p class="fl">Adicione o nome da sua banda.</p>
+	<p class="fl">Crie sua banda</p>
 </div>
 
 <form id="new-band-form" action="/banda/criar-post" method="post" class="ajax">
-	Nome da banda: <input type="text" name="band_name" class="band_name" />
+	
+	<div class="name-band">
+		<h2>Qual o nome da banda ?</h2>
+		<input type="text" name="band_name" class="band_name" />
+		<a href="#" class="btn next">Continuar</a>
+	</div>
 
-	Estilo musical da banda:
-	<div class="musical-style">
+	<div class="musical-style see-all-option hide">
+		<h2>Que estilo essa banda toca ?</h2>
 		{% for style in musical_styles %}
 			<label class="check-icon">
 				<input type="checkbox" value="{{ style.id }}" name="musical_styles" /> 
 				{{ style.name }}
 			</label>
 		{% endfor %}
+		<a href="#" class="btn continue">Continuar</a>
 	</div>
 
-	Instrumento que você toca na banda:
-	<div class="instruments">
-		{% for instrument in equipament_types %}
+	<div class="musician-info hide">
+		<h2>Qual instrumento você toca nessa banda ?</h2>
+		<div class="instruments">
+			{% for instrument in equipament_types %}
+				<div class="box-label">
+					<label class="{{ instrument.normalized_name }} check-icon icons-instruments">
+						<input type="checkbox" value="{{ instrument.id }}" name="instruments" /> 
+						{{ instrument.name }}
+					</label>
+				</div>
+			{% endfor %}
 			<div class="box-label">
-				<label class="{{ instrument.normalized_name }} check-icon icons-instruments">
-					<input type="checkbox" value="{{ instrument.id }}" name="instruments" /> 
-					{{ instrument.name }}
-				</label>
+				<a href="#lb-lightbox-more-instruments" class="lightbox plus icons-instruments"><label class="plus">Veja mais</label></a>
 			</div>
-		{% endfor %}
+		</div>
+		<input type="submit" value="Criar banda" class="btn"/>
 	</div>
-
-	<input type="submit" value="Continuar" class="btn"/>
 </form>

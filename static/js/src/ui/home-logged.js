@@ -154,6 +154,18 @@
 	}
 	
 	function bandCreation(){
+		$(document).delegate('a.next', 'click', function(e){
+			e.preventDefault();
+			$('.name-band').hide();
+			$('.musical-style').fadeIn();
+		});
+
+		$(document).delegate('a.continue', 'click', function(e){
+			e.preventDefault();
+			$('.musical-style').hide();
+			$('.musician-info').fadeIn();
+		});
+
 		$(document).delegate("#new-band-form", "ajaxcomplete", function(e, response){
 			if(!response.success){ return; }
 			location.href = response.band_page_url;

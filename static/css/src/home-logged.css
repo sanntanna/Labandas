@@ -222,11 +222,6 @@
 	    	}
 	}
 
-	.musician-info{
-		width:380px;
-		margin-right: 18px;
-	}
-
 	.personal-info{
 		width:300px;
 		font-size: 14px;
@@ -584,48 +579,21 @@
 	}	
 }
 
+#new-band-form{
+	.musician-info{
+		margin:24px 0 0 30px;
 
-.see-all-option{
-	width:500px;
+		.instruments{
+			display: table;
+		    margin: 0 30px 0 40px;
+		    width: 400px;
+		}
 
-	.musical-style {padding:20px;}
-	.instruments-play{padding: 20px;}
-
-	label{
-		background: url(http://lasbandas.s3.amazonaws.com/site/bg-musical-style.jpg) repeat-x scroll center top #363636;
-	    border: 1px solid #262525;
-	    .border-radius(3px);
-	    box-shadow: 0 1px 0 #4A4A4A;
-	    color: white;
-	    display: inline-block;
-	    font-size: 13px;
-	    height: 13px;
-	    line-height: 13px;
-	    margin-bottom: 17px;
-	    margin-right: 17px;
-	    padding: 8px 15px;
-	    text-shadow: 1px 1px 0 #313131;
-
-	    &.active{.box-shadow(0px 0px 8px @green);background: #2c2c2c;}
-	    &:hover{background: #2c2c2c;}
-
-	    input{
-	    	vertical-align: middle;
-	    	display: none;
-	    }
+		.btn{
+			margin:25px 30px 25px 140px;
+		}
 	}
 
-	.lightbox-close{
-	    font-size: 15px;
-	    height: 30px;
-	    margin-bottom: 15px;
-	    margin-left: 120px;
-	    text-transform: uppercase;
-	    width: 250px;
-    }
-}
-
-#new-band-form{
 	.band_name {
 		color:#FF6600;
 		display: block;
@@ -634,13 +602,25 @@
 	    height: 35px;
 	    margin: 30px auto 0;
 	    text-align: center;
-	    text-transform: uppercase;
 	    width: 60%;
 	}
+
+	.name-band{padding: 28px;}
+
 	.btn{
 		display: block;
     	margin: 20px auto 0;
+
+    	&.next, &.continue{width: 60px;}
 	}
+
+	h2{
+		color: white;
+	    font-size: 18px;
+	    .light;
+	    margin-bottom: 20px;
+	}
+	
 }
 
 /*BAND*/

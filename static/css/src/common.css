@@ -403,6 +403,11 @@ header.logged{
     .semibold;
 }
 
+.musician-info{
+		width:380px;
+		margin-right: 18px;
+	}
+
 .instruments {
 	.box-label{
 		background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-icons-instruments.png) no-repeat scroll 0 -732px transparent;
@@ -441,6 +446,49 @@ header.logged{
     	&.active    {.box-shadow(0px 0px 15px @green);}
     	input{display: none;}
 	}
+}
+
+.see-all-option{
+	width:500px;
+
+	&.musical-style {
+	    padding:35px 35px 35px 30px;
+	    width: auto;
+	}
+	.instruments-play{padding: 20px;}
+
+	label{
+		background: url(http://lasbandas.s3.amazonaws.com/site/bg-musical-style.jpg) repeat-x scroll center top #363636;
+	    border: 1px solid #262525;
+	    .border-radius(3px);
+	    box-shadow: 0 1px 0 #4A4A4A;
+	    color: white;
+	    display: inline-block;
+	    font-size: 13px;
+	    height: 13px;
+	    line-height: 13px;
+	    margin-bottom: 17px;
+	    margin-right: 17px;
+	    padding: 8px 15px;
+	    text-shadow: 1px 1px 0 #313131;
+
+	    &.active{.box-shadow(0px 0px 8px @green);background: #2c2c2c;}
+	    &:hover{background: #2c2c2c;}
+
+	    input{
+	    	vertical-align: middle;
+	    	display: none;
+	    }
+	}
+
+	.lightbox-close{
+	    font-size: 15px;
+	    height: 30px;
+	    margin-bottom: 15px;
+	    margin-left: 120px;
+	    text-transform: uppercase;
+	    width: 250px;
+    }
 }
 
 #slider-notification{
