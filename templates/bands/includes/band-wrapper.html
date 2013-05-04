@@ -32,6 +32,12 @@
 		<div id="user-header" class="clearfix">
 			<h1 class="fl">
 				<span>Banda</span> <strong class="editable" data-single="true" data-field="name">{{ band.name }}</strong>
+				<span> / 
+					{% for style in band.musical_styles.all %}
+						{{ band.musical_styles.name }}
+						{% if not forloop.last %} | {%endif%}
+					{% endfor %}
+				</span>
 			</h1>
 		</div>
 	</div>

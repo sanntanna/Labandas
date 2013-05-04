@@ -28,6 +28,7 @@ def create_band(request):
     })
 
     t = loader.get_template('lightbox/new-band.html')
+
     return HttpResponse(t.render(c))
 
 @onlypost
