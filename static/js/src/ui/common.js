@@ -277,11 +277,15 @@
 			boxMessages.html(html);
 		}
 
+		var isLoaded = false;
         $(document).delegate('.notification', 'click', function(e){
 			e.preventDefault();
-			boxSolicitations.html('<li class="default-message">Aguarde...</li>');
-			$("#slider-notification").fadeIn();
-			$.get('/solicitacao/listar', printNotifications);
+			$("#slider-notification").fadeToggle();
+
+			if(!isLoaded){
+				isLoaded = true;
+				$('.invitations').trigger('click');
+			}
 		});
 
 		$(document).delegate('body', 'click', function(e){
@@ -310,6 +314,8 @@
 			boxSolicitations.fadeIn();
 			invitations.addClass('active');
 			messages.removeClass('active');
+			boxSolicitations.html('<li class="default-message">Aguarde...</li>');
+			$.get('/solicitacao/listar', printNotifications);
 		});
 
 
