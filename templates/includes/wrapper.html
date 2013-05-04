@@ -66,11 +66,12 @@
 			    	<strong><a href="{{ user.get_profile.profile_url }}" title="{{ user.get_full_name }}">{{ user.get_full_name|truncatechars:20 }}</a></strong>
 			    </li>
 			    <li class="notifications">
-			    	<a href="#notificacoes" class="icon prevent-hide notification ir" title="Nenhuma nova notificação">notificações</a>
+			    	<a href="#notificacoes" class="icon prevent-hide notification ir">notificações</a>
+			    	<span id="total-notifications">20</span>
 			    	<div id="slider-notification" class="prevent-hide">
 			    		<div class="list-header">
-							<a class="invitations" href="#solicitacoes">Solicitações de convites</a>
-							<a class="nav-messages" href="#mensagens">Mensagens</a>
+							<a class="invitations" href="#solicitacoes">Solicitações (<span id="total-solicitations">0</span>)</a>
+							<a class="nav-messages" href="#mensagens">Mensagens (<span id="total-messages">0</span>)</a>
 						</div>
 
 						<div class="slider">
@@ -78,7 +79,7 @@
 							<ul class="messages list"></ul>
 							<a href="/" class="view-all">Ver todas</a>
 						</div>
-					</div>	
+					</divπ>	
 			   	</li>
 			    <li class="lock">
 			    	<a href="#dados-pessoais" class="icon lock ir" title="Dados pessoais">dados pessoais</a>

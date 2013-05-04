@@ -7,6 +7,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
 from jsonui.response import JSONResponse
+from messages.models import Message
+from solicitations.models import Solicitation
 
 def home(request):
     if request.user.is_authenticated():
@@ -47,3 +49,11 @@ def lightbox_login(request):
     })
     c.update(csrf(request))
     return HttpResponse(t.render(c))
+
+def count_notifications(request):
+    totals = {
+        'messages': Message.objects.total_unread_from_musician(request.user),
+        'solicitations': Solicitation.objects.count_from_music_pending(request.user)
+    }
+
+    return JSONResponse({ 'success': True, 'totals': totals })

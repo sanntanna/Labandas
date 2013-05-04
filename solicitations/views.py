@@ -46,7 +46,7 @@ def cancel_solicitation(request):
 
 @onlyajax
 def list_solicitations(request):
-    solicitations = Solicitation.objects.all_from_music_pending(request.user.get_profile())
+    solicitations = Solicitation.objects.all_from_music_pending(request.user)
 
     res = [{    'id': s.pk, 
                 'from': s.from_musician, 

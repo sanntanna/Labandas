@@ -10,7 +10,7 @@
 		setupInlineEdit();
 		setupSoundCloudPlayers();
 		setupPushState();
-		baloonNotifications();
+		notifications();
 		initCodaSlider();
 		solicitations();
 		setupMessages();
@@ -205,7 +205,18 @@
 		});
 	}
 
-	function baloonNotifications(){
+	function countNotifications(){
+		$.get('/total-notificacoes', function(response){
+			var total = response.totals.messages + response.totals.solicitations;
+			if(total == 0){ return; }
+
+			$("#total-notifications").html(total).fadeIn();
+			$("#total-messages").html(response.totals.messages);
+			$("#total-solicitations").html(response.totals.solicitations);
+		});
+	}
+
+	function notifications(){
 
 		var boxMessages = $('.messages');
 			boxSolicitations = $('.solicitations');
@@ -306,6 +317,9 @@
             e.preventDefault();
             $("#slider-notification").fadeOut();  
 		});
+
+		setTimeout(countNotifications, 1500);
+		setInterval(countNotifications, 60 * 1000);
 	}
 
 	function initCodaSlider(){

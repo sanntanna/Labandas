@@ -262,10 +262,25 @@ header.logged{
 			margin-top:13px;
 		}
 
-		&.notifications{width:35px;}
+		&.notifications{
+			width:35px;
+			position: relative;
+		}
 		&.lock{width:35px;}
-
 		.icon{ margin:12px 0 0 5px; }
+
+		#total-notifications {
+			display:none; 
+			position: absolute;
+			background: #f00;
+			color: #fff;
+			font-size: 10px;
+			border-radius: 2px;
+			line-height: 11px;
+			top: 20px;
+			padding: 3px;
+			right: -3px;
+		}
 	}
 
 	a{color:#fff;}
@@ -541,7 +556,7 @@ header.logged{
 		    	line-height: 14px;
 		    }
 
-		    div{float: left;}
+		    & > div{float: left;}
 
 		    .info-user{
 				margin: 31px 5px 0;

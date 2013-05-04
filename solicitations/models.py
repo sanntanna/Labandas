@@ -24,7 +24,7 @@ class SolicitationManager(models.Manager):
         
         
         if target_musician.is_in_band(band):
-            raise ValueError("O musico " + str(target_musician) + " ja pertence a banda " + str(band))
+            raise ValueError("O musico %s ja pertence a banda %s" % (target_musician, band))
         
         solicitation = self.__generate_solicitation(from_musician=sender_musician, to_musician=target_musician, band=band)
         solicitation.solicitation_type = Type.ADD_TO_BAND
@@ -33,8 +33,11 @@ class SolicitationManager(models.Manager):
 
         return True
     
-    def all_from_music_pending(self, musician):
-        return musician.solicitation_to.filter(active=True, solicitation_status=Status.PENDING)
+    def all_from_music_pending(self, user):
+        return user.get_profile().solicitation_to.filter(active=True, solicitation_status=Status.PENDING)
+
+    def count_from_music_pending(self, user):
+        return self.all_from_music_pending(user).count()
     
     def musicians_pending(self, band):
         return band.solicitations.filter(active=True, solicitation_type=Type.ADD_TO_BAND, solicitation_status=Status.PENDING)
