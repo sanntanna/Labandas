@@ -224,7 +224,9 @@
 		padding: 20px;
 
 		input{
-			padding: 10px 5px 5px 10px;
+			padding: 10px 5px 9px 10px;
+			border: none;
+			.border-radius(5px);
     		width: 60%;
 		}
 
@@ -240,24 +242,39 @@
 		}
 
 		.results{
-			padding: 15px 0 40px;
+			display: table;
+		    padding: 15px 0 0;
+		    width: 100%;
 
 			li{
-				color: @green;
-				list-style: none;
-				margin-right: 20px;
-				clear:both;
+				clear: both;
+			    color: @green;
+			    display: table;
+			    list-style: none outside none;
+			    margin-bottom: 10px;
 
-					img{width: 60px; height: 60px;}
+			    	.avatar{
+			    		background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll -121px -231px #FFFFFF;
+			    		.border-radius(40px);
+						width: 50px; 
+						height: 50px;
 
+						img{
+							.border-radius(40px);
+							width: 50px; 
+							height: 50px;
+						}
+			    	}
+					
 					.name{
-						font-size: 18px;
-					    padding-top: 14px;
-					    width: 25%;
+						font-size: 16px;
+					    line-height: 20px;
+					    padding: 15px 0 0 15px;
+					    width: 125px;
 					}
 
 					.button{
-						  padding-top: 34px;
+						padding: 18px 0 0 20px;
 					}
 
 			}
@@ -275,6 +292,27 @@
 		color: #FFF;
 		.normal;
 		font-size: 22px;
-		margin: 75px 0 10px;
+		margin: 10px 0 10px;
+	}
+
+	.what-play {
+		display: block;
+	    margin: 0 auto;
+	    width: 70%;
+
+			.other-option{
+				color: white;
+				font-size: 18px;
+				.light;
+				margin: 25px 0 20px;
+			}
+
+			.instruments{
+				display: table;
+				margin: 0 30px 0 40px;
+				width: 400px;
+
+					input{margin: 20px 0;}
+			}
 	}
 }

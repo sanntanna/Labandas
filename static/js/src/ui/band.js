@@ -103,7 +103,9 @@
 
 			var result = musicians.map(function(musician){
 				return ['<li>',
-					musician.avatar ? '<img class="fl" src="' + musician.avatar + '"/>' : '',
+					'<div class="avatar fl">',
+						musician.avatar ? '<img class="fl" src="' + musician.avatar + '"/>' : '',
+					'</div>',
 					'<div class="name fl">', musician.name, '</div>',
 					'<div class="button fl"><a href="#add-to-band" data-id="', musician.id, '" class="btn add">Adicionar a banda</a></div>',
 				'</li>'].join('');
