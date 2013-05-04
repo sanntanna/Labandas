@@ -270,16 +270,18 @@ header.logged{
 		.icon{ margin:12px 0 0 5px; }
 
 		#total-notifications {
-			display:none; 
-			position: absolute;
-			background: #f00;
-			color: #fff;
-			font-size: 10px;
-			border-radius: 2px;
-			line-height: 11px;
-			top: 20px;
-			padding: 3px;
-			right: -3px;
+			background:@red;
+		    .border-radius(40px);
+		    color: #FFFFFF;
+		    display: none;
+		    font-size: 10px;
+		    line-height: 10px;
+		    padding: 4px 4px 5px;
+		    position: absolute;
+		    right: -5px;
+		    text-align: center;
+		    top: 2px;
+		    width: 12px;
 		}
 	}
 
@@ -567,7 +569,7 @@ header.logged{
 	    			background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll -125px -236px #FFFFFF;
 	    			float: left;
 				    line-height: 35px;
-				    margin: 0 7px 0 0;
+				    margin: 0 10px 0 0;
 			    	.border-radius(5px);
 
 				    	img{ 
@@ -579,8 +581,8 @@ header.logged{
 
 		    	.name{
 					line-height: 13px;
-					width: 45px;
-					padding-left: 3px;
+				    padding-left: 3px;
+				    width: 95px;
 				}
 
 			}
