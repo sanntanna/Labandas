@@ -78,11 +78,11 @@ lb.lightbox = function(param){
 	}
 
 	function isText(str){
-		return typeof str == 'string' && str.match(/^([^<>'"])*(\.|#|\/)/gi) == null;
+		return typeof str == 'string' && str.match(/^([^<>'"])*(\/)*/gi) == null;
 	}
 
 	function isCssSelector(str){
-		return str.match(/^(#|\.|[a-zA-Z])([^\/?<]*)$/g) != null;
+		return str.match(/^(#|\.[a-zA-Z])([^\/?<]*)$/g) != null;
 	}
 
 	function open(){
