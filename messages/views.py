@@ -26,10 +26,17 @@ def send_post(request):
 	return JSONResponse({'success':True})
 
 @onlyajax
+def mark_as_readed(request):
+	Message.objects.mark_as_read(request.GET.getlist('ids'))
+
+	return JSONResponse({'success':True})
+
+@onlyajax
 def list(request):
 	objects = request.user.messages_received.filter(active=True).all()
 
 	messages = [{	'id': o.id, 
+					'is_read': o.read_date != None,
 					'from_id': o.from_user.id,
 					'from': o.from_user.get_full_name(), 
 					'from_avatar': o.from_user.get_profile().media.avatar_small, 

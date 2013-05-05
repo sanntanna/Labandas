@@ -7,4 +7,5 @@ src/lb/inline-edit.js
 src/lb/soundcloud.js
 src/lb/message.js
 src/lb/lightbox.js
+src/ui/notifications.js
 src/ui/common.js
