@@ -36,16 +36,16 @@
 			    .border-radius(10px);
 			    border:1px solid #cccccc;
 			    display: inline-table;
-			    height: 92px;
+			    height: 90px;
 			    margin-right: 10px;
-			    width: 85px;
+			    width: 90px;
 			    float: left;
 
 			    &.last {margin-right: 0;}
 
 			    img{
-					width:85px; 
-					height: 92px;
+					width:90px; 
+					height: 90px;
 			    }
 
 			    a{
