@@ -160,3 +160,14 @@ def update_cover_photo(request):
     musician.save()
 
     return redirect('/')
+
+@Partialhandled(full_template, partial_template)
+def all_messages(request, name, user_id):
+    musician = get_object_or_404(Musician, pk=user_id)
+
+    template = loader.get_template("bands/all-messages.html")
+    context = RequestContext(request, {
+        'musician': musician,
+    })
+    
+    return HttpPartialResponseHandler(template, context)
