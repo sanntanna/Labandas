@@ -1,0 +1,57 @@
+@import "_colors.less";
+@import "_utils.less";
+
+#container nav{display: none;}
+
+#all-messages{
+	margin-top: 20px;
+
+	.sidebar{
+    	padding: 10px;
+    	.border-radius(3px); 
+    	width: 270px;
+    	min-height: 640px;
+    	margin-right: 20px;
+
+    	.list-people{
+    		margin-left: 0;
+
+    		li{
+    			border-bottom: 1px solid @defaultgray;
+			    border-top: 1px solid #FFFFFF;
+			    display: table;
+			    list-style: none outside none;
+			    padding: 15px 0;
+			    width: 100%;
+			    .light;
+
+    				img{
+    					.border-radius(40px);
+    				}
+
+    				.description{
+    					color:@defaultgray;
+					    display: table;
+					    margin-left: 70px;
+					    width: 70%;
+					    .semibold;
+    				}
+
+    				.messages{
+    					color: @defaultgray;
+					    margin-left: 70px;
+					    padding-top: 5px;
+    				}
+    		}
+    	}
+	}
+
+	.main{
+		background: #FFFFFF;
+	    .border-radius(5px);
+	    padding: 20px;
+	    width: 425px;
+	    opacity: 0.90;
+	    min-height: 640px;
+	}
+}
