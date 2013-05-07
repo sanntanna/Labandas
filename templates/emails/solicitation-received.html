@@ -1,0 +1,11 @@
+<html>
+<body>
+<p>Olá {{ solicitation.to_musician.name }},<p>
+
+<p>{{ solicitation.from_musician.name }} adicionou você na banda {{ solicitation.band.name }}<p>
+
+Acesse http://localhost:8000/?accept_solicitation={{ solicitation.id }} para confirmar.
+
+
+</body>
+</html>

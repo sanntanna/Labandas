@@ -1,7 +1,11 @@
 #coding=ISO-8859-1
 from bands.models import Musician, Band
 from datetime import datetime
+from django.core.mail import send_mail
+from django.conf import settings
 from django.db import models
+from django.template.loader import get_template
+from django.template import Context
 from equipaments.models import EquipamentType
 
 class Type(object):
@@ -17,7 +21,13 @@ class SolicitationManager(models.Manager):
                             from_musician=from_musician,
                             to_musician=to_musician,
                             band=band)
-     
+    
+    def __send_email(self, solicitation):
+        subject = '%s, %s disse que voce toca na banda %s' % ( solicitation.to_musician.name(), solicitation.from_musician.name(), solicitation.band.name)
+        body = get_template('emails/solicitation-received.html')
+
+        send_mail(subject, body.render(Context({'solicitation': solicitation})), settings.LB_DEFAULT_SENDER, [solicitation.to_musician.user.email])
+
     def ask_to_add(self, sender_musician, target_musician, band, instruments):
         if not band.musicians.get(musician=sender_musician).is_admin:
             raise ValueError('Esse musico nao pode enviar solicitacao para essa banda')
@@ -30,6 +40,8 @@ class SolicitationManager(models.Manager):
         solicitation.solicitation_type = Type.ADD_TO_BAND
         solicitation.save()
         solicitation.instruments = instruments
+
+        self.__send_email(solicitation)
 
         return True
     

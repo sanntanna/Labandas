@@ -1,0 +1,13 @@
+<html>
+<body>
+<p>Olá {{ message.to_user.first_name }},<p>
+
+<p>{{ message.from_user.first_name }} te enviou uma mensagem.<p>
+
+<p>Para visualiza-la, acesse seu perfil no lasbandas.</p>
+
+<p><i>"{{ message.text|truncatechars:10 }}..."</i></p>
+
+
+</body>
+</html>

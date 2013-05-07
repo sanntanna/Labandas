@@ -195,8 +195,10 @@ LOGGING = {
     },
 }
 
-
 AUTH_PROFILE_MODULE = 'bands.Musician'
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/tmp/lb-messages'
 
 #amazon S3 settings
 BUCKET_NAME = 'lasbandas'
@@ -208,7 +210,4 @@ PACKAGE_DIR = 'pkg'
 LESS_EXECUTABLE = "lessc"
 
 #network auth settings
-KEYS = {
-    'facebook': { 'key': '363555127094643', 'secret_key': 'c6b942d21ba141a67695ed6f090b8d1b' },
-}
-
+LB_DEFAULT_SENDER = "Lasbandas <noreply@lasbandas.com>"
