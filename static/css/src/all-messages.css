@@ -35,11 +35,15 @@
 					    margin-left: 70px;
 					    width: 70%;
 					    .semibold;
+
+					    	.date{
+					    		text-align: right;
+					    	}
+					    	.name{.semibold;}
     				}
 
     				.messages{
     					color: @defaultgray;
-					    margin-left: 70px;
 					    padding-top: 5px;
     				}
     		}
@@ -51,7 +55,7 @@
 	    .border-radius(5px);
 	    padding: 20px;
 	    width: 425px;
-	    opacity: 0.90;
+	    opacity: :;
 	    min-height: 640px;
 	}
 }

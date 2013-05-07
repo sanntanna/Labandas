@@ -13,31 +13,16 @@
 			<a class="nav-messages" href="#mensagens">Mensagens ( <span id="total-messages">0</span> )</a>
 		</nav>
 		<ul class="list-people">
-			<li>
-				<img src="http://lasbandas.s3.amazonaws.com/u/4/avatar-small.png" width="50" class="fl"/>
-				<div class="description">
-					<span class="name fl">Anderson Santana</span>
-					<span class="date fr">Sáb</span>
-				</div>
-				<div class="messages">kldsfklsdkl fdsklsdf jsdlj fdljldsf fdjsljds </div>
-			</li>
-			<li>
-				<img src="http://lasbandas.s3.amazonaws.com/u/4/avatar-small.png" width="50" class="fl"/>
-				<div class="description">
-					<span class="name fl">Anderson Santana</span>
-					<span class="date fr">Sáb</span>
-				</div>
-				<div class="messages">kldsfklsdkl fdsklsdf jsdlj fdljldsf fdjsljds </div>
-			</li>
-			<li>
-				<img src="http://lasbandas.s3.amazonaws.com/u/4/avatar-small.png" width="50" class="fl"/>
-				<div class="description">
-					<span class="name fl">Anderson Santana</span>
-					<span class="date fr">Sáb</span>
-				</div>
-				<div class="messages">kldsfklsdkl fdsklsdf jsdlj fdljldsf fdjsljds </div>
-			</li>
-			
+			{% for m in user.messages_received.all %}
+				<li>
+					<img src="{{ m.from_user.get_profile.media.avatar }}" width="50" class="fl"/>
+					<div class="description">
+						<div class="date"> {{ m.sent_date }}</div>
+						<div class="name">{{ m.from_user.get_full_name }}</div
+					</div>
+					<div class="messages">{{ m.text }}</div>
+				</li>
+			{% endfor %}
 		</ul>
 	</div>
 
