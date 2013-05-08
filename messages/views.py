@@ -20,7 +20,7 @@ def send(request):
 @onlypost
 @onlyajax
 def send_post(request):
-	recipient = User(id=request.POST['recipient_id'])
+	recipient = User.objects.get(id=request.POST['recipient_id'])
 	Message.objects.send_message(request.user, recipient, None, request.POST['message'])
 
 	return JSONResponse({'success':True})

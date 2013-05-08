@@ -42,8 +42,27 @@
 			return;
 		}
 
+		console.log(response.solicitations);
+
 		var html = response.solicitations.map(function(n){
-			return ['<li>',
+			return n.type == 0 ?
+					['<li>',
+						'<div class="info-user">',
+						'	<div class="image"><img src="', n.from_avatar,'" /></div>',
+						'	<div class="name">', n.from,'</div>',
+						'</div>',
+						'<div>',
+						'	<div class="waiting">',
+						'		<p><a href="', n.from_url,'" target="_blank"><strong>', n.from ,'</strong></a> ',
+						'		quer entrar na banda  <strong>', n.band, '</strong>.</p>',
+						'		<p>Acesse o perfil de <a href="', n.from_url, '">', n.from, '</a> e veja se ele é bom mesmo!</p>',
+						'	</div>',
+						'	<div class="line">',
+						'		<a href="#send-message" data-toid="', n.from_id,'" class="btn send-msg">Enviar mensagem</a>',
+						'	</div>',
+						'</div>',
+					'</li>'].join('')
+					: ['<li>',
 						'<div class="info-user">',
 						'	<div class="image"><img src="', n.from_avatar,'" /></div>',
 						'	<div class="name">', n.from,'</div>',

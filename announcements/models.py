@@ -3,6 +3,8 @@ from bands.models import Band, Musician
 from django.db import models
 from django.utils import timezone
 from equipaments.models import EquipamentType
+from solicitations.models import Solicitation
+from labandas.helpers import EmailSender
 
 class Announcement(models.Model):
     instruments = models.ManyToManyField(EquipamentType)
@@ -27,8 +29,10 @@ class Announcement(models.Model):
         if musician in self.candidates.all():
             return False
 
-        #TODO: notificar isso
         self.candidates.add(musician)
+        solicitation = Solicitation.objects.reply_announcement(musician, self.owner_band)
+        EmailSender.announcement_reply(solicitation, self)
+
         return True
     
     def __unicode__(self):

@@ -1,12 +1,9 @@
 #coding=ISO-8859-1
 from bands.models import Musician, Band
 from datetime import datetime
-from django.core.mail import send_mail
-from django.conf import settings
 from django.db import models
-from django.template.loader import get_template
-from django.template import Context
 from equipaments.models import EquipamentType
+from labandas.helpers import EmailSender
 
 class Type(object):
     RESPONSE_BAND_ANNOUNCEMENT, INVITE_TO_BAND, ADD_TO_BAND = range(3)
@@ -22,12 +19,6 @@ class SolicitationManager(models.Manager):
                             to_musician=to_musician,
                             band=band)
     
-    def __send_email(self, solicitation):
-        subject = '%s, %s disse que voce toca na banda %s' % ( solicitation.to_musician.name(), solicitation.from_musician.name(), solicitation.band.name)
-        body = get_template('emails/solicitation-received.html')
-
-        send_mail(subject, body.render(Context({'solicitation': solicitation})), settings.LB_DEFAULT_SENDER, [solicitation.to_musician.user.email])
-
     def ask_to_add(self, sender_musician, target_musician, band, instruments):
         if not band.musicians.get(musician=sender_musician).is_admin:
             raise ValueError('Esse musico nao pode enviar solicitacao para essa banda')
@@ -41,9 +32,19 @@ class SolicitationManager(models.Manager):
         solicitation.save()
         solicitation.instruments = instruments
 
-        self.__send_email(solicitation)
+        EmailSender.add_in_band(solicitation)
 
         return True
+
+    def reply_announcement(self, sender_musician, band):
+        if sender_musician.is_in_band(band):
+            raise ValueError("O musico %s ja pertence a banda %s" % (target_musician, band))
+
+        solicitation = self.__generate_solicitation(sender_musician, band.admin, band)
+        solicitation.solicitation_type = Type.RESPONSE_BAND_ANNOUNCEMENT
+        solicitation.save()
+        
+        return solicitation
     
     def all_from_music_pending(self, user):
         return user.get_profile().solicitation_to.filter(active=True, solicitation_status=Status.PENDING)

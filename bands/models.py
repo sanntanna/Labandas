@@ -113,6 +113,10 @@ class Band(models.Model):
     @property
     def musicians_list(self):
         return [m.musician for m in self.musicians]
+
+    @property
+    def admin(self):
+        return self.all_musicians.filter(is_admin=True).all()[0].musician
     
     @property
     def page_url(self):

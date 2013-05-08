@@ -54,6 +54,7 @@ def list_solicitations(request):
                 'from_url': s.from_musician.profile_url, 
                 'from_avatar': s.from_musician.media.avatar_small,
                 'band': s.band.name,
+                'type': s.solicitation_type,
                 'instruments': [i.name for i in s.instruments.all()],} for s in solicitations]
 
     return JSONResponse({'solicitations': res})
