@@ -80,6 +80,15 @@
 
 		});
 
+		$(document).delegate('.instruments input:checkbox', 'change', function(){
+			var str = [];
+			$('.instruments input:checked').each(function(){
+				str.push( $(this).closest('label').text().toUpperCase() );
+			});
+
+			$('#i_want').html(str.join(','));
+		});
+
 		$(document).delegate(".candidate-to-announcement", "click", function(e){
 			e.preventDefault();
 			var $link = $(this);
