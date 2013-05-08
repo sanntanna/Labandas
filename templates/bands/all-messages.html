@@ -15,19 +15,36 @@
 		<ul class="list-people">
 			{% for m in user.messages_received.all %}
 				<li>
-					<img src="{{ m.from_user.get_profile.media.avatar }}" width="50" class="fl"/>
-					<div class="description">
-						<div class="date"> {{ m.sent_date }}</div>
-						<div class="name">{{ m.from_user.get_full_name }}</div
-					</div>
-					<div class="messages">{{ m.text }}</div>
+					<a href="/">
+						<img src="{{ m.from_user.get_profile.media.avatar }}" width="50" class="fl"/>
+						<div class="description">
+							<div class="date"> {{ m.sent_date }}</div>
+							<div class="name">{{ m.from_user.get_full_name }}</div>
+							<div class="full-messages">{{ m.text }}</div>
+						</div>
+					</a>
 				</li>
 			{% endfor %}
 		</ul>
 	</div>
 
 	<div class="main fl">
-		conteúdo
+		<div class="list-people">
+			<div class="calendar"> 
+				<span class="date">7 de Maio de 2013 às 23:18 </span>
+			</div>
+			<div class="see-full-message">
+				<img src="http://lasbandas.s3.amazonaws.com/u/4/avatar.png" width="50" class="fl"/>
+				<div class="description">
+					<div class="name">Falcão do nascimento</div>
+					<div class="full-messages">SM é uma canção da cantora barbadense Rihanna, gravada para o seu quinto álbum de estúdio Loud. Foi composta por Mikkel Eriksen, Tor Hermansen, Sandy Wilhelm e Ester Dean, com a produção a cargo da equipa norueguesa</div>
+				</div>
+			</div>
+		</div>
+		<div class="reply-msg">
+			<textarea placeholder="Responder mensagem" class="txt" name="message"></textarea>
+			<a href="/" class="add fl lightbox btn">Responder mensagem</a>
+		</div>	
 	</div>
 </div>
 {% endblock musiciancontent %}

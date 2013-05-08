@@ -97,9 +97,9 @@
 					'</div>',
 					'<div>',
 					'	<div class="waiting">', m.message,'</div>',
-					'</div>',
 					'	<a href="#respond-message" data-toid="', m.from_id,'" class="btn send-msg">Responder</a>',
 					'	<a href="#respond-message" data-toid="', m.from_id,'" class="btn">Ler mensagem completa</a>',
+					'</div>',
 					'</li>'].join('');
 		}).join('');
 
