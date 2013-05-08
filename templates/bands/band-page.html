@@ -23,7 +23,7 @@
 								<div class="box-label">
 									<label class="{{ instrument.normalized_name }} check-icon icons-instruments">
 										<input type="checkbox" value="{{ instrument.id }}" name="instruments" /> 
-										{{ instrument.name }}
+										{{ instrument.who_play }}
 									</label>
 								</div>
 							{% endfor %}
@@ -107,7 +107,7 @@
 								<img src="{{ m.musician.media.avatar }}" title="{{ m.musician.name }}" />
 							{% endif %}
 							<div>{{ m.musician.name }}</div>
-							<strong>{% for i in m.instruments.all %}#{{ i.name }}{% if not forloop.last %},{% endif %}{% endfor %}</strong>
+							<strong>{% for i in m.instruments.all %}#{{ i.who_play }}{% if not forloop.last %},{% endif %}{% endfor %}</strong>
 						</a>
 					</li>
 				{% endfor %}

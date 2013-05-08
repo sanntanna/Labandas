@@ -9,11 +9,11 @@
 				{% for instrument in musician.type_instruments_play.all %}
 					<li class="{{ instrument.normalized_name }} icons-instruments">
 						<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
-							{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
+							{% if instrument in musician_instruments_play|dictsort:"id" %}
 								checked="checked"
 							{% endif %}
 						/>
-						<span>{{ instrument.name }}</span>
+						<span>{{ instrument.who_play }}</span>
 					</li>
 				{% endfor %}
 			</ul>

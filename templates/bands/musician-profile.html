@@ -24,11 +24,11 @@
 					<div class="box-label">
 						<label class="{{ instrument.normalized_name }} check-icon icons-instruments">
 							<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
-								{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
+								{% if instrument in musician_instruments_play|dictsort:"id" %}
 									checked="checked"
 								{% endif %}
 							/> 
-							{{ instrument.name }}
+							{{ instrument.who_play }}
 						</label>
 					</div>
 				{% endfor %}
@@ -45,7 +45,7 @@
 						{% for instrument in equipament_types %}
 							<label class="{{ instrument.normalized_name }} check-icon">
 								<input type="checkbox" value="{{ instrument.id }}" name="type_instruments_play" 
-									{% if instrument in musician.type_instruments_play.all|dictsort:"id" %}
+									{% if instrument in musician_instruments_play|dictsort:"id" %}
 										checked="checked"
 									{% endif %}
 								/> 
@@ -86,7 +86,7 @@
 						{% for style in musical_styles %}
 							<label class="check-icon">
 								<input type="checkbox" value="{{ style.id }}" name="musical_styles"
-									{% if style in musician.musical_styles.all|dictsort:"id" %}
+									{% if style in musician_musical_styles|dictsort:"id" %}
 										checked="checked"
 									{% endif %}
 								/> 

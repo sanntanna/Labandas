@@ -22,13 +22,13 @@
 	</div>
 
 	<div class="musician-info hide">
-		<h2>Qual instrumento você toca nessa banda ?</h2>
+		<h2>O que você é na banda?</h2>
 		<div class="instruments">
 			{% for instrument in equipament_types %}
 				<div class="box-label">
 					<label class="{{ instrument.normalized_name }} check-icon icons-instruments">
 						<input type="checkbox" value="{{ instrument.id }}" name="instruments" /> 
-						{{ instrument.name }}
+						{{ instrument.who_play }}
 					</label>
 				</div>
 			{% endfor %}

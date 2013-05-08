@@ -3,14 +3,15 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=15)
     image = models.CharField(max_length=255, null=True, blank=True)
     def __unicode__(self):
         return self.name
     
 class EquipamentType(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=20)
     category = models.ForeignKey(Category)
+    who_play = models.CharField(max_length=25, null=True, blank=True)
 
     @property
     def normalized_name(self):
@@ -20,7 +21,7 @@ class EquipamentType(models.Model):
         return self.name
 
 class Brand(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=25)
     logo = models.CharField(max_length=255, null=True, blank=True)
     website = models.CharField(max_length=255, null=True, blank=True)
     def __unicode__(self):
@@ -31,5 +32,6 @@ class Equipament(models.Model):
     image = models.CharField(max_length=255, null=True, blank=True)
     brand = models.ForeignKey(Brand)
     equipament_type = models.ForeignKey(EquipamentType)
+    
     def __unicode__(self):
         return self.equipament_type.name + " " + self.brand.name + " " + self.name

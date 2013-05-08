@@ -30,6 +30,7 @@ class UserFinder(object):
 		if stored_users.count() > 0:
 			user = stored_users[0]
 			self.__bind_user_in_network(user, user_id, 'facebook', fb_data)
+			self.__add_user_backend(user)
 			return user, {}
 
 		user = User.objects.create_user(fb_data['email'], fb_data['email'], "78%s123%s309" % (user_id,user_id))

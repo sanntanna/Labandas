@@ -34,6 +34,8 @@ def profile(request):
         'musical_styles': MusicalStyle.objects.all(),
         'equipament_types': EquipamentType.objects.all(),
         'has_personal_data': has_personal_data,
+        'musician_instruments_play': musician.type_instruments_play.all(),
+        'musician_musical_styles': musician.musical_styles.all(),
         'musician':musician
     })
     
@@ -98,7 +100,8 @@ def public_profile(request, user_id, name):
     template = loader.get_template('bands/musician-public-profile.html')
     context = RequestContext(request, {
         'musician': musician,
-        'current_year': datetime.datetime.now().year
+        'current_year': datetime.datetime.now().year,
+        'musician_instruments_play': musician.type_instruments_play.all(),
     })
     
     return HttpPartialResponseHandler(template, context)
