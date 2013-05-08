@@ -534,7 +534,7 @@ header.logged{
 	    padding: 3px 15px 0;
 
 	    a{
-	    	padding-right: 25px;
+	    	padding-right: 35px;
 	    		&.active{color: @green;}
 	    }
 
