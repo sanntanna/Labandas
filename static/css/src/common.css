@@ -558,8 +558,6 @@ header.logged{
 		    	line-height: 14px;
 		    }
 
-		    & > div{float: left;}
-
 		    .info-user{
 				margin: 31px 5px 0;
 
@@ -613,6 +611,9 @@ header.logged{
 				a{ color: #000; }
     		}
 		}
+
+		li > div{float: left;}
+
 		&.messages{display: none;}
 	}
 

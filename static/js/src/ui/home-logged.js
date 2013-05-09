@@ -7,7 +7,6 @@
 		setupSoundCloud();
 		musicalStyles();
 		bandCreation();
-		bandInvitation();
 	};
 	
 	function setupSkills(){
@@ -170,47 +169,6 @@
 		$(document).delegate("#new-band-form", "ajaxcomplete", function(e, response){
 			if(!response.success){ return; }
 			location.href = response.band_page_url;
-		});
-	}
-
-	function bandInvitation(){
-		var isLoaded = false,
-			$bandList = $('#invite-bands-list');
-
-
-		function handleListHide(){
-			$(document).bind('mouseup', function(e){
-				if($(e.target).is('.invite-me')){ return; }
-
-				$(document).unbind('mouseup');
-				$bandList.slideUp(300);
-			});
-		}
-
-		$(document).delegate('.invite-me', 'click', function(e){
-			e.preventDefault();
-
-			if(isLoaded){
-				$bandList.slideToggle(300, handleListHide);
-				return;
-			}
-
-			isLoaded = true;
-			$.get('/banda/listar', function(response){
-
-				var html = response.bands.map(function(b){
-					return ['<li>',
-								'<a href="#', b.name ,'" class="invite-to-band" data-id="',b.id,'">', b.name,'</a>',
-							'</li>'].join('');
-				});
-
-				$bandList.html(html.join('')).slideDown(300, handleListHide);
-			});
-		});
-
-		$(document).delegate('.invite-to-band', 'click', function(e){
-			e.preventDefault();
-			alert('Enviar solicitação para a banda ' + $(this).data('id'));
 		});
 	}
 

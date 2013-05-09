@@ -168,15 +168,6 @@ def remove_band_from_band(request):
     success = bandBand.objects.get(pk=request.POST.get('id')).deactivate()
     return JSONResponse({'success': success})
 
-@onlyajax
-def list_bands(request):
-    band_list = request.user.get_profile().bands_list
-
-    bands = [{'name': b.name,
-             'id': b.id} for b in band_list]
-
-    return JSONResponse({'success': True, 'bands': bands})
-    
 def user_can_edit(user, band):
     return hasattr(user, 'get_profile') and user.get_profile().is_in_band(band)
 

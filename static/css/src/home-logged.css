@@ -47,7 +47,7 @@
 			.change-cover-photo{opacity: 1;}
 		}
 	}
-	.invite-me{
+	.message-me{
 		background: #000;
 		.border-radius(3px);
 		color: #FFFFFF;
@@ -65,28 +65,6 @@
 	    	color: white;
 	    	.transition;
 	    }
-	}
-
-	#invite-bands-list{
-		list-style: none;
-		position: absolute;
-		background: #000;
-		top:305px;
-		right:30px;
-		border-radius:0 0 5px 5px;
-
-		a{
-			text-align: left;
-			width:245px;
-			padding:5px 0 5px 10px;
-			color:#fff;
-			display:block;
-			.transition;
-
-			&:hover{
-				background:@darkgray;
-			}
-		}
 	}
 }
 

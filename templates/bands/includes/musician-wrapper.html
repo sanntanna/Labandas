@@ -18,7 +18,7 @@
 		{% if musician.media.cover %} class="with-photo" {% endif %} >
 		
 		{% if musician.pk != user.pk %}
-			<a href="#" class="invite-me"><span class="highlight">+</span>Convide-me para sua banda</a> 
+			<a href="#" class="message-me send-msg" data-toid="{{ musician.id }}"><span class="highlight">+</span>Mande uma mensagem para mim</a> 
 			<ul id="invite-bands-list"></ul>
 		{% endif %}
 		
