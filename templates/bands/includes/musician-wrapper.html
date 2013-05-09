@@ -19,6 +19,7 @@
 		
 		{% if musician.pk != user.pk %}
 			<a href="#" class="invite-me"><span class="highlight">+</span>Convide-me para sua banda</a> 
+			<ul id="invite-bands-list"></ul>
 		{% endif %}
 		
 		{% if musician.media.cover %}
