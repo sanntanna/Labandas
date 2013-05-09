@@ -8,10 +8,10 @@
 {% block musiciancontent %}
 <div id="all-messages">
 	<div class="sidebar fl">
-		<nav class="list-header">
-			<a class="invitations" href="#solicitacoes">Solicitações de convites ( <span id="total-solicitations">0</span> )</a>
+		<div class="list-header">
+			<a class="invitations" href="#solicitacoes">Solicitações ( <span id="total-solicitations">0</span> )</a>
 			<a class="nav-messages" href="#mensagens">Mensagens ( <span id="total-messages">0</span> )</a>
-		</nav>
+		</div>
 		<ul class="list-people">
 			{% for m in user.messages_received.all %}
 				<li>
