@@ -464,7 +464,7 @@ header.logged{
     	&.baixo     {background-position: 0 -428px;}
     	&.piano     {background-position: 0 -489px;}
     	&.violao    {background-position: 0 -550px;}
-    	&.dj    {background-position: 0 -611px;}
+    	&.pickup    {background-position: 0 -611px;}
     	&.plus	    {background-position: 0 -671px; text-indent: -9999px;}
     	&.active    {.box-shadow(0px 0px 15px @green);}
     	input{display: none;}
