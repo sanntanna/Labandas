@@ -191,6 +191,12 @@ h2{
 			color:@green;
 		}
 	}
+
+	&.small{
+		font-size: 14px; 
+		.normal;
+		padding: 5px 15px;
+	}
 }
 
 .white{color:#fff;}

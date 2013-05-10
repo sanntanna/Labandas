@@ -1,6 +1,6 @@
 (function(){
-	var boxMessages = $('.messages');
-		boxSolicitations = $('.solicitations');
+	var boxMessages = $('.tab-msg');
+		boxSolicitations = $('.tab-requests');
 		messages = $('.nav-messages');
 		invitations = $('.invitations');
 

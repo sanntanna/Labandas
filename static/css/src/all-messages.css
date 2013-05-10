@@ -5,12 +5,18 @@
 
 #all-messages{
 	margin-top: 20px;
+    display: table;
+
+    .send-msg{
+        float: right;
+        margin: 0 17px 30px 0;
+    }
 
 	.sidebar{
     	.border-radius(3px); 
     	width: 295px;
     	min-height: 640px;
-    	margin-right: 18px;
+    	margin: 58px 18px 0 0;
 
         .list-header{
             background: none repeat scroll 0 0 white;
@@ -19,7 +25,22 @@
             padding: 10px 15px 8px;
             text-align: center;
 
-                a{margin-right: 10px;}
+                a{
+                    margin-right: 20px;
+                        &.active{
+                            padding: 10px 10px 8px;
+                            background: #333;
+                            color:#777;
+                        }
+                }
+        }
+
+        .types-msg{
+            background:#333333;
+            font-size: 11px;
+            padding: 12px 30px 20px 38px;
+
+                a{margin-right: 35px;}
         }
 	}
 
