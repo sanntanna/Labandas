@@ -8,6 +8,8 @@ facebook = function(appid){
 	};
 
 	this.login = function(callback){
+		console.log(FB);
+		return;
 		if(ready){
 			executeLogin(callback);
 			return;
@@ -21,22 +23,25 @@ facebook = function(appid){
 		permissions = {scope: perms};
 	};
 
+	this.friends = function(callback){
+		FB.api('/me/friends',{fields: 'name,id,location,birthday'}, callback)
+	};
+
 	function executeLogin(callback){
-		/*FB.getLoginStatus(function(response){
+		FB.getLoginStatus(function(response){
 			if(response.status == 'connected'){
 				callback.call(null, response.authResponse);
 				return;
-			}*/
-			console.log(permissions);
+			}
+
 			FB.login(function(loginResponse) {
-				console.log(loginResponse);
 				if(loginResponse.status != 'connected'){
 					return;
 				}
 				
 				callback.call(null, loginResponse.authResponse);
 			}, permissions);
-		//});
+		});
 	}
 
 	function prepare(){

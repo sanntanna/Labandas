@@ -24,6 +24,10 @@ lb.facebook = (function(){
 		});
 	};
 
+	public.friends = function(callback){
+		facebookApi.friends(callback);
+	}
+
 	function load(){
 		facebookApi = new facebook('363555127094643');
 		facebookApi.permissionsNeeded('email,user_birthday,user_hometown,publish_stream,create_event');

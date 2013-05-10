@@ -6,6 +6,7 @@
 		setupSetlist();
 		announcements();
 		addMusician();
+		findMusicianInFacebook();
 	};
 	
 	function setupSoundCloud(){
@@ -167,6 +168,52 @@
 
 				new lb.message("Erro ao enviar a solicitação", lb.message.ERROR);
 			});
+		});
+	}
+
+	function findMusicianInFacebook(){
+		var friendList = null;
+
+		function performSearch(){
+			var kw = $('#musician-fb-kw').val();
+
+			var results = friendList.filter(function(item){
+				return item.name.toLowerCase().indexOf(kw.toLowerCase()) == 0;
+			});
+
+			var html = results.map(function(fbUser){
+				var avatar = 'http://graph.facebook.com/'+ fbUser.id +'/picture?width=100&height=100';
+
+				return ['<li>',
+					'<div class="avatar fl">',
+						'<img class="fl" src="' + avatar + '"/>',
+					'</div>',
+					'<div class="name fl">', fbUser.name, '</div>',
+					'<div class="button fl"><a href="#add-to-band" data-fbid="'+ fbUser.id +'" class="btn fb-add">Adicionar a banda</a></div>',
+				'</li>'].join('');
+			}).join('');
+
+			$('#founded-fb-musicians').html(html);
+		}
+
+		$(document).delegate('#search-on-fb', 'click', function(){
+			if(friendList != null){
+				performSearch();
+				return;
+			}
+
+			lb.facebook.friends(function(response){
+				friendList = response.data;
+				performSearch();
+			});
+		});
+
+		$(document).delegate('.fb-add', 'click', function(e){
+			e.preventDefault();
+			FB.api('/' + $(this).data('fbid'), function(user){
+				console.log(user);
+			})
+			alert('Ver como fazer pra pegar o email do usuario ' + $(this).data('fbid'));
 		});
 	}
 
