@@ -12,41 +12,16 @@
 	
 	<div class="sidebar fl">
 		<div class="list-header">
-			<a class="invitations" href="#solicitacoes">Solicitações ( <span id="total-solicitations">0</span> )</a>
-			<a class="nav-messages" href="#mensagens">Mensagens ( <span id="total-messages">0</span> )</a>
+			<a id="alerts" class="invitations" href="#solicitacoes">Solicitações ( <span id="total-solicitations">0</span> )</a>
+			<a id="posts" class="nav-messages" href="#mensagens">Mensagens ( <span id="total-messages">0</span> )</a>
 		</div>
 		<div class="types-msg">
 			<a href="recebidas" class="fl">Recebidas</a>
 			<a href="#enviadas" class="fl">Enviadas</a>
 		</div>
-		<ul class="list-people">
-			{% for m in user.messages_received.all %}
-				<li>
-					<a href="/">
-						<img src="{{ m.from_user.get_profile.media.avatar }}" width="50" class="fl"/>
-						<div class="description">
-							<div class="date">{{ m.sent_date }}</div>
-							<div class="name">{{ m.from_user.get_full_name }}</div>
-							<div class="full-messages">{{ m.text }}</div>
-						</div>
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
 		
-		<ul class="list-people">
-			{% for m in band.solicitation_from.all %}
-				<li>
-					<a href="/">
-						<img src="{{ m.from_user.get_profile.media.avatar }}" width="50" class="fl"/>
-						<div class="description">
-							<div class="name">{{ m.from_user.get_full_name }}</div>
-							<div class="full-messages">{{ m.instruments }}</div>
-						</div>
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
+		<ul class="list-people posts"></ul>
+		<ul class="list-people alerts"></ul>
 	</div>
 
 	<div class="main fl">

@@ -3,6 +3,9 @@
 		boxSolicitations = $('.tab-requests');
 		messages = $('.nav-messages');
 		invitations = $('.invitations');
+		typesMessages = $(".types-msg");
+		boxMessagesAll = $('.posts');
+		boxSolicitationsAll = $('.alerts');
 
 
 	var markAsReadTimeout = 0;
@@ -42,27 +45,8 @@
 			return;
 		}
 
-		console.log(response.solicitations);
-
 		var html = response.solicitations.map(function(n){
-			return n.type == 0 ?
-					['<li>',
-						'<div class="info-user">',
-						'	<div class="image"><img src="', n.from_avatar,'" /></div>',
-						'	<div class="name">', n.from,'</div>',
-						'</div>',
-						'<div>',
-						'	<div class="waiting">',
-						'		<p><a href="', n.from_url,'" target="_blank"><strong>', n.from ,'</strong></a> ',
-						'		quer entrar na banda  <strong>', n.band, '</strong>.</p>',
-						'		<p>Acesse o perfil de <a href="', n.from_url, '">', n.from, '</a> e veja se ele é bom mesmo!</p>',
-						'	</div>',
-						'	<div class="line">',
-						'		<a href="#send-message" data-toid="', n.from_id,'" class="btn send-msg">Enviar mensagem</a>',
-						'	</div>',
-						'</div>',
-					'</li>'].join('')
-					: ['<li>',
+			return  ['<li>',
 						'<div class="info-user">',
 						'	<div class="image"><img src="', n.from_avatar,'" /></div>',
 						'	<div class="name">', n.from,'</div>',
@@ -80,8 +64,32 @@
 						'</div>',
 					'</li>'].join('');
 		}).join('');
-
+		
 		boxSolicitations.html(html);
+	}
+
+	function printNotificationsAll(response){
+		if(!response.solicitations || response.solicitations.length == 0){
+			boxSolicitations.html('<li class="default-message">Nenhuma notificação</li>');
+			return;
+		}
+
+		var html = response.solicitations.map(function(n){
+			return ['<li>',
+						'<a href="/">',
+							'<img src="', n.from_avatar,'" width="50" class="fl"/>',
+							'<div class="description">',
+								'<div class="date">', n.sent_date,'</div>',
+								'<div class="name">', n.from,'</div>',
+								'<div class="full-messages">',
+									'Te adicionei como ', n.instruments, ' da banda <strong>', n.band, '</strong>.',
+								'</div>',
+							'</div>',
+						'</a>',
+					'</li>'].join('');
+		}).join('');
+
+		boxSolicitationsAll.html(html);
 	}
 
 	function printMessages(response){
@@ -91,21 +99,64 @@
 
 		var html = response.messages.map(function(m){
 			return ['<li data-messageid="', m.id ,'" class="', m.is_read ? 'readed': 'unreaded','">',
-					'<div class="info-user">',
-						'	<div class="image"><img src="', m.from_avatar,'" /></div>',
-						'	<div class="name">', m.from,'</div>',
-					'</div>',
-					'<div>',
-					'	<div class="waiting">', m.message,'</div>',
-					'	<a href="#respond-message" data-toid="', m.from_id,'" class="btn send-msg">Responder</a>',
-					'	<a href="#respond-message" data-toid="', m.from_id,'" class="btn">Ler mensagem completa</a>',
-					'</div>',
+						'<div class="info-user">',
+							'	<div class="image"><img src="', m.from_avatar,'" /></div>',
+							'	<div class="name">', m.from,'</div>',
+						'</div>',
+						'<div>',
+						'	<div class="waiting">', m.message,'</div>',
+						'	<a href="#respond-message" data-toid="', m.from_id,'" class="btn send-msg">Responder</a>',
+						'	<a href="#respond-message" data-toid="', m.from_id,'" class="btn">Ler mensagem completa</a>',
+						'</div>',
 					'</li>'].join('');
 		}).join('');
 
-		boxMessages.html(html);
-
+		boxMessages.html(html);	
 		markAsReadTimeout = setTimeout(markMessagesAsRead, 4000);
+	}
+
+	function printMessagesAll(response){
+		if(!response.messages || response.messages.length == 0){
+			boxMessages.html('<li class="default-message">Nenhuma mensagem</li>');
+		}
+
+		var html = response.messages.map(function(m){
+			return ['<li data-messageid="', m.id ,'" class="', m.is_read ? 'readed': 'unreaded','">',
+						'<a href="/" id="see-all">',
+							'<img src="', m.from_avatar,'" width="50" class="fl"/>',
+							'<div class="description">',
+								'<div class="date">', m.sent_date,'</div>',
+								'<div class="name">', m.from,'</div>',
+								'<div class="full-messages">', m.message,'</div>',
+							'</div>',
+						'</a>',
+					'</li>'].join('');
+		}).join('');
+
+		boxMessagesAll.html(html);	
+		markAsReadTimeout = setTimeout(markMessagesAsRead, 4000);
+	}
+
+	function eventsMessages(){
+		boxSolicitations.hide();
+		boxMessages.fadeIn();
+		boxSolicitationsAll.hide();
+		boxMessagesAll.fadeIn();
+		messages.addClass('active');
+		typesMessages.fadeIn();
+		invitations.removeClass('active');
+		boxMessages.html('<li class="default-message">Aguarde...</li>');
+	}
+
+	function eventsSolicitations(){
+		typesMessages.fadeOut();
+		boxMessages.hide();
+		boxSolicitations.fadeIn();
+		boxMessagesAll.hide();
+		boxSolicitationsAll.fadeIn();
+		invitations.addClass('active');
+		messages.removeClass('active');	
+		boxSolicitations.html('<li class="default-message">Aguarde...</li>');
 	}
 
 	var isLoaded = false;
@@ -131,26 +182,29 @@
 		clearTimeout(markAsReadTimeout);
 	});
 
-	 $(document).delegate('.nav-messages', 'click', function(e){
+	 $(document).delegate('#nav-messages', 'click', function(e){
 		e.preventDefault();
-
-		boxSolicitations.hide();
-		boxMessages.fadeIn();
-		messages.addClass('active');
-		invitations.removeClass('active');
-		boxMessages.html('<li class="default-message">Aguarde...</li>');
+		eventsMessages();
 		$.get('/mensagem/listar', printMessages);
 	});
 
-	$(document).delegate('.invitations', 'click', function(e){
+	 $(document).delegate('#posts', 'click', function(e){
 		e.preventDefault();
+		eventsMessages();
+		$.get('/mensagem/listar', printMessagesAll);
+	});
 
-		boxMessages.hide();
-		boxSolicitations.fadeIn();
-		invitations.addClass('active');
-		messages.removeClass('active');
-		boxSolicitations.html('<li class="default-message">Aguarde...</li>');
+	$(document).delegate('#invitations', 'click', function(e){
+		e.preventDefault();
+		eventsSolicitations();
 		$.get('/solicitacao/listar', printNotifications);
+	});
+
+
+	$(document).delegate('#alerts', 'click', function(e){
+		e.preventDefault();
+		eventsSolicitations();
+		$.get('/solicitacao/listar', printNotificationsAll);
 	});
 
 
@@ -161,4 +215,5 @@
 
 	setTimeout(countNotifications, 1500);
 	setInterval(countNotifications, 60 * 1000);
+
 }());
