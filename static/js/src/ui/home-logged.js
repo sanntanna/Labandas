@@ -7,6 +7,7 @@
 		setupSoundCloud();
 		musicalStyles();
 		bandCreation();
+		photoAlbum();
 	};
 	
 	function setupSkills(){
@@ -169,6 +170,12 @@
 		$(document).delegate("#new-band-form", "ajaxcomplete", function(e, response){
 			if(!response.success){ return; }
 			location.href = response.band_page_url;
+		});
+	}
+
+	function photoAlbum(){
+		$(document).delegate("#new-photo", "change", function(){
+			$(this).closest('form').submit();
 		});
 	}
 

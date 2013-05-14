@@ -164,6 +164,13 @@ def update_cover_photo(request):
 
     return redirect('/')
 
+@onlypost
+def add_photo(request):
+    musician = request.user.get_profile()
+    musician.media.add_photo(request.FILES['img'])
+
+    return musician_photos(request, None, musician.id)
+
 @Partialhandled(full_template, partial_template)
 def all_messages(request, name, user_id):
     musician = get_object_or_404(Musician, pk=user_id)

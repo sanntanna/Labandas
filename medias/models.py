@@ -10,7 +10,7 @@ class MediaType(models.Model):
 
 class Media(models.Model):
     media = models.CharField(max_length=255)
-    legend = models.CharField(max_length=125)
+    legend = models.CharField(max_length=125, null=True, blank=True)
     media_type = models.ForeignKey(MediaType)
 
     def __unicode__(self):
@@ -89,15 +89,16 @@ class MusicianMedia(models.Model):
 
     @property
     def photos(self):
-        return self.media_list.filter(media_type__name = "musician_photo")
+        return self.media_list.filter(media_type__name = "photo")
 
     def add_photo(self, image, legend=None):
+        defaul_filename = '/u/%s/photo/%s%s'
         filename, ext = os.path.splitext(image.name)
         
-        photo = Media.objects.create(media=image.name, legend=legend, media_type=self.__type("photo"))
+        photo = Media.objects.create(media=defaul_filename % ('%s', '%s', ext), legend=legend, media_type=self.__type("photo"))
         self.media_list.add(photo)
 
-        AmazonS3().upload_file(image, '/u/%d/photo/%d%s' % (self.musician.id, photo.id, ext))
+        AmazonS3().upload_file(image, defaul_filename % (self.musician.id, photo.id, ext))
 
 
     def __type(self, name):

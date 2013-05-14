@@ -7,9 +7,11 @@
 
 <ul id="album-photos">
 	<li class="add">
-		<a href="#">
-			<span>Criar novo álbum<span>
-		</a>
+		<form enctype="multipart/form-data" action="/musico/adicionar-foto" method="post">
+			{% csrf_token %}
+			<input type="file" id="new-photo" name="img"/>
+			<span>Adicionar foto<span>
+		</form>
 	</li>
 </ul>
 

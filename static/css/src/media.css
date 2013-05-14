@@ -5,10 +5,10 @@
 	margin-top: 25px;
 
 	li {
-		
+		position:relative;
 		list-style: none;
 
-		a{
+		span{
 			background: #2E2E2E;
 			 border: 1px dashed #FFFFFF;
 			.border-radius(5px);
@@ -28,6 +28,14 @@
 		    		background:@green;
 		    	}
 		}
+
+		input[type=file]{
+			position: absolute;
+			width: 177px;
+			height: 121px;
+			opacity: 0;
+		}
+
 	}
 }
 
