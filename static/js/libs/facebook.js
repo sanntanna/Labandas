@@ -8,8 +8,6 @@ facebook = function(appid){
 	};
 
 	this.login = function(callback){
-		console.log(FB);
-		return;
 		if(ready){
 			executeLogin(callback);
 			return;

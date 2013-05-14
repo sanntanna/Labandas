@@ -1,5 +1,6 @@
 #coding=ISO-8859-1
 from django.db import models
+import os
 from utils import ImageHandler, AmazonS3, SoundCloud
 
 class MediaType(models.Model):
@@ -9,7 +10,9 @@ class MediaType(models.Model):
 
 class Media(models.Model):
     media = models.CharField(max_length=255)
+    legend = models.CharField(max_length=125)
     media_type = models.ForeignKey(MediaType)
+
     def __unicode__(self):
         return self.media
 
@@ -83,6 +86,19 @@ class MusicianMedia(models.Model):
         sound_cloud.save()
 
     sound_cloud = property(get_sound_cloud, set_sound_cloud)
+
+    @property
+    def photos(self):
+        return self.media_list.filter(media_type__name = "musician_photo")
+
+    def add_photo(self, image, legend=None):
+        filename, ext = os.path.splitext(image.name)
+        
+        photo = Media.objects.create(media=image.name, legend=legend, media_type=self.__type("photo"))
+        self.media_list.add(photo)
+
+        AmazonS3().upload_file(image, '/u/%d/photo/%d%s' % (self.musician.id, photo.id, ext))
+
 
     def __type(self, name):
         return MediaType.objects.get(name=name)
