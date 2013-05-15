@@ -12,6 +12,10 @@
 		width: 177px;
 		height: 125px;
 
+		&:hover{
+			.remove-photo{ opacity:1; }
+		}
+
 		&.add{
 			background: #2E2E2E;
 			 border: 1px dashed #FFFFFF;
@@ -41,6 +45,23 @@
 			height: 121px;
 			opacity: 0;
 			cursor:pointer;
+		}
+
+		.remove-photo{
+			font-weight: bold;
+			width:19px;
+			height:19px;
+			border-radius:15px;
+			border:2px solid #fff;
+			background:#000;
+			display:block;
+			position:absolute;
+			color:#fff;
+			text-align: center;
+			right:-10px;
+			top:-10px;
+			opacity:0;
+			.transition;
 		}
 
 	}
