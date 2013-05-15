@@ -104,6 +104,18 @@ def band_videos(request, name, band_id):
     
     return HttpPartialResponseHandler(template, context)
 
+@Partialhandled(full_template, partial_template)
+def band_history_ads(request, name, band_id):
+    band = get_object_or_404(Band, pk=band_id)
+
+    template = loader.get_template("bands/history-ads.html")
+    context = RequestContext(request, {
+        'band': band,
+        'can_edit': user_can_edit(request.user, band)
+    })
+    
+    return HttpPartialResponseHandler(template, context)
+
 @onlypost
 @onlyajax
 def update_field(request, field):

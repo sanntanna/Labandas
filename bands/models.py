@@ -134,6 +134,10 @@ class Band(models.Model):
     def videos_url(self):
         return "/banda/%s/%d/videos" % (self.url, self.pk)
 
+    @property
+    def history_ads(self):
+        return "/banda/%s/%d/historico-de-anuncios" % (self.url, self.pk)
+
     def is_admin(self, musician):
         return self.all_musicians.get(active=True, musician=musician).is_admin
     

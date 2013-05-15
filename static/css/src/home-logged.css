@@ -653,8 +653,8 @@
 	}
 
 	&.band {
-		width: 232px;
-		left: 66%;
+		left: 48%;
+    	width: 375px;
 	}
 }
 

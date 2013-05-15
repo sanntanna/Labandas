@@ -1,0 +1,25 @@
+{% extends base_template %}
+{% load staticoptimizer %}
+
+{% block bandcontent %}
+
+<h2 class="subtitle">Histórico de anúncios</h2>
+
+<div id="history">
+	{% for announcement in band.announcements.all %}
+		<div id="band-looking">
+			<h2 class="subtitle">{{ announcement.title }}</h2>
+			<p>{{ announcement.text }}</p>
+			{% if not announcement in user.get_profile.announcements.all|dictsort:"id" %}
+				<div class="candidade-wrapper">
+					<span>Pra quem se interessar em fazer um teste.</span>
+					<a href="#se-candidatar" class="btn candidate-to-announcement" data-id="{{ announcement.id }}">Quero entrar nessa banda</a>
+				</div>
+			{% else %}
+				<div class="already-candidated">Seus dias de músico sem banda podem ter acabado! Já mandamos sua solicitação pra <span class="name">banda {{ band.name }}.</span></div>
+			{% endif %}
+		</div>
+	{% endfor %}
+</div>
+{% endblock bandcontent %}
+
