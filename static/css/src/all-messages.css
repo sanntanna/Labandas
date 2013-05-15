@@ -1,8 +1,6 @@
 @import "_colors.less";
 @import "_utils.less";
 
-#container nav{display: none;}
-
 #all-messages{
 	margin-top: 20px;
     display: table;
@@ -19,7 +17,7 @@
     	margin: 58px 18px 0 0;
 
         .list-header{
-            background: none repeat scroll 0 0 white;
+            background: #FFFFFF;
             border-radius: 5px 5px 0 0;
             font-size: 12px;
             padding: 10px 15px 8px;

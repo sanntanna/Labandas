@@ -466,16 +466,14 @@
 			    .border-radius(7px);
 			    height: 170px;
 			    line-height: 235px;
-			    padding-left: 10px;
 			    text-align: center;
 			    font-size: 15px;
 			    color: #fff;
 
 				a{
 					color: white;
-				    font-size: 20px;
+				    font-size: 18px;
 				    text-decoration: underline;
-				    width: 60px;
 				}
 			}
 	}
@@ -631,11 +629,11 @@
     font-size: 16px;
     .normal;
     height: 13px;
-    left: 60%;
+    left: 66%;
     margin-top: 20px;
-    padding: 5px 10px 13px;
+    padding: 5px 10px 15px;
     position: relative;
-    width: 280px;
+    width: 232px;
 
 	li{
 		border-right: 1px solid @green;
