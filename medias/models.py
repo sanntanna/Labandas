@@ -3,6 +3,8 @@ from django.db import models
 import os
 from utils import ImageHandler, AmazonS3, SoundCloud
 
+S3_DOMAIN = "http://lasbandas.s3.amazonaws.com"
+
 class MediaType(models.Model):
     name = models.CharField(max_length=50)
     def __unicode__(self):
@@ -16,8 +18,11 @@ class Media(models.Model):
     def __unicode__(self):
         return self.media
 
+    class Meta:
+        ordering = ['-id']
+
 class MusicianMedia(models.Model):
-    BASE_URL_USER_IMAGES = "http://lasbandas.s3.amazonaws.com/u/"
+    BASE_URL_USER_IMAGES = "%s/u/" % S3_DOMAIN
     AVATAR_IMG_NAME = "avatar.png"
     AVATAR_SMALL_IMG_NAME = "avatar-small.png"
     COVER_IMG_NAME = "cover.png"
@@ -89,16 +94,26 @@ class MusicianMedia(models.Model):
 
     @property
     def photos(self):
-        return self.media_list.filter(media_type__name = "photo")
+        photos = self.media_list.filter(media_type__name = "photo").all()
+
+        return [{
+            'thumb': '%s%s' % (S3_DOMAIN, p.media % (self.musician.id, str(p.id) + '-thumb')),
+            'large': '%s%s' % (S3_DOMAIN, p.media % (self.musician.id, p.id)),
+            'id': p.id,
+            'legend': p.legend
+        } for p in photos]
 
     def add_photo(self, image, legend=None):
-        defaul_filename = '/u/%s/photo/%s%s'
+        default_filename = '/u/%s/photo/%s%s'
         filename, ext = os.path.splitext(image.name)
         
-        photo = Media.objects.create(media=defaul_filename % ('%s', '%s', ext), legend=legend, media_type=self.__type("photo"))
+        photo = Media.objects.create(media=default_filename % ('%s', '%s', ext), legend=legend, media_type=self.__type("photo"))
         self.media_list.add(photo)
 
-        AmazonS3().upload_file(image, defaul_filename % (self.musician.id, photo.id, ext))
+        thumb, normal = ImageHandler().handle_photo_album(image)
+
+        AmazonS3().upload_file(thumb, default_filename % (self.musician.id, str(photo.id) + '-thumb', ext))
+        AmazonS3().upload_file(normal, default_filename % (self.musician.id, photo.id, ext))
 
 
     def __type(self, name):
@@ -106,6 +121,7 @@ class MusicianMedia(models.Model):
 
     def __unicode__(self):
         return "Midia %s" % self.id
+
 
 
 class BandMedia(models.Model):

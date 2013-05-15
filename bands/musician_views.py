@@ -169,7 +169,7 @@ def add_photo(request):
     musician = request.user.get_profile()
     musician.media.add_photo(request.FILES['img'])
 
-    return musician_photos(request, None, musician.id)
+    return redirect(musician.photos_url)
 
 @Partialhandled(full_template, partial_template)
 def all_messages(request, name, user_id):

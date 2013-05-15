@@ -13,6 +13,15 @@
 			<span>Adicionar foto<span>
 		</form>
 	</li>
+
+	{% for photo in musician.media.photos %}
+		<li>
+			<a href="{{ photo.large }}" class="photo_gallery">
+				<img src="{{photo.thumb}}" alt="{{ photo.legend }}" />
+			</a>
+		</li>
+	{% endfor %}
+
 </ul>
 
 {% endblock musiciancontent %}
