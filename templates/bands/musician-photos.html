@@ -16,7 +16,7 @@
 
 	{% for photo in musician.media.photos %}
 		<li>
-			<a href="#delete-photo" data-id="{{ photo.id }}" class="remove-photo">x</a>
+			<a href="#delete-photo" data-id="{{ photo.id }}" class="remove-photo icons">x</a>
 			<a href="{{ photo.large }}" class="photo_gallery">
 				<img src="{{photo.thumb}}" alt="{{ photo.legend }}" />
 			</a>

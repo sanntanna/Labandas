@@ -12,7 +12,6 @@
 		width: 177px;
 		height: 125px;
 
-<<<<<<< HEAD
 		.photo_gallery{
 		    display: block;
 
@@ -24,10 +23,7 @@
 				&:hover{
 					opacity: 0.50;
 				}
-=======
-		&:hover{
-			.remove-photo{ opacity:1; }
->>>>>>> 970c5ad121d7a48a8b17f99c451c4c90106472e9
+
 		}
 
 		&.add{
