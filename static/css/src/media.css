@@ -59,20 +59,13 @@
 		}
 
 		.remove-photo{
-			font-weight: bold;
-			width:19px;
-			height:19px;
-			border-radius:15px;
-			border:2px solid #fff;
-			background:#000;
-			display:block;
-			position:absolute;
-			color:#fff;
-			text-align: center;
-			right:-10px;
-			top:-10px;
-			opacity:0;
-			.transition;
+			background-position: 0 -520px;
+		    display: block;
+		    position: absolute;
+		    right: -17px;
+		    text-align: center;
+		    text-indent: -9999px;
+		    top: -10px;
 		}
 
 	}
