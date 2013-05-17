@@ -76,7 +76,7 @@ class ImageHandler():
     
     def handle_photo_album(self, file):
         image = Image.open(file)    
-        return self.__resize_image(image, (179,123)), self.__resize_image(image, (800,600))
+        return self.__resize_image(image, (179,123)), self.__resize_image(image, (750,550))
 
     def handle_profile_images(self, new_file):
         image = Image.open(new_file)

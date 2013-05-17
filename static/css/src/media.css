@@ -71,6 +71,47 @@
 	}
 }
 
+#photo-large{
+	position:fixed;
+	border:10px solid #fff;
+	z-index:99;
+	top:70px;
+	left:90px;
+
+	img{
+		max-width:750px;
+		max-height: 550px;
+	}
+
+	span{
+		position:absolute;
+		display: block;
+		width:30px;
+		height:30px;
+		background: #000;
+		color:#fff;
+		border-radius: 15px;
+		cursor: pointer;
+		text-align: center;
+		line-height: 30px;
+
+		&.close{
+			top:-15px;
+			right:-15px;
+		}
+
+		&.prev{
+			top:50%;
+			left:20px;
+		}
+
+		&.next{
+			top:50%;
+			right:20px;
+		}
+	}
+}
+
 #movies{
 	background:#434343;
     .border-radius(8px);
