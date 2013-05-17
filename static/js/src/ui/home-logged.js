@@ -177,6 +177,25 @@
 		$(document).delegate("#new-photo", "change", function(){
 			$(this).closest('form').submit();
 		});
+
+		var inprogress = false;
+		$(document).delegate(".remove-photo", "click", function(e){
+			e.preventDefault();
+
+			if(inprogress){ return; }
+			inprogress = true;
+
+			var $link = $(this),
+				$photo = $link.closest('li');
+
+			$.get('/musico/remover-foto', {id: $link.data('id')}, function(response){
+				new lb.message('A foto foi removida',lb.message.INFO);
+				$photo.hide(300, function(){
+					$photo.remove();
+					inprogress = false;
+				});
+			});
+		});
 	}
 
 	this.init();

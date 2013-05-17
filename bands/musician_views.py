@@ -139,6 +139,17 @@ def musician_bands(request, name, user_id):
     
     return HttpPartialResponseHandler(template, context)
 
+@Partialhandled(full_template, partial_template)
+def all_messages(request, name, user_id):
+    musician = get_object_or_404(Musician, pk=user_id)
+
+    template = loader.get_template("bands/all-messages.html")
+    context = RequestContext(request, {
+        'musician': musician,
+    })
+    
+    return HttpPartialResponseHandler(template, context)
+
 @onlyajax
 def find_musician(request):
     search = request.GET.get('kw')
@@ -152,7 +163,6 @@ def find_musician(request):
 def update_avatar(request):
     musician = request.user.get_profile()
     musician.media.avatar = request.FILES.get('img')
-    musician.save()
 
     return redirect('/')
 
@@ -160,7 +170,6 @@ def update_avatar(request):
 def update_cover_photo(request):
     musician = request.user.get_profile()
     musician.media.cover = request.FILES.get('img')
-    musician.save()
 
     return redirect('/')
 
@@ -171,13 +180,10 @@ def add_photo(request):
 
     return redirect(musician.photos_url)
 
-@Partialhandled(full_template, partial_template)
-def all_messages(request, name, user_id):
-    musician = get_object_or_404(Musician, pk=user_id)
+@onlyajax
+def delete_photo(request):
+    id_photo = request.GET['id']
+    musician = request.user.get_profile()
+    musician.media.remove_photo(id_photo)
 
-    template = loader.get_template("bands/all-messages.html")
-    context = RequestContext(request, {
-        'musician': musician,
-    })
-    
-    return HttpPartialResponseHandler(template, context)
+    return JSONResponse({'success': True}) 

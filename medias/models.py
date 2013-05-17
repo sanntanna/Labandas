@@ -111,9 +111,23 @@ class MusicianMedia(models.Model):
         self.media_list.add(photo)
 
         thumb, normal = ImageHandler().handle_photo_album(image)
+        s3 = AmazonS3()
+        s3.upload_file(thumb, default_filename % (self.musician.id, str(photo.id) + '-thumb', ext))
+        s3.upload_file(normal, default_filename % (self.musician.id, photo.id, ext))
 
-        AmazonS3().upload_file(thumb, default_filename % (self.musician.id, str(photo.id) + '-thumb', ext))
-        AmazonS3().upload_file(normal, default_filename % (self.musician.id, photo.id, ext))
+
+    def remove_photo(self, photo_id):
+        photo = Media.objects.get(id=photo_id)
+            
+        self.media_list.remove(photo)
+        photo.delete()
+
+        s3 = AmazonS3()
+        thumb_path = photo.media % (self.musician.id, str(photo_id) + '-thumb')
+        large_path = photo.media % (self.musician.id, photo_id)
+        
+        s3.delete_file(thumb_path)
+        s3.delete_file(large_path)
 
 
     def __type(self, name):

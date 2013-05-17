@@ -31,6 +31,14 @@ class AmazonS3(object):
         
         return bucket_key.generate_url(1 * 60 * 60 * 24)
 
+    def delete_file(self, path):
+        conn = self.__connect_s3()
+        
+        bucket = self.__get_bucket(conn)
+        k = Key(bucket)
+        k.key = path
+        bucket.delete_key(k)
+
 class ImageHandler():
     def __resize_image(self, image, size, crop=True):
         factor = 1
