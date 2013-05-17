@@ -6,7 +6,7 @@
 <h2 class="subtitle">Histórico de anúncios</h2>
 
 <div id="history">
-	{% if announcement in band.announcements.all %}
+	{% if band.announcements.all %}
 		{% for announcement in band.announcements.all %}
 			<div id="band-looking">
 				<h2 class="subtitle">{{ announcement.title }}</h2>
