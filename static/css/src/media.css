@@ -39,6 +39,8 @@
 		    text-align: center;
 		    text-decoration: underline;
 		    text-transform: uppercase;
+		    cursor: pointer;
+		    display: block;
 
 	    	&:hover{
 	    		background:@green;
