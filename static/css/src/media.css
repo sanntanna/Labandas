@@ -3,28 +3,30 @@
 
 #album-photos {
 	margin-top: 25px;
+	display: table;
 
 	li {
+		background: url(http://lasbandas.s3.amazonaws.com/site/photo-frame.png) no-repeat scroll center 0 transparent;
 		position:relative;
 		list-style: none;
-		margin:0 20px 20px 0;
+		margin:0 12px 20px 0;
 		float:left;
-		width: 177px;
-		height: 125px;
+		width: 180px;
+		height: 135px;
 
-		.photo_gallery{
-		    display: block;
+			.photo-gallery{
+			    display: block;
 
-				img{
-					.border-radius(5px);
-					border:4px solid white;
-				}
-				
-				&:hover{
-					opacity: 0.50;
-				}
+					img{
+						margin: 10px auto 0 16px;
+	    				width: 145px;
+					}
+					
+					&:hover{
+						opacity: 0.50;
+					}
 
-		}
+			}
 
 		&.add{
 			background: #2E2E2E;
@@ -34,7 +36,7 @@
 		    .bold;
 		    color: #FFFFFF;
 		    font-size: 15px;
-		    height: 124px;
+		    height: 116px;
 		    padding-top: 5px;
 		    text-align: center;
 		    text-decoration: underline;
@@ -61,13 +63,15 @@
 		}
 
 		.remove-photo{
-			background-position: 0 -520px;
+			background-position: 0 -555px;
 		    display: block;
+		    height: 30px;
 		    position: absolute;
-		    right: -17px;
+		    right: -10px;
 		    text-align: center;
 		    text-indent: -9999px;
-		    top: -10px;
+		    top: -7px;
+		    width: 10px;
 		}
 
 	}
