@@ -183,3 +183,17 @@ def remove_band_from_band(request):
 def user_can_edit(user, band):
     return hasattr(user, 'get_profile') and user.get_profile().is_in_band(band)
 
+@onlypost
+def add_photo(request):
+    band = Band.objects.get(pk=request.POST.get('id'))
+    band.media.add_photo(request.FILES['img'])
+
+    return redirect(band.photos_url)
+
+@onlyajax
+def delete_photo(request):
+    id_photo = request.GET['id']
+    band = Band.objects.get(pk=request.POST.get('id'))
+    band.media.remove_photo(id_photo)
+
+    return JSONResponse({'success': True}) 

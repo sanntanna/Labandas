@@ -13,4 +13,6 @@ urlpatterns = patterns('bands.band_views',
     (r'^remover/setlist$', 'remove_music_from_setlist'),
     (r'^atualizar/(?P<field>[a-z_]+)$', 'update_field'),
     (r'^atualizar/(?P<obj>[a-z_]+)/(?P<attr>[a-z_]+)$', 'update_obj_field'),
+    (r'^adicionar-foto$', 'add_photo'),
+    (r'^remover-foto$', 'delete_photo'),
 )

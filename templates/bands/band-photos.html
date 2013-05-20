@@ -7,11 +7,23 @@
 
 <ul id="album-photos">
 	<li class="add">
-		<a href="#">
-			<span>Criar novo álbum<span>
-		</a>
+		<form enctype="multipart/form-data" action="/banda/adicionar-foto" method="post">
+			<input type="hidden" value="{{band.id}}" name="id"/>
+			{% csrf_token %}
+			<input type="file" id="new-photo" name="img"/>
+			<span>Adicionar foto<span>
+		</form>
 	</li>
+	{% for photo in band.media.photos %}
+		<li>
+			<a href="#delete-photo" data-id="{{ photo.id }}" class="remove-photo icons">x</a>
+			<a href="{{ photo.large }}" class="photo-gallery">
+				<img src="{{photo.thumb}}" alt="{{ photo.legend }}" />
+			</a>
+		</li>
+	{% endfor %}
 </ul>
+
 
 {% endblock bandcontent %}
 

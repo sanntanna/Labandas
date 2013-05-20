@@ -110,7 +110,7 @@ class MusicianMedia(models.Model):
         photo = Media.objects.create(media=default_filename % ('%s', '%s', ext), legend=legend, media_type=self.__type("photo"))
         self.media_list.add(photo)
 
-        thumb, normal = ImageHandler().handle_photo_album(image)
+        thumb, normal = ImageHandler().handle_photo_album(image)    
         s3 = AmazonS3()
         s3.upload_file(thumb, default_filename % (self.musician.id, str(photo.id) + '-thumb', ext))
         s3.upload_file(normal, default_filename % (self.musician.id, photo.id, ext))
@@ -188,6 +188,43 @@ class BandMedia(models.Model):
         sound_cloud.save()
 
     sound_cloud = property(get_sound_cloud, set_sound_cloud)
+
+    @property
+    def photos(self):
+        photos = self.media_list.filter(media_type__name = "photo").all()
+
+        return [{
+            'thumb': '%s%s' % (S3_DOMAIN, p.media % (self.band.id, str(p.id) + '-thumb')),
+            'large': '%s%s' % (S3_DOMAIN, p.media % (self.band.id, p.id)),
+            'id': p.id,
+            'legend': p.legend
+        } for p in photos]
+
+    def add_photo(self, image, legend=None):
+        default_filename = '/u/%s/photo/%s%s'
+        filename, ext = os.path.splitext(image.name)
+        
+        photo = Media.objects.create(media=default_filename % ('%s', '%s', ext), legend=legend, media_type=self.__type("photo"))
+        self.media_list.add(photo)
+
+        thumb, normal = ImageHandler().handle_photo_album(image)    
+        s3 = AmazonS3()
+        s3.upload_file(thumb, default_filename % (self.band.id, str(photo.id) + '-thumb', ext))
+        s3.upload_file(normal, default_filename % (self.band.id, photo.id, ext))
+
+
+    def remove_photo(self, photo_id):
+        photo = Media.objects.get(id=photo_id)
+            
+        self.media_list.remove(photo)
+        photo.delete()
+
+        s3 = AmazonS3()
+        thumb_path = photo.media % (self.band.id, str(photo_id) + '-thumb')
+        large_path = photo.media % (self.band.id, photo_id)
+        
+        s3.delete_file(thumb_path)
+        s3.delete_file(large_path)
 
     def __type(self, name):
         return MediaType.objects.get(name=name)
