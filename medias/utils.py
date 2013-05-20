@@ -109,3 +109,17 @@ class SoundCloud(object):
             raise ValidationError("Url do sound cloud invalida")
 
         return True
+
+
+class VideoValidator(object):
+    @classmethod
+    def validate_url(cls, url):
+        validate = URLValidator()
+        try:
+            validate(url)
+            if url.find("youtube.com") == -1:
+                raise ValidationError()
+        except ValidationError, e:
+            raise ValidationError("Url do youtube invalida")
+
+        return True

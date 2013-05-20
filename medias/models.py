@@ -1,7 +1,7 @@
 #coding=ISO-8859-1
 from django.db import models
 import os
-from utils import ImageHandler, AmazonS3, SoundCloud
+from utils import ImageHandler, AmazonS3, SoundCloud, VideoValidator
 
 S3_DOMAIN = "http://lasbandas.s3.amazonaws.com"
 
@@ -118,7 +118,7 @@ class MusicianMedia(models.Model):
 
     def remove_photo(self, photo_id):
         photo = Media.objects.get(id=photo_id)
-            
+        
         self.media_list.remove(photo)
         photo.delete()
 
@@ -129,6 +129,17 @@ class MusicianMedia(models.Model):
         s3.delete_file(thumb_path)
         s3.delete_file(large_path)
 
+
+    @property
+    def videos(self):
+        return self.media_list.filter(media_type__name = "video").all()
+
+    def add_video(self, video_url, legend=None):
+        if not VideoValidator.validate_url(video_url):
+            return
+
+        video = Media.objects.create(media=video_url, legend=legend, media_type=self.__type("video"))
+        self.media_list.add(video)
 
     def __type(self, name):
         return MediaType.objects.get(name=name)
@@ -201,7 +212,7 @@ class BandMedia(models.Model):
         } for p in photos]
 
     def add_photo(self, image, legend=None):
-        default_filename = '/u/%s/photo/%s%s'
+        default_filename = '/b/%s/photo/%s%s'
         filename, ext = os.path.splitext(image.name)
         
         photo = Media.objects.create(media=default_filename % ('%s', '%s', ext), legend=legend, media_type=self.__type("photo"))
