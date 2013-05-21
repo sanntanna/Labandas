@@ -5,7 +5,7 @@
 
 <h2 class="subtitle">Álbum de fotos</h2>
 
-<ul id="album-photos">
+<ul id="album-photos" class="media-container">
 	{% if user.id = musician.id %}
 	<li class="add">
 		<form enctype="multipart/form-data" action="/musico/adicionar-foto" method="post">
@@ -21,9 +21,19 @@
 	{% endif %}
 	
 	{% for photo in photos %}
-		<li>
+		<li data-id="{{ photo.id }}">
+			
 			{% if user.id = musician.id %}
 				<a href="#delete-photo" data-id="{{ photo.id }}" class="remove-photo remove icons">x</a>
+
+				<span class="editable" data-field="legend">
+					{% if photo.legend %}
+						{{ photo.legend }}
+					{% else %}
+						Adicionar legenda
+					{% endif %}
+				</span>
+
 			{% endif %}
 			<a href="{{ photo.large }}" class="media-gallery">
 				<img src="{{photo.thumb}}" alt="{{ photo.legend }}" />

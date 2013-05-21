@@ -5,6 +5,7 @@
 		gallery();
 		photos();
 		videos();
+		legends();
 	};
 
 	function gallery(){
@@ -166,6 +167,18 @@
 					inprogress = false;
 				});
 			});
+		});
+	}
+
+	function legends(){
+		$(document).delegate('.media-container .post-on-edit', 'blur', function(){
+			var $input = $(this);
+			var data = {
+				'id': $input.closest('[data-id]').data('id'),
+				'legend': $input.val()
+			};
+
+			$.post('/midia/atualizar-legenda', data);
 		});
 	}
 
