@@ -62,7 +62,7 @@
 			cursor:pointer;
 		}
 
-		.remove-photo{
+		.remove{
 			background-position: 0 -555px;
 		    display: block;
 		    height: 30px;
@@ -77,7 +77,7 @@
 	}
 }
 
-#photo-large{
+.opened-media{
 	position:fixed;
 	border:25px solid @defaultgray;
 	.border-radius(10px);

@@ -2,85 +2,149 @@
 	this.init = function(){};
 	
 	this.domLoaded = function(){
-		photoAlbum();
+		gallery();
+		photos();
+		videos();
 	};
 
-	function photoAlbum(){
-			$(document).delegate("#new-photo", "change", function(){
-				$(this).closest('form').submit();
-			});
+	function gallery(){
+		var $current = null;
 
-			var inprogress = false;
+		function handleNextPrev($box){
+			var $gallery = $('.media-gallery'),
+					index = $gallery.index($(this));
 
-			$(document).delegate(".remove-photo", "click", function(e){
-				e.preventDefault();
+			$box.find(".prev, .next").show();
 
-				if(inprogress){ return; }
-				inprogress = true;
+			if(index == 0){
+				$box.find(".prev").hide();
+			} 
 
-				var $link = $(this),
-					$photo = $link.closest('li');
+			if(index == $gallery.length - 1){
+				$box.find(".next").hide();
+			}
+		}
 
-				$.get('/musico/remover-foto', {id: $link.data('id')}, function(response){
-					new lb.message('A foto foi removida',lb.message.INFO);
-					$photo.hide(300, function(){
-						$photo.remove();
-						inprogress = false;
-					});
-				});
-			});
-
-			var $current = null;
-			$(document).delegate('.photo-gallery', 'click', function(e){
-				e.preventDefault();
-
-				$current = $(this);
-
+		var handlers = {
+			'default': function(url){
 				var $photoLarge = $('#photo-large');
 
 				if(!$photoLarge.length){
-					$photoLarge = $(['<div id="photo-large">',
+					$photoLarge = $(['<div id="photo-large" class="opened-media">',
 										'<span class="close">x</span>',
 										'<span class="prev">&lt;</span>',
-										'<img src="' + this.href + '" />',
+										'<img src="', url, '" />',
 										'<span class="next">&gt;</span>',
 								   '</div>'].join(''));
 
 					$('body').append($photoLarge);
 				} else {
-					$photoLarge.find('img').attr('src', this.href);
+					$photoLarge.find('img').attr('src', url);
 				}
 
-				var $gallery = $('.photo-gallery'),
-					index = $gallery.index($(this));
+				$current = $(this);
 
-				$photoLarge.find(".prev, .next").show();
+				handleNextPrev.call(this, $photoLarge);
+			},
 
-				if(index == 0){
-					$photoLarge.find(".prev").hide();
-				} else if(index == $gallery.length - 1){
-					$photoLarge.find(".next").hide();
+			'video': function(url){
+				var $videoLarge = $('#video-large'),
+					baseUrl = 'http://www.youtube.com/embed/';
+
+				if(!$videoLarge.length){
+					$videoLarge = $(['<div id="video-large" class="opened-media">',
+										'<span class="close">x</span>',
+										'<span class="prev">&lt;</span>',
+										'<iframe width="853" height="480" src="', baseUrl, url, '" frameborder="0" allowfullscreen></iframe>',
+										'<span class="next">&gt;</span>',
+								   '</div>'].join(''));
+
+					$('body').append($videoLarge);
+				} else {
+					$videoLarge.find('iframe').attr('src', baseUrl + url);
 				}
+
+				$current = $(this);
+
+				handleNextPrev.call(this, $videoLarge);
+			}
+		};
+
+		$(document).delegate('.media-gallery', 'click', function(e){
+			e.preventDefault();
+			console.log($(this).data('type') || 'default');
+			handlers[$(this).data('type') || 'default'].call(this, $(this).attr('href'));
+		});
+
+		$(document).delegate('.opened-media .close', 'click', function(e){
+			e.preventDefault();
+			$(this).closest('.opened-media').hide(300, function(){
+				$(this).remove();
+			})
+		});
+
+		$(document).delegate('.opened-media .next, .opened-media .prev', 'click', function(e){
+			e.preventDefault();
+
+			var step = $(this).is('.prev') ? -1 : 1;
+
+			var $gallery = $('.media-gallery'),
+				index = $gallery.index($current) + step;
+
+			$($gallery[index]).trigger('click');
+		});
+	}
+
+	function photos(){
+		$(document).delegate("#new-photo", "change", function(){
+			$(this).closest('form').submit();
+		});
+
+		var inprogress = false;
+
+		$(document).delegate(".remove-photo", "click", function(e){
+			e.preventDefault();
+
+			if(inprogress){ return; }
+			inprogress = true;
+
+			var $link = $(this),
+				$photo = $link.closest('li');
+
+			$.get('/musico/remover-foto', {id: $link.data('id')}, function(response){
+				new lb.message('A foto foi removida',lb.message.INFO);
+				$photo.hide(300, function(){
+					$photo.remove();
+					inprogress = false;
+				});
 			});
+		});
+	}
 
-			$(document).delegate('#photo-large .close', 'click', function(e){
-				e.preventDefault();
-				$(this).closest('#photo-large').hide(300, function(){
-					$(this).remove();
-				})
+	function videos(){
+		$(document).delegate('#add-video-form', 'ajaxcomplete', function(e, response){
+			location.reload();
+		});
+
+		var inprogress = false;
+		$(document).delegate(".remove-video", "click", function(e){
+			e.preventDefault();
+
+			if(inprogress){ return; }
+			inprogress = true;
+
+			var $link = $(this),
+				$photo = $link.closest('li');
+
+			$.get('/musico/remover-video', {id: $link.data('id')}, function(response){
+				new lb.message('O vídeo foi removido',lb.message.INFO);
+				$photo.hide(300, function(){
+					$photo.remove();
+					inprogress = false;
+				});
 			});
-
-			$(document).delegate('#photo-large .next, #photo-large .prev', 'click', function(e){
-				e.preventDefault();
-
-				var step = $(this).is('.prev') ? -1 : 1;
-
-				var $gallery = $('.photo-gallery'),
-					index = $gallery.index($current) + step;
-
-				$($gallery[index]).trigger('click');
-			});
-		}
+		});
+	}
 
 	this.init();
 	$(this.domLoaded);

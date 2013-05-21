@@ -8,11 +8,24 @@
 <div id="movies">
 	<h3>Para publicar, insira a URL do vídeo que deseja públicar</h3>
 	<div class"line">
-		<label>URL</label>
-		<input type="url" class="post-on-edit" name="media.movies" id="movies-url-value" />
-		<button class="btn">Buscar Vídeos</button>
+		<form method="POST" action="/musico/adicionar-video" class="ajax" id="add-video-form">
+			<label>URL</label>
+			<input type="url" id="movies-url-value" name="video" />
+			<button class="btn">Adicionar Vídeo</button>
+		</form>
 	</div>
 	<span class="terms">Atenção É expressamente proibida a publicação de conteúdo multimídia pornográfico e/ou ofensivo e material com direitos autorais. Ao enviar os arquivos, você estará declarando que o material não viola os Termos de Uso do Lasbandas e que você possui os direitos autorais ou a permissão dos proprietários dos diretos autorais para publicação. É proibida também a publicação de conteúdo que não esteja relacionado com o tema.</span>
 </div>
+
+<ul class="line" id="album-photos">
+	{% for v in musician.media.videos %}
+		<li>
+			<a href="#delete-video" data-id="{{ v.id }}" class="remove-video remove icons">x</a>
+			<a href="{{ v.media }}" class="media-gallery" data-type="video">
+				<img src="//i3.ytimg.com/vi/{{ v.media }}/default.jpg" />
+			</a>
+		</li>
+	{% endfor %}
+</ul>
 {% endblock musiciancontent %}
 

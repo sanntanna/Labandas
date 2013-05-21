@@ -187,3 +187,18 @@ def delete_photo(request):
     musician.media.remove_photo(id_photo)
 
     return JSONResponse({'success': True}) 
+
+@onlypost
+@onlyajax
+def add_video(request):
+    musician = request.user.get_profile()
+    musician.media.add_video(request.POST['video'])
+
+    return JSONResponse({'success': True}) 
+
+@onlyajax
+def delete_video(request):
+    musician = request.user.get_profile()
+    musician.media.remove_video(request.GET['id'])
+
+    return JSONResponse({'success': True}) 

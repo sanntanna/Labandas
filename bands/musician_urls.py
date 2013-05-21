@@ -14,4 +14,6 @@ urlpatterns = patterns('bands.musician_views',
     (r'^atualizar-imagem-capa$', 'update_cover_photo'),
     (r'^adicionar-foto$', 'add_photo'),
     (r'^remover-foto$', 'delete_photo'),
+    (r'^adicionar-video$', 'add_video'),
+    (r'^remover-video$', 'delete_video'),
 )

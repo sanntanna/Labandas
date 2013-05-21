@@ -1,6 +1,7 @@
 #coding=ISO-8859-1
 from django.db import models
 import os
+import urlparse
 from utils import ImageHandler, AmazonS3, SoundCloud, VideoValidator
 
 S3_DOMAIN = "http://lasbandas.s3.amazonaws.com"
@@ -138,8 +139,18 @@ class MusicianMedia(models.Model):
         if not VideoValidator.validate_url(video_url):
             return
 
-        video = Media.objects.create(media=video_url, legend=legend, media_type=self.__type("video"))
+        url_data = urlparse.urlparse(video_url)
+        query = urlparse.parse_qs(url_data.query)
+        video = query["v"][0]
+
+        video = Media.objects.create(media=video, legend=legend, media_type=self.__type("video"))
         self.media_list.add(video)
+
+    def remove_video(self, video_id):
+        video = Media.objects.get(id=video_id)
+        
+        self.media_list.remove(video)
+        video.delete()
 
     def __type(self, name):
         return MediaType.objects.get(name=name)
