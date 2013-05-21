@@ -6,17 +6,28 @@
 <h2 class="subtitle">Álbum da Banda</h2>
 
 <ul id="album-photos">
-	<li class="add">
-		<form enctype="multipart/form-data" action="/banda/adicionar-foto" method="post">
-			<input type="hidden" value="{{band.id}}" name="id"/>
-			{% csrf_token %}
-			<input type="file" id="new-photo" name="img"/>
-			<span>Adicionar foto<span>
-		</form>
-	</li>
-	{% for photo in band.media.photos %}
+	{% if can_edit %}
+		<li class="add">
+			<form enctype="multipart/form-data" action="/banda/adicionar-foto" method="post">
+				<input type="hidden" value="{{band.id}}" name="id"/>
+				{% csrf_token %}
+				<input type="file" id="new-photo" name="img"/>
+				<span>Adicionar foto<span>
+			</form>
+		</li>
+	{% elif not photos %}
+		<div class="empty fl">
+			<p>
+				<strong>Nenhuma foto</strong> 
+				{{ band.name }} está sem fotos :(
+			</p>
+		</div>
+	{% endif %}
+	{% for photo in photos %}
 		<li>
-			<a href="#delete-photo" data-id="{{ photo.id }}" class="remove-photo remove icons">x</a>
+			{% if can_edit %}
+				<a href="#delete-photo" data-id="{{ photo.id }}" class="remove-photo remove icons">x</a>
+			{% endif %}
 			<a href="{{ photo.large }}" class="photo-gallery">
 				<img src="{{photo.thumb}}" alt="{{ photo.legend }}" />
 			</a>

@@ -95,7 +95,8 @@ def band_photos(request, name, band_id):
     template = loader.get_template("bands/band-photos.html")
     context = RequestContext(request, {
         'band': band,
-        'can_edit': user_can_edit(request.user, band)
+        'can_edit': user_can_edit(request.user, band),
+        'photos': band.media.photos
     })
     
     return HttpPartialResponseHandler(template, context)
@@ -111,7 +112,8 @@ def band_videos(request, name, band_id):
     template = loader.get_template("bands/band-videos.html")
     context = RequestContext(request, {
         'band': band,
-        'can_edit': user_can_edit(request.user, band)
+        'can_edit': user_can_edit(request.user, band),
+        'videos': band.media.videos
     })
     
     return HttpPartialResponseHandler(template, context)

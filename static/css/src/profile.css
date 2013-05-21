@@ -219,27 +219,6 @@
     	}
 }
 
-#history{
-	.empty{ 
-		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icon-alerts.png) no-repeat scroll 130px 20px #C4C7C6;
-	    .border-radius(10px);
-	    font-size: 17px;
-	    height: 80px;
-	    line-height: 25px;
-	    margin-left: 65px;
-	    margin-top: 39px;
-	    padding: 30px 45px 0 100px;
-	    text-align: center;
-	    width: 500px;
-	    .normal;
-
-	    	strong{
-	    		display: block;
-	    		font-size: 26px;
-    			text-transform: uppercase;
-	    	}
-	}
-}
 
 #add-musician-lightbox {
 	.container{
