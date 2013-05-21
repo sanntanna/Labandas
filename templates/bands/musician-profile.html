@@ -325,7 +325,15 @@
 				</ul>
 			</div>
 		</div>
-		<div class="fl mysound">
+		<div class="fl influences">
+			<h2 class="marker small">Influências</h2>
+			<textarea type="text" class="post-on-edit" name="influences" data-single="true">{% if musician.influences %}{{musician.influences}}{% else %}Digite aqui suas influências{% endif %}</textarea>
+		</div>
+		
+	</div>
+
+	<div class="modules">	
+		<div class="mysound">
 			<h2 class="marker small">Meu<strong>Som</strong></h2>
 			
 			{% if musician.media.sound_cloud %}
@@ -337,18 +345,6 @@
 					<a href="/lightbox/soundcloud?width=550&amp;height=420" class="lightbox">Adicione aqui seu player do soundcloud</a>	
 				</div>
 			{% endif %}
-	
-		</div>
-	</div>
-
-	<div class="modules">	
-		<div class="fl myequipaments">
-			<h2 class="marker small">Meus<strong>Equipamentos</strong></h2>
-			<a href="#" class="add">Adicionar instrumento</a>
-		</div>
-		<div class="fl influences">
-			<h2 class="marker small">Influências</h2>
-			<textarea type="text" class="post-on-edit" name="influences" data-single="true">{% if musician.influences %}{{musician.influences}}{% else %}Digite aqui suas influências{% endif %}</textarea>
 		</div>
 	</div>
 {% endblock %}

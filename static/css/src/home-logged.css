@@ -451,13 +451,13 @@
 		}
 	}
 	.mysound{
-		width: 370px;
+		width: 785px;
 			.soundcloud, #user-soundcloud-player{
 				margin-top: 10px;
 			}
 
 			.soundcloud{
-				background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 125px -615px #F78910;
+				background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 335px -615px #F78910;
 			    .border-radius(7px);
 			    height: 170px;
 			    line-height: 235px;
@@ -498,8 +498,8 @@
 		    box-shadow: none;
 		    color: white;
 		    font-size: 20px;
-		    height: 115px;
-		    margin-top: 20px;
+		    height: 131px;
+		    margin-top: 11px;
 		    padding: 20px;
 		    width: 330px;
 		}
