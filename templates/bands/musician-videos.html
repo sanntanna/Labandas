@@ -5,6 +5,7 @@
 
 <h2 class="subtitle">Álbum de vídeos</h2>
 
+{% if user.id = musician.id %}
 <div id="movies">
 	<h3>Para publicar, insira a URL do vídeo que deseja públicar</h3>
 	<div class"line">
@@ -16,6 +17,7 @@
 	</div>
 	<span class="terms">Atenção É expressamente proibida a publicação de conteúdo multimídia pornográfico e/ou ofensivo e material com direitos autorais. Ao enviar os arquivos, você estará declarando que o material não viola os Termos de Uso do Lasbandas e que você possui os direitos autorais ou a permissão dos proprietários dos diretos autorais para publicação. É proibida também a publicação de conteúdo que não esteja relacionado com o tema.</span>
 </div>
+{% endif %}
 
 <ul class="line" id="album-photos">
 	{% for v in musician.media.videos %}

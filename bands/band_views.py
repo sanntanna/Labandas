@@ -72,6 +72,10 @@ def band_page(request, band_id, name):
 def band_setlist(request, name, band_id):
     band = get_object_or_404(Band, pk=band_id)
 
+    correct_url = band.setlist_url
+    if correct_url != request.path_info:
+        return HttpResponsePermanentRedirect(correct_url)
+
     t = loader.get_template("bands/band-setlist.html")
     c = RequestContext(request, {
         'band': band,
@@ -84,6 +88,10 @@ def band_setlist(request, name, band_id):
 def band_photos(request, name, band_id):
     band = get_object_or_404(Band, pk=band_id)
 
+    correct_url = band.photos_url
+    if correct_url != request.path_info:
+        return HttpResponsePermanentRedirect(correct_url)
+
     template = loader.get_template("bands/band-photos.html")
     context = RequestContext(request, {
         'band': band,
@@ -95,6 +103,10 @@ def band_photos(request, name, band_id):
 @Partialhandled(full_template, partial_template)
 def band_videos(request, name, band_id):
     band = get_object_or_404(Band, pk=band_id)
+
+    correct_url = band.videos_url
+    if correct_url != request.path_info:
+        return HttpResponsePermanentRedirect(correct_url)
 
     template = loader.get_template("bands/band-videos.html")
     context = RequestContext(request, {

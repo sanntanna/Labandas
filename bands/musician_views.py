@@ -110,6 +110,10 @@ def public_profile(request, user_id, name):
 def musician_photos(request, name, user_id):
     musician = get_object_or_404(Musician, pk=user_id)
 
+    correct_url = musician.photos_url
+    if correct_url != request.path_info:
+        return HttpResponsePermanentRedirect(correct_url)
+
     template = loader.get_template("bands/musician-photos.html")
     context = RequestContext(request, {
         'musician': musician,
@@ -120,6 +124,10 @@ def musician_photos(request, name, user_id):
 @Partialhandled(full_template, partial_template)
 def musician_videos(request, name, user_id):
     musician = get_object_or_404(Musician, pk=user_id)
+
+    correct_url = musician.videos_url
+    if correct_url != request.path_info:
+        return HttpResponsePermanentRedirect(correct_url)
 
     template = loader.get_template("bands/musician-videos.html")
     context = RequestContext(request, {
