@@ -6,7 +6,8 @@
 <h2 class="subtitle">Bandas de {{ musician.name }}</h2>
 
 <ul id="bands-musician">
-	{% for band in musician.bands_list %}
+
+	{% for band in bands %}
 		<li>
 			<a href="{{ band.page_url }}" class="without-avatar">
 				<span class="name-band">
@@ -25,6 +26,14 @@
 	
 	{% if musician.pk = user.pk %}
 		<a href="/banda/criar?width=500&amp;height=250" class="add fl lightbox btn gray">Criar nova banda</a>
+	{% elif not bands %}
+		<div class="empty fl">
+			<p>
+				<strong>Sem banda</strong> 
+				<a href="#invite" class="send-msg" data-toid="{{ musician.id }}">envie uma mensagem</a>  para<br/>
+				 {{ musician.name }} e chame para tocar!
+			</p>
+		</div>
 	{% endif %}
 </ul>
 

@@ -659,7 +659,7 @@ header.logged{
 			.btn{
 				font-size: 13px;
 			    text-transform: uppercase;
-			    width: 30px;
+			    width: 115px;
 			    margin-right: 10px;
 			}
 
@@ -679,9 +679,14 @@ header.logged{
     width: 500px;
     .normal;
 
-    	strong{
-    		display: block;
-    		font-size: 26px;
-			text-transform: uppercase;
-    	}
+	strong{
+		display: block;
+		font-size: 26px;
+		text-transform: uppercase;
+	}
+
+	a{
+		color:#000;
+		text-decoration: underline;
+	}
 }

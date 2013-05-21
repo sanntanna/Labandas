@@ -142,9 +142,14 @@ def musician_videos(request, name, user_id):
 def musician_bands(request, name, user_id):
     musician = get_object_or_404(Musician, pk=user_id)
 
+    correct_url = musician.bands_url
+    if correct_url != request.path_info:
+        return HttpResponsePermanentRedirect(correct_url)
+
     template = loader.get_template("bands/musician-bands.html")
     context = RequestContext(request, {
         'musician': musician,
+        'bands': musician.bands_list
     })
     
     return HttpPartialResponseHandler(template, context)
