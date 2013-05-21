@@ -6,18 +6,18 @@
 <h2 class="subtitle">Vídeos da Banda</h2>
 
 {% if can_edit %}
-<div id="movies">
-	<h3>Para publicar, insira a URL do vídeo que deseja públicar</h3>
-	<div class"line">
-		<form method="POST" action="/banda/adicionar-video" class="ajax" id="add-video-form">
-			<input type="hidden" value="{{band.id}}" name="id"/>
-			<label>URL</label>
-			<input type="url" id="movies-url-value" name="video" />
-			<button class="btn">Adicionar Vídeo</button>
-		</form>
+	<div id="movies">
+		<h3>Para publicar, insira a URL do vídeo que deseja públicar</h3>
+		<div class"line">
+			<form method="POST" action="/banda/adicionar-video" class="ajax" id="add-video-form">
+				<input type="hidden" value="{{band.id}}" name="id"/>
+				<label>URL</label>
+				<input type="url" id="movies-url-value" name="video" />
+				<button class="btn">Adicionar Vídeo</button>
+			</form>
+		</div>
+		<span class="terms">Atenção É expressamente proibida a publicação de conteúdo multimídia pornográfico e/ou ofensivo e material com direitos autorais. Ao enviar os arquivos, você estará declarando que o material não viola os Termos de Uso do Lasbandas e que você possui os direitos autorais ou a permissão dos proprietários dos diretos autorais para publicação. É proibida também a publicação de conteúdo que não esteja relacionado com o tema.</span>
 	</div>
-	<span class="terms">Atenção É expressamente proibida a publicação de conteúdo multimídia pornográfico e/ou ofensivo e material com direitos autorais. Ao enviar os arquivos, você estará declarando que o material não viola os Termos de Uso do Lasbandas e que você possui os direitos autorais ou a permissão dos proprietários dos diretos autorais para publicação. É proibida também a publicação de conteúdo que não esteja relacionado com o tema.</span>
-</div>
 {% elif not videos %}
 	<div class="empty fl">
 		<p>
