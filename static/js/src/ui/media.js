@@ -10,6 +10,10 @@
 	function gallery(){
 		var $current = null;
 
+		var LEFT = 37,
+			RIGHT = 39,
+			ESC = 27;
+
 		function handleNextPrev($box){
 			var $gallery = $('.media-gallery'),
 					index = $gallery.index($(this));
@@ -70,14 +74,33 @@
 			}
 		};
 
+		function handleNavigation(e){
+			if(e.keyCode == LEFT){
+				$('.prev:visible').click();
+				return;
+			} 
+			
+			if(e.keyCode == RIGHT){
+				$('.next:visible').click();
+				return;
+			}
+
+			if(e.keyCode == ESC){
+				$('.close').click();
+				return;
+			}
+		}
+
 		$(document).delegate('.media-gallery', 'click', function(e){
 			e.preventDefault();
-			console.log($(this).data('type') || 'default');
 			handlers[$(this).data('type') || 'default'].call(this, $(this).attr('href'));
+
+			$(document).unbind('keyup').bind('keyup', handleNavigation);
 		});
 
 		$(document).delegate('.opened-media .close', 'click', function(e){
 			e.preventDefault();
+			$(document).unbind('keyup');
 			$(this).closest('.opened-media').hide(300, function(){
 				$(this).remove();
 			})

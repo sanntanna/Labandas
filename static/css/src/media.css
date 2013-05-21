@@ -85,22 +85,25 @@
 	top:50%;
 	left:50%;
 	width:850px;
-	height:470px;
-	margin-top:-225px;
+	height:570px;
+	line-height: 570px;
+	margin-top:-285px;
 	margin-left:-450px;
 	background: @defaultgray;
+	text-align: center;
 
 	img{
 		.border-radius(10px);
 		max-width:750px;
 		max-height: 550px;
 		border:1px solid #e6e6e6;
+		vertical-align: middle;
 	}
 
 	span{
 		position:absolute;
 		display: block;
-		width:40px;
+		width:43px;
 		height:30px;
 		color:#fff;
 		cursor: pointer;
