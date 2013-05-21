@@ -248,6 +248,27 @@ class BandMedia(models.Model):
         s3.delete_file(thumb_path)
         s3.delete_file(large_path)
 
+    @property
+    def videos(self):
+        return self.media_list.filter(media_type__name = "video").all()
+
+    def add_video(self, video_url, legend=None):
+        if not VideoValidator.validate_url(video_url):
+            return
+
+        url_data = urlparse.urlparse(video_url)
+        query = urlparse.parse_qs(url_data.query)
+        video = query["v"][0]
+
+        video = Media.objects.create(media=video, legend=legend, media_type=self.__type("video"))
+        self.media_list.add(video)
+
+    def remove_video(self, video_id):
+        video = Media.objects.get(id=video_id)
+        
+        self.media_list.remove(video)
+        video.delete()
+
     def __type(self, name):
         return MediaType.objects.get(name=name)
 

@@ -193,7 +193,24 @@ def add_photo(request):
 @onlyajax
 def delete_photo(request):
     id_photo = request.GET['id']
+    band = Band.objects.get(pk=request.GET['band_id'])
+    band.media.remove_photo(id_photo)
+
+    return JSONResponse({'success': True}) 
+
+
+@onlypost
+@onlyajax
+def add_video(request):
     band = Band.objects.get(pk=request.POST.get('id'))
+    band.media.add_video(request.POST['video'])
+
+    return JSONResponse({'success': True}) 
+
+@onlyajax
+def delete_video(request):
+    id_photo = request.GET['id']
+    band = Band.objects.get(pk=request.GET['band_id'])
     band.media.remove_photo(id_photo)
 
     return JSONResponse({'success': True}) 
