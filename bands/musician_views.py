@@ -133,7 +133,7 @@ def musician_videos(request, name, user_id):
     template = loader.get_template("bands/musician-videos.html")
     context = RequestContext(request, {
         'musician': musician,
-        'photos': musician.media.videos
+        'videos': musician.media.videos
     })
     
     return HttpPartialResponseHandler(template, context)

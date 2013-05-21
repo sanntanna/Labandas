@@ -31,7 +31,9 @@
 <ul class="line" id="album-photos">
 	{% for v in videos %}
 		<li>
+			{% if can_edit %}
 			<a href="#delete-video" data-id="{{ v.id }}" class="remove-video remove icons">x</a>
+			{% endif %}
 			<a href="{{ v.media }}" class="media-gallery" data-type="video">
 				<img src="//i3.ytimg.com/vi/{{ v.media }}/default.jpg" />
 			</a>

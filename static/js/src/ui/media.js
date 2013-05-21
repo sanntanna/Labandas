@@ -5,6 +5,7 @@
 		gallery();
 		photos();
 		videos();
+		labels();
 	};
 
 	function gallery(){
