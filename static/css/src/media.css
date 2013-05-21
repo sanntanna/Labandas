@@ -82,8 +82,12 @@
 	border:25px solid @defaultgray;
 	.border-radius(10px);
 	z-index:99;
-	top:70px;
-	left:90px;
+	top:50%;
+	left:50%;
+	width:850px;
+	height:470px;
+	margin-top:-225px;
+	margin-left:-450px;
 	background: @defaultgray;
 
 	img{
