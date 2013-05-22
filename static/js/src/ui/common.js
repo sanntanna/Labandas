@@ -84,7 +84,9 @@
 			var $link = $(this),
 				$target = $($link.data('target'));
 
-			this.innerHTML = $target.is(':visible') ? $link.data('collapsedlabel') : $link.data('noncollapsedlabel');
+			if($link.data('collapsedlabel')){
+				this.innerHTML = $target.is(':visible') ? $link.data('collapsedlabel') : $link.data('noncollapsedlabel');
+			}
 			$target.slideToggle();
 		});
 

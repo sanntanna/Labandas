@@ -26,7 +26,9 @@
 	
 	{% for photo in photos %}
 		<li data-id="{{ photo.id }}">
-			<a href="{{ photo.large }}" class="media-gallery">
+			<a href="{{ photo.large }}" 
+				title="{% if photo.legend %}{{ photo.legend }}{% else %}----{% endif %}"
+				class="media-gallery">
 				<img src="{{photo.thumb}}" alt="{{ photo.legend }}" />
 			</a>
 			{% if can_edit %}
@@ -48,7 +50,13 @@
 				</span>
 			{% endif %}
 		</li>
-
+		{% if photo.id = 25 %}
+		<li class="expanded">
+			<div class="hide-zoom toggle-button" data-target=".expanded">x</div>
+			{{ photo.legend }}
+			<img src="{{photo.large}}" alt="{{ photo.legend }}" />
+		</li>
+		{% endif %}
 	{% endfor %}
 </ul>
 

@@ -90,6 +90,26 @@
 		    width: 10px;
 		}
 
+		&.expanded{
+			width:735px;
+			height:auto;
+			background: #2E2E2E;
+			color:#fff;
+			padding:10px;
+			position: relative;
+
+			.hide-zoom{
+				position:absolute; 
+				right:10px;
+				top:5px;
+				cursor: pointer;
+			}
+
+			img{
+				max-width: 735px;
+			}
+		}
+
 	}
 }
 
