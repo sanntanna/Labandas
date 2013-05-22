@@ -6,27 +6,26 @@
 	display: table;
 
 	li {
-		background: url(http://lasbandas.s3.amazonaws.com/site/photo-frame.png) no-repeat scroll center 0 transparent;
+		background: #2D393F;
+		border-radius: 5px;
 		position:relative;
 		list-style: none;
 		margin:0 12px 20px 0;
 		float:left;
 		width: 180px;
-		height: 135px;
 
-			.media-gallery{
-			    display: block;
+		.media-gallery{
+		    display: block;
 
-					img{
-						margin: 10px auto 0 16px;
-	    				width: 145px;
-					}
-					
-					&:hover{
-						opacity: 0.50;
-					}
-
+			img{
+				margin: 10px auto 0 16px;
+				width: 145px;
 			}
+			
+			&:hover{
+				opacity: 0.50;
+			}
+		}
 
 		&.add{
 			background: #2E2E2E;
@@ -36,7 +35,7 @@
 		    .bold;
 		    color: #FFFFFF;
 		    font-size: 15px;
-		    height: 116px;
+		    height: 140px;
 		    padding-top: 5px;
 		    text-align: center;
 		    text-decoration: underline;
@@ -47,10 +46,23 @@
 	    	&:hover{
 	    		background:@green;
 	    	}
+
+	    	span{
+	    		line-height: 140px;
+	    	}
 		}
 
-		span{
-			line-height:121px;
+		span.legend{
+			padding:5px;
+			margin:5px 5px 5px 5px;
+			color:#fff;
+			cursor:pointer;
+			display:block;
+			background: #405059;
+
+			em{
+				font-style: italic; 
+			}
 		}
 
 		input[type=file]{

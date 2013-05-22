@@ -7,7 +7,7 @@ from jsonui.response import JSONResponse
 @onlypost
 @onlyajax
 def update_legend(request):
-	media = Media.objects.get(id=request.POST['id'])
+	media = Media.objects.get(id=request.POST['id_media'])
 	media.legend = request.POST['legend']
 	media.save()
 	

@@ -7,6 +7,10 @@ lb.inlineEdit = function(){
 		$(document).delegate('input.post-on-edit, textarea.post-on-edit, select.post-on-edit', 'change', function(e){
 			var $elm = $(this);
 
+			if($elm.closest('[data-disableautopost]').length){
+				return;
+			}
+
 			var dataField = this.name.split('.'),
 				val = this.value;
 
@@ -36,7 +40,7 @@ lb.inlineEdit = function(){
 			var $div = $(this);
 			if($div.find('input').length){ return; }
 
-			this.originalContent = $.trim($div.html());
+			this.originalContent = $.trim($div.text());
 			var ipt = input($div);
 
 			if($div.data('single')){
@@ -58,18 +62,31 @@ lb.inlineEdit = function(){
 	};
 
 	function input($elm, type){
+		var value = $elm[0].originalContent;
+
+		if(value == $elm.data('default')){
+			value = '';
+		}
+
 		return $('<input type="text" class="post-on-edit" />')
 					.attr('name', $elm.attr('data-field'))
 					.width($elm.width())
-					.val($elm[0].originalContent)
+					.val(value)
 					.bind('blur enterpress', inlineInputBlur);
 	}
 
 	function inlineInputBlur(e){
 		var $parent = $(this).parent(),
-		val = this.value;
+			val = this.value,
+			def = $parent.data('default');
 
-		$parent.html(val != "" ? val : $parent[0].originalContent );
+		var value = val != "" ? val :  $parent[0].originalContent;
+
+		if(val == '' && def){
+			value = '<em>' + def + '</em>';
+		}
+
+		$parent.html(value);
 	}
 }
 

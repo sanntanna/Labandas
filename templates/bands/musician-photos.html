@@ -7,13 +7,13 @@
 
 <ul id="album-photos" class="media-container">
 	{% if user.id = musician.id %}
-	<li class="add">
-		<form enctype="multipart/form-data" action="/musico/adicionar-foto" method="post">
-			{% csrf_token %}
-			<input type="file" id="new-photo" name="img"/>
-			<span>Adicionar foto<span>
-		</form>
-	</li>
+		<li class="add">
+			<form enctype="multipart/form-data" action="/musico/adicionar-foto" method="post">
+				{% csrf_token %}
+				<input type="file" id="new-photo" name="img"/>
+				<span>Adicionar foto<span>
+			</form>
+		</li>
 	{% elif not photos %}
 		<div class="empty fl">
 			<p><strong>Nenhuma foto</strong> {{ musician.name }} é timido</p>
@@ -22,22 +22,27 @@
 	
 	{% for photo in photos %}
 		<li data-id="{{ photo.id }}">
-			
-			{% if user.id = musician.id %}
-				<a href="#delete-photo" data-id="{{ photo.id }}" class="remove-photo remove icons">x</a>
-
-				<span class="editable" data-field="legend">
-					{% if photo.legend %}
-						{{ photo.legend }}
-					{% else %}
-						Adicionar legenda
-					{% endif %}
-				</span>
-
-			{% endif %}
 			<a href="{{ photo.large }}" class="media-gallery">
 				<img src="{{photo.thumb}}" alt="{{ photo.legend }}" />
 			</a>
+			{% if user.id = musician.id %}
+				<a href="#delete-photo" data-id="{{ photo.id }}" class="remove-photo remove icons">x</a>
+				<span class="editable legend" data-field="legend" data-default="Editar legenda" data-disableautopost="true">
+					{% if photo.legend %}
+						{{ photo.legend }}
+					{% else %}
+						<em>Editar legenda</em>
+					{% endif %}
+				</span>
+			{% else %}
+				<span class="legend">
+					{% if photo.legend %}
+						{{ photo.legend }}
+					{% else %}
+						&nbsp;
+					{% endif %}
+				</span>
+			{% endif %}
 		</li>
 	{% endfor %}
 

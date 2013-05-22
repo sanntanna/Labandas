@@ -174,7 +174,7 @@
 		$(document).delegate('.media-container .post-on-edit', 'blur', function(){
 			var $input = $(this);
 			var data = {
-				'id': $input.closest('[data-id]').data('id'),
+				'id_media': $input.closest('[data-id]').data('id'),
 				'legend': $input.val()
 			};
 
