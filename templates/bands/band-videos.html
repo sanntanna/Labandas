@@ -28,15 +28,31 @@
 {% endif %}
 
 
-<ul class="line" id="album-photos">
+<ul class="line media-container" id="album-photos">
 	{% for v in videos %}
-		<li>
-			{% if can_edit %}
-			<a href="#delete-video" data-id="{{ v.id }}" class="remove-video remove icons">x</a>
-			{% endif %}
+		<li data-id="{{ v.id }}">
 			<a href="{{ v.media }}" class="media-gallery" data-type="video">
-				<img src="//i3.ytimg.com/vi/{{ v.media }}/default.jpg" />
+				<img src="//i3.ytimg.com/vi/{{ v.media }}/1.jpg" />
 			</a>
+
+			{% if can_edit %}
+				<a href="#delete-video" data-id="{{ v.id }}" class="remove-video remove icons">x</a>
+				<span class="editable legend" data-field="legend" data-default="Editar legenda" data-disableautopost="true">
+					{% if v.legend %}
+						{{ v.legend }}
+					{% else %}
+						<em>Editar legenda</em>
+					{% endif %}
+				</span>
+			{% else %}
+				<span class="legend">
+					{% if v.legend %}
+						{{ v.legend }}
+					{% else %}
+						----
+					{% endif %}
+				</span>
+			{% endif %}
 		</li>
 	{% endfor %}
 </ul>
