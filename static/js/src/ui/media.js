@@ -31,20 +31,26 @@
 		}
 
 		var handlers = {
-			'default': function(url){
-				var $photoLarge = $('#photo-large');
+			'default': function(url, legend){
+				var $photoLarge = $('.expanded'),
+					animate = true;
 
-				if(!$photoLarge.length){
-					$photoLarge = $(['<div id="photo-large" class="opened-media">',
-										'<span class="close">x</span>',
-										'<span class="prev">&lt;</span>',
-										'<img src="', url, '" />',
-										'<span class="next">&gt;</span>',
-								   '</div>'].join(''));
+				if($photoLarge.length){
+					console.log('remove');
+					$photoLarge.remove();
+					animate = false;
+				}
 
-					$('body').append($photoLarge);
+				$photoLarge = $(['<li class="expanded">',
+									'<div class="hide-zoom toggle-button" data-target=".expanded">x</div>',
+									legend,
+									'<img src="', url ,'" alt="', legend ,'" />',
+								'</li>'].join(''));
+
+				if(animate){
+					$('.media-container').append($photoLarge.slideDown());
 				} else {
-					$photoLarge.find('img').attr('src', url);
+					$('.media-container').append($photoLarge);
 				}
 
 				$current = $(this);
@@ -94,7 +100,8 @@
 
 		$(document).delegate('.media-gallery', 'click', function(e){
 			e.preventDefault();
-			handlers[$(this).data('type') || 'default'].call(this, $(this).attr('href'));
+			var $link = $(this);
+			handlers[$link.data('type') || 'default'].apply(this, [$link.attr('href'), $link.attr('title')]);
 
 			$(document).unbind('keyup').bind('keyup', handleNavigation);
 		});

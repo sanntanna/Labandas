@@ -50,13 +50,6 @@
 				</span>
 			{% endif %}
 		</li>
-		{% if photo.id = 25 %}
-		<li class="expanded">
-			<div class="hide-zoom toggle-button" data-target=".expanded">x</div>
-			{{ photo.legend }}
-			<img src="{{photo.large}}" alt="{{ photo.legend }}" />
-		</li>
-		{% endif %}
 	{% endfor %}
 </ul>
 
