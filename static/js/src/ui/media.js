@@ -31,12 +31,14 @@
 		}
 
 		var handlers = {
-			'default': function(url, legend){
+			'default': function($link){
+				var url = $link.attr('href'),
+					legend = $link.attr('title');
+
 				var $photoLarge = $('.expanded'),
 					animate = true;
 
 				if($photoLarge.length){
-					console.log('remove');
 					$photoLarge.remove();
 					animate = false;
 				}
@@ -48,7 +50,7 @@
 								'</li>'].join(''));
 
 				if(animate){
-					$('.media-container').append($photoLarge.slideDown());
+					$('.media-container').append($photoLarge.show(300));
 				} else {
 					$('.media-container').append($photoLarge);
 				}
@@ -101,7 +103,7 @@
 		$(document).delegate('.media-gallery', 'click', function(e){
 			e.preventDefault();
 			var $link = $(this);
-			handlers[$link.data('type') || 'default'].apply(this, [$link.attr('href'), $link.attr('title')]);
+			handlers[$link.data('type') || 'default'].apply(this, [$link]);
 
 			$(document).unbind('keyup').bind('keyup', handleNavigation);
 		});
