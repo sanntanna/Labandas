@@ -41,11 +41,11 @@
 				if($photoLarge.length){
 					$photoLarge.remove();
 				} else {
-					$link.closest('ul').addClass('with-zoom')
+					$link.closest('ul').addClass('with-zoom');
 				}
 
 				$photoLarge = $(['<li class="expanded">',
-									'<div class="hide-zoom toggle-button" data-target=".expanded">x</div>',
+									'<div class="hide-zoom close">x</div>',
 									legend,
 									'<img src="', url ,'" alt="', legend ,'" />',
 								'</li>'].join(''));
@@ -110,12 +110,14 @@
 			$(document).unbind('keyup').bind('keyup', handleNavigation);
 		});
 
-		$(document).delegate('.opened-media .close', 'click', function(e){
+		$(document).delegate('.expanded .close', 'click', function(e){
 			e.preventDefault();
 			$(document).unbind('keyup');
-			$(this).closest('.opened-media').hide(300, function(){
+			$(this).closest('.expanded').slideUp(300, function(){
+				$('.active').removeClass('active');
+				$(this).closest('.media-container').removeClass('with-zoom');
 				$(this).remove();
-			}).closest('ul').removeClass('with-zoom');
+			});
 		});
 
 		$(document).delegate('.opened-media .next, .opened-media .prev', 'click', function(e){
