@@ -31,7 +31,7 @@
 		}
 
 		var handlers = {
-			'default': function($link){
+			'default': function($link, $last){
 				var url = $link.attr('href'),
 					legend = $link.attr('title');
 
@@ -40,7 +40,8 @@
 
 				if($photoLarge.length){
 					$photoLarge.remove();
-					animate = false;
+				} else {
+					$link.closest('ul').addClass('with-zoom')
 				}
 
 				$photoLarge = $(['<li class="expanded">',
@@ -49,13 +50,10 @@
 									'<img src="', url ,'" alt="', legend ,'" />',
 								'</li>'].join(''));
 
-				if(animate){
-					$('.media-container').append($photoLarge.show(300));
-				} else {
-					$('.media-container').append($photoLarge);
-				}
+					$last.after($photoLarge);
 
-				$current = $(this);
+				$('.active').removeClass('active');
+				$current = $link.closest('li').addClass('active');
 
 				handleNextPrev.call(this, $photoLarge);
 			},
@@ -86,7 +84,7 @@
 		function handleNavigation(e){
 			if(e.keyCode == LEFT){
 				$('.prev:visible').click();
-				return;
+				return; 
 			} 
 			
 			if(e.keyCode == RIGHT){
@@ -103,7 +101,11 @@
 		$(document).delegate('.media-gallery', 'click', function(e){
 			e.preventDefault();
 			var $link = $(this);
-			handlers[$link.data('type') || 'default'].apply(this, [$link]);
+
+			var $items = $('.media-gallery'),
+				whereAppend = Math.min(Math.ceil(parseInt($link.data('pos'), 10) / 4) * 4 - 2, $items.length - 1);
+
+			handlers[$link.data('type') || 'default'].apply(this, [$link, $items.eq(whereAppend).parent()]);
 
 			$(document).unbind('keyup').bind('keyup', handleNavigation);
 		});
@@ -113,7 +115,7 @@
 			$(document).unbind('keyup');
 			$(this).closest('.opened-media').hide(300, function(){
 				$(this).remove();
-			})
+			}).closest('ul').removeClass('with-zoom');
 		});
 
 		$(document).delegate('.opened-media .next, .opened-media .prev', 'click', function(e){

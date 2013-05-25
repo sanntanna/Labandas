@@ -27,6 +27,7 @@
 	{% for photo in photos %}
 		<li data-id="{{ photo.id }}">
 			<a href="{{ photo.large }}" 
+				data-pos="{{ forloop.counter|add:1 }}"
 				title="{% if photo.legend %}{{ photo.legend }}{% else %}----{% endif %}"
 				class="media-gallery">
 				<img src="{{photo.thumb}}" alt="{{ photo.legend }}" />
