@@ -116,6 +116,9 @@ ROOT_URLCONF = 'labandas.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'labandas.wsgi.application'
 
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),
 )

@@ -30,8 +30,16 @@ class MusicianMedia(models.Model):
 
     media_list = models.ManyToManyField(Media, null=True, blank=True)
 
+    def __init__(self, *args, **kwargs):
+        instance = super(MusicianMedia, self).__init__(*args, **kwargs)
+
+        self.__has_avatar = self.media_list.filter(media_type__name = "avatar").count() > 0
+        self.__has_cover = self.media_list.filter(media_type__name = "cover_photo").count() > 0
+
+        return instance
+
     def get_avatar(self):
-        if not self.media_list.filter(media_type__name = "avatar"):
+        if not self.__has_avatar:
             return None
         return "%s%d/%s" % (self.BASE_URL_USER_IMAGES, self.musician.id, self.AVATAR_IMG_NAME)
 
@@ -50,13 +58,13 @@ class MusicianMedia(models.Model):
 
     @property
     def avatar_small(self):
-        if not self.media_list.filter(media_type__name = "avatar"):
+        if not self.__has_avatar:
             return None
         return "%s%d/%s" % (self.BASE_URL_USER_IMAGES, self.musician.id, self.AVATAR_SMALL_IMG_NAME)
 
 
     def get_cover(self):
-        if not self.media_list.filter(media_type__name = "cover_photo"):
+        if not self.__has_cover:
             return None
         return "%s%d/%s" % (self.BASE_URL_USER_IMAGES, self.musician.id, self.COVER_IMG_NAME)
 
