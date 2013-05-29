@@ -19,14 +19,14 @@
 			var $gallery = $('.media-gallery'),
 					index = $gallery.index($(this));
 
-			$box.find(".prev, .next").show();
+			$box.find(".prev-media, .next-media").show();
 
 			if(index == 0){
-				$box.find(".prev").hide();
+				$box.find(".prev-media").hide();
 			} 
 
 			if(index == $gallery.length - 1){
-				$box.find(".next").hide();
+				$box.find(".next-media").hide();
 			}
 		}
 
@@ -35,60 +35,26 @@
 				var url = $link.attr('href'),
 					legend = $link.attr('title');
 
-				var $photoLarge = $('.expanded'),
-					animate = true;
-
-				if($photoLarge.length){
-					$photoLarge.remove();
-				} else {
-					$link.closest('ul').addClass('with-zoom');
-				}
-
-				$photoLarge = $(['<li class="expanded">',
-									'<div class="hide-zoom close">x</div>',
-									legend,
-									'<img src="', url ,'" alt="', legend ,'" />',
-								'</li>'].join(''));
-
-					$last.after($photoLarge);
-
-				$('.active').removeClass('active');
-				$current = $link.closest('li').addClass('active');
-
-				handleNextPrev.call(this, $photoLarge);
+				return ['<img src="', url ,'" alt="', legend ,'" />'].join('');
 			},
 
-			'video': function(url){
-				var $videoLarge = $('#video-large'),
-					baseUrl = 'http://www.youtube.com/embed/';
+			'video': function($link, $last){
+				var url = $link.attr('href'),
+					baseUrl = 'http://www.youtube.com/embed/',
+					legend = $link.attr('title');
 
-				if(!$videoLarge.length){
-					$videoLarge = $(['<div id="video-large" class="opened-media">',
-										'<span class="close">x</span>',
-										'<span class="prev">&lt;</span>',
-										'<iframe width="853" height="480" src="', baseUrl, url, '" frameborder="0" allowfullscreen></iframe>',
-										'<span class="next">&gt;</span>',
-								   '</div>'].join(''));
-
-					$('body').append($videoLarge);
-				} else {
-					$videoLarge.find('iframe').attr('src', baseUrl + url);
-				}
-
-				$current = $(this);
-
-				handleNextPrev.call(this, $videoLarge);
+				return ['<iframe width="735" height="550" src="', baseUrl, url, '" frameborder="0" allowfullscreen></iframe>'].join('');
 			}
 		};
 
 		function handleNavigation(e){
 			if(e.keyCode == LEFT){
-				$('.prev:visible').click();
+				$('.prev-media:visible').click();
 				return; 
 			} 
 			
 			if(e.keyCode == RIGHT){
-				$('.next:visible').click();
+				$('.next-media:visible').click();
 				return;
 			}
 
@@ -105,7 +71,34 @@
 			var $items = $('.media-gallery'),
 				whereAppend = Math.min(Math.ceil(parseInt($link.data('pos'), 10) / 4) * 4 - 2, $items.length - 1);
 
-			handlers[$link.data('type') || 'default'].apply(this, [$link, $items.eq(whereAppend).parent()]);
+			var url = $link.attr('href'),
+				legend = $link.attr('title');
+
+			var $expanded = $('.expanded');
+
+			if($expanded.length){
+				$expanded.remove();
+			} else {
+				$link.closest('ul').addClass('with-zoom');
+			}
+
+			$expanded = $(['<li class="expanded">',
+								'<div class="hide-zoom close">x</div>',
+								'<div class="legend">', legend, '</div>',
+								handlers[$link.data('type') || 'default'].apply(this, [$link]),
+								'<div class="prev-media"><span>&lt;</span></div>',
+								'<div class="next-media"><span>&gt;</span></div>',
+							'</li>'].join(''));
+
+			$items.eq(whereAppend).parent().after($expanded);
+
+			$('.active').removeClass('active');
+			$link.closest('li').addClass('active');
+			$current = $link;
+
+			handleNextPrev.call(this, $expanded);
+
+			$('body').animate({'scrollTop': $expanded.offset().top - 50}, 500);
 
 			$(document).unbind('keyup').bind('keyup', handleNavigation);
 		});
@@ -120,10 +113,10 @@
 			});
 		});
 
-		$(document).delegate('.opened-media .next, .opened-media .prev', 'click', function(e){
+		$(document).delegate('.next-media, .prev-media', 'click', function(e){
 			e.preventDefault();
 
-			var step = $(this).is('.prev') ? -1 : 1;
+			var step = $(this).is('.prev-media') ? -1 : 1;
 
 			var $gallery = $('.media-gallery'),
 				index = $gallery.index($current) + step;

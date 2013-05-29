@@ -31,7 +31,11 @@
 <ul class="line media-container" id="album-photos">
 	{% for v in videos %}
 		<li data-id="{{ v.id }}">
-			<a href="{{ v.media }}" class="media-gallery" data-type="video">
+			<a href="{{ v.media }}" 
+				class="media-gallery" 
+				data-type="video" 
+				data-pos="{{ forloop.counter }}"
+				title="{% if v.legend %}{{ v.legend }}{% endif %}">
 				<img src="//i3.ytimg.com/vi/{{ v.media }}/1.jpg" />
 			</a>
 

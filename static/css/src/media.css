@@ -15,27 +15,12 @@
 	display: table;
 
 	li {
-		background: #2D393F;
-		border-radius: 5px;
 		position:relative;
 		list-style: none;
 		margin:0 12px 20px 0;
 		float:left;
 		width: 180px;
 		height:147px;
-
-		.media-gallery{
-		    display: block;
-
-			img{
-				margin: 10px auto 0 16px;
-				width: 145px;
-			}
-			
-			&:hover{
-				opacity: 0.50;
-			}
-		}
 
 		&.add{
 			background: #2E2E2E;
@@ -45,7 +30,7 @@
 		    .bold;
 		    color: #FFFFFF;
 		    font-size: 15px;
-		    height: 140px;
+		    height: 111px;
 		    padding-top: 5px;
 		    text-align: center;
 		    text-decoration: underline;
@@ -58,53 +43,22 @@
 	    	}
 
 	    	span{
-	    		line-height: 140px;
+	    		line-height: 111px;
 	    	}
-		}
-
-		span.legend{
-			padding:5px;
-			margin:5px 5px 5px 5px;
-			color:#fff;
-			display:block;
-			background: #405059;
-
-			em{
-				font-style: italic; 
-			}
-
-			&.editable{
-				cursor:pointer;
-			}
-		}
-
-		input[type=file]{
-			display:block;
-			position: absolute;
-			width: 177px;
-			height: 121px;
-			opacity: 0;
-			cursor:pointer;
-		}
-
-		.remove{
-			background-position: 0 -555px;
-		    display: block;
-		    height: 30px;
-		    position: absolute;
-		    right: -10px;
-		    text-align: center;
-		    text-indent: -9999px;
-		    top: -7px;
-		    width: 10px;
 		}
 
 		&.expanded{
 			width:735px;
 			height:auto;
-			background: #2E2E2E;
-			color:#fff;
 			padding:10px;
+			border-radius:3px;
+
+			.legend{
+				text-align: center;
+				font-size:15px;
+				height:15px;
+				margin-bottom:10px;
+			}
 
 			.hide-zoom{
 				position:absolute; 
@@ -113,66 +67,92 @@
 				cursor: pointer;
 			}
 
-			img{
+			img, iframe{
 				max-width: 735px;
+				border-radius: 5px;
+				vertical-align: middle;
+				.box-shadow(2px 2px 15px #000);
+			}
+
+			.next-media, .prev-media{
+				background: transparent;
+				opacity: 0;
+				display: inline-block;
+				width:30%;
+				position: absolute;
+				height:90%;
+				text-align: center;
+				font-size:70px;
+				color:#fff;
+				cursor: pointer;
+				vertical-align: middle;
+				.transition;
+
+				&:hover{
+					opacity:1;
+				}
+
+				span{
+					position: absolute;
+					top:45%;
+					text-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+				}
+			}
+
+			.next-media{
+				left:70%;
 			}
 		}
 
+		&:hover{
+			.remove{ display: block;  }
+		}
+
+	}
+
+	.remove{
+		background-position: 0 -555px;
+	    display: block;
+	    height: 30px;
+	    position: absolute;
+	    right: -10px;
+	    text-align: center;
+	    text-indent: -9999px;
+	    top: -13px;
+	    width: 10px;
+	    display: none;
+	}
+
+	.media-gallery{
+	    display: block;
+
+		img{ 
+			width: 170px; 
+			.transition;
+			border-radius:5px;
+			&:hover{ .box-shadow(2px 2px 15px #000); }
+		}
+	}
+
+	span.legend{
+		margin:5px 5px 5px 5px;
+		display:block;
+
+		em{ font-style: italic; }
+
+		&.editable{ cursor:pointer; }
+	}
+
+	input[type=file]{
+		display:block;
+		position: absolute;
+		width: 177px;
+		height: 121px;
+		opacity: 0;
+		cursor:pointer;
 	}
 }
 
-.opened-media{
-	position:fixed;
-	border:25px solid @defaultgray;
-	.border-radius(10px);
-	z-index:99;
-	top:50%;
-	left:50%;
-	width:850px;
-	height:570px;
-	line-height: 570px;
-	margin-top:-285px;
-	margin-left:-450px;
-	background: @defaultgray;
-	text-align: center;
-
-	img{
-		.border-radius(10px);
-		max-width:750px;
-		max-height: 550px;
-		border:1px solid #e6e6e6;
-		vertical-align: middle;
-	}
-
-	span{
-		position:absolute;
-		display: block;
-		width:43px;
-		height:30px;
-		color:#fff;
-		cursor: pointer;
-		text-align: center;
-		line-height: 30px;
-
-		&.close{
-			background: url(http://lasbandas.s3.amazonaws.com/site/sprite-icons.png) repeat scroll 0 -403px transparent;
-		    outline-width: 0;
-		    right: -23px;
-		    text-indent: -9999em;
-		    top: -10px;
-		}
-
-		&.prev{
-			top:50%;
-			left:20px;
-		}
-
-		&.next{
-			top:50%;
-			right:20px;
-		}
-	}
-}
 
 #movies{
 	background:#434343;
