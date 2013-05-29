@@ -22,11 +22,14 @@
 	
 	{% for photo in photos %}
 		<li data-id="{{ photo.id }}">
-			<a href="{{ photo.large }}" class="media-gallery">
+			<a href="{{ photo.large }}" 
+				data-pos="{{ forloop.counter|add:1 }}"
+				title="{% if photo.legend %}{{ photo.legend }}{% endif %}"
+				class="media-gallery">
 				<img src="{{photo.thumb}}" alt="{{ photo.legend }}" />
 			</a>
 			{% if user.id = musician.id %}
-				<a href="#delete-photo" data-id="{{ photo.id }}" class="remove-photo remove icons">x</a>
+				<a href="#delete-photo" data-id="{{ photo.id }}" class="remove-photo remove icons" title="Excluir foto">x</a>
 				<span class="editable legend" data-field="legend" data-default="Editar legenda" data-disableautopost="true">
 					{% if photo.legend %}
 						{{ photo.legend }}

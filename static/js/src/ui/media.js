@@ -85,8 +85,8 @@
 			$expanded = $(['<li class="expanded">',
 								'<div class="hide-zoom close">x</div>',
 								'<div class="legend">', legend, '</div>',
-								handlers[$link.data('type') || 'default'].apply(this, [$link]),
 								'<div class="prev-media"><span>&lt;</span></div>',
+								handlers[$link.data('type') || 'default'].apply(this, [$link]),
 								'<div class="next-media"><span>&gt;</span></div>',
 							'</li>'].join(''));
 
