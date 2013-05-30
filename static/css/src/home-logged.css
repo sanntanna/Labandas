@@ -291,7 +291,7 @@
 				}
 		}
 		.personal-info {
-		    padding: 14px 0 0 25px;
+		    padding: 13px 0 0 25px;
 		    text-transform: uppercase;
 		    width: auto;
 		}
@@ -454,6 +454,14 @@
 		width: 785px;
 			.soundcloud, #user-soundcloud-player{
 				margin-top: 10px;
+			}
+
+			&.band{
+				width: 370px;
+
+				.soundcloud{
+					background-position: 135px -615px;
+				}
 			}
 
 			.soundcloud{

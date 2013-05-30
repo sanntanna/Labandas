@@ -58,7 +58,7 @@
 						{{ musician.user.get_full_name }}
 						<span class="complement">
 							{% if musician.born_year %}
-								,{{ current_year|sub:musician.born_year }}  anos
+								,  {{ current_year|sub:musician.born_year }}  anos
 							{% endif %}
 							
 							{% if musician.address.state %}

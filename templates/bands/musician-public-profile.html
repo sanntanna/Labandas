@@ -123,7 +123,16 @@
 					</ul>
 				</div>
 			</div>
-			<div class="fl mysound">
+			{% if musician.influences %}
+				<div class="fl influences">
+					<h2 class="marker small">Influências</h2>
+					<div class="influences-content">{{musician.influences}}</div>
+				</div>
+			{% endif %}
+		</div>
+
+		<div class="modules">	
+			<div class="mysound">
 				<h2 class="marker small">Meu<strong>Som</strong></h2>
 				
 				{% if musician.media.sound_cloud %}
@@ -134,19 +143,6 @@
 				{% endif %}
 		
 			</div>
-		</div>
-
-		<div class="modules">	
-			<div class="fl myequipaments">
-				<h2 class="marker small">Meus<strong>Equipamentos</strong></h2>
-			</div>
-			
-			{% if musician.influences %}
-				<div class="fl influences">
-					<h2 class="marker small">Influências</h2>
-					<div class="influences-content">{{musician.influences}}</div>
-				</div>
-			{% endif %}
 		</div>
 {% endblock %}
 
