@@ -45,12 +45,16 @@
 		</a>
 	</div>
 
-	{% if band.media.sound_cloud %}
-	<div class="fl mysound">
+	<div class="fl mysound band">
 		<h2 class="marker small">Nosso<strong>Som</strong></h2>
-		<div id="user-soundcloud-player" class="soundcloud-player" data-src="{{ band.media.sound_cloud }}"></div>
+		{% if band.media.sound_cloud %}
+			<div id="user-soundcloud-player" class="soundcloud-player" data-src="{{ band.media.sound_cloud }}"></div>
+		{% else %}
+			<div id="user-soundcloud-player"></div>
+			<div class="soundcloud">Esta banda não possui playlist :(</div>
+		{% endif %}
 	</div>
-	{% endif %}
+
 </div>
 <div class="modules">	
 	<div class="fl band-members">
