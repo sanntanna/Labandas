@@ -20,6 +20,8 @@
 	
 	.about{
 		height: 340px;
+		font-size: 14px;
+		line-height: 25px;
 		.about-you {height: 340px;  margin: 0 10px;}
 	}
 

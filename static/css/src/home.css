@@ -76,3 +76,72 @@
 			}
 		}
 }
+
+#presenting-lb{
+
+	.light_box{
+		background: #aba698; /* Old browsers */
+		background: -moz-linear-gradient(top,  #aba698 0%, #c2bfb0 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aba698), color-stop(100%,#c2bfb0)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  #aba698 0%,#c2bfb0 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  #aba698 0%,#c2bfb0 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  #aba698 0%,#c2bfb0 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  #aba698 0%,#c2bfb0 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aba698', endColorstr='#c2bfb0',GradientType=0 ); /* IE6-9 */
+		height: 700px;
+		padding-top: 30px;
+	}
+
+	.dark_box{
+		background: #524e44; /* Old browsers */
+		background: -moz-linear-gradient(top,  #524e44 0%, #605b4f 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#524e44), color-stop(100%,#605b4f)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  #524e44 0%,#605b4f 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  #524e44 0%,#605b4f 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  #524e44 0%,#605b4f 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  #524e44 0%,#605b4f 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#524e44', endColorstr='#605b4f',GradientType=0 ); /* IE6-9 */
+		height: 700px;
+		padding-top: 30px;
+	}
+
+	.fl{width: 50%;}
+
+	.title{
+		border-left: 20px solid @green;
+		padding: 2px 0 3px !important;
+		position: relative;
+		text-transform: uppercase;
+		font-size: 28px;
+
+			.background{
+				background-color: @green;
+				.box-shadow(5px 0 @green);
+				color: #FFFFFF;
+				padding: 2px 8px 3px 0;
+			}
+	}
+
+	.subtitle{
+		border-left: 20px solid @defaultgray;
+		padding: 2px 0 3px !important;
+		position: relative;
+		font-size: 72px;
+		text-transform: uppercase;
+
+			.background{
+				background-color: @defaultgray;
+				.box-shadow(5px 0 @defaultgray);
+				color: #FFFFFF;
+				padding: 2px 8px 3px 0;
+			}
+	}
+
+	p{
+		color: #524e44;
+		font-size: 18px;
+		line-height: 30px;
+	}
+
+
+}

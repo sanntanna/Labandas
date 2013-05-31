@@ -13,54 +13,56 @@
 {% block bodyattr %} data-inline-edit-path="/banda/atualizar/" data-id="{{ band.id }}" {% endblock %}
 
 {% block content %}
-	<div id="cover-photo"
-		{% if band.media.cover %} class="with-photo" {% endif %} >
- 
-		{% if band.media.cover %}
-			<img src="{{band.media.cover}}" alt="{{ band.name }}"/>
-		{% endif %}
-		<a href="/lightbox/foto-capa-banda?width=665&amp;height=200&amp;band_id={{ band.id }}" class="lightbox change-cover-photo">
-			<span class="highlight">+</span> 	
-
+	<section id="content" class="wrapper clearfix">
+		<div id="cover-photo"
+			{% if band.media.cover %} class="with-photo" {% endif %} >
+	 
 			{% if band.media.cover %}
-				Alterar foto da capa
-			{% else %}
-				Adicionar foto da capa
+				<img src="{{band.media.cover}}" alt="{{ band.name }}"/>
 			{% endif %}
-		</a>	
+			<a href="/lightbox/foto-capa-banda?width=665&amp;height=200&amp;band_id={{ band.id }}" class="lightbox change-cover-photo">
+				<span class="highlight">+</span> 	
 
-		<div id="user-header" class="clearfix">
-			<h1 class="fl">
-				<span>Banda</span> <strong class="editable" data-single="true" data-field="name">{{ band.name }}</strong>
-				<span> | 
-					{% for style in band.musical_styles.all %}
-						{{ style.name }}
-						{% if not forloop.last %} | {%endif%}
-					{% endfor %}
-				</span>
-			</h1>
+				{% if band.media.cover %}
+					Alterar foto da capa
+				{% else %}
+					Adicionar foto da capa
+				{% endif %}
+			</a>	
+
+			<div id="user-header" class="clearfix">
+				<h1 class="fl">
+					<span>Banda</span> <strong class="editable" data-single="true" data-field="name">{{ band.name }}</strong>
+					<span> | 
+						{% for style in band.musical_styles.all %}
+							{{ style.name }}
+							{% if not forloop.last %} | {%endif%}
+						{% endfor %}
+					</span>
+				</h1>
+			</div>
 		</div>
-	</div>
-		
-	<div id="container" class="fl">
-		
-		<nav>
-		  	<ul class="menu band markable">
-		        <li><a href="{{ band.page_url }}" class="no-refresh">Geral</a></li>
-		        <li><a href="{{ band.photos_url }}" class="no-refresh">Fotos</a></li>
-		        <li><a href="{{ band.videos_url }}" class="no-refresh">Videos</a></li>
-		        <li><a href="{{ band.setlist_url }}" class="no-refresh">Setlist</a></li>
-		        <li class="no_border"><a href="{{ band.history_ads }}" class="no-refresh">Temos vagas</a></li> 
-			</ul>
-		</nav>
-		
-		<div id="no-refresh-content">
-		{% block bandcontent %}{% endblock %}
+			
+		<div id="container" class="fl">
+			
+			<nav>
+			  	<ul class="menu band markable">
+			        <li><a href="{{ band.page_url }}" class="no-refresh">Geral</a></li>
+			        <li><a href="{{ band.photos_url }}" class="no-refresh">Fotos</a></li>
+			        <li><a href="{{ band.videos_url }}" class="no-refresh">Videos</a></li>
+			        <li><a href="{{ band.setlist_url }}" class="no-refresh">Setlist</a></li>
+			        <li class="no_border"><a href="{{ band.history_ads }}" class="no-refresh">Temos vagas</a></li> 
+				</ul>
+			</nav>
+			
+			<div id="no-refresh-content">
+			{% block bandcontent %}{% endblock %}
+			</div>
 		</div>
-	</div>
-	<div class="fl advertising">
-		<h2 class="subtitle">Ofertas</h2>
-	</div>
+		<div class="fl advertising">
+			<h2 class="subtitle">Ofertas</h2>
+		</div>
+	</section>
 {% endblock %}
 
 {% block aside %}{% endblock %}

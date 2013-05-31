@@ -96,21 +96,11 @@
 </div>
 
 <div id="main" class="{% block mainclass %}{% endblock %} banner">
-	<section id="content" class="wrapper clearfix">
-		{% block content %}
-			conteudo
-		{% endblock %}
-	</section>
+	{% block content %}
+		conteudo
+	{% endblock %}
 </div>
-<div id="search-musicians">
-	<section class="wrapper">
-		<!--<ul class="filters">
-			<li class="musicians">Encontre músicos</li>
-			<li class="bands">Encontre uma banda</li>
-			<li class="studios">Encontre estúdios</li>
-		</ul>-->
-	</section>
-</div>
+
 <div id="footer-container">
 	<footer class="wrapper">
 		<h3>A nice footer</h3>
