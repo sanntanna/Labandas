@@ -128,12 +128,13 @@
 		position: relative;
 		font-size: 72px;
 		text-transform: uppercase;
+		.bold;
 
 			.background{
 				background-color: @defaultgray;
 				.box-shadow(5px 0 @defaultgray);
 				color: #FFFFFF;
-				padding: 2px 8px 3px 0;
+				padding: 2px 25px 3px 0;
 			}
 	}
 
