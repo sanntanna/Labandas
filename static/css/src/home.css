@@ -78,34 +78,76 @@
 }
 
 #presenting-lb{
+	@pathImgTexture : "http://lasbandas.s3.amazonaws.com/site/texture-home.png";
 
-	.light_box{
-		background: #aba698; /* Old browsers */
-		background: -moz-linear-gradient(top,  #aba698 0%, #c2bfb0 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aba698), color-stop(100%,#c2bfb0)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top,  #aba698 0%,#c2bfb0 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top,  #aba698 0%,#c2bfb0 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top,  #aba698 0%,#c2bfb0 100%); /* IE10+ */
-		background: linear-gradient(to bottom,  #aba698 0%,#c2bfb0 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aba698', endColorstr='#c2bfb0',GradientType=0 ); /* IE6-9 */
-		height: 700px;
+	#create-profile{
+		background: #aba698;
+		background-image: url(@pathImgTexture); /* fallback */
+		background-image: url(@pathImgTexture), -webkit-gradient(linear, left top, left bottom, from(#aba698), to(#c2bfb0)); /* Saf4+, Chrome */
+		background-image: url(@pathImgTexture), -webkit-linear-gradient(top, #aba698, #c2bfb0); /* Chrome 10+, Saf5.1+ */
+		background-image: url(@pathImgTexture),    -moz-linear-gradient(top, #aba698, #c2bfb0); /* FF3.6+ */
+		background-image: url(@pathImgTexture),     -ms-linear-gradient(top, #aba698, #c2bfb0); /* IE10 */
+		background-image: url(@pathImgTexture),      -o-linear-gradient(top, #aba698, #c2bfb0); /* Opera 11.10+ */
+		background-image: url(@pathImgTexture),         linear-gradient(top, #aba698, #c2bfb0); /* W3C */
+		background-position: 1250px 59px;
+		background-attachment: fixed;
+		padding-top: 30px;
+		height: 630px;
+	}
+
+	#find-musicians{
+		background: #aba698;
+		background-image: url(@pathImgTexture); /* fallback */
+		background-image: url(@pathImgTexture), -webkit-gradient(linear, left top, left bottom, from(#524e44), to(#605b4f)); /* Saf4+, Chrome */
+		background-image: url(@pathImgTexture), -webkit-linear-gradient(top, #524e44, #605b4f); /* Chrome 10+, Saf5.1+ */
+		background-image: url(@pathImgTexture),    -moz-linear-gradient(top, #524e44, #605b4f); /* FF3.6+ */
+		background-image: url(@pathImgTexture),     -ms-linear-gradient(top, #524e44, #605b4f); /* IE10 */
+		background-image: url(@pathImgTexture),      -o-linear-gradient(top, #524e44, #605b4f); /* Opera 11.10+ */
+		background-image: url(@pathImgTexture),         linear-gradient(top, #524e44, #605b4f); /* W3C */
+		background-position: 185px -845px;
+		background-attachment: fixed;
+		padding-top: 30px;
+		height: 630px;
+			p{color: #FFFFFF;}
+	}
+
+	#fanpage{
+		background: #aba698;
+		background-image: url(@pathImgTexture); /* fallback */
+		background-image: url(@pathImgTexture), -webkit-gradient(linear, left top, left bottom, from(#aba698), to(#c2bfb0)); /* Saf4+, Chrome */
+		background-image: url(@pathImgTexture), -webkit-linear-gradient(top, #aba698, #c2bfb0); /* Chrome 10+, Saf5.1+ */
+		background-image: url(@pathImgTexture),    -moz-linear-gradient(top, #aba698, #c2bfb0); /* FF3.6+ */
+		background-image: url(@pathImgTexture),     -ms-linear-gradient(top, #aba698, #c2bfb0); /* IE10 */
+		background-image: url(@pathImgTexture),      -o-linear-gradient(top, #aba698, #c2bfb0); /* Opera 11.10+ */
+		background-image: url(@pathImgTexture),         linear-gradient(top, #aba698, #c2bfb0); /* W3C */
+		background-position: 1250px 59px;
+		background-attachment: fixed;
 		padding-top: 30px;
 	}
 
-	.dark_box{
-		background: #524e44; /* Old browsers */
-		background: -moz-linear-gradient(top,  #524e44 0%, #605b4f 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#524e44), color-stop(100%,#605b4f)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top,  #524e44 0%,#605b4f 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top,  #524e44 0%,#605b4f 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top,  #524e44 0%,#605b4f 100%); /* IE10+ */
-		background: linear-gradient(to bottom,  #524e44 0%,#605b4f 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#524e44', endColorstr='#605b4f',GradientType=0 ); /* IE6-9 */
-		height: 700px;
-		padding-top: 30px;
-	}
+	#footer-sign{
+		height: 60px;
+		background:@green;
+		padding-top:20px; 
 
-	.fl{width: 50%;}
+
+			h3{
+				color: #FFFFFF;
+				text-transform: uppercase;
+				font-size: 30px;
+				float: left;
+			}
+	}
+	.fl, .fr{width: 50%;}
+
+	.parallax{
+		position: relative;
+		min-height: 100%;
+		background-position: 50% 0;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		height: 675px;
+	}
 
 	.title{
 		border-left: 20px solid @green;
@@ -113,6 +155,7 @@
 		position: relative;
 		text-transform: uppercase;
 		font-size: 28px;
+		margin-bottom: 10px;
 
 			.background{
 				background-color: @green;
@@ -142,7 +185,7 @@
 		color: #524e44;
 		font-size: 18px;
 		line-height: 30px;
+		padding: 25px;
 	}
-
 
 }
