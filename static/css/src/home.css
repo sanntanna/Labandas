@@ -3,13 +3,16 @@
 
 #content article{
 	float:left;
-	padding-top:65px;
-	&#subscription{
-		width:325px;
-	}
+	padding-left: 20px;
+    padding-top: 40px;
 }
 
 #subscription {
+	width: 410px;
+	margin-top: 11px;
+
+	#subscribe-form{margin-top: 20px;}
+
 	h2{
 		font-size: 30px;
 		.semibold;
@@ -18,20 +21,26 @@
 	input[type=text], input[type=password]{
 		width:100%;
 		 .box-shadow(inset 0 1px 3px #dfdee0);
-		margin-bottom:5px;
+		margin-bottom:7px;
 		height:40px;
 		color: #969494;
 	}
 
 	input[type=submit]{
-		margin-top:10px;
+		margin-top:1px;
 		.box-shadow(inset 0 1px 3px #dfdee0);
+		height: 38px;
+		padding-top: 1px;
+	}
+
+	.fb-login{
+		margin-left: 0;
 	}
 }
 
 #call-to-action {
 	width: 355px;
-	padding-right: 170px;
+	padding-right: 130px;
 	color: white;
 
 	h2{
@@ -49,6 +58,14 @@
 		font-size: 20px;
 		width: 67%;
 		.light;
+	}
+
+	.know{
+		line-height: 20px;
+	    list-style: disc outside none;
+	    margin-top: 20px;
+	    .light;
+	    font-size: 16px;
 	}
 }
 
@@ -91,7 +108,7 @@
 		background-image: url(@pathImgTexture),         linear-gradient(top, #aba698, #c2bfb0); /* W3C */
 		background-position: 1250px 59px;
 		background-attachment: fixed;
-		padding-top: 30px;
+		padding-top: 45px;
 		height: 630px;
 	}
 
@@ -106,7 +123,7 @@
 		background-image: url(@pathImgTexture),         linear-gradient(top, #524e44, #605b4f); /* W3C */
 		background-position: 185px -845px;
 		background-attachment: fixed;
-		padding-top: 30px;
+		padding-top: 45px;
 		height: 580px;
 			p{color: #FFFFFF;}
 	}
@@ -122,7 +139,7 @@
 		background-image: url(@pathImgTexture),         linear-gradient(top, #aba698, #c2bfb0); /* W3C */
 		background-position: 1250px 59px;
 		background-attachment: fixed;
-		padding-top: 30px;
+		padding-top: 45px;
 	}
 
 	#footer-sign{

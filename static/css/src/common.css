@@ -352,6 +352,15 @@ header.logged{
 }
 
 /*@lightbox login*/
+.fb-login {
+		background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-social.png) repeat scroll 0 0 transparent;
+	    display: block;
+	    height: 40px;
+	    margin-left: 9px;
+	    text-indent: -9999px;
+	    width: 260px;
+	}
+
 #lb-lightbox-login {
 	background: url(http://lasbandas.s3.amazonaws.com/site/lb-slice.png) no-repeat scroll 395px 100px transparent;
     display: table-row;
@@ -366,14 +375,6 @@ header.logged{
     		}
     }
 
-	.fb-login {
-		background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-social.png) repeat scroll 0 0 transparent;
-	    display: block;
-	    height: 40px;
-	    margin-left: 9px;
-	    text-indent: -9999px;
-	    width: 260px;
-	}
 	h2{
 		color: white;
 		.semibold;

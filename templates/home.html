@@ -14,13 +14,18 @@
 		<article id="call-to-action">
 			<h2>Você é músico?</h2>
 			<span class="higlight">Procura ou quer formar uma banda?</span>
-			<p>então conheça o melhor site de bandas e músicos do brasil!</p> 
+			<p>então conheça o melhor site de bandas e músicos do brasil!</p>
+			<ul class="know">
+				<li>Crie seu perfil</li>
+				<li>Procure por bandas, por musicos, por estilo, CEP, encontre o estúdiomais próximo e muito mais!</li>
+			</ul>
 		</article>
 		<article id="subscription">
 			<h2 class="white">Cadastre-se</h2>
 			<form action="/musico/cadastrar" method="post" id="subscribe-form" class="ajax">{% csrf_token %}
 				{% include "includes/subscription-form.html" %}
 				<input type="submit" value="Cadastrar" class="btn fr" />
+				<a href="#" class="fb-login fl">Conecte Facebook</a>
 			</form>
 		</article>
 	</section>
