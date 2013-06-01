@@ -107,7 +107,7 @@
 		background-position: 185px -845px;
 		background-attachment: fixed;
 		padding-top: 30px;
-		height: 630px;
+		height: 580px;
 			p{color: #FFFFFF;}
 	}
 
@@ -127,15 +127,27 @@
 
 	#footer-sign{
 		height: 60px;
-		background:@green;
-		padding-top:20px; 
+		background:url(http://lasbandas.s3.amazonaws.com/site/bg-gray-texture.jpg) no-repeat scroll center center transparent;
+		padding-top:20px;
 
 
 			h3{
 				color: #FFFFFF;
-				text-transform: uppercase;
 				font-size: 30px;
 				float: left;
+				padding:0 90px;
+				.normal;
+			}
+
+			.btn{
+				.border-radius(5px);
+			    .box-shadow(none);
+			    display: block;
+			    float: left;
+			    font-size: 25px;
+			    line-height: 30px;
+			    padding-top: 8px;
+			    text-transform: uppercase; 
 			}
 	}
 	.fl, .fr{width: 50%;}
@@ -147,6 +159,7 @@
 		background-repeat: no-repeat;
 		background-attachment: fixed;
 		height: 675px;
+		.box-shadow(0 1px 15px #000000 inset);
 	}
 
 	.title{

@@ -184,11 +184,12 @@ h2{
 	}
 
 	&.red{
-		background: @red;
+		background-image:linear-gradient(to bottom, @magenta, @red);
 		color: #FFF;
 
 		&:hover{
-			color:@green;
+			color:#FFFFFF;
+			background:@green;
 		}
 	}
 
