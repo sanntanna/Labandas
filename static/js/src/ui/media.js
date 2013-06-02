@@ -102,7 +102,7 @@
 
 			handleNextPrev.call(this, $expanded);
 
-			$('body').animate({'scrollTop': $expanded.offset().top - 50}, 500);
+			$('html, body').animate({'scrollTop': $(this).offset().top - 100}, 500);
 
 			$(document).unbind('keyup').bind('keyup', handleNavigation);
 		});
