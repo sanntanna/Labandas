@@ -55,12 +55,26 @@
 			background: @darkgray;
 
 			.legend{
-				text-align: center;
-				font-size:15px;
-				height:15px;
-				margin: 0 auto;
 				color: #FFFFFF;
-				.light;
+			    float: right;
+			    font-size: 20px;
+			    height: 15px;
+			    padding: 40px;
+			    text-align: left;
+			    width: 120px;
+
+			    	p{
+			    		border-left: 15px solid @green;
+					    padding: 5px 0 3px !important;
+					    position: relative;
+
+							.background{
+								background-color: @green;
+								.box-shadow(5px 0 @green);
+								color: #FFFFFF;
+								padding: 5px 8px 3px 0;
+							}
+			    	}
 			}
 
 			.image{
@@ -70,10 +84,15 @@
 			}
 
 			.hide-zoom{
-				position:absolute; 
-				right:10px;
-				top:5px;
-				cursor: pointer;
+			    color: #FFFFFF;
+			    cursor: pointer;
+			    font-size: 16px;
+			    padding: 5px;
+			    position: absolute;
+			    right: 10px;
+			    text-align: center;
+			    top: 5px;
+			    width: 16px;
 			}
 
 			img, iframe{
@@ -83,34 +102,27 @@
 				.box-shadow(2px 2px 15px #000);
 			}
 
-			.next-media, .prev-media{
-				background: transparent;
-				opacity: 0;
-				display: inline-block;
-				width:30%;
-				position: absolute;
-				height:90%;
-				text-align: center;
-				font-size:70px;
-				color:#fff;
-				cursor: pointer;
-				vertical-align: middle;
-				.transition;
+			.arrow-container{
+				bottom: 25px;
+			    height: auto;
+			    margin: 0 auto 0 75px;
+			    position: absolute;
+			    text-align: center;
+			    width: 120px;
 
-				&:hover{
-					opacity:1;
-				}
+					.arrow{
+						background: url(http://lasbandas.s3.amazonaws.com/site/sprite-bullets.png) no-repeat scroll 0 0 transparent;
+						float: left;
+					    height: 40px;
+					    text-indent: -9999px;
+					    width: 40px;
+					    cursor: pointer;
 
-				span{
-					position: absolute;
-					top:45%;
-					text-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
-				}
+							&.next-media{background-position: 0 -134px; margin-left: 10px;}
+							&.prev-media{background-position: 0 0;}
+					}
 			}
 
-			.next-media{
-				left:70%;
-			}
 		}
 
 		&:hover{
@@ -187,7 +199,7 @@
 		    margin-top: -1px;
 		    padding: 3px;
 		    color: #bdbdbd;
-		    width: 440px;
+		    width: 430px;
     	}
     	.btn{font-size: 13px; text-transform: uppercase;}
 

@@ -88,10 +88,15 @@
 									'<div class="fl image">',
 										handlers[$link.data('type') || 'default'].apply(this, [$link]),
 									'</div>',
-									'<div class="fl legend">', legend, '</div>',
+									'<div class="fl">',
+										'<div class="legend"><p><span class="background">', legend, '</span></p></div>',
+										'<div class="arrow-container">',
+											'<div class="arrow prev-media"><span>&lt;</span></div>',
+											'<div class="arrow next-media"><span>&gt;</span></div>',
+										'</div>',
+									'</div>',
 								'</div>',
-								'<div class="prev-media"><span>&lt;</span></div>',
-								'<div class="next-media"><span>&gt;</span></div>',
+								
 							'</li>'].join(''));
 
 			$items.eq(whereAppend).parent().after($expanded);
