@@ -19,6 +19,8 @@ from solicitations.models import Solicitation
 from bands.models import MusicalStyle
 from equipaments.models import EquipamentType
 
+from search import main as se
+
 full_template = 'bands/includes/musician-wrapper.html'
 partial_template = 'bands/includes/musician-wrapper-partial.html'
 
@@ -29,6 +31,8 @@ def profile(request):
     has_personal_data = musician.type_instruments_play.all().count() > 0 \
                         and musician.musical_styles.all().count() > 0 \
                         and not musician.address.city is None
+
+    se.search_kw()
 
     c = RequestContext(request, {
         'musical_styles': MusicalStyle.objects.all(),
