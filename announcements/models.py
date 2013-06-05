@@ -9,7 +9,7 @@ from labandas.helpers import EmailSender
 class Announcement(models.Model):
     instruments = models.ManyToManyField(EquipamentType)
     title = models.CharField(max_length=50)
-    text = models.CharField(max_length=140)
+    text = models.CharField(max_length=600)
     active = models.BooleanField(default=True)
     registration_date = models.DateTimeField('Registration date')
 
