@@ -90,7 +90,7 @@
 									'</div>',
 									'<div class="fl">',
 										'<div class="legend">',
-											'<p><span class="background">', legend, '</span></p>',
+											legend ? '<p><span class="background">' + legend + '</span></p>' : '',
 										'</div>',
 										'<div class="arrow-container">',
 											'<div class="arrow prev-media"><span>&lt;</span></div>',
