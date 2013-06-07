@@ -32,7 +32,7 @@ def profile(request):
                         and musician.musical_styles.all().count() > 0 \
                         and not musician.address.city is None
 
-    se.search_kw()
+    se.search_kw('guitarrista de jazz ou samba')
 
     c = RequestContext(request, {
         'musical_styles': MusicalStyle.objects.all(),
