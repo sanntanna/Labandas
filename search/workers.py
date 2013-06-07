@@ -4,17 +4,26 @@ from equipaments.models import EquipamentType
 from geoapi.models import Address
 from helpers import *
 
+class SearchType(object):
+	ALL = 0
+	MUSICIAN = 1
+	BAND = 2
+
 equipaments = normalize_equipaments(EquipamentType.objects.all())
 musical_styles = normalize_musicalstyles(MusicalStyle.objects.all())
 ufs = Address.objects.values('district')
 
 
-def search_kw(kw):
+def search(kw):
 	filters = get_filters_from_search(kw)
+
+	search_type = define_search_type(kw, filters)
 
 	print filters['musical_styles']
 	print filters['instruments']
 	print filters['result_kw']
+
+	print search_type
 
 def search_bands(self):
 	pass
@@ -36,3 +45,27 @@ def get_filters_from_search(kw):
 		'instruments': instruments,
 		'result_kw': '-'.join(n_terms)
 	}
+
+def define_search_type(kw, filters):
+	n_terms = slugify(kw).split('-')
+
+	has_musician_kw = 'musico' in n_terms
+	has_band_kw = 'banda' in n_terms 
+
+	if  has_musician_kw and not has_band_kw:
+		return SearchType.MUSICIAN
+
+	if has_band_kw and not has_musician_kw:
+		return SearchType.BAND
+
+	if has_musician_kw and has_band_kw:
+		return SearchType.MUSICIAN if n_terms.index('musico') < n_terms.index('banda') else SearchType.BAND
+
+	who_plays = [w for w in equipaments if w['n_whoplay'] in n_terms]
+
+	if len(who_plays) > 0:
+		return SearchType.MUSICIAN
+
+	return SearchType.ALL		
+
+
