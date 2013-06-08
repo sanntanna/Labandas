@@ -22,6 +22,12 @@ def home(request):
     
     return HttpResponse(t.render(c))
 
+def page_404(request):
+    t = loader.get_template('404.html')
+    c = RequestContext(request, request.GET)
+    
+    return HttpResponse(t.render(c))
+
 
 def login(request):
     user = auth.authenticate(username=request.POST['user'], password=request.POST['password'])

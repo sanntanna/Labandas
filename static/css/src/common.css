@@ -692,3 +692,54 @@ header.logged{
 		text-decoration: underline;
 	}
 }
+
+.dead_page{
+	min-height: 578px;
+	color: #FFFFFF;
+    margin-top: 80px;
+    min-height: 578px;
+    width: 100%;
+
+    	.skull{
+    		position: absolute;
+    		float: left;
+    	}
+
+    	.info{
+    		float: right;
+		    margin-right: 140px;
+		    margin-top: 40px;
+
+		    	h2{
+		    		background: @darkgray;
+				    height: 180px;
+				    line-height: 174px;
+				    padding-right: 25px;
+				    font-size: 190px;
+				    text-align: right;
+				    width: 500px;
+				    .bold;
+    			}
+
+    			h3{
+    				background: @green;
+    				font-size: 30px;
+				    margin-top: 10px;
+				    padding-right: 30px;
+				    text-align: right;
+				    .semibold;
+
+    			}	
+
+    			p{
+    				float: right;
+				    font-size: 17px;
+				    line-height: 20px;
+				    padding-top: 20px;
+				    width: 330px;
+				    color: @defaultgray;
+    			}
+    	}
+
+    	
+}

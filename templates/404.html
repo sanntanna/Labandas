@@ -1,0 +1,29 @@
+{% extends "includes/wrapper.html" %}
+{% load staticoptimizer %}
+
+{% block css %}
+	{% css "css/src/home.css" %}
+{% endblock %}
+
+{% block js %}
+	{% js "js/src/ui/home.js" %}
+{% endblock %}
+
+{% block content %}
+<section id="content" class="wrapper clearfix">
+	<div class="dead_page">
+		<div class="skull">
+			<img src="http://lasbandas.s3.amazonaws.com/site/skull-404.png" alt="404">
+		</div>
+		<div class="info">
+			<h2>404</h2>
+			<h3>página não encontrada</h3>
+			<p>Acho que deu merda! Essa não é a página que você estava procurando. Mi Perdona!</p>
+		</div>
+	</div>
+</section>
+{% endblock %}
+
+
+{% block aside %}
+{% endblock %}
