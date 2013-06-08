@@ -148,7 +148,8 @@
 	    display: block;
 
 		img{ 
-			width: 170px; 
+			width: 170px;
+			height: 117px;
 			.transition;
 			.border-radius(5px);
 			border:2px groove #454545;
