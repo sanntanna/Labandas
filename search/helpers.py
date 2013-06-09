@@ -24,7 +24,10 @@ def remove_plural(word):
 	return word[:-1]
 
 def remove_unutil_words(term_list):
-	black_list = 'o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas', 'que', 'quem', 'em', 'de', 'da', 'do', 'das', 'dos', 'para', 'por', 'e', 'ou', 'nao'
+	black_list = 'o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas', 'que', 'quem', 'em', \
+					'de', 'da', 'do', 'das', 'dos', 'para', 'por', 'e', 'ou', 'nao', \
+					'banda', 'bandas', 'musico', 'musicos', 'procura', 'procuram', 'procuro', 'quer', 'querem', \
+					'toca', 'tocam', 'tocar', 'onde', 'cidade', 'qualquer', 'na', 'nas'
 
 	[term_list.remove(t) for t in black_list if t in term_list]
 

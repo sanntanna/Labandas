@@ -40,17 +40,27 @@ def get_filters_from_search(kw):
 	if len(styles) > 0 or len(instruments) > 0:
 		remove_unutil_words(n_terms)
 
+	result_kw = []
+	kw_arr = kw.split(' ')
+	normalized_kw_arr = slugify(kw).split('-')
+	i = 0
+
+	for term in normalized_kw_arr:
+		if term in n_terms:
+			result_kw.append(kw_arr[i])
+		i += 1
+
 	return {
 		'musical_styles': styles,
 		'instruments': instruments,
-		'result_kw': '-'.join(n_terms)
+		'result_kw': ' '.join(result_kw)
 	}
 
 def define_search_type(kw, filters):
 	n_terms = slugify(kw).split('-')
 
-	has_musician_kw = 'musico' in n_terms
-	has_band_kw = 'banda' in n_terms 
+	has_musician_kw = 'musico' in n_terms or 'musicos' in n_terms
+	has_band_kw = 'banda' in n_terms  or 'bandas' in n_terms
 
 	if  has_musician_kw and not has_band_kw:
 		return SearchType.MUSICIAN
