@@ -17,11 +17,16 @@
 <section id="content" class="wrapper clearfix" style="color:#000;">
 	{{ results.count }} resultados.
 
+	Musicos
 	<ul>
 	{% for m in results.musicians %}
 		<li>{{ m.name }}</li>
 	{% endfor %}
+	</ul>
 
+
+	Bandas
+	<ul>
 	{% for b in results.bands %}
 		<li>{{ b.name }}</li>
 	{% endfor %}

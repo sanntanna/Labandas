@@ -29,24 +29,22 @@ def search(kw):
 
 def perform_search(kw=None, page=1, search_type=SearchType.ALL, musical_styles=None, instruments=None):
 	
-	if search_type == SearchType.MUSICIAN:
-		arguments = {}
+	musicians = None,
+	bands = None
 
-		print instruments
-		if(musical_styles != None and len(musical_styles) > 0):
-			arguments['musical_styles__in'] = [s['pk'] for s in musical_styles]
+	if search_type != SearchType.BAND:	
+		arguments = musician_search_arguments(kw, musical_styles, instruments)
+		musicians = Musician.objects.filter(**arguments)[page-1:RESULTS_PER_PAGE]
 
-		if(instruments != None and len(instruments) > 0):
-			arguments['type_instruments_play__in'] = [i['pk'] for i in instruments]
+	if search_type != SearchType.MUSICIAN:
+		arguments = band_search_arguments(kw, musical_styles, instruments)
+		bands = Band.objects.filter(**arguments)[page-1:RESULTS_PER_PAGE]
 
-		if(kw != None):
-			arguments['user__first_name__icontains'] = kw			
-
-		data = Musician.objects.filter(**arguments)[page-1:RESULTS_PER_PAGE]
-
-		return {'musicians': data, 'count': len(data)}
-
-	return {}
+	return {
+		'musicians': musicians,
+		'bands': bands,
+		'count': 20
+	}
 
 
 def get_filters_from_search(kw):
@@ -97,3 +95,30 @@ def define_search_type(kw, filters):
 	return SearchType.ALL		
 
 
+def musician_search_arguments(kw=None, musical_styles=None, instruments=None):
+	arguments = {}
+
+	if(musical_styles != None and len(musical_styles) > 0):
+		arguments['musical_styles__in'] = [s['pk'] for s in musical_styles]
+
+	if(instruments != None and len(instruments) > 0):
+		arguments['type_instruments_play__in'] = [i['pk'] for i in instruments]
+
+	if(kw != None):
+		arguments['user__first_name__icontains'] = kw
+
+	return arguments
+
+def band_search_arguments(kw=None, musical_styles=None, instruments=None):
+	arguments = {}
+
+	if(musical_styles != None and len(musical_styles) > 0):
+		arguments['musical_styles__in'] = [s['pk'] for s in musical_styles]
+
+	if(instruments != None and len(instruments) > 0):
+		arguments['announcements__instruments__in'] = [i['pk'] for i in instruments]
+
+	if(kw != None):
+		arguments['name__icontains'] = kw
+
+	return arguments
