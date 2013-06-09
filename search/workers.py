@@ -4,6 +4,8 @@ from equipaments.models import EquipamentType
 from geoapi.models import Address
 from helpers import *
 
+RESULTS_PER_PAGE = 20
+
 class SearchType(object):
 	ALL = 0
 	MUSICIAN = 1
@@ -19,17 +21,33 @@ def search(kw):
 
 	search_type = define_search_type(kw, filters)
 
-	print filters['musical_styles']
-	print filters['instruments']
-	print filters['result_kw']
+	results = perform_search(filters['result_kw'], 1, search_type, filters['musical_styles'], filters['instruments'])
 
-	print search_type
+	results['result_kw'] = filters['result_kw']
 
-def search_bands(self):
-	pass
+	return results
 
-def search_musicians(self):
-	pass
+def perform_search(kw=None, page=1, search_type=SearchType.ALL, musical_styles=None, instruments=None):
+	
+	if search_type == SearchType.MUSICIAN:
+		arguments = {}
+
+		print instruments
+		if(musical_styles != None and len(musical_styles) > 0):
+			arguments['musical_styles__in'] = [s['pk'] for s in musical_styles]
+
+		if(instruments != None and len(instruments) > 0):
+			arguments['type_instruments_play__in'] = [i['pk'] for i in instruments]
+
+		if(kw != None):
+			arguments['user__first_name__icontains'] = kw			
+
+		data = Musician.objects.filter(**arguments)[page-1:RESULTS_PER_PAGE]
+
+		return {'musicians': data, 'count': len(data)}
+
+	return {}
+
 
 def get_filters_from_search(kw):
 	n_terms = slugify(kw).split('-')
