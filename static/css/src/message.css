@@ -9,16 +9,19 @@
 	width: 100%;
 	background: white;
 	margin: 0 auto;
+	.normal;
+	font-size: 14px;
 
 		.message_inner {
 			width: 500px;
 			margin: 0 auto;
+			padding: 15px;
 
 			.ico {
 				background: url(http://lasbandas.s3.amazonaws.com/site/sprite-message-box.png) no-repeat 0 0 transparent;
 				display: block;
 				height: 45px;
-				width: 45px;
+				width: 70px;
 				float:left;
 			}
 
@@ -26,52 +29,34 @@
 		}
 
 	&.error{
-		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-message-box.png) no-repeat 0 0 white;
+		border-bottom: 3px solid #FA4747;
+    	border-top: 3px solid #FA4747;
+
+    		.ico{background-position: 0 -55px;}
+    		.text{color: #688b3e; padding-top: 12px;
+
+	&.success{
+		border-bottom: 3px solid #acd769;
+    	border-top: 3px solid #acd769;
+
+    		.ico{background-position: 0 0;}
+    		.text{color: #FA4747; padding-top: 12px;}
 	}
-}
 
-
-.message_box.warning .message_inner .ico {
-	background-position: 0 -97px;
-}
-
-.message_box.error .message_inner .ico {
-	background-position: 0 -48px;
-}
-
-.message_box.warning,.message_box.warning .message_inner {
-	background-image:
-		url(http://image.buscape.com/bui-bp7/bg-message-box-warning.png);
-}
-
-.message_box .close {
-	cursor: pointer;
-	font-size: 16px;
-	font-weight: bold;
-	position: absolute;
-	text-align: right;
-	right: 20px;
-	top: 13px;
-}
-
-.message_box.success .close {
-	color: #7cab71;
-}
-
-.message_box.success .warning {
-	color: #f7d85c;
-}
-
-.message_box.success .error {
-	color: #f46c70;
-}
-
-.message_box .message_inner {
-	background-position: left bottom;
-	margin-top: 10px;
-	padding: 5px 20px 15px 20px;
-}
-
-.message_box .highlight,.message_box a {
-	font-weight: bold;
+	.close {
+		background:#333333;
+	    .border-radius(45px);
+	    color: white;
+	    cursor: pointer;
+	    font-size: 12px;
+	    font-weight: bold;
+	    height: 6px;
+	    line-height: 6px;
+	    padding: 10px;
+	    position: absolute;
+	    right: 20px;
+	    text-align: right;
+	    top: 12px;
+	    width: 7px;
+	}
 }
