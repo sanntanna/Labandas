@@ -1,45 +1,35 @@
+@import "_colors.less";
+@import "_utils.less";
+
 .message_box {
-	border-radius: 10px;
 	font-size: 13px;
 	position: fixed;
 	top: 50px;
 	z-index: 9;
-	width: 535px;
+	width: 100%;
+	background: white;
+	margin: 0 auto;
+
+		.message_inner {
+			width: 500px;
+			margin: 0 auto;
+
+			.ico {
+				background: url(http://lasbandas.s3.amazonaws.com/site/sprite-message-box.png) no-repeat 0 0 transparent;
+				display: block;
+				height: 45px;
+				width: 45px;
+				float:left;
+			}
+
+			.text{float:left;}
+		}
+
+	&.error{
+		background: url(http://lasbandas.s3.amazonaws.com/site/sprite-message-box.png) no-repeat 0 0 white;
+	}
 }
 
-.message_box,.message_box .message_inner {
-	background:
-		url(http://image.buscape.com/bui-bp7/bg-message-box-success.png)
-		no-repeat;
-}
-
-.message_box.success,.message_box.success a {
-	color: #367325;
-}
-
-.message_box.warning,.message_box.warning a {
-	color: #785a01;
-}
-
-.message_box.error,.message_box.error a {
-	color: #ed1c24;
-}
-
-.message_box .message_inner .ico {
-	background:
-		url(http://image.buscape.com/bui-bp7/sprite-icos-message-box.png)
-		no-repeat;
-	display: block;
-	height: 20px;
-	width: 20px;
-	float:left;
-}
-
-.message_box .message_inner .text{float:left;}
-
-.message_box.success .message_inner .ico {
-	background-position: 0 0;
-}
 
 .message_box.warning .message_inner .ico {
 	background-position: 0 -97px;
@@ -52,11 +42,6 @@
 .message_box.warning,.message_box.warning .message_inner {
 	background-image:
 		url(http://image.buscape.com/bui-bp7/bg-message-box-warning.png);
-}
-
-.message_box.error,.message_box.error .message_inner {
-	background-image:
-		url(http://image.buscape.com/bui-bp7/bg-message-box-error.png);
 }
 
 .message_box .close {

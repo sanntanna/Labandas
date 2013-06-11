@@ -23,7 +23,7 @@ lb.message = function(text, type, timeInSecconds){
 			.find('.text')
 			.html(message);
 		
-		centerBox(instance.box);
+		//centerBox(instance.box);
 		handleClose(instance.box);
 		
 		this.tiemout = setTimeout(function(){
