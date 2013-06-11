@@ -45,8 +45,8 @@ class Address(models.Model):
 
 
 class AddressFinder(object):
-    #CORREIOS_URL = "http://m.correios.com.br/movel/buscaCepConfirma.do?metodo=buscarCep&cepEntrada=%s"
-    CORREIOS_URL = "http://www.buscacep.correios.com.br/servicos/dnec/consultaLogradouroAction.do"
+    CORREIOS_URL = "http://m.correios.com.br/movel/buscaCepConfirma.do?metodo=buscarCep&cepEntrada=%s"
+    #CORREIOS_URL = "http://www.buscacep.correios.com.br/servicos/dnec/consultaLogradouroAction.do"
     MAPS_URL = "http://maps.googleapis.com/maps/api/geocode/xml?address=%s&sensor=false"
     
     def find(self, cep):
@@ -60,30 +60,31 @@ class AddressFinder(object):
         return result
     
     def get_address(self, cep):
-        page = pq(url=self.CORREIOS_URL, method="POST", data={'relaxation': cep, 'Metodo':'listaLogradouro', 'TipoConsulta': 'relaxation'})
-        content = page.find(".ctrlcontent > div table:first tr")
-        error = None#page.find("title")[1].text
+        page = pq(url=self.CORREIOS_URL % cep)
+        fields = page.find(".respostadestaque")
+        err = page.find(".erro").text()
         
         result = SearchAddrResult()
-        
-        if not error is None:
-            result.message = error
+
+        if not err is None:
+            result.message = err
             result.status = Status.NOT_FOUND
             return result
         
+        city, state = fields[2].text.split('/')
+
         address = Address()
-        address.street = self.__addr_field(0, content)
-        address.district = self.__addr_field(1, content)
-        address.city = self.__addr_field(2, content)
-        address.state =  self.__addr_field(3, content)
+        address.street = fields[0].text.strip()
+        address.district = fields[1].text.strip()
+        address.city = city.strip('\n').strip()
+        address.state =  state.strip('\n').strip()
         
+        print city
+        print state
+
         result.address = address
         result.status = Status.FOUND
         return result
-    
-    def __addr_field(self, index, parent):
-        content = parent.find('td')[index].text
-        return None if content is None else content.strip()
     
     def fill_lat_long(self, address):
         addr_xml = pq(self.MAPS_URL % urlquote(str(address)))

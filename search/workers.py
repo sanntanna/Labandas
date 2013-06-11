@@ -1,4 +1,5 @@
 from bands.models import Musician, Band, MusicalStyle
+from announcements.models import Announcement
 from django.template.defaultfilters import slugify
 from equipaments.models import EquipamentType
 from geoapi.models import Address
@@ -16,12 +17,12 @@ musical_styles = normalize_musicalstyles(MusicalStyle.objects.all())
 ufs = Address.objects.values('district')
 
 
-def search(kw):
+def search(kw, page=1):
 	filters = get_filters_from_search(kw)
 
 	search_type = define_search_type(kw, filters)
 
-	results = perform_search(filters['result_kw'], 1, search_type, filters['musical_styles'], filters['instruments'])
+	results = perform_search(filters['result_kw'], page, search_type, filters['musical_styles'], filters['instruments'])
 
 	results['result_kw'] = filters['result_kw']
 
@@ -116,7 +117,11 @@ def band_search_arguments(kw=None, musical_styles=None, instruments=None):
 		arguments['musical_styles__in'] = [s['pk'] for s in musical_styles]
 
 	if(instruments != None and len(instruments) > 0):
-		arguments['announcements__instruments__in'] = [i['pk'] for i in instruments]
+		print instruments
+		announcements = Announcement.objects.values('owner_band_id').filter(instruments__in=[i['pk'] for i in instruments])
+		print announcements
+		arguments['id__in'] = [a.band.id for a in announcements]
+		print arguments['id__in']
 
 	if(kw != None):
 		arguments['name__icontains'] = kw

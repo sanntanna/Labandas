@@ -6,7 +6,7 @@ import workers
 def do_search(request):
     t = loader.get_template('resultado-busca.html')
     c = RequestContext(request, {
-        'results': workers.search(request.GET['kw'])
+        'results': workers.search(request.GET['kw'], request.GET['pg'])
     })
     
     return HttpResponse(t.render(c))
