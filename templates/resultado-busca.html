@@ -2,7 +2,7 @@
 {% load staticoptimizer %}
 
 {% block css %}
-	{% css "css/src/home.css" %}
+	{% css "css/lb.search.css" %}
 {% endblock %}
 
 {% block js %}
@@ -10,20 +10,39 @@
 {% endblock %}
 
 
-{% block mainclass %}banner{% endblock %}
+{% block mainclass %}search-result{% endblock %}
 
 {% block content %}
-<div id="main">
-<section id="content" class="wrapper clearfix" style="color:#000;">
+<section id="content" class="wrapper clearfix">
+	<div id="filters" class="line">
+		<ul>
+			<li>Buscar (músico, banda, estudios)</li>
+			<li>Estilo(rock, pop, samba...)</li>
+			<li>Tipo de músico (guitarrista, vocal...)</li>
+		</ul>
+	</div>
+	
 	{{ results.count }} resultados.
-
-	Musicos
-	<ul>
-	{% for m in results.musicians %}
-		<li>{{ m.name }}</li>
-	{% endfor %}
-	</ul>
-
+	
+	<div class="line-result">
+		<div>
+			<h2 class="subtitle fl">Músicos guitarristas de São Paulo</h2>
+			<div class="fl">Relacionados ao seu perfil</div>
+		</div>
+		<div class="line">
+			{% for m in results.musicians %}
+				<div class="box">
+					<div class="thumb fl"></div>
+					<div class="description fl">
+						<ul>
+							<li>{{ m.name }}</li>
+							<li>São Paulo</li>
+							<li>Vocalista</li>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 
 	Bandas
 	<ul>
@@ -33,7 +52,7 @@
 
 	</ul>
 </section>
-</div>
+
 {% endblock %}
 
 

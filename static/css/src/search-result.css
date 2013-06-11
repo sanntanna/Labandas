@@ -1,0 +1,43 @@
+@import "_colors.less";
+@import "_utils.less";
+
+.search-result{
+	color: #FFFFFF;
+
+	.line-result{
+
+		.subtitle{
+			width: 650px;
+			color:#333;
+			font-size:22px;
+			.light;
+		}
+
+		.box{
+			background: none repeat scroll 0 0 #F7F7F7;
+		    border: 2px solid #FAFAFA;
+		    height: 95px;
+		    padding: 5px;
+		    width: 220px;
+
+				.thumb{
+					width: 90px;
+					height: 90px;
+					border: 3px solid #FFFFFF;
+					background: #333;
+				}
+
+				.description{
+					color: #252525;
+				    text-align: left;
+				    width: 120px;
+
+				    	ul{
+				    		list-style: none outside none;
+						    margin-left: 15px;
+						    margin-top: 5px;
+				    	}
+				}
+		}
+	}
+}
