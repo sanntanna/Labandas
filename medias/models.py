@@ -33,8 +33,9 @@ class MusicianMedia(models.Model):
     def __init__(self, *args, **kwargs):
         instance = super(MusicianMedia, self).__init__(*args, **kwargs)
 
-        self.__has_avatar = self.media_list.filter(media_type__name = "avatar").count() > 0
-        self.__has_cover = self.media_list.filter(media_type__name = "cover_photo").count() > 0
+        if self.pk:
+            self.__has_avatar = self.media_list.filter(media_type__name = "avatar").count() > 0
+            self.__has_cover = self.media_list.filter(media_type__name = "cover_photo").count() > 0
 
         return instance
 
