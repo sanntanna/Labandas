@@ -83,12 +83,18 @@ def update_obj_field(request, obj, attr):
     musician_obj = getattr(musician, obj)
 
     setattr(musician_obj, attr, updated_attr)
-
-    musician.save()
     musician_obj.save()
     
     return JSONResponse({ "success": True })
 
+@onlyajax
+def update_location(request):
+    musician = request.user.get_profile()
+    musician.fill_location(cep=request.GET['cep'])
+
+    return JSONResponse({ "success": True })
+
+    
 @Partialhandled(full_template, partial_template)
 def public_profile(request, user_id, name):
     musician = get_object_or_404(Musician, pk=user_id)

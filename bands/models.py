@@ -1,15 +1,17 @@
 #coding=UTF-8
 from copy import copy
 from django.contrib.auth.models import User
-from networkconnect.models import UserNetwork
-from django.db import models
+from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.db.models.signals import post_save
 from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from equipaments.models import Equipament, EquipamentType
 from geoapi.models import Address
+from geoapi.utils import finder, SearchAddrStatus
 from medias.models import MusicianMedia, BandMedia
+from networkconnect.models import UserNetwork
 
 class MusicalStyle(models.Model):
     name = models.CharField(max_length=50)
@@ -40,7 +42,11 @@ class Musician(models.Model):
     skills = models.OneToOneField(MusicianSkill, related_name="musician", null=True, blank=True)
     address = models.OneToOneField(Address, related_name="musician", null=True, blank=True)
     
+    location = models.PointField(default=Point(999,999))
+    
     user = models.OneToOneField(User)
+
+    objects = models.GeoManager()
     
     def name(self):
         return self.user.get_full_name()
@@ -71,7 +77,25 @@ class Musician(models.Model):
     @property
     def bands_url(self):
         return "/musico/%s/%d/bandas" % (self.url, self.pk)
-   
+
+    def fill_location(self, cep=None, latitude=None, longitude=None):
+        result = finder.find(cep)
+        if result.status == SearchAddrStatus.NOT_FOUND:
+            return
+        
+        self.address.street = result.address.street
+        self.address.district = result.address.district
+        self.address.city = result.address.city
+        self.address.state = result.address.state
+        self.address.cep = result.address.cep
+        self.address.save()
+
+        if result.status == SearchAddrStatus.NO_GEOPOSITION:
+            return
+
+        self.location = result.point
+        self.save()
+
     def save(self, *args, **kwargs):
         self.url = slugify(self.name())
 
@@ -83,10 +107,6 @@ class Musician(models.Model):
 
         if self.address is None:
             self.address = Address.objects.create()
-
-        if not self.address.cep is None and self.address.cep != "":
-            self.address.fill_by_cep()
-            self.address.save()
 
         super(Musician, self).save(*args, **kwargs)
    
