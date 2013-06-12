@@ -32,15 +32,16 @@
 		border-bottom: 3px solid #FA4747;
     	border-top: 3px solid #FA4747;
 
-    		.ico{background-position: 0 -55px;}
-    		.text{color: #688b3e; padding-top: 12px;
+    		.ico{background-position: 0 0;}
+    		.text{color: #FA4747; padding-top: 12px;}
+    }
 
 	&.success{
 		border-bottom: 3px solid #acd769;
     	border-top: 3px solid #acd769;
 
-    		.ico{background-position: 0 0;}
-    		.text{color: #FA4747; padding-top: 12px;}
+    		.ico{background-position: 0 -55px;}
+    		.text{color: #688b3e; padding-top: 12px;}
 	}
 
 	.close {
