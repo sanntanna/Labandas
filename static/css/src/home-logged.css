@@ -520,7 +520,7 @@
 		padding: 40px 60px 60px 85px;
 
 			.upload{
-				display:inline-block; 
+				display:marker; 
 				position:relative; 
 				overflow:hidden; 
 				cursor: pointer;
