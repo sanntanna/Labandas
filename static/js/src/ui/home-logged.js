@@ -7,6 +7,7 @@
 		setupSoundCloud();
 		musicalStyles();
 		bandCreation();
+		location();	
 	};
 	
 	function setupSkills(){
@@ -169,6 +170,12 @@
 		$(document).delegate("#new-band-form", "ajaxcomplete", function(e, response){
 			if(!response.success){ return; }
 			location.href = response.band_page_url;
+		});
+	}
+
+	function location(){
+		$("#ipt-cep").change(function(){
+			$.get('/musico/atualizar-localizacao', {cep: $(this).val()});
 		});
 	}
 
