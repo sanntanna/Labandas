@@ -15,21 +15,75 @@
 {% block content %}
 <section id="content" class="wrapper clearfix">
 	<div id="filters" class="line">
-		<div id="filter-musician" class="custom-select">
+		<div id="filter-general" class="custom-select">
 			<ul class="inner">
-				<li class="item selected">Buscar (músico, banda, estudios)</li>
+				<li class="item selected"><span>Buscar</span> (músico, banda, estudios)</li>
 				<li class="item"><a href="#">Músico</a></li>
 				<li class="item"><a href="#">Banda</a></li>
 			</ul>
 		</div>
+		
+		<div id="filter-style" class="custom-select">
+			<ul class="inner">
+				<li class="item selected"><span>Estilo</span> (rock, samba,pop...)</li>
+				<li class="item"><a href="">60s</a></li>
+				<li class="item"><a href="">70s</a></li>
+				<li class="item"><a href="">80s</a></li>
+				<li class="item"><a href="">90s</a></li>
+				<li class="item"><a href="">Rock</a></li>
+				<li class="item"><a href="">Alternativo</a></li>
+				<li class="item"><a href="">Pop</a></li>
+				<li class="item"><a href="">Samba</a></li>
+				<li class="item"><a href="">Forró</a></li>
+				<li class="item"><a href="">Jazz</a></li>
+			</ul>
+		</div>
+		
+		<div id="filter-musician" class="custom-select">
+			<ul class="inner">
+				<li class="item selected"><span>Tipo do Músico</span> (baixista, guitarrista, vocal...)</li>
+				<li class="item"><a href="#">Guitarrista</a></li>
+				<li class="item"><a href="#">Baixista</a></li>
+				<li class="item"><a href="#">Vocal</a></li>
+				<li class="item"><a href="#">Flauta</a></li>
+			</ul>
+		</div>
 	</div>
 	
-	{{ results.count }} resultados.
+	<div class="line">
+		<div class="fl maps">
+			<iframe width="629" height="315" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.br/maps?f=q&amp;source=s_q&amp;hl=pt-BR&amp;geocode=&amp;q=Av.+Francisco+Matarazzo,+682+-+Barra+Funda,+S%C3%A3o+Paulo+-+S%C3%A3o+Paulo&amp;aq=0&amp;oq=av+franci&amp;sll=-23.548943,-46.638818&amp;sspn=1.709582,2.870178&amp;ie=UTF8&amp;hq=&amp;hnear=Av.+Francisco+Matarazzo,+682+-+Barra+Funda,+S%C3%A3o+Paulo,+05001-000&amp;t=m&amp;z=14&amp;ll=-23.528592,-46.669416&amp;output=embed"></iframe>
+		</div>
+		<div class="fr">
+			<div class="cep">
+				<label>Seu Cep</label>
+				<input name="address.cep" class="post-on-edit" 
+					{% if musician.address.cep %}
+						value="{{ musician.address.cep }}"
+					{% endif %}
+				/>
+			</div>
+			<div class="cities">
+				<h2 class="subtitle">Cidades inclusas</h2>
+				<div class="box">
+					
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<div class="line-result">
-		<div>
-			<h2 class="subtitle fl">Músicos guitarristas de São Paulo</h2>
-			<div class="fl">Relacionados ao seu perfil</div>
+		<div class="line">
+			<h2 class="subtitle fl">
+				Músicos guitarristas de São Paulo. Encontramos <span>{{ results.count }}</span> resultados.
+			</h2>
+			<div class="fr">
+				<div id="filter-profile" class="custom-select">
+					<ul class="inner">
+						<li class="item selected"><span>Relacionados ao seu perfil</span></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 		<div class="line">
 			{% for m in results.musicians %}

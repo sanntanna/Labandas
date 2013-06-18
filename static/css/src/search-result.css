@@ -5,20 +5,22 @@
 	color: #FFFFFF;
 
 	.line-result{
+		margin-top: 30px;
 
 		.subtitle{
-			width: 650px;
+			width: 620px;
 			color:#333;
 			font-size:22px;
 			.light;
+
 		}
 
 		.box{
-			background: none repeat scroll 0 0 #F7F7F7;
+			background: url(http://lasbandas.s3.amazonaws.com/site/bg-result.png) no-repeat scroll 0 0 #f6f6f6;
 		    border: 2px solid #FAFAFA;
-		    height: 95px;
+		    height: 101px;
 		    padding: 5px;
-		    width: 220px;
+		    width: 209px;
 
 				.thumb{
 					width: 90px;
@@ -30,7 +32,7 @@
 				.description{
 					color: #252525;
 				    text-align: left;
-				    width: 120px;
+				    width: 110px;
 
 				    	ul{
 				    		list-style: none outside none;
@@ -38,6 +40,67 @@
 						    margin-top: 5px;
 				    	}
 				}
+		}
+	}
+
+	#filters{
+		margin: 20px 0;
+
+		.custom-select{
+			float: left;
+			margin-right: 50px;
+		}
+
+		#filter-musician{
+			margin-right: 0;
+		}
+	}
+
+	.maps{
+		width: 629px;
+		height: 315px;
+		background: @darkgray;
+		border: 1px solid #adacac;
+	}
+
+	.cep{
+		label{
+			background: url(http://lasbandas.s3.amazonaws.com/site/sprite-form.png) no-repeat scroll 0 -63px transparent;
+		    color: #2c2c2c;
+		    display: block;
+		    float: left;
+		    height: 25px;
+		    padding: 8px 0 2px 20px;
+		    width: 64px;
+		    text-transform: uppercase;
+		    .normal;
+		}
+
+		input{
+			border: 1px solid #CCCCCC;
+			.border-radius(0 5px 5px 0);
+		    font-size: 18px;
+		    height: 30px;
+		    padding-left: 60px;
+		    width: 143px;
+		}
+	}
+
+	.cities{
+		.subtitle{
+			color: @darkgray;
+			.light;
+			margin-top: 20px;
+			background-position: 0 -27px;
+
+		}
+
+		.box{
+			background:#DEDEDE;
+		    .border-radius(5px);
+		    height: 184px;
+		    margin-top: 15px;
+		    padding: 20px;
 		}
 	}
 }
