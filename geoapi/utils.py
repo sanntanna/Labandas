@@ -33,6 +33,14 @@ class AddressFinder(object):
             result.status = SearchAddrStatus.NOT_FOUND
             return result
         
+        addrData = {}
+
+        #for f in fields:
+        #    print pq(f).prevAll().text()
+        #    addrData[pq(f).prevAll().text()] = f.text.strip()
+
+        #print addrData
+
         city, state = fields[2].text.split('/')
 
         address = Address()
