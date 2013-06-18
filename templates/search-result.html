@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block js %}
-	{% js "js/src/ui/home.js" %}
+	{% js "js/lb.search-result.package.js" %}
 {% endblock %}
 
 
@@ -15,11 +15,13 @@
 {% block content %}
 <section id="content" class="wrapper clearfix">
 	<div id="filters" class="line">
-		<ul>
-			<li>Buscar (músico, banda, estudios)</li>
-			<li>Estilo(rock, pop, samba...)</li>
-			<li>Tipo de músico (guitarrista, vocal...)</li>
-		</ul>
+		<div id="filter-musician" class="custom-select">
+			<ul class="inner">
+				<li class="item selected">Buscar (músico, banda, estudios)</li>
+				<li class="item"><a href="#">Músico</a></li>
+				<li class="item"><a href="#">Banda</a></li>
+			</ul>
+		</div>
 	</div>
 	
 	{{ results.count }} resultados.

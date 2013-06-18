@@ -8,7 +8,7 @@ def do_search(request):
 
     current_page = 1 if not 'pg' in request.GET else int(request.GET['pg'])
     c = RequestContext(request, {
-        'results': workers.search(request.GET['kw'], current_page	)
+        'results': workers.search(request.GET['kw'], current_page)
     })
     
     return HttpResponse(t.render(c))
