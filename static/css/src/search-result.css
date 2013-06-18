@@ -11,15 +11,21 @@
 			width: 620px;
 			color:#333;
 			font-size:22px;
+			border-bottom: 1px solid;
+			padding-bottom: 3px;
 			.light;
+			background-position: 0 -27px;
 
+				.count{
+					color: @green;
+					.semibold;
+				}
 		}
 
 		.box{
 			background: url(http://lasbandas.s3.amazonaws.com/site/bg-result.png) no-repeat scroll 0 0 #f6f6f6;
-		    border: 2px solid #FAFAFA;
-		    height: 101px;
-		    padding: 5px;
+		    height: 100px;
+		    padding: 8px 5px 5px;
 		    width: 209px;
 
 				.thumb{
@@ -91,8 +97,8 @@
 			color: @darkgray;
 			.light;
 			margin-top: 20px;
-			background-position: 0 -27px;
-
+			border-bottom: 1px solid;
+			padding-bottom: 3px;
 		}
 
 		.box{
