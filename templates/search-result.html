@@ -50,28 +50,6 @@
 		</div>
 	</div>
 	
-	<div class="line">
-		<div class="fl maps">
-			<iframe width="629" height="285" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.br/maps?f=q&amp;source=s_q&amp;hl=pt-BR&amp;geocode=&amp;q=Av.+Francisco+Matarazzo,+682+-+Barra+Funda,+S%C3%A3o+Paulo+-+S%C3%A3o+Paulo&amp;aq=0&amp;oq=av+franci&amp;sll=-23.548943,-46.638818&amp;sspn=1.709582,2.870178&amp;ie=UTF8&amp;hq=&amp;hnear=Av.+Francisco+Matarazzo,+682+-+Barra+Funda,+S%C3%A3o+Paulo,+05001-000&amp;t=m&amp;z=14&amp;ll=-23.528592,-46.669416&amp;output=embed"></iframe>
-		</div>
-		<div class="fr">
-			<div class="cep">
-				<label>Seu Cep</label>
-				<input name="address.cep" class="post-on-edit" 
-					{% if musician.address.cep %}
-						value="{{ musician.address.cep }}"
-					{% endif %}
-				/>
-			</div>
-			<div class="cities">
-				<h2 class="subtitle">Cidades inclusas</h2>
-				<div class="box">
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	
 	<div class="line-result">
 		<div class="line">
 			<h2 class="subtitle fl">
@@ -86,17 +64,21 @@
 			</div>
 		</div>
 		<div class="line">
-			{% for m in results.musicians %}
-				<div class="box">
-					<div class="thumb fl"></div>
-					<div class="description fl">
-						<ul>
-							<li>{{ m.name }}</li>
-							<li>São Paulo</li>
-							<li>Vocalista</li>
+			{% if m in results.musicians %}
+				{% for m in results.musicians %}
+					<div class="box">
+						<div class="thumb fl"></div>
+						<div class="description fl">
+							<ul>
+								<li>{{ m.name }}</li>
+								<li>São Paulo</li>
+								<li>Vocalista</li>
+						</div>
 					</div>
-				</div>
-			{% endfor %}
+				{% endfor %}
+			{ % else %}
+				Não encontramos resultados para essa pesquisa
+			{% endif %}
 		</div>
 	</div>
 
