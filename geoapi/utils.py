@@ -23,7 +23,7 @@ class AddressFinder(object):
     
     def __get_address(self, cep):
         page = pq(url=self.CORREIOS_URL % cep)
-        fields = page.find(".respostadestaque")
+        fields = page.find(".resposta")
         err = page.find(".erro").text()
         
         result = SearchAddrResult()
@@ -32,20 +32,12 @@ class AddressFinder(object):
             result.message = err
             result.status = SearchAddrStatus.NOT_FOUND
             return result
-        
-        addrData = {}
 
-        #for f in fields:
-        #    print pq(f).prevAll().text()
-        #    addrData[pq(f).prevAll().text()] = f.text.strip()
-
-        #print addrData
-
-        city, state = fields[2].text.split('/')
+        city, state = self.__get_field(fields, "Localidade / UF").split('/')
 
         address = Address()
-        address.street = fields[0].text.strip()
-        address.district = fields[1].text.strip()
+        address.street = self.__get_field(fields, "Logradouro")
+        address.district = self.__get_field(fields, "Bairro")
         address.city = city.strip('\n').strip()
         address.state =  state.strip('\n').strip()
         address.cep = cep
@@ -65,6 +57,14 @@ class AddressFinder(object):
         lat_long_node =  addr_xml.find('geometry location')
     
         return  Point(float(lat_long_node.find('lat').html()), float(lat_long_node.find('lng').html()))
+
+    def __get_field(self, fields, name):
+        selected_field = fields.filter(lambda i: pq(this).text().rstrip(":") == name)
+
+        if not len(selected_field):
+            return None
+        return selected_field.next(".respostadestaque").text().strip()
+
 
 class SearchAddrStatus():
     FOUND = 1
