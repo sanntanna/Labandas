@@ -64,21 +64,21 @@
 			</div>
 		</div>
 		<div class="line">
-			{% if m in results.musicians %}
-				{% for m in results.musicians %}
-					<div class="box">
-						<div class="thumb fl"></div>
+			{% for m in results.musicians %}
+				<div class="box">
+					<a href="{{ user.get_profile.profile_url }}">
+						<div class="thumb fl">
+							<img src="{{m.media.avatar}}" alt="{{ m.name }}"/>
+						</div>
 						<div class="description fl">
 							<ul>
 								<li>{{ m.name }}</li>
-								<li>São Paulo</li>
-								<li>Vocalista</li>
+								<li>{{ m.address.city }}</li>
+								<li>{{ m.instrument.who_play }}</li>
 						</div>
-					</div>
-				{% endfor %}
-			{ % else %}
-				Não encontramos resultados para essa pesquisa
-			{% endif %}
+					</a>
+				</div>
+			{% endfor %}
 		</div>
 	</div>
 
