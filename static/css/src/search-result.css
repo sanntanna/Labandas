@@ -24,21 +24,25 @@
 
 		.box{
 			background: url(http://lasbandas.s3.amazonaws.com/site/bg-result.png) no-repeat scroll 0 0 #f6f6f6;
+			.border-radius(10px);
 		    height: 98px;
 		    padding: 8px 5px 5px;
 		    width: 209px;
 		    float: left;
 		    margin-top: 20px;
+		    margin-right: 20px;
 
 				.thumb{
 					width: 90px;
 					height: 90px;
 					background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 15px -205px #FFFFFF;
 					padding: 4px;
+					.border-radius(45px);
 
 						img{
 							width: 90px;
 							height:90px;
+							.border-radius(45px);
 						}
 				}
 
