@@ -49,6 +49,10 @@
 					margin-left: 0;
 				}
 
+				.item{
+					display: block!important;
+				}
+
 				a{display: block;}
 		}
 }

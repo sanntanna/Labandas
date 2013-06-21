@@ -1,6 +1,7 @@
 lb = window.lb || {};
 
 lb.soundcloud = function(instanceParams, targetElement){
+	console.log("3");
 	var instance = this;
 	
 	var urlRegex = /^(https\:\/\/)?([a-z.]*)\/([^\/?]*)([^\/]*)$/gi;
