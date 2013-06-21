@@ -25,12 +25,25 @@
 		.box{
 			background: url(http://lasbandas.s3.amazonaws.com/site/bg-result.png) no-repeat scroll 0 0 #f6f6f6;
 			.border-radius(10px);
-		    height: 98px;
-		    padding: 8px 5px 5px;
+		    height: 112px;
 		    width: 209px;
 		    float: left;
 		    margin-top: 20px;
 		    margin-right: 20px;
+		    position: relative;
+
+		    	a{
+		    		display: table;
+		    		padding:8px 5px 5px;
+		    		.border-radius(10px);
+		    		height: 97px;
+
+		    			&:hover{
+		    				background:#b9b9b9;
+					    	color: white;
+					    	.transition;
+		    			}
+		    	}
 
 				.thumb{
 					width: 90px;
@@ -38,6 +51,7 @@
 					background: url(http://lasbandas.s3.amazonaws.com/site/lb-sprite-media.png) no-repeat scroll 15px -205px #FFFFFF;
 					padding: 4px;
 					.border-radius(45px);
+					position: absolute;
 
 						img{
 							width: 90px;
@@ -49,12 +63,31 @@
 				.description{
 					color: #252525;
 				    text-align: left;
-				    width: 110px;
+				    width: 150px;
+				    margin-left: 55px;
 
 				    	ul{
 				    		list-style: none outside none;
 						    margin-left: 15px;
 						    margin-top: 5px;
+
+						    	.name{
+						    		background: @green;
+						    		color: white;
+    								padding: 5px 40px;
+    								width: 45px;
+    								text-transform: inherit;
+						    	}
+
+						    	.city{
+						    		padding: 5px 0 0 42px;
+						    		background: @darkgray;
+						    		color: white;
+						    		width: 73px;
+						    		font-size: 12px;
+						    		text-transform: lowercase;
+						    		.normal;
+						    	}
 				    	}
 				}
 		}

@@ -67,14 +67,14 @@
 			{% for m in results.musicians %}
 				<div class="box">
 					<a href="{{ user.get_profile.profile_url }}">
-						<div class="thumb fl">
+						<div class="thumb">
 							<img src="{{m.media.avatar}}"/>
 						</div>
-						<div class="description fl">
+						<div class="description">
 							<ul>
-								<li>{{ m.name }}</li>
-								<li>{{ m.address.city }}</li>
-								<li>{{ m.instrument.who_play }}</li>
+								<li class="name">{{ m.name }}</li>
+								<li class="city">{{ m.address.city }}</li>
+								<li class="instrument">{{ m.instrument.who_play }}</li>
 						</div>
 					</a>
 				</div>
