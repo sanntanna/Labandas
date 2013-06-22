@@ -90,9 +90,9 @@ def update_obj_field(request, obj, attr):
 @onlyajax
 def update_location(request):
     musician = request.user.get_profile()
-    musician.fill_location(cep=request.GET['cep'])
+    location = musician.fill_location(cep=request.GET['cep'])
 
-    return JSONResponse({ "success": True })
+    return JSONResponse({ "success": True , "location": location})
 
     
 @Partialhandled(full_template, partial_template)

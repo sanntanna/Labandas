@@ -175,7 +175,21 @@
 
 	function location(){
 		$("#ipt-cep").change(function(){
-			$.get('/musico/atualizar-localizacao', {cep: $(this).val()});
+
+			if(this.value == ""){
+				return;
+			}
+
+			$.get('/musico/atualizar-localizacao', {cep: $(this).val()}, function(response){
+				var addr = response.location;
+
+				if(!addr){
+					new lb.message('CEP não encontrado', lb.message.ERROR);
+					return;					
+				}
+
+				new lb.message('Seu endereço foi atualizado para ' + addr, lb.message.SUCCESS);
+			});
 		});
 	}
 

@@ -81,7 +81,7 @@ class Musician(models.Model):
     def fill_location(self, cep=None, latitude=None, longitude=None):
         result = finder.find(cep)
         if result.status == SearchAddrStatus.NOT_FOUND:
-            return
+            return None
         
         self.address.street = result.address.street
         self.address.district = result.address.district
@@ -95,6 +95,8 @@ class Musician(models.Model):
 
         self.location = result.point
         self.save()
+
+        return self.address
 
     def save(self, *args, **kwargs):
         self.url = slugify(self.name())
