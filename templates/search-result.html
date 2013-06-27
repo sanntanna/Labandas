@@ -26,26 +26,18 @@
 		<div id="filter-style" class="custom-select">
 			<ul class="inner">
 				<li class="item selected"><span>Estilo</span> (rock, samba,pop...)</li>
-				<li class="item"><a href="">60s</a></li>
-				<li class="item"><a href="">70s</a></li>
-				<li class="item"><a href="">80s</a></li>
-				<li class="item"><a href="">90s</a></li>
-				<li class="item"><a href="">Rock</a></li>
-				<li class="item"><a href="">Alternativo</a></li>
-				<li class="item"><a href="">Pop</a></li>
-				<li class="item"><a href="">Samba</a></li>
-				<li class="item"><a href="">Forró</a></li>
-				<li class="item"><a href="">Jazz</a></li>
+				{% for style in musical_styles %}
+				<li class="item"><a href="#">{{ style.name }}</a></li>
+				{% endfor %}
 			</ul>
 		</div>
 		
 		<div id="filter-musician" class="custom-select">
 			<ul class="inner">
 				<li class="item selected"><span>Tipo do Músico</span> (baixista, guitarrista, vocal...)</li>
-				<li class="item"><a href="#">Guitarrista</a></li>
-				<li class="item"><a href="#">Baixista</a></li>
-				<li class="item"><a href="#">Vocal</a></li>
-				<li class="item"><a href="#">Flauta</a></li>
+				{% for instrument in equipament_types %}
+				<li class="item"><a href="#">{{ instrument.who_play }}</a></li>
+				{% endfor %}
 			</ul>
 		</div>
 	</div>
