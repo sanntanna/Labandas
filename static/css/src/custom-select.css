@@ -2,21 +2,20 @@
 @import "_utils.less";
 
 .custom-select{
-	background: url(http://lasbandas.s3.amazonaws.com/site/sprite-form.png) no-repeat scroll 0 0 transparent;
+	background: url(http://lasbandas.s3.amazonaws.com/site/sprite-form.png) no-repeat scroll -2px -4px transparent;
 	cursor: default;
 	color: @defaultgray;
 	.normal;
 	font-size: 16px;
 	position: relative;
 	z-index: 2;
-	width: 285px;
-	line-height: 43px;
-	.border-radius(7px);
+	width: 283px;
+	line-height: 33px;
+	.border-radius(30px);
 
 		.item{
 			display: none;
 			font-size: 12px;
-			margin-left: -10px;
 
 				span{
 					text-transform: uppercase;
@@ -38,23 +37,35 @@
 		}
 
 		.dropdown{
-			background: none repeat scroll 0 0 #FFFFFF;
-		    left: 3px;
-		    padding-left: 30px;
+			background: url(http://lasbandas.s3.amazonaws.com/site/bg-custom-select.png) repeat-x scroll 0 0 transparent;
+			.border-radius(15px);
 		    position: absolute;
-		    top: 42px;
-		    width: 253px;
+		    top: 10px;
+		    width: 283px;
+		    z-index: -1;
 
 				.inner{
-					background: #FFFFFF;
+					background: url(http://lasbandas.s3.amazonaws.com/site/bg-custom-select.png) repeat-x scroll 0 0 transparent;
+					.border-radius(15px);
 					height: auto;
 					margin-left: 0;
+					padding-top: 20px;
 				}
 
 				.item{
 					display: block;
+					font-size: 14px;
 				}
 
-				a{display: block;}
+				a{
+					display: block;
+					padding-left: 35px;
+					color: @defaultgray;
+
+						&:hover{
+							background:@defaultgray;
+							color: @green;
+						}
+				}
 		}
 }
