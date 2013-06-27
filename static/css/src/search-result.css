@@ -117,12 +117,14 @@
 
 	.cep{
 		label{
-			background: url(http://lasbandas.s3.amazonaws.com/site/sprite-form.png) no-repeat scroll 0 -63px transparent;
+			background: url(http://lasbandas.s3.amazonaws.com/site/bg-custom-select.png) repeat-x scroll 0 0 transparent;
+			.border-radius(15px 0 0 15px);
 		    color: #2c2c2c;
 		    display: block;
 		    float: left;
-		    height: 25px;
-		    padding: 8px 0 2px 20px;
+		    height: 22px;
+		    margin-top: 1px;
+		    padding: 8px 0 2px 15px;
 		    width: 64px;
 		    text-transform: uppercase;
 		    .normal;
@@ -130,7 +132,7 @@
 
 		input{
 			border: 1px solid #CCCCCC;
-			.border-radius(0 5px 5px 0);
+			.border-radius(0 15px 15px 0);
 		    font-size: 18px;
 		    height: 30px;
 		    padding-left: 60px;

@@ -16,6 +16,7 @@
 		.item{
 			display: none;
 			font-size: 12px;
+			padding-top: 2px;
 
 				span{
 					text-transform: uppercase;

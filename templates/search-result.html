@@ -56,10 +56,13 @@
 				Músicos guitarristas de São Paulo. Encontramos <span class="count">{{ results.count }} resultados.</span>
 			</h2>
 			<div class="fr">
-				<div id="filter-profile" class="custom-select">
-					<ul class="inner">
-						<li class="item selected"><span>Relacionados ao seu perfil</span></li>
-					</ul>
+				<div class="cep">
+					<label>Seu Cep</label>
+					<input name="address.cep" class="post-on-edit" 
+						{% if musician.address.cep %}
+							value="{{ musician.address.cep }}"
+						{% endif %}
+					/>
 				</div>
 			</div>
 		</div>
