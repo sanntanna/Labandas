@@ -45,7 +45,7 @@
 	<div class="line-result">
 		<div class="line">
 			<h2 class="subtitle fl">
-				Músicos guitarristas de São Paulo. Encontramos <span class="count">{{ results.count }} resultados.</span>
+				Músicos guitarristas de {{ m.address.city }}. Encontramos <span class="count">{{ results.count }} resultados.</span>
 			</h2>
 			<div class="fr">
 				<div class="cep">
@@ -69,21 +69,28 @@
 							<ul>
 								<li class="name">{{ m.name }}</li>
 								<li class="city">{{ m.address.city }}</li>
-								<li class="instrument">{{ m.instrument.who_play }}</li>
+								<li class="instrument">{{ instrument.who_play }}</li>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+			{% for b in results.bands %}
+				<div class="box">
+					<a href="{{ b.page_url }}">
+						<div class="thumb">
+							<img src="{{b.media.cover}}"/>
+						</div>
+						<div class="description">
+							<ul>
+								<li class="name">Banda {{ b.name }}</li>
 						</div>
 					</a>
 				</div>
 			{% endfor %}
 		</div>
 	</div>
-
-	Bandas
-	<ul>
-	{% for b in results.bands %}
-		<li>{{ b.name }}</li>
-	{% endfor %}
-
-	</ul>
+	
+	
 </section>
 
 {% endblock %}
