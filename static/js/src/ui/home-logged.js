@@ -169,7 +169,7 @@
 
 		$(document).delegate("#new-band-form", "ajaxcomplete", function(e, response){
 			if(!response.success){ return; }
-			location.href = response.band_page_url;
+			window.location.href = response.band_page_url;
 		});
 	}
 
